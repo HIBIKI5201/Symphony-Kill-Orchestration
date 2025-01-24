@@ -1,7 +1,10 @@
 #Version
-1.03
+1.11
 
 #Log
+1.11
+Assembly Definition added
+
 1.03
 [Update]
 SymphonyDebugLog
