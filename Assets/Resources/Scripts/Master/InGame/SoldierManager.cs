@@ -3,6 +3,9 @@ using UnityEngine.AI;
 
 namespace Orchestration.InGame
 {
+    /// <summary>
+    /// 兵士のベースクラス
+    /// </summary>
     [RequireComponent(typeof(NavMeshAgent))]
     public class SoldierManager : MonoBehaviour
     {
