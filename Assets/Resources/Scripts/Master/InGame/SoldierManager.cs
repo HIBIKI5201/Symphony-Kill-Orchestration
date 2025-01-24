@@ -16,7 +16,7 @@ namespace Orchestration.InGame
                 _agent.autoTraverseOffMeshLink = true;
             }
         }
-           
+
         private void Update()
         {
             if (_agent != null)
@@ -37,23 +37,42 @@ namespace Orchestration.InGame
         {
             if (_agent != null && _agent.path != null)
             {
-                // 経路を取得
                 NavMeshPath path = _agent.path;
 
-                // 経路のコーナーポイントがあるか確認
                 if (path.corners.Length < 2)
                 {
                     return;
                 }
 
-                // 線の色を設定
                 Gizmos.color = Color.blue;
+                Gizmos.DrawLineStrip(path.corners, false);
+            }
+        }
 
-                // 経路のコーナーポイントを線で結ぶ
-                for (int i = 1; i < path.corners.Length; i++)
-                {
-                    Gizmos.DrawLine(path.corners[i - 1], path.corners[i]);
-                }
+        GUIStyle Style
+        {
+            get
+            {
+                GUIStyle style = new GUIStyle();
+                style = new GUIStyle();
+                style.fontSize = 30;
+                style.normal.textColor = Color.white;
+                return style;
+            }
+        }
+
+        /// <summary>
+        /// 試しにOnGUIを使用してみた
+        /// </summary>
+        private void OnGUI()
+        {
+            string[] logs = new string[2] { "a", "b" };
+
+            float y = 10;
+            foreach (string log in logs)
+            {
+                GUI.Label(new Rect(0, y, 350, 40), log, Style);
+                y += 40;
             }
         }
 #endif
