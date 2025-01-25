@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -24,11 +25,11 @@ namespace Orchestration.InGame
         {
             _gridPosList.Clear();
             var navMeshRange = GetNavMeshCorners();
-            Vector3 searchPos = navMeshRange.min;
+            Vector3 searchPos = navMeshRange.min ;
 
             for (; searchPos.z <= navMeshRange.max.z; searchPos.z++)
             {
-                for (searchPos.y = navMeshRange.min.y ; searchPos.y <= navMeshRange.max.y + 1; searchPos.y++)
+                for (searchPos.y = navMeshRange.min.y; searchPos.y <= navMeshRange.max.y + 1; searchPos.y++)
                 {
                     for (searchPos.x = navMeshRange.min.x; searchPos.x <= navMeshRange.max.x; searchPos.x++)
                     {
@@ -57,10 +58,25 @@ namespace Orchestration.InGame
                     max = Vector3.Max(max, vertex);
                 }
 
+                //’[”‚ðØ‚èŽÌ‚Ä‚é
+                const float divisor = 0.5f;
+                min = FloorToNearest(min, divisor, _gridSize / 2);
+                max = FloorToNearest(max, divisor, _gridSize / 2);
+
                 return (min, max);
             }
 
             return (Vector3.zero, Vector3.zero);
+
+            //divisor‚ÅŠ„‚Á‚½—]‚è‚ðØ‚èŽÌ‚Ä‚é
+            Vector3 FloorToNearest(Vector3 vector, float divisor, float offset)
+            {
+                return new Vector3(
+                    Mathf.Floor(vector.x / divisor) * divisor + offset,
+                    Mathf.Floor(vector.y / divisor) * divisor,
+                    Mathf.Floor(vector.z / divisor) * divisor + offset
+                );
+            }
         }
 
 #if UNITY_EDITOR
@@ -74,9 +90,9 @@ namespace Orchestration.InGame
             {
                 foreach (var item in _gridPosList)
                 {
-                    Gizmos.color =  Color.green;
+                    Gizmos.color = Color.green;
                     Gizmos.DrawWireCube(item + Vector3.up * _gridSize / 3f,
-                        Vector3.one * (_gridSize * 0.9f) - Vector3.up * _gridSize / 2f);
+                        Vector3.one * (_gridSize * 1f) - Vector3.up * _gridSize / 2f);
                 }
             }
         }
