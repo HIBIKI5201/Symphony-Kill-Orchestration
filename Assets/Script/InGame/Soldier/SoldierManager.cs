@@ -7,10 +7,11 @@ namespace Orchestration.InGame
     /// <summary>
     /// 兵士のベースクラス
     /// </summary>
-    [RequireComponent(typeof(SoldierModel))]
+    [RequireComponent(typeof(SoldierModel), typeof(SoldierUI))]
     public class SoldierManager : MonoBehaviour
     {
         private SoldierModel _model;
+        private SoldierUI _ui;
 
         //移動系プロパティ
         private Vector2 _currentDirection;
@@ -18,6 +19,9 @@ namespace Orchestration.InGame
         {
             _model = GetComponent<SoldierModel>();
             _model.NullCheckComponent($"{name}のモデルが見つかりませんでした");
+
+            _ui = GetComponent<SoldierUI>();
+            _ui.NullCheckComponent($"{name}のUIが見つかりませんでした");
         }
 
         private void Update()
@@ -62,6 +66,8 @@ namespace Orchestration.InGame
                 // Lerpで滑らかに変化
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * 5);
             }
+
+            _ui.HealthBarMove(transform.position);
         }
 
 #if UNITY_EDITOR
