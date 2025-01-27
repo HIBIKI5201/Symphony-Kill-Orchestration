@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
 
 namespace SymphonyFrameWork.CoreSystem
@@ -10,7 +9,7 @@ namespace SymphonyFrameWork.CoreSystem
     /// シングルトンのインスタンスを統括して管理するクラス
     /// </summary>
     //インスタンスを一時的にシーンロードから切り離したい時にも使用できる
-    public static class SingletonDirector
+    public static class ServiceLocator
     {
         [Tooltip("シングルトン化するインスタンスのコンテナ")]
         private static GameObject _instance;
@@ -25,11 +24,23 @@ namespace SymphonyFrameWork.CoreSystem
             if (_instance is not null) return;
 
             GameObject instance = new GameObject("SingltonDirector");
-            Scene systemScene = SceneManager.CreateScene("SymphonySystem");
-            SceneManager.MoveGameObjectToScene(instance, systemScene);
+
+            SymphonyCoreSystem.MoveObjectToSymphonySystem(instance);
             _instance = instance;
         }
 
+        public static void SetInstance<T>(T instance, LocateType type) where T : MonoBehaviour
+        {
+
+        }
+
+        public enum LocateType
+        {
+            Singleton,
+            Locator,
+        }
+
+        #region 旧シングルトン用メソッド
         /// <summary>
         /// 入れられたMonoBehaviourを継承するクラスをシングルトン化する
         /// </summary>
@@ -46,7 +57,7 @@ namespace SymphonyFrameWork.CoreSystem
                 Object.Destroy(instance.gameObject);
                 return;
             }
-                
+
             Debug.Log($"{typeof(T).Name}クラスの{instance.name}がシングルトン登録されました");
             instance.transform.SetParent(_instance.transform);
         }
@@ -84,5 +95,7 @@ namespace SymphonyFrameWork.CoreSystem
                 Debug.Log($"{typeof(T).Name}はシングルトン登録されていません");
             }
         }
+
+#endregion
     }
 }

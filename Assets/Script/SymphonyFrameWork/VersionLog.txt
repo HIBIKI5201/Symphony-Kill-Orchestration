@@ -1,7 +1,18 @@
 #Version
-1.11
+1.13
 
 #Log
+1.13
+[Add]
+SymphonyCoreSystem
+
+1.12
+[Add]
+SymphonyUtility
+
+[Update]
+SingletonDirector -> ServiceLocator
+
 1.11
 Assembly Definition added
 
