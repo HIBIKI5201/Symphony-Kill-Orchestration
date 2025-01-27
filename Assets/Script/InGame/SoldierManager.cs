@@ -1,4 +1,4 @@
-using Unity.Services.Analytics;
+using SymphonyFrameWork.Utility;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,27 +7,24 @@ namespace Orchestration.InGame
     /// <summary>
     /// 兵士のベースクラス
     /// </summary>
-    [RequireComponent(typeof(NavMeshAgent))]
+    [RequireComponent(typeof(SoldierModel))]
     public class SoldierManager : MonoBehaviour
     {
-        private NavMeshAgent _agent;
-        private Animator _animator;
+        private SoldierModel _model;
 
+        //移動系プロパティ
+        private Vector2 _currentDirection;
         private void Awake()
         {
-            _agent = GetComponent<NavMeshAgent>();
-            if (_agent)
-            {
-                _agent.updatePosition = false;
-                _agent.updateRotation = false;
-            }
-
-            _animator = GetComponentInChildren<Animator>();
+            _model = GetComponent<SoldierModel>();
+            _model.NullCheckComponent($"{name}のモデルが見つかりませんでした");
         }
 
         private void Update()
         {
-            if (_agent != null)
+            NavMeshAgent agent = _model.Agent;
+
+            if (agent != null)
             {
                 if (Input.GetMouseButtonDown(0))
                 {
@@ -37,35 +34,44 @@ namespace Orchestration.InGame
                     if (Physics.Raycast(ray, out hit))
                     {
                         Vector3 hitPosition = hit.point;
-                        _agent.SetDestination(hitPosition);
+                        agent.SetDestination(hitPosition);
                     }
                 }
 
-                Vector3 direction = (_agent.nextPosition - transform.position).normalized;
+                #region Move
 
-                // nextPositionからdeltaPositionを算出
-                var worldDeltaPosition = _agent.nextPosition - transform.position;
+                Vector3 localNextPos = transform.InverseTransformPoint(agent.nextPosition);
+                Vector2 targetDirection = new Vector2(localNextPos.x, localNextPos.z).normalized;
 
-                // キャラクターを基点にしたxz平面に射影したdeltaPosition
-                var dx = Vector3.Dot(transform.right, worldDeltaPosition);
-                var dy = Vector3.Dot(transform.forward, worldDeltaPosition);
-                Vector2 deltaPosition = new Vector2(dx, dy);
+                //Lerpで滑らかに変化
+                _currentDirection = Vector2.Lerp(_currentDirection, targetDirection, Time.deltaTime * 5);
 
-                // Time.deltaTimeから速度を算出
-                var velocity = deltaPosition / Time.deltaTime;
+                Animator animator = _model.Animator;
+                animator.SetFloat("Right", _currentDirection.x);
+                animator.SetFloat("Forward", _currentDirection.y);
 
-                Vector2 duration = deltaPosition.normalized;
-                _animator.SetFloat("Right", duration.x);
-                _animator.SetFloat("Forward", duration.y);
+                transform.position = agent.nextPosition;
+
+                #endregion
+
+                Vector3 direction = _model.Target.position - transform.position;
+                direction.y = 0;  // Y軸方向を無視
+
+                Quaternion targetRotation = Quaternion.LookRotation(direction);
+
+                // Lerpで滑らかに変化
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * 5);
             }
         }
 
 #if UNITY_EDITOR
         private void OnDrawGizmos()
         {
-            if (_agent != null && _agent.path != null)
+            NavMeshAgent agent = _model?.Agent;
+
+            if (agent != null && agent.path != null)
             {
-                NavMeshPath path = _agent.path;
+                NavMeshPath path = agent.path;
 
                 if (path.corners.Length < 2)
                 {
@@ -77,6 +83,7 @@ namespace Orchestration.InGame
             }
         }
 
+        #region お試しOnGUI
         GUIStyle Style
         {
             get
@@ -103,6 +110,7 @@ namespace Orchestration.InGame
                 y += 40;
             }
         }
+        #endregion
 #endif
     }
 }
