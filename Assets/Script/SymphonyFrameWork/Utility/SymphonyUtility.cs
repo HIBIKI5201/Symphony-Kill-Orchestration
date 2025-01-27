@@ -4,7 +4,7 @@ namespace SymphonyFrameWork.Utility
 {
     public static class SymphonyUtility
     {
-        public static bool NullCheckComponent(this Component component, string message)
+        public static bool NullCheckComponent(this Component component, string message = "component is not found")
         {
             if (component)
             {
