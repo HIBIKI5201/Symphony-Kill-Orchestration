@@ -8,10 +8,8 @@ namespace SymphonyFrameWork.CoreSystem
         private static Scene _systemScene;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-        private static void EditorModeInitialize()
+        private static void GameInitialize()
         {
-            Debug.Log("Initialize");
-
             _systemScene = SceneManager.CreateScene("SymphonySystem");
         }
 

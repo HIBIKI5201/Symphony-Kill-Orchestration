@@ -21,17 +21,40 @@ namespace SymphonyFrameWork.CoreSystem
         /// </summary>
         private static void CreateInstance()
         {
-            if (_instance is not null) return;
+            if (_instance is not null)
+            {
+                return;
+            }
 
-            GameObject instance = new GameObject("SingltonDirector");
+            GameObject instance = new GameObject("ServiceLocator");
 
             SymphonyCoreSystem.MoveObjectToSymphonySystem(instance);
             _instance = instance;
         }
 
+        /// <summary>
+        /// 入れられたMonoBehaviourを継承するクラスをロケーターに登録する
+        /// </summary>
+        /// <typeparam name="T">ロケートする型</typeparam>
+        /// <param name="instance">インスタンス</param>
+        /// <returns>登録が成功したらtrue、失敗したらfalse</returns>
         public static void SetInstance<T>(T instance, LocateType type) where T : MonoBehaviour
         {
+            CreateInstance();
 
+            // 既に登録されている場合は追加できない
+            if (!_singletonObjects.TryAdd(typeof(T), instance))
+            {
+                Object.Destroy(instance.gameObject);
+                return;
+            }
+
+            Debug.Log($"{typeof(T).Name}クラスの{instance.name}がシングルトン登録されました");
+
+            if (type == LocateType.Singleton)
+            {
+                instance.transform.SetParent(_instance.transform);
+            }
         }
 
         public enum LocateType
@@ -49,17 +72,7 @@ namespace SymphonyFrameWork.CoreSystem
         /// <returns>辞書に追加が成功したらtrue、失敗したらfalse</returns>
         public static void SetSinglton<T>(T instance) where T : MonoBehaviour
         {
-            CreateInstance();
-
-            // シングルトンが既に登録されている場合は追加できない
-            if (!_singletonObjects.TryAdd(typeof(T), instance))
-            {
-                Object.Destroy(instance.gameObject);
-                return;
-            }
-
-            Debug.Log($"{typeof(T).Name}クラスの{instance.name}がシングルトン登録されました");
-            instance.transform.SetParent(_instance.transform);
+            SetInstance(instance, LocateType.Singleton);
         }
 
         /// <summary>
@@ -71,7 +84,15 @@ namespace SymphonyFrameWork.CoreSystem
         {
             if (_singletonObjects.TryGetValue(typeof(T), out MonoBehaviour md))
             {
-                return md as T;
+                if (md != null)
+                {
+                    return md as T;
+                }
+                else
+                {
+                    Debug.LogError($"{typeof(T).Name} は破棄されています。");
+                    return null;
+                }
             }
 
             Debug.LogError($"{typeof(T).Name} は登録されていません。");
@@ -92,7 +113,7 @@ namespace SymphonyFrameWork.CoreSystem
             }
             else
             {
-                Debug.Log($"{typeof(T).Name}はシングルトン登録されていません");
+                Debug.Log($"{typeof(T).Name}は登録されていません");
             }
         }
 
