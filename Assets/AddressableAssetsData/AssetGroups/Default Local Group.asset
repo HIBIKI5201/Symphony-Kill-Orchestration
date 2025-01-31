@@ -14,12 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GroupName: Default Local Group
   m_GUID: 2f952d5048302c24a975caeaebfa903e
-  m_SerializeEntries:
-  - m_GUID: 24431a0f522d2a2469eb6c8f05473536
-    m_Address: Assets/UI Toolkit/UXML/SoldierUI.uxml
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: c553d6a8fc5f5504a855782fea110c4c, type: 2}
   m_SchemaSet:
