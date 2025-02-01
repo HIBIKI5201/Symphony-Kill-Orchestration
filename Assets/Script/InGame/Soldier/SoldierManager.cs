@@ -44,6 +44,12 @@ namespace Orchestration.Entity
             _model.Move();
 
             _ui.HealthBarMove(transform.position);
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                SceneChanger sceneChanger = new SceneChanger();
+                sceneChanger.SceneLoad(SceneEnum.InGame);
+            }
         }
 
         private void AddDamage(float damage) => _soldierData.HealthPoint -= damage;
