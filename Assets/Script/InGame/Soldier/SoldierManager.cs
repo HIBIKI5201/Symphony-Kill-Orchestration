@@ -10,13 +10,18 @@ namespace Orchestration.InGame
     [RequireComponent(typeof(SoldierModel), typeof(SoldierUI))]
     public class SoldierManager : MonoBehaviour
     {
+        [SerializeField]
+        private SoldierData_SO _soldierData;
+
         private SoldierModel _model;
+
         private SoldierUI _ui;
 
-        //移動系プロパティ
-        private Vector2 _currentDirection;
         private void Awake()
         {
+            var data = Instantiate(_soldierData);
+            _soldierData = data;
+
             _model = GetComponent<SoldierModel>();
             _model.NullCheckComponent($"{name}のモデルが見つかりませんでした");
 
@@ -26,46 +31,12 @@ namespace Orchestration.InGame
 
         private void Update()
         {
-            NavMeshAgent agent = _model.Agent;
-
-            if (agent != null)
+            if (Input.GetMouseButtonDown(0))
             {
-                if (Input.GetMouseButtonDown(0))
-                {
-                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                    RaycastHit hit;
-
-                    if (Physics.Raycast(ray, out hit))
-                    {
-                        Vector3 hitPosition = hit.point;
-                        agent.SetDestination(hitPosition);
-                    }
-                }
-
-                #region Move
-
-                Vector3 localNextPos = transform.InverseTransformPoint(agent.nextPosition);
-                Vector2 targetDirection = new Vector2(localNextPos.x, localNextPos.z).normalized;
-
-                //Lerpで滑らかに変化
-                _currentDirection = Vector2.Lerp(_currentDirection, targetDirection, Time.deltaTime * 5);
-
-                Animator animator = _model.Animator;
-                animator.SetFloat("Right", _currentDirection.x);
-                animator.SetFloat("Forward", _currentDirection.y);
-
-                transform.position = agent.nextPosition;
-
-                #endregion
-
-                Vector3 direction = _model.Target.position - transform.position;
-                direction.y = 0;  // Y軸方向を無視
-
-                Quaternion targetRotation = Quaternion.LookRotation(direction);
-
-                // Lerpで滑らかに変化
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * 5);
+                _model.SetDirection();
             }
+
+            _model.Move();
 
             _ui.HealthBarMove(transform.position);
         }
