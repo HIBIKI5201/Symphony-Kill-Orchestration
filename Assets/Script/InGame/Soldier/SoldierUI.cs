@@ -1,21 +1,26 @@
 using SymphonyFrameWork.Utility;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 using UnityEngine.UIElements;
 
-namespace Orchestration
+namespace Orchestration.Entity
 {
     public class SoldierUI : MonoBehaviour
     {
         private UIDocument _document;
 
         private VisualElement _healthBar;
+        private VisualElement _bar;
         private async void Awake()
         {
             _document = GetComponentInChildren<UIDocument>();
             if (_document.NullCheckComponent("UI Document‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ"))
             {
                 _healthBar = _document.rootVisualElement.Q<VisualElement>("health-bar");
+            }
+
+            if (_healthBar != null)
+            {
+                _bar = _healthBar.Q<VisualElement>("bar");
             }
         }
 
@@ -34,6 +39,11 @@ namespace Orchestration
 
             _healthBar.style.left = centerX;
             _healthBar.style.top = centerY;
+        }
+
+        public void HealthBarUpdate(float proportion)
+        {
+            _bar.style.width = Length.Percent(proportion * 100);
         }
     }
 }

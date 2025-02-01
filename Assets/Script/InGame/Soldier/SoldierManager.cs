@@ -1,8 +1,9 @@
 using SymphonyFrameWork.Utility;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.Rendering.DebugUI;
 
-namespace Orchestration.InGame
+namespace Orchestration.Entity
 {
     /// <summary>
     /// 兵士のベースクラス
@@ -23,10 +24,14 @@ namespace Orchestration.InGame
             _soldierData = data;
 
             _model = GetComponent<SoldierModel>();
-            _model.NullCheckComponent($"{name}のモデルが見つかりませんでした");
 
             _ui = GetComponent<SoldierUI>();
-            _ui.NullCheckComponent($"{name}のUIが見つかりませんでした");
+
+            if (_model.NullCheckComponent($"{name}のモデルが見つかりませんでした") && _ui.NullCheckComponent($"{name}のUIが見つかりませんでした"))
+            {
+                _soldierData.OnHealthChanged += value => _ui.HealthBarUpdate(value / data.MaxHealthPoint);
+                _soldierData.OnHealthChanged += value => Debug.Log(value);
+            }
         }
 
         private void Update()
@@ -40,6 +45,9 @@ namespace Orchestration.InGame
 
             _ui.HealthBarMove(transform.position);
         }
+
+        private void AddDamage(float damage) => _soldierData.HealthPoint -= damage;
+        private void AddHeal (float heal) => _soldierData.HealthPoint += heal;
 
 #if UNITY_EDITOR
         private void OnDrawGizmos()

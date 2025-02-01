@@ -4,7 +4,7 @@ using Unity.Services.Analytics;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Orchestration.InGame
+namespace Orchestration.Entity
 {
     [RequireComponent(typeof(NavMeshAgent))]
     public class SoldierModel : MonoBehaviour
@@ -29,6 +29,8 @@ namespace Orchestration.InGame
                 //手動で動かすためアップデートはなし
                 _agent.updatePosition = false;
                 _agent.updateRotation = false;
+
+                _agent.autoTraverseOffMeshLink = true;
 
                 _agent.SetDestination(transform.position + new Vector3(0, 0, 10));
             }
