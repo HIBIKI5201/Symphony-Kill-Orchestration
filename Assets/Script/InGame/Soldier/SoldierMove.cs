@@ -29,8 +29,6 @@ namespace Orchestration.Entity
                 _agent.updateRotation = false;
 
                 _agent.autoTraverseOffMeshLink = true;
-
-                _agent.SetDestination(transform.position + new Vector3(0, 0, 10));
             }
 
             _animator = GetComponentInChildren<Animator>();
