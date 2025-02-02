@@ -10,6 +10,22 @@ namespace SymphonyFrameWork.CoreSystem
     {
         private static Dictionary<string, Scene> _sceneDict = new();
 
+        /// <summary>
+        ///ゲーム開始時の初期化処理
+        /// </summary>
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+        private static void Initialize()
+        {
+            Scene scene = SceneManager.GetActiveScene();
+            _sceneDict.Add(scene.name, scene);
+        }
+
+        /// <summary>
+        /// ロードされているシーンを返す
+        /// ない場合はnullを返す
+        /// </summary>
+        /// <param name="sceneName"></param>
+        /// <returns></returns>
         public static Scene? GetExistScene(string sceneName)
         {
             bool result = _sceneDict.TryGetValue(sceneName, out Scene scene);
@@ -37,7 +53,7 @@ namespace SymphonyFrameWork.CoreSystem
                 return false;
             }
 
-            while (operation.isDone)
+            while (!operation.isDone)
             {
                 loadingAction?.Invoke(operation.progress);
                 await Awaitable.NextFrameAsync();
@@ -78,6 +94,8 @@ namespace SymphonyFrameWork.CoreSystem
                 loadingAction?.Invoke(operation.progress);
                 await Awaitable.NextFrameAsync();
             }
+
+            _sceneDict.Remove(sceneName);
 
             return true;
         }
