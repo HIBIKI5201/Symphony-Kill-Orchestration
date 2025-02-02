@@ -2,7 +2,6 @@ using SymphonyFrameWork.CoreSystem;
 using SymphonyFrameWork.Utility;
 using UnityEngine;
 using UnityEngine.AI;
-using static UnityEngine.Rendering.DebugUI;
 
 namespace Orchestration.Entity
 {
@@ -53,7 +52,7 @@ namespace Orchestration.Entity
         }
 
         private void AddDamage(float damage) => _soldierData.HealthPoint -= damage;
-        private void AddHeal (float heal) => _soldierData.HealthPoint += heal;
+        private void AddHeal(float heal) => _soldierData.HealthPoint += heal;
 
 #if UNITY_EDITOR
         private void OnDrawGizmos()
