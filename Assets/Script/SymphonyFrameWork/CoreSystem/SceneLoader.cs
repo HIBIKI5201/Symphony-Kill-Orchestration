@@ -26,10 +26,20 @@ namespace SymphonyFrameWork.CoreSystem
         /// </summary>
         /// <param name="sceneName"></param>
         /// <returns></returns>
-        public static Scene? GetExistScene(string sceneName)
+        public static bool GetExistScene(string sceneName, out Scene scene) =>
+            _sceneDict.TryGetValue(sceneName, out scene);
+
+        public static bool SetActiveScene(string sceneName)
         {
-            bool result = _sceneDict.TryGetValue(sceneName, out Scene scene);
-            return result ? scene : null;
+            if (_sceneDict.TryGetValue(sceneName, out Scene scene))
+            {
+                SceneManager.SetActiveScene(scene);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         /// <summary>
