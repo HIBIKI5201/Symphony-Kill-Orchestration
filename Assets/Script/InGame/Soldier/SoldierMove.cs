@@ -7,7 +7,7 @@ using UnityEngine.AI;
 namespace Orchestration.Entity
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    public class SoldierModel : MonoBehaviour
+    public class SoldierMove : MonoBehaviour
     {
         private NavMeshAgent _agent;
         public NavMeshAgent Agent { get => _agent; }
