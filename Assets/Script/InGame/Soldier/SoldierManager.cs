@@ -8,13 +8,13 @@ namespace Orchestration.Entity
     /// <summary>
     /// 兵士のベースクラス
     /// </summary>
-    [RequireComponent(typeof(SoldierModel), typeof(SoldierUI))]
+    [RequireComponent(typeof(SoldierMove), typeof(SoldierUI))]
     public class SoldierManager : MonoBehaviour
     {
         [SerializeField]
         private SoldierData_SO _soldierData;
 
-        private SoldierModel _model;
+        private SoldierMove _moveModule;
 
         private SoldierUI _ui;
 
@@ -23,11 +23,11 @@ namespace Orchestration.Entity
             var data = Instantiate(_soldierData);
             _soldierData = data;
 
-            _model = GetComponent<SoldierModel>();
+            _moveModule = GetComponent<SoldierMove>();
 
             _ui = GetComponent<SoldierUI>();
 
-            if (_model.NullCheckComponent($"{name}のモデルが見つかりませんでした") && _ui.NullCheckComponent($"{name}のUIが見つかりませんでした"))
+            if (_moveModule.NullCheckComponent($"{name}のモデルが見つかりませんでした") && _ui.NullCheckComponent($"{name}のUIが見つかりませんでした"))
             {
                 _soldierData.OnHealthChanged += value => _ui.HealthBarUpdate(value / data.MaxHealthPoint);
                 _soldierData.OnHealthChanged += value => Debug.Log(value);
@@ -38,10 +38,10 @@ namespace Orchestration.Entity
         {
             if (Input.GetMouseButtonDown(0))
             {
-                _model.SetDirection();
+                _moveModule.SetDirection();
             }
 
-            _model.Move();
+            _moveModule.Move();
 
             _ui.HealthBarMove(transform.position);
 
@@ -58,7 +58,7 @@ namespace Orchestration.Entity
 #if UNITY_EDITOR
         private void OnDrawGizmos()
         {
-            NavMeshAgent agent = _model?.Agent;
+            NavMeshAgent agent = _moveModule?.Agent;
 
             if (agent != null && agent.path != null)
             {

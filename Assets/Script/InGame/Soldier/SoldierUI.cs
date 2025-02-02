@@ -10,7 +10,7 @@ namespace Orchestration.Entity
 
         private VisualElement _healthBar;
         private VisualElement _bar;
-        private async void Awake()
+        private void Awake()
         {
             _document = GetComponentInChildren<UIDocument>();
             if (_document.NullCheckComponent("UI Document‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ"))
