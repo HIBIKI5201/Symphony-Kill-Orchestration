@@ -1,3 +1,4 @@
+using SymphonyFrameWork.CoreSystem;
 using SymphonyFrameWork.Utility;
 using UnityEngine;
 using UnityEngine.AI;
@@ -47,8 +48,7 @@ namespace Orchestration.Entity
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                SceneChanger sceneChanger = new SceneChanger();
-                sceneChanger.SceneLoad(SceneEnum.InGame);
+                ServiceLocator.GetSingleton<GameLogic>().SceneChange(System.SceneEnum.InGame);
             }
         }
 

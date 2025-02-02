@@ -1,6 +1,4 @@
 using SymphonyFrameWork.Utility;
-using System;
-using Unity.Services.Analytics;
 using UnityEngine;
 using UnityEngine.AI;
 
