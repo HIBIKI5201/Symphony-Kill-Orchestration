@@ -646,57 +646,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 932154803}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &960300603
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 960300604}
-  - component: {fileID: 960300605}
-  m_Layer: 0
-  m_Name: UIDocument
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &960300604
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 960300603}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2120304859}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &960300605
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 960300603}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_PanelSettings: {fileID: 11400000, guid: 84c03ee390f5c9b49b5aca80ed233f4b, type: 2}
-  m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 24431a0f522d2a2469eb6c8f05473536, type: 3}
-  m_SortingOrder: 0
-  m_WorldSpaceSizeMode: 1
-  m_WorldSpaceWidth: 1920
-  m_WorldSpaceHeight: 1080
 --- !u!1 &1198487880
 GameObject:
   m_ObjectHideFlags: 0
@@ -820,44 +769,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4372350224500275771, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
-      propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'mixamorig:RightArm'\n\tTransform 'mixamorig:LeftArm'\n\tTransform
-        'mixamorig:RightHand'\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:LeftForeArm'\n\tTransform
-        'mixamorig:RightForeArm'\n\tTransform 'mixamorig:Spine'\n\tTransform 'mixamorig:LeftHand'\n\tTransform
-        'mixamorig:RightArm'\n\tTransform 'mixamorig:LeftArm'\n\tand more ..."
-      objectReference: {fileID: 0}
     - target: {fileID: 4818443321490436054, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
       propertyPath: m_Name
       value: Soldier
       objectReference: {fileID: 0}
-    - target: {fileID: 8582153300400858969, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
-      propertyPath: _soldierData
-      value: 
-      objectReference: {fileID: 11400000, guid: 6b6b8f7323687c04ea62386d4cbf411d, type: 2}
-    - target: {fileID: 8994952510775268647, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.381
-      objectReference: {fileID: 0}
-    - target: {fileID: 8994952510775268647, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1.211
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 2852204906293816622, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 960300604}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
---- !u!4 &2120304859 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2852204906293816622, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
-  m_PrefabInstance: {fileID: 1878022860}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2126694613
 GameObject:
   m_ObjectHideFlags: 0
