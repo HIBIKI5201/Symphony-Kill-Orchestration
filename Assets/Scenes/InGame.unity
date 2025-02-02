@@ -882,6 +882,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4372350224500275771, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'mixamorig:RightArm'\n\tTransform 'mixamorig:LeftArm'\n\tTransform
+        'mixamorig:RightHand'\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:LeftForeArm'\n\tTransform
+        'mixamorig:RightForeArm'\n\tTransform 'mixamorig:Spine'\n\tTransform 'mixamorig:LeftHand'\n\tTransform
+        'mixamorig:RightArm'\n\tTransform 'mixamorig:LeftArm'\n\tand more ..."
+      objectReference: {fileID: 0}
     - target: {fileID: 4818443321490436054, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
       propertyPath: m_Name
       value: Soldier
@@ -890,6 +899,14 @@ PrefabInstance:
       propertyPath: _soldierData
       value: 
       objectReference: {fileID: 11400000, guid: 6b6b8f7323687c04ea62386d4cbf411d, type: 2}
+    - target: {fileID: 8994952510775268647, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.381
+      objectReference: {fileID: 0}
+    - target: {fileID: 8994952510775268647, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.211
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
