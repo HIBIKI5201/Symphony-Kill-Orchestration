@@ -16,6 +16,8 @@ namespace SymphonyFrameWork.CoreSystem
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void Initialize()
         {
+            _sceneDict.Clear();
+
             Scene scene = SceneManager.GetActiveScene();
             _sceneDict.Add(scene.name, scene);
         }
