@@ -25,7 +25,7 @@ namespace Orchestration
                 return;
             }
 
-            Scene? scene = SceneLoader.GetExistScene(SceneEnum.LoadingScene.ToString());
+            Scene? loadScene = SceneLoader.GetExistScene(SceneEnum.LoadingScene.ToString());
 
             FadeIn();
 
