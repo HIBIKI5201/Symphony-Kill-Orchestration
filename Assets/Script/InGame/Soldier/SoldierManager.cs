@@ -93,6 +93,7 @@ namespace Orchestration.Entity
         }
 
         #region ‚¨ŽŽ‚µOnGUI
+        /*
         GUIStyle Style
         {
             get
@@ -119,6 +120,7 @@ namespace Orchestration.Entity
                 y += 40;
             }
         }
+        */
         #endregion
 #endif
     }
