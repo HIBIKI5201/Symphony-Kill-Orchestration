@@ -44,7 +44,7 @@ Material:
     - _Speed: 5
     - _stripe: 8
     m_Colors:
-    - _Color: {r: 5.0917816, g: 23.96863, b: 23.72025, a: 0.27450982}
+    - _Color: {r: 2.509804, g: 23.96863, b: 23.72025, a: 0.27450982}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &1374992359243089053
