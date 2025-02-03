@@ -47,11 +47,10 @@ namespace SymphonyFrameWork.Utility
 
                 // UI要素の取得
                 await Initialize_S(container);
-                Debug.Log("ウィンドウは正常にロード完了");
             }
             else
             {
-                Debug.LogError($"Failed to load UXML file from Addressables: {path}");
+                Debug.LogError($"Failed to load UXML file \nfrom : {path}");
             }
         }
 
