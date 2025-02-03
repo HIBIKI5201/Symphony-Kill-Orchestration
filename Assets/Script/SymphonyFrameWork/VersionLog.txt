@@ -1,7 +1,17 @@
 #Version
-1.16
+1.16.1
 
 #Log
+1.16.1
+[Update]
+ServiceLocator
+
+[Fix]
+ServiceLocator
+SceneLoader
+SaveDataSystem
+PauseManager
+
 1.16
 [Add]
 SymphonyVisualElement

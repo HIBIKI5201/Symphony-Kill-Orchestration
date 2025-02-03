@@ -11,7 +11,7 @@ namespace SymphonyFrameWork.CoreSystem
     //インスタンスを一時的にシーンロードから切り離したい時にも使用できる
     public static class ServiceLocator
     {
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private static void Initialize()
         {
             _instance = null;
@@ -42,7 +42,7 @@ namespace SymphonyFrameWork.CoreSystem
         /// <summary>
         /// 入れられたMonoBehaviourを継承するクラスをロケーターに登録する
         /// </summary>
-        /// <typeparam name="T">ロケートする型</typeparam>
+        /// <typeparam name="T">登録する型</typeparam>
         /// <param name="instance">インスタンス</param>
         /// <returns>登録が成功したらtrue、失敗したらfalse</returns>
         public static void SetInstance<T>(T instance, LocateType type = LocateType.Locator) where T : MonoBehaviour
@@ -62,6 +62,48 @@ namespace SymphonyFrameWork.CoreSystem
             {
                 instance.transform.SetParent(_instance.transform);
             }
+        }
+
+        /// <summary>
+        /// 指定した型のインスタンスを破棄する
+        /// </summary>
+        /// <typeparam name="T">破棄したいインスタンスの型</typeparam>
+        public static void DestroyInstance<T>() where T : MonoBehaviour
+        {
+            if (_singletonObjects.TryGetValue(typeof(T), out MonoBehaviour md))
+            {
+                Object.Destroy(md.gameObject);
+                _singletonObjects.Remove(typeof(T));
+                Debug.Log($"{typeof(T).Name}が破棄されました");
+            }
+            else
+            {
+                Debug.Log($"{typeof(T).Name}は登録されていません");
+            }
+        }
+
+        /// <summary>
+        /// 登録されたインスタンスを返す
+        /// </summary>
+        /// <typeparam name="T">取得したいインスタンスの型</typeparam>
+        /// <returns>指定した型のインスタンス</returns>
+        public static T GetInstance<T>() where T : MonoBehaviour
+        {
+            if (_singletonObjects.TryGetValue(typeof(T), out MonoBehaviour md))
+            {
+                if (md != null)
+                {
+                    return md as T;
+                }
+                else
+                {
+                    Debug.LogError($"{typeof(T).Name} は破棄されています。");
+                    return null;
+                }
+            }
+
+            Debug.LogError($"{typeof(T).Name} は登録されていません。");
+            return null;
         }
 
         public enum LocateType
@@ -89,21 +131,7 @@ namespace SymphonyFrameWork.CoreSystem
         /// <returns>指定した型のインスタンス</returns>
         public static T GetSingleton<T>() where T : MonoBehaviour
         {
-            if (_singletonObjects.TryGetValue(typeof(T), out MonoBehaviour md))
-            {
-                if (md != null)
-                {
-                    return md as T;
-                }
-                else
-                {
-                    Debug.LogError($"{typeof(T).Name} は破棄されています。");
-                    return null;
-                }
-            }
-
-            Debug.LogError($"{typeof(T).Name} は登録されていません。");
-            return null;
+            return GetInstance<T>();
         }
 
         /// <summary>
@@ -112,16 +140,7 @@ namespace SymphonyFrameWork.CoreSystem
         /// <typeparam name="T"></typeparam>
         public static void DestroySingleton<T>() where T : MonoBehaviour
         {
-            if (_singletonObjects.TryGetValue(typeof(T), out MonoBehaviour md))
-            {
-                Object.Destroy(md.gameObject);
-                _singletonObjects.Remove(typeof(T));
-                Debug.Log($"{typeof(T).Name}が破棄されました");
-            }
-            else
-            {
-                Debug.Log($"{typeof(T).Name}は登録されていません");
-            }
+            DestroyInstance<T>();
         }
 
 #endregion
