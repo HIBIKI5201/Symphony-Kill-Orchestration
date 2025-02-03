@@ -21,9 +21,29 @@ namespace Orchestration.InGame
         [SerializeField]
         private GameObject _gridPrefab;
 
-        private List<Vector3> _gridPosList = new();
+        private List<GridInfo> _gridPosList = new();
 
         private Vector3 _originPosition;
+
+        private struct GridInfo
+        {
+            private Vector3 _position;
+            public Vector3 Position { get => _position; }
+
+            private GameObject _object;
+            public GameObject Object { get => _object; }
+
+            public GridInfo(Vector3 position)
+            {
+                _position = position;
+                _object = null;
+            }
+
+            public void SetObject(GameObject gameObject)
+            {
+                _object = gameObject;
+            }
+        }
 
         private void OnEnable()
         {
@@ -62,7 +82,7 @@ namespace Orchestration.InGame
                         //サーチする場所にNavMeshがあったらリストに追加
                         if (NavMesh.SamplePosition(searchPos, out _, _gridSize * 0.1f, NavMesh.AllAreas))
                         {
-                            _gridPosList.Add(searchPos);
+                            _gridPosList.Add(new GridInfo(searchPos));
                         }
                     }
                 }
@@ -74,22 +94,23 @@ namespace Orchestration.InGame
         /// <summary>
         /// グリッドの位置にプレハブを生成
         /// </summary>
-        private void GridPrefabInstantiate()
+        private async void GridPrefabInstantiate()
         {
             //プレハブの親オブジェクトを生成
             GameObject rootObj = new GameObject("GridPrefabs");
             rootObj.transform.parent = transform;
 
-            //グリッドの位置を配列化
-            Span<Vector3> positions = new Span<Vector3>(_gridPosList.ToArray());
-            Span<Quaternion> quaternions = new Span<Quaternion>(Enumerable.Repeat(Quaternion.identity, _gridPosList.Count).ToArray());
-
             //親オブジェクトの子としてグリッドプレハブを一括生成
-            InstantiateAsync(original: _gridPrefab,
+            GameObject[] objects = await InstantiateAsync(original: _gridPrefab,
                 count: _gridPosList.Count,
                 parent: rootObj.transform,
-                positions: positions,
-                rotations: quaternions);
+                positions: new Span<Vector3>(_gridPosList.Select(gi => gi.Position).ToArray()),
+                rotations: new Span<Quaternion>(Enumerable.Repeat(Quaternion.identity, _gridPosList.Count).ToArray()));
+
+            for (int i = 0; i < objects.Length; i++)
+            {
+                _gridPosList[i].SetObject(objects[i]);
+            }
         }
 
         /// <summary>
@@ -151,7 +172,7 @@ namespace Orchestration.InGame
             pos = vector * _gridSize + _originPosition;
 
             //そこにグリッドがあるかを判定
-            int index = _gridPosList.IndexOf(pos);
+            int index = _gridPosList.Select(gi => gi.Position).ToList().IndexOf(pos);
             return 0 <= index;
         }
 
@@ -164,7 +185,7 @@ namespace Orchestration.InGame
         {
             if (_gridPosVisible && _gridPosList.Count > 0)
             {
-                foreach (var item in _gridPosList)
+                foreach (var item in _gridPosList.Select(gi => gi.Position))
                 {
                     Gizmos.color = Color.green;
                     Gizmos.DrawWireCube(
