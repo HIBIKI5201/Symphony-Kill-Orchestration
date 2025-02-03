@@ -1,5 +1,5 @@
+using SymphonyFrameWork.CoreSystem;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -16,6 +16,18 @@ namespace Orchestration.InGame
 
         private List<Vector3> _gridPosList = new();
 
+        private Vector3 _originPosition;
+
+        private void OnEnable()
+        {
+            ServiceLocator.SetInstance(this);
+        }
+
+        private void OnDisable()
+        {
+            ServiceLocator.DestroySingleton<GridManager>();
+        }
+
         private void Start()
         {
             GridCreate();
@@ -25,13 +37,12 @@ namespace Orchestration.InGame
         {
             _gridPosList.Clear();
             var navMeshRange = GetNavMeshCorners();
-            Vector3 searchPos = navMeshRange.min ;
 
-            for (; searchPos.z <= navMeshRange.max.z; searchPos.z++)
+            for (Vector3 searchPos = navMeshRange.min; searchPos.z <= navMeshRange.max.z; searchPos.z += _gridSize)
             {
-                for (searchPos.y = navMeshRange.min.y; searchPos.y <= navMeshRange.max.y + 1; searchPos.y++)
+                for (searchPos.y = navMeshRange.min.y; searchPos.y <= navMeshRange.max.y + 1; searchPos.y += _gridSize)
                 {
-                    for (searchPos.x = navMeshRange.min.x; searchPos.x <= navMeshRange.max.x; searchPos.x++)
+                    for (searchPos.x = navMeshRange.min.x; searchPos.x <= navMeshRange.max.x; searchPos.x += _gridSize)
                     {
                         if (NavMesh.SamplePosition(searchPos, out var hit, _gridSize * 0.1f, NavMesh.AllAreas))
                         {
@@ -40,6 +51,8 @@ namespace Orchestration.InGame
                     }
                 }
             }
+
+            _originPosition = navMeshRange.min;
         }
 
         private (Vector3 min, Vector3 max) GetNavMeshCorners()
@@ -79,6 +92,19 @@ namespace Orchestration.InGame
             }
         }
 
+        public bool GetGridPosition(Vector3 position, out Vector3 gridPos)
+        {
+            //原点からの距離をグリッドの大きさで割る
+            Vector3 normalizePos = (position - _originPosition);
+
+            //一番近いグリッドの座標を出す
+            gridPos = new Vector3(normalizePos.x - _gridSize / 2, normalizePos.y, normalizePos.z - _gridSize / 2);
+            
+            //そこにグリッドがあるかを判定
+            int index = _gridPosList.IndexOf(gridPos);
+            return index < 0;
+        }
+
 #if UNITY_EDITOR
         [Header("DebugMode")]
         [SerializeField]
@@ -91,8 +117,9 @@ namespace Orchestration.InGame
                 foreach (var item in _gridPosList)
                 {
                     Gizmos.color = Color.green;
-                    Gizmos.DrawWireCube(item + Vector3.up * _gridSize / 3f,
-                        Vector3.one * (_gridSize * 1f) - Vector3.up * _gridSize / 2f);
+                    Gizmos.DrawWireCube(
+                        center: item + Vector3.up * _gridSize / 3f,
+                        size: Vector3.one * (_gridSize * 1f) - Vector3.up * _gridSize / 2f);
                 }
             }
         }
