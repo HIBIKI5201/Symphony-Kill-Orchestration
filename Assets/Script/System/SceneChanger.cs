@@ -1,4 +1,5 @@
 using SymphonyFrameWork.CoreSystem;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,6 +9,8 @@ namespace Orchestration.System
     {
         private string _currentSceneName;
 
+        private bool _isLoading;
+
         public SceneChanger()
         {
             Scene scene = SceneManager.GetActiveScene();
@@ -16,7 +19,14 @@ namespace Orchestration.System
 
         public async void SceneLoad(SceneEnum sceneEnum)
         {
-            FadeOut();
+            if (_isLoading)
+            {
+                Debug.LogWarning("ローディング中にロードできません");
+                return;
+            }
+            _isLoading = true;
+
+            await FadeOut(1.5f);
 
             //ロードシーンのロード
             if (!await SceneLoader.LoadScene(SceneEnum.LoadingScene.ToString()))
@@ -48,16 +58,17 @@ namespace Orchestration.System
                 }
             }
 
-            FadeIn();
+            await FadeIn(1);
 
             //元のシーンをアンロード
             bool unloadSuccess = await SceneLoader.UnloadScene(_currentSceneName.ToString(),
                 progress =>
                 {
-                    manager.ProgressBarUpdate(progress / 2); //0～50%の範囲
+                    manager.ProgressUpdate(progress / 2); //0～50%の範囲
                 });
 
-            await Awaitable.WaitForSecondsAsync(1);
+            //少し猶予を作る
+            await Awaitable.WaitForSecondsAsync(0.5f);
 
             if (unloadSuccess)
             {
@@ -65,8 +76,7 @@ namespace Orchestration.System
                 bool loadSuccess = await SceneLoader.LoadScene(sceneEnum.ToString(),
                     progress =>
                     {
-                        manager.ProgressBarUpdate(progress / 2 + 0.5f); //50～100%の範囲
-
+                        manager.ProgressUpdate(progress / 2 + 0.5f); //50～100%の範囲
                     });
 
                 if (loadSuccess)
@@ -86,29 +96,33 @@ namespace Orchestration.System
             }
             else return;
 
-            FadeOut();
+            //完了した事を明示するためにゲージを最大化
+            manager.ProgressUpdate(1);
+
+            //少し猶予を作る
+            await Awaitable.WaitForSecondsAsync(0.5f);
+
+            await FadeOut(1);
 
             //ロードシーンをアンロード
             await SceneLoader.UnloadScene(SceneEnum.LoadingScene.ToString());
 
-            FadeIn();
+            await FadeIn(1.5f);
+
+            _isLoading = false;
         }
 
         /// <summary>
-        /// 画面をロードしたシーンの画面にする
+        /// 画面をフェードインする
         /// </summary>
-        private void FadeIn()
-        {
-
-        }
+        private async Awaitable FadeIn(float time) =>
+            await ServiceLocator.GetSingleton<GameLogic>().FadeIn(time);
 
         /// <summary>
-        /// 画面をロードシーンに移行する
+        /// 画面をフェードアウトする
         /// </summary>
-        private void FadeOut()
-        {
-
-        }
+        private async Awaitable FadeOut(float time) =>
+            await ServiceLocator.GetSingleton<GameLogic>().FadeOut(time);
 
 
         /// <summary>
@@ -116,9 +130,9 @@ namespace Orchestration.System
         /// </summary>
         private async void LoadFailed()
         {
-            FadeOut();
+            await FadeOut(1);
             await SceneLoader.LoadScene(SceneEnum.Home.ToString());
-            FadeIn();
+            await FadeIn(1);
         }
     }
 
