@@ -42,6 +42,8 @@ namespace Orchestration.Entity
                 _moveModule.SetDirection();
             }
 
+            GridHighLight();
+
             _moveModule.Move();
 
             _ui.HealthBarMove(transform.position);
@@ -49,6 +51,22 @@ namespace Orchestration.Entity
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 ServiceLocator.GetSingleton<GameLogic>().SceneChange(System.SceneEnum.InGame);
+            }
+        }
+
+        private void GridHighLight()
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                var gridManager = ServiceLocator.GetSingleton<GridManager>();
+
+                //ヒットした場所のグリッド位置を目標地点にセット
+                if (gridManager.GetGridPosition(hit.point, out Vector3 pos, out int index))
+                {
+                    gridManager.HighLightGrid(index);
+                }
             }
         }
 
