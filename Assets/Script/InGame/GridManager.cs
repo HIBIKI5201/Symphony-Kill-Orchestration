@@ -1,5 +1,7 @@
 using SymphonyFrameWork.CoreSystem;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -13,6 +15,11 @@ namespace Orchestration.InGame
     {
         [SerializeField]
         private float _gridSize = 1f;
+
+        [Space]
+
+        [SerializeField]
+        private GameObject _gridPrefab;
 
         private List<Vector3> _gridPosList = new();
 
@@ -31,8 +38,16 @@ namespace Orchestration.InGame
         private void Start()
         {
             GridCreate();
+
+            if (_gridPrefab)
+            {
+                GridPrefabInstantiate();
+            }
         }
 
+        /// <summary>
+        /// NavMeshがある場所を検索しグリッドを生成
+        /// </summary>
         private void GridCreate()
         {
             _gridPosList.Clear();
@@ -44,7 +59,8 @@ namespace Orchestration.InGame
                 {
                     for (searchPos.x = navMeshRange.min.x; searchPos.x <= navMeshRange.max.x; searchPos.x += _gridSize)
                     {
-                        if (NavMesh.SamplePosition(searchPos, out var hit, _gridSize * 0.1f, NavMesh.AllAreas))
+                        //サーチする場所にNavMeshがあったらリストに追加
+                        if (NavMesh.SamplePosition(searchPos, out _, _gridSize * 0.1f, NavMesh.AllAreas))
                         {
                             _gridPosList.Add(searchPos);
                         }
@@ -55,6 +71,31 @@ namespace Orchestration.InGame
             _originPosition = navMeshRange.min;
         }
 
+        /// <summary>
+        /// グリッドの位置にプレハブを生成
+        /// </summary>
+        private void GridPrefabInstantiate()
+        {
+            //プレハブの親オブジェクトを生成
+            GameObject rootObj = new GameObject("GridPrefabs");
+            rootObj.transform.parent = transform;
+
+            //グリッドの位置を配列化
+            Span<Vector3> positions = new Span<Vector3>(_gridPosList.ToArray());
+            Span<Quaternion> quaternions = new Span<Quaternion>(Enumerable.Repeat(Quaternion.identity, _gridPosList.Count).ToArray());
+
+            //親オブジェクトの子としてグリッドプレハブを一括生成
+            InstantiateAsync(original: _gridPrefab,
+                count: _gridPosList.Count,
+                parent: rootObj.transform,
+                positions: positions,
+                rotations: quaternions);
+        }
+
+        /// <summary>
+        /// NavMeshの端の二点を取得
+        /// </summary>
+        /// <returns></returns>
         private (Vector3 min, Vector3 max) GetNavMeshCorners()
         {
             NavMeshTriangulation triangulation = NavMesh.CalculateTriangulation();
@@ -92,6 +133,12 @@ namespace Orchestration.InGame
             }
         }
 
+        /// <summary>
+        /// 入力された座標に一番近いグリッド上の座標を返す
+        /// </summary>
+        /// <param name="position">検索したい座標</param>
+        /// <param name="pos">グリッドの座標</param>
+        /// <returns>グリッドが存在するか</returns>
         public bool GetGridPosition(Vector3 position, out Vector3 pos)
         {
             //原点からの距離
@@ -101,8 +148,8 @@ namespace Orchestration.InGame
             //グリッド座標系のポジションを出す
             vector = new Vector3((int)(vector.x / _gridSize), (int)(vector.y / _gridSize), (int)(vector.z / _gridSize));
             //一番近いグリッドの座標を出す
-            pos =  vector * _gridSize + _originPosition;
-            
+            pos = vector * _gridSize + _originPosition;
+
             //そこにグリッドがあるかを判定
             int index = _gridPosList.IndexOf(pos);
             return 0 <= index;
