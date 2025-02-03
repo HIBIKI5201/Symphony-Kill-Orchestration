@@ -13,13 +13,21 @@ namespace Orchestration.InGame
     /// </summary>
     public class GridManager : MonoBehaviour
     {
-        [SerializeField]
+        [SerializeField, Tooltip("グリッドの大きさ")]
         private float _gridSize = 1f;
 
         [Space]
 
-        [SerializeField]
+        [SerializeField, Tooltip("グリッドのプレハブ")]
         private GameObject _gridPrefab;
+
+        [Space]
+        [SerializeField, Tooltip("グリッドが選ばれていない時のマテリアル")]
+        private Material _unselectGridMaterial;
+
+        [SerializeField, Tooltip("グリッドが選ばれている時のマテリアル")]
+        private Material _selectGridMaterial;
+
 
         private List<GridInfo> _griInfoList = new();
 
@@ -194,13 +202,13 @@ namespace Orchestration.InGame
                 //前のグリッドのハイライトをオフに
                 if (_highLightingGrid != null)
                 {
-                    _highLightingGrid.HighLightSetActive(false);
+                    HighLightSet(_highLightingGrid, false);
                 }
 
                 //ハイライトを表示し記録
                 GridInfo info = _griInfoList[index];
 
-                info.HighLightSetActive(true);
+                HighLightSet(info, true);
 
                 _highLightingGrid = info;
             }
@@ -210,11 +218,17 @@ namespace Orchestration.InGame
                 //ハイライト中のグリッドがあればオフに
                 if (_highLightingGrid != null)
                 {
-                    _highLightingGrid.HighLightSetActive(false);
+                    HighLightSet(_highLightingGrid, false);
+
                     _highLightingGrid = null;
                 }
             }
 
+            void HighLightSet(GridInfo gridInfo, bool value)
+            {
+                gridInfo.HighLightSetActive(value);
+                gridInfo.GroundMaterialChange(value ? _selectGridMaterial : _unselectGridMaterial);
+            }
         }
 
 #if UNITY_EDITOR
