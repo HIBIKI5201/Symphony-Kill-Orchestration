@@ -1,3 +1,14 @@
 {
-	"name": "OrchestrationDebug"
+    "name": "OrchestrationDebug",
+    "rootNamespace": "Orchestration.DebugFunction",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
