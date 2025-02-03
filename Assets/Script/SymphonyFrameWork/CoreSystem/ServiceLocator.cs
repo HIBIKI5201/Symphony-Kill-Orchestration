@@ -45,7 +45,7 @@ namespace SymphonyFrameWork.CoreSystem
         /// <typeparam name="T">ロケートする型</typeparam>
         /// <param name="instance">インスタンス</param>
         /// <returns>登録が成功したらtrue、失敗したらfalse</returns>
-        public static void SetInstance<T>(T instance, LocateType type) where T : MonoBehaviour
+        public static void SetInstance<T>(T instance, LocateType type = LocateType.Locator) where T : MonoBehaviour
         {
             CreateInstance();
 

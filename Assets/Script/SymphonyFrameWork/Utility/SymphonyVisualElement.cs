@@ -4,7 +4,8 @@ using UnityEngine.UIElements;
 
 namespace SymphonyFrameWork.Utility
 {
-    public abstract class SymphonyVisualElement : VisualElement
+    [UxmlElement]
+    public abstract partial class SymphonyVisualElement : VisualElement
     {
         public Task InitializeTask { get; private set; }
 
