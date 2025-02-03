@@ -1,0 +1,16 @@
+.button {
+    transition-duration: 0.1s;
+}
+
+.button:hover {
+    scale: 1.1 1.1;
+    transition-duration: 0.15s;
+    transition-timing-function: ease-out;
+}
+
+.button:active {
+    scale: 0.5 0.5;
+    transition-duration: 0.05s;
+    transition-timing-function: ease-in-out;
+    background-color: rgb(255, 0, 0);
+}
