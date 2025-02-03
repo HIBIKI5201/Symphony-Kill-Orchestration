@@ -1,0 +1,16 @@
+{
+    "name": "OrchestrationUI",
+    "rootNamespace": "Orchestration.UI",
+    "references": [
+        "GUID:68a532f43eeefd5408e4e8871b769ee4"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
