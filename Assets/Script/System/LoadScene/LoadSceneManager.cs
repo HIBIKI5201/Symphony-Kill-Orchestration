@@ -1,20 +1,18 @@
+using Orchestration.System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Orchestration
+namespace Orchestration.System
 {
     public class LoadSceneManager : MonoBehaviour
     {
-        UIDocument _ui;
+        private LoadUIManager _loadUIManager;
 
         private void Awake()
         {
-            _ui = GetComponent<UIDocument>();
+            _loadUIManager = GetComponent<LoadUIManager>();
         }
 
-        public void ProgressBarUpdate(float progress)
-        {
-
-        }
+        public void ProgressUpdate(float progress) => _loadUIManager.ProgressUpdate(progress);
     }
 }
