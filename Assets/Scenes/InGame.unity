@@ -251,7 +251,7 @@ GameObject:
   - component: {fileID: 664427128}
   - component: {fileID: 664427129}
   - component: {fileID: 664427127}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -335,7 +335,7 @@ GameObject:
   - component: {fileID: 821335564}
   - component: {fileID: 821335563}
   - component: {fileID: 821335562}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -608,6 +608,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Soldier
       objectReference: {fileID: 0}
+    - target: {fileID: 8582153300400858969, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
+      propertyPath: _layerMask.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -625,7 +629,7 @@ GameObject:
   - component: {fileID: 2036024538}
   - component: {fileID: 2036024537}
   - component: {fileID: 2036024536}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -734,7 +738,7 @@ GameObject:
   - component: {fileID: 2100913535}
   - component: {fileID: 2100913534}
   - component: {fileID: 2100913533}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
