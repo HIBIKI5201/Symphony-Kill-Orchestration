@@ -1,3 +1,5 @@
+using Orchestration.InGame;
+using SymphonyFrameWork.CoreSystem;
 using SymphonyFrameWork.Utility;
 using UnityEngine;
 using UnityEngine.AI;
@@ -69,13 +71,16 @@ namespace Orchestration.Entity
         public void SetDirection()
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                //ヒットした場所を目標地点にする
-                Vector3 hitPosition = hit.point;
-                _agent.SetDestination(hitPosition);
+                var gridManager = ServiceLocator.GetSingleton<GridManager>();
+
+                //ヒットした場所のグリッド位置を目標地点にセット
+                if (gridManager.GetGridPosition(hit.point, out Vector3 pos))
+                {
+                    _agent.SetDestination(pos);
+                }
             }
         }
     }

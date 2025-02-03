@@ -92,17 +92,20 @@ namespace Orchestration.InGame
             }
         }
 
-        public bool GetGridPosition(Vector3 position, out Vector3 gridPos)
+        public bool GetGridPosition(Vector3 position, out Vector3 pos)
         {
-            //原点からの距離をグリッドの大きさで割る
-            Vector3 normalizePos = (position - _originPosition);
-
+            //原点からの距離
+            Vector3 vector = (position - _originPosition);
+            //原点から半グリッドずらす
+            vector += new Vector3(_gridSize / 2, _gridSize / 2, _gridSize / 2);
+            //グリッド座標系のポジションを出す
+            vector = new Vector3((int)(vector.x / _gridSize), (int)(vector.y / _gridSize), (int)(vector.z / _gridSize));
             //一番近いグリッドの座標を出す
-            gridPos = new Vector3(normalizePos.x - _gridSize / 2, normalizePos.y, normalizePos.z - _gridSize / 2);
+            pos =  vector * _gridSize + _originPosition;
             
             //そこにグリッドがあるかを判定
-            int index = _gridPosList.IndexOf(gridPos);
-            return index < 0;
+            int index = _gridPosList.IndexOf(pos);
+            return 0 <= index;
         }
 
 #if UNITY_EDITOR
