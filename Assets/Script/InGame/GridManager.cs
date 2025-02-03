@@ -21,50 +21,11 @@ namespace Orchestration.InGame
         [SerializeField]
         private GameObject _gridPrefab;
 
-        private List<GridInfo> _gridPosList = new();
+        private List<GridInfo> _griInfoList = new();
 
         private GridInfo _highLightingGrid;
 
         private Vector3 _originPosition;
-
-        private class GridInfo
-        {
-            private Vector3 _position;
-            public Vector3 Position { get => _position; }
-
-            private GameObject _object;
-            public GameObject Object { get => _object; }
-
-            private GameObject _highLight;
-
-            public GridInfo(Vector3 position)
-            {
-                _position = position;
-                _object = null;
-                _highLight = null;
-            }
-
-            public void SetObject(GameObject gameObject)
-            {
-                _object = gameObject;
-                _highLight = gameObject.transform.Find("HighLight").gameObject;
-
-                if (_highLight)
-                {
-                    _highLight.SetActive(false);
-                }
-                else
-                {
-                    Debug.LogWarning("グリッドのハイライトが見つかりません");
-                }
-            }
-
-            public void HighLightSetActive(bool value)
-            {
-                _highLight?.SetActive(value);
-            }
-        }
-
         private void OnEnable()
         {
             ServiceLocator.SetInstance(this);
@@ -77,20 +38,23 @@ namespace Orchestration.InGame
 
         private void Start()
         {
-            GridCreate();
+            List<Vector3> gridPosList = GridCreate();
 
             if (_gridPrefab)
             {
-                GridPrefabInstantiate();
+                GridPrefabInstantiate(gridPosList);
             }
         }
+
 
         /// <summary>
         /// NavMeshがある場所を検索しグリッドを生成
         /// </summary>
-        private void GridCreate()
+        /// <returns>グリッドの座標のリスト</returns>
+        private List<Vector3> GridCreate()
         {
-            _gridPosList.Clear();
+            List<Vector3> list = new();
+
             var navMeshRange = GetNavMeshCorners();
 
             for (Vector3 searchPos = navMeshRange.min; searchPos.z <= navMeshRange.max.z; searchPos.z += _gridSize)
@@ -102,34 +66,43 @@ namespace Orchestration.InGame
                         //サーチする場所にNavMeshがあったらリストに追加
                         if (NavMesh.SamplePosition(searchPos, out _, _gridSize * 0.1f, NavMesh.AllAreas))
                         {
-                            _gridPosList.Add(new GridInfo(searchPos));
+                            list.Add(searchPos);
                         }
                     }
                 }
             }
 
             _originPosition = navMeshRange.min;
+
+            return list;
         }
 
         /// <summary>
         /// グリッドの位置にプレハブを生成
         /// </summary>
-        private async void GridPrefabInstantiate()
+        /// <param name="list">グリッドの位置</param>
+        private async void GridPrefabInstantiate(List<Vector3> list)
         {
+            _griInfoList.Clear();
+
             //プレハブの親オブジェクトを生成
             GameObject rootObj = new GameObject("GridPrefabs");
             rootObj.transform.parent = transform;
 
             //親オブジェクトの子としてグリッドプレハブを一括生成
             GameObject[] objects = await InstantiateAsync(original: _gridPrefab,
-                count: _gridPosList.Count,
+                count: list.Count,
                 parent: rootObj.transform,
-                positions: new Span<Vector3>(_gridPosList.Select(gi => gi.Position).ToArray()),
-                rotations: new Span<Quaternion>(Enumerable.Repeat(Quaternion.identity, _gridPosList.Count).ToArray()));
+                positions: new Span<Vector3>(list.ToArray()),
+                rotations: new Span<Quaternion>(Enumerable.Repeat(Quaternion.identity, list.Count).ToArray()));
 
+            //生成したオブジェクトのGridInfoを取得
             for (int i = 0; i < objects.Length; i++)
             {
-                _gridPosList[i].SetObject(objects[i]);
+                _griInfoList.Add(
+                    objects[i].TryGetComponent<GridInfo>(out var info) ?
+                    info : objects[i].AddComponent<GridInfo>()
+                    );
             }
         }
 
@@ -204,7 +177,7 @@ namespace Orchestration.InGame
             pos = vector * _gridSize + _originPosition;
 
             //そこにグリッドがあるかを判定
-            index = _gridPosList.Select(gi => gi.Position).ToList().IndexOf(pos);
+            index = _griInfoList.Select(gi => gi.transform.position).ToList().IndexOf(pos);
             return 0 <= index;
         }
 
@@ -216,7 +189,7 @@ namespace Orchestration.InGame
         public void HighLightGrid(int index)
         {
             //範囲内だった時
-            if (0 <= index && index < _gridPosList.Count)
+            if (0 <= index && index < _griInfoList.Count)
             {
                 //前のグリッドのハイライトをオフに
                 if (_highLightingGrid != null)
@@ -225,7 +198,7 @@ namespace Orchestration.InGame
                 }
 
                 //ハイライトを表示し記録
-                GridInfo info = _gridPosList[index];
+                GridInfo info = _griInfoList[index];
 
                 info.HighLightSetActive(true);
 
@@ -251,9 +224,9 @@ namespace Orchestration.InGame
 
         private void OnDrawGizmos()
         {
-            if (_gridPosVisible && _gridPosList.Count > 0)
+            if (_gridPosVisible && _griInfoList.Count > 0)
             {
-                foreach (var item in _gridPosList.Select(gi => gi.Position))
+                foreach (var item in _griInfoList.Select(gi => gi.transform.position))
                 {
                     Gizmos.color = Color.green;
                     Gizmos.DrawWireCube(
