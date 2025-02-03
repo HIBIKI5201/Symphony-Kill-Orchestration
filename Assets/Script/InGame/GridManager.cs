@@ -23,9 +23,11 @@ namespace Orchestration.InGame
 
         private List<GridInfo> _gridPosList = new();
 
+        private GridInfo _highLightingGrid;
+
         private Vector3 _originPosition;
 
-        private struct GridInfo
+        private class GridInfo
         {
             private Vector3 _position;
             public Vector3 Position { get => _position; }
@@ -33,15 +35,33 @@ namespace Orchestration.InGame
             private GameObject _object;
             public GameObject Object { get => _object; }
 
+            private GameObject _highLight;
+
             public GridInfo(Vector3 position)
             {
                 _position = position;
                 _object = null;
+                _highLight = null;
             }
 
             public void SetObject(GameObject gameObject)
             {
                 _object = gameObject;
+                _highLight = gameObject.transform.Find("HighLight").gameObject;
+
+                if (_highLight)
+                {
+                    _highLight.SetActive(false);
+                }
+                else
+                {
+                    Debug.LogWarning("グリッドのハイライトが見つかりません");
+                }
+            }
+
+            public void HighLightSetActive(bool value)
+            {
+                _highLight?.SetActive(value);
             }
         }
 
@@ -162,6 +182,18 @@ namespace Orchestration.InGame
         /// <returns>グリッドが存在するか</returns>
         public bool GetGridPosition(Vector3 position, out Vector3 pos)
         {
+            return GetGridPosition(position, out pos, out _);
+        }
+
+        /// <summary>
+        /// 入力された座標に一番近いグリッド上の座標を返す
+        /// </summary>
+        /// <param name="position">検索したい座標</param>
+        /// <param name="pos">グリッドの座標</param>
+        ///<param name="index">グリッドのインデックス番号</param>
+        /// <returns>グリッドが存在するか</returns>
+        public bool GetGridPosition(Vector3 position, out Vector3 pos, out int index)
+        {
             //原点からの距離
             Vector3 vector = (position - _originPosition);
             //原点から半グリッドずらす
@@ -172,8 +204,44 @@ namespace Orchestration.InGame
             pos = vector * _gridSize + _originPosition;
 
             //そこにグリッドがあるかを判定
-            int index = _gridPosList.Select(gi => gi.Position).ToList().IndexOf(pos);
+            index = _gridPosList.Select(gi => gi.Position).ToList().IndexOf(pos);
             return 0 <= index;
+        }
+
+        /// <summary>
+        /// 指定したグリッドをハイライトする
+        /// 入力がリストにない場合はハイライトを消す
+        /// </summary>
+        /// <param name="index">グリッドのインデックス番号</param>
+        public void HighLightGrid(int index)
+        {
+            //範囲内だった時
+            if (0 <= index && index < _gridPosList.Count)
+            {
+                //前のグリッドのハイライトをオフに
+                if (_highLightingGrid != null)
+                {
+                    _highLightingGrid.HighLightSetActive(false);
+                }
+
+                //ハイライトを表示し記録
+                GridInfo info = _gridPosList[index];
+
+                info.HighLightSetActive(true);
+
+                _highLightingGrid = info;
+            }
+            //範囲外だった時
+            else
+            {
+                //ハイライト中のグリッドがあればオフに
+                if (_highLightingGrid != null)
+                {
+                    _highLightingGrid.HighLightSetActive(false);
+                    _highLightingGrid = null;
+                }
+            }
+
         }
 
 #if UNITY_EDITOR
