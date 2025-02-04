@@ -2,6 +2,7 @@ using SymphonyFrameWork.CoreSystem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -46,6 +47,8 @@ namespace Orchestration.InGame
 
         private void Start()
         {
+            GetComponent<NavMeshSurface>().BuildNavMesh();
+
             List<Vector3> gridPosList = GridCreate();
 
             if (_gridPrefab)
