@@ -40,6 +40,9 @@ namespace Orchestration.Entity
             }
         }
 
+        /// <summary>
+        /// アニメーターに移動パラメータを渡し、座標を更新
+        /// </summary>
         public void Move()
         {
             //ターゲットのベクトルを計算
@@ -56,11 +59,10 @@ namespace Orchestration.Entity
             transform.position = _agent.nextPosition;
         }
 
-        public Vector3 TargetDirection()
-        {
-            return _agent.velocity.normalized;
-        }
-
+        /// <summary>
+        /// 引数の方向に回転させる
+        /// </summary>
+        /// <param name="direction"></param>
         public void Rotation(Vector3 direction)
         {
             // 進行方向がある場合のみ回転
@@ -71,6 +73,9 @@ namespace Orchestration.Entity
             }
         }
 
+        /// <summary>
+        /// 移動場所を取得し設定
+        /// </summary>
         public void SetDirection()
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

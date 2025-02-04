@@ -37,6 +37,10 @@ namespace Orchestration.Entity
             }
         }
 
+        /// <summary>
+        /// ヘルスバーの位置を更新する
+        /// </summary>
+        /// <param name="pos"></param>
         public void HealthBarMove(Vector3 pos)
         {
             if (_healthBar == null)
@@ -54,6 +58,10 @@ namespace Orchestration.Entity
             _healthBar.style.top = centerY;
         }
 
+        /// <summary>
+        /// ヘルスバーの量を更新する
+        /// </summary>
+        /// <param name="proportion"></param>
         public void HealthBarUpdate(float proportion) => _info.HealthBarUpdate(proportion);
     }
 }
