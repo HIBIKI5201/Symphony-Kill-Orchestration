@@ -8,7 +8,7 @@ namespace Orchestration.System
     {
         private UIDocument _document;
 
-        private LoadingUI _loadingUI;
+        private LoadingProduction _loadingUI;
         private void Awake()
         {
             _document = GetComponent<UIDocument>();
@@ -18,7 +18,7 @@ namespace Orchestration.System
         {
             var root = _document.rootVisualElement;
 
-            _loadingUI = root.Q<LoadingUI>("LoadingUI");
+            _loadingUI = root.Q<LoadingProduction>("LoadingUI");
         }
 
         public void ProgressUpdate(float progress) => _loadingUI.ProgressUpdate(progress);

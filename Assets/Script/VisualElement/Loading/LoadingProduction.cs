@@ -6,11 +6,11 @@ using UnityEngine.UIElements;
 namespace Orchestration.UI
 {
     [UxmlElement]
-    public partial class LoadingUI : SymphonyVisualElement
+    public partial class LoadingProduction : SymphonyVisualElement
     {
         private VisualElement _progressBar;
 
-        public LoadingUI() : base("UXML/Loading/LoadingProduction") { }
+        public LoadingProduction() : base("UXML/Loading/LoadingProduction") { }
 
         protected override Task Initialize_S(TemplateContainer container)
         {
