@@ -7,10 +7,7 @@ namespace Orchestration.UI
     [UxmlElement]
     public partial class MiniMap : SymphonyVisualElement
     {
-        public MiniMap() : base("UXML/Ingame/HUD/MiniMap")
-        {
-
-        }
+        public MiniMap() : base("UXML/Ingame/HUD/MiniMap") { }
 
         protected override Task Initialize_S(TemplateContainer container)
         {
