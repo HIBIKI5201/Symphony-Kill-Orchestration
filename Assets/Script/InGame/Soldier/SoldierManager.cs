@@ -58,10 +58,10 @@ namespace Orchestration.Entity
 
             GridHighLight();
 
-            _move.Move();
-
-            Vector3 direction = _move.TargetDirection();
+            Vector3 direction = _model.TargetDirection();
             _move.Rotation(direction);
+
+            _move.Move();
 
             _ui.HealthBarMove(transform.position);
 
