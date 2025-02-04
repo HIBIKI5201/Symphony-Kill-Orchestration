@@ -15,7 +15,9 @@ namespace Orchestration.Entity
         [SerializeField]
         private SoldierData_SO _soldierData;
 
-        private SoldierMove _moveModule;
+        private SoldierModel _model;
+
+        private SoldierMove _move;
 
         private SoldierUI _ui;
 
@@ -24,28 +26,42 @@ namespace Orchestration.Entity
             var data = Instantiate(_soldierData);
             _soldierData = data;
 
-            _moveModule = GetComponent<SoldierMove>();
+            _model = GetComponent<SoldierModel>();
+
+            _move = GetComponent<SoldierMove>();
 
             _ui = GetComponent<SoldierUI>();
 
-            if (_moveModule.NullCheckComponent($"{name}‚Ìƒ‚ƒfƒ‹‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½") && _ui.NullCheckComponent($"{name}‚ÌUI‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½"))
+            if (_soldierData != null && _ui.NullCheckComponent($"{name}‚ÌUI‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½"))
             {
                 _soldierData.OnHealthChanged += value => _ui.HealthBarUpdate(value / data.MaxHealthPoint);
-                _soldierData.OnHealthChanged += value => Debug.Log(value);
             }
+        }
+
+        private void Start()
+        {
+            _model.Init();
+
+            _move.Init();
+
+            string name = _soldierData.Name;
+
+            _ui.Init(name);
         }
 
         private void Update()
         {
             if (Input.GetMouseButtonDown(0))
             {
-                _moveModule.SetDirection();
+                _move.SetDirection();
             }
-
 
             GridHighLight();
 
-            _moveModule.Move();
+            _move.Move();
+
+            Vector3 direction = _move.TargetDirection();
+            _move.Rotation(direction);
 
             _ui.HealthBarMove(transform.position);
 
@@ -86,7 +102,7 @@ namespace Orchestration.Entity
 #if UNITY_EDITOR
         private void OnDrawGizmos()
         {
-            NavMeshAgent agent = _moveModule?.Agent;
+            NavMeshAgent agent = _move?.Agent;
 
             if (agent != null && agent.path != null)
             {
