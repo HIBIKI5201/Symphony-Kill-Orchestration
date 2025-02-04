@@ -53,7 +53,7 @@ namespace Orchestration.Entity
 
             if (Input.GetMouseButtonDown(1))
             {
-                this.AddDamage(10);
+                ServiceLocator.GetSingleton<GridManager>().ChunkBuild();
             }
 
             if (Input.GetKeyDown(KeyCode.Space))
