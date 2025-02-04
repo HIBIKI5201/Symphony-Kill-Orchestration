@@ -56,7 +56,8 @@ namespace SymphonyFrameWork.CoreSystem
                 return;
             }
 
-            Debug.Log($"{typeof(T).Name}クラスの{instance.name}がシングルトン登録されました");
+            Debug.Log($"{typeof(T).Name}クラスの{instance.name}が" +
+                $"{type switch { LocateType.Locator => "ロケート", LocateType.Singleton => "シングルトン" }}登録されました");
 
             if (type == LocateType.Singleton)
             {

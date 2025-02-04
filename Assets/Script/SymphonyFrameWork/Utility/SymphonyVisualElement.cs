@@ -9,12 +9,12 @@ namespace SymphonyFrameWork.Utility
     {
         public Task InitializeTask { get; private set; }
 
-        public SymphonyVisualElement(string path)
+        public SymphonyVisualElement(string path, Position position = Position.Absolute)
         {
-            InitializeTask = Initialize(path);
+            InitializeTask = Initialize(path, position);
         }
 
-        private async Task Initialize(string path)
+        private async Task Initialize(string path, Position position)
         {
             VisualTreeAsset treeAsset = default;
             if (!string.IsNullOrEmpty(path))
@@ -41,9 +41,13 @@ namespace SymphonyFrameWork.Utility
                 container.RegisterCallback<KeyDownEvent>(e => e.StopPropagation());
                 container.pickingMode = PickingMode.Ignore;
 
-                this.style.position = Position.Absolute;
+                this.style.position = position;
+
                 this.style.height = Length.Percent(100);
+
+
                 this.style.width = Length.Percent(100);
+
 
                 hierarchy.Add(container);
 
