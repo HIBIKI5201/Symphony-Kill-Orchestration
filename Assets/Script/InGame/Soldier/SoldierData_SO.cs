@@ -6,6 +6,10 @@ namespace Orchestration.Entity
     [CreateAssetMenu(fileName = "SoldierData", menuName = "GameDataSO/SoldierData")]
     public class SoldierData_SO : ScriptableObject
     {
+        [SerializeField]
+        private string _name;
+        public string Name { get => _name; }
+
         //ƒwƒ‹ƒX
         [SerializeField]
         private float _maxHealthPoint;
