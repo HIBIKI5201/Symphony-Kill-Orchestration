@@ -1,3 +1,5 @@
+using Orchestration.UI;
+using SymphonyFrameWork.CoreSystem;
 using SymphonyFrameWork.Utility;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -6,10 +8,12 @@ namespace Orchestration.Entity
 {
     public class SoldierUI : MonoBehaviour
     {
-        private UIDocument _document;
+        private IngameUIManager _ingameUIManager;
+        UnitInfomationSoldier _info;
 
+        private UIDocument _document;
         private VisualElement _healthBar;
-        private VisualElement _bar;
+        
 
         [SerializeField]
         private Vector3 _healthBarOffset = Vector3.zero;
@@ -20,10 +24,16 @@ namespace Orchestration.Entity
             {
                 _healthBar = _document.rootVisualElement.Q<VisualElement>("health-bar");
             }
+        }
 
-            if (_healthBar != null)
+        private void Start()
+        {
+            _ingameUIManager = ServiceLocator.GetInstance<IngameUIManager>();
+            if (_ingameUIManager)
             {
-                _bar = _healthBar.Q<VisualElement>("bar");
+                _info = new UnitInfomationSoldier();
+                _info.SetName("“ËŒ‚•º");
+                _ingameUIManager.AddSoldierInfo(_info);
             }
         }
 
@@ -44,9 +54,6 @@ namespace Orchestration.Entity
             _healthBar.style.top = centerY;
         }
 
-        public void HealthBarUpdate(float proportion)
-        {
-            _bar.style.width = Length.Percent(proportion * 100);
-        }
+        public void HealthBarUpdate(float proportion) => _info.HealthBarUpdate(proportion);
     }
 }

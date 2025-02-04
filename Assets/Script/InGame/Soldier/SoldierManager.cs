@@ -42,16 +42,26 @@ namespace Orchestration.Entity
                 _moveModule.SetDirection();
             }
 
+
             GridHighLight();
 
             _moveModule.Move();
 
             _ui.HealthBarMove(transform.position);
 
+            #region デバッグ機能
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                this.AddDamage(10);
+            }
+
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 ServiceLocator.GetSingleton<GameLogic>().SceneChange(System.SceneEnum.InGame);
             }
+
+            #endregion
         }
 
         private void GridHighLight()
