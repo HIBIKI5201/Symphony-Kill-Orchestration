@@ -1,5 +1,5 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <engine:VisualElement name="health-bar" style="height: 5%; width: 10%; background-color: rgb(255, 255, 255); left: 0; top: 0; position: absolute; background-image: none; flex-direction: row;">
+    <engine:VisualElement name="health-bar" style="height: 2%; width: 6%; background-color: rgb(255, 255, 255); position: absolute; background-image: none; flex-direction: row;">
         <engine:VisualElement name="bar" style="height: 100%; width: 100%; background-color: rgb(255, 0, 0);" />
     </engine:VisualElement>
 </engine:UXML>
