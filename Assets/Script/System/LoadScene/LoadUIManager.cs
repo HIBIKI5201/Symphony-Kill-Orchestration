@@ -18,7 +18,7 @@ namespace Orchestration.System
         {
             var root = _document.rootVisualElement;
 
-            _loadingUI = root.Q<LoadingProduction>("LoadingUI");
+            _loadingUI = root.Q<LoadingProduction>();
         }
 
         public void ProgressUpdate(float progress) => _loadingUI.ProgressUpdate(progress);
