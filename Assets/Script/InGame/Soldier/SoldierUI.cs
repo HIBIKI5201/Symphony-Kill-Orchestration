@@ -38,7 +38,7 @@ namespace Orchestration.Entity
             Vector3 screenPos = Camera.main.WorldToScreenPoint(pos + _healthBarOffset);
 
             float centerX = screenPos.x - (_healthBar.resolvedStyle.width / 2);
-            float centerY = Screen.height - screenPos.y; //UITKÀ•WŒn‚Å‚Í‘½‚¢‚Ù‚Ç‰º‚ÉˆÚ“®‚·‚é
+            float centerY = Screen.height - screenPos.y; //UITKÀ•WŒn‚Å‚Í’l‚ª‚‚¢‚Ù‚Ç‰º‚ÉˆÚ“®‚·‚é
 
             _healthBar.style.left = centerX;
             _healthBar.style.top = centerY;
