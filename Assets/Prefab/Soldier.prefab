@@ -485,6 +485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58091868545ea4844a098ab05d32552a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _healthBarOffset: {x: 0, y: 2, z: 0}
 --- !u!195 &4628807394301753388
 NavMeshAgent:
   m_ObjectHideFlags: 0
