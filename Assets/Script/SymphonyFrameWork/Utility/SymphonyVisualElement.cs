@@ -41,6 +41,10 @@ namespace SymphonyFrameWork.Utility
                 container.RegisterCallback<KeyDownEvent>(e => e.StopPropagation());
                 container.pickingMode = PickingMode.Ignore;
 
+                this.style.position = Position.Absolute;
+                this.style.height = Length.Percent(100);
+                this.style.width = Length.Percent(100);
+
                 hierarchy.Add(container);
 
                 #endregion
