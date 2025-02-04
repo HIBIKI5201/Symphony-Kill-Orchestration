@@ -26,13 +26,13 @@ namespace Orchestration.Entity
             }
         }
 
-        private void Start()
+        public void Init(string name)
         {
             _ingameUIManager = ServiceLocator.GetInstance<IngameUIManager>();
             if (_ingameUIManager)
             {
                 _info = new UnitInfomationSoldier();
-                _info.SetName("“ËŒ‚•º");
+                _info.SetName(name);
                 _ingameUIManager.AddSoldierInfo(_info);
             }
         }
