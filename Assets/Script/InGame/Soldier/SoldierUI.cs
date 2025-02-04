@@ -10,6 +10,9 @@ namespace Orchestration.Entity
 
         private VisualElement _healthBar;
         private VisualElement _bar;
+
+        [SerializeField]
+        private Vector3 _healthBarOffset = Vector3.zero;
         private void Awake()
         {
             _document = GetComponentInChildren<UIDocument>();
@@ -32,7 +35,7 @@ namespace Orchestration.Entity
             }
 
             //スクリーン座標系に変換
-            Vector3 screenPos = Camera.main.WorldToScreenPoint(pos);
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(pos + _healthBarOffset);
 
             float centerX = screenPos.x - (_healthBar.resolvedStyle.width / 2);
             float centerY = Screen.height - screenPos.y; //UITK座標系では多いほど下に移動する
