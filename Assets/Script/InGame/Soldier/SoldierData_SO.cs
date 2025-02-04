@@ -8,7 +8,19 @@ namespace Orchestration.Entity
     {
         [SerializeField]
         private string _name;
-        public string Name { get => _name; }
+        public string Name { get
+            {
+                //名前がなければデフォルト名を返す
+                if (string.IsNullOrEmpty(_name))
+                {
+                    return "Soldier";
+                }
+                else
+                {
+                    return _name;
+                }
+            }
+        }
 
         //ヘルス
         [SerializeField]
