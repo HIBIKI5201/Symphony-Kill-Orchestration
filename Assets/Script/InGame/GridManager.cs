@@ -1,4 +1,5 @@
 using SymphonyFrameWork.CoreSystem;
+using SymphonyFrameWork.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Rendering;
 
 namespace Orchestration.InGame
 {
@@ -16,6 +18,8 @@ namespace Orchestration.InGame
     public class GridManager : MonoBehaviour
     {
         private const string GridPrefabsName = "Grid Prefabs";
+
+        private NavMeshSurface _surface;
 
         [SerializeField, Tooltip("グリッドの大きさ")]
         private float _gridSize = 1f;
@@ -45,6 +49,8 @@ namespace Orchestration.InGame
 
         private Queue<GameObject> _chunkQueue = new();
 
+        private readonly object _chunkCreatLock = new object();
+
         private float _lastChunkPos = 0;
 
         private void OnEnable()
@@ -57,31 +63,53 @@ namespace Orchestration.InGame
             ServiceLocator.DestroySingleton<GridManager>();
         }
 
+        private void Awake()
+        {
+            _surface = GetComponent<NavMeshSurface>();
+        }
+
         private async void Start()
         {
-            NavMeshSurface[] surfaces = GetComponentsInChildren<NavMeshSurface>();
+            _surface.BuildNavMesh();
 
-            foreach (var surface in surfaces)
+            for (int i = 0; i < 3; i++)
             {
-                await ChunkBuild(surface);
+                await ChunkBuild();
             }
         }
+
 
         [ContextMenu("New Chunk Create")]
-        public async void NewChunkCreate()
+        /// <summary>
+        /// チャンクを生成する
+        /// </summary>
+        /// <returns></returns>
+        public async Task ChunkBuild()
         {
             GameObject chunk = Instantiate(_chunkPrefab, new Vector3(_lastChunkPos, 0, 0), Quaternion.identity);
+            chunk.transform.parent = transform;
 
-            if (chunk.TryGetComponent<NavMeshSurface>(out var surface))
-            {
-                await ChunkBuild(surface);
-            }
-        }
-
-        private async Task ChunkBuild(NavMeshSurface surface)
-        {
             _lastChunkPos += 10;
-            surface.BuildNavMesh();
+
+            //アクティブなチャンクのコレクションに追加
+            _chunkQueue.Enqueue(chunk.gameObject);
+            if (_chunkQueue.Count > 3)
+            {
+                GameObject obj = _chunkQueue.Dequeue();
+                DestroyChunk(obj);
+            }
+
+            //NavMeshを再生成
+            foreach (GameObject go in _chunkQueue.ToArray())
+            {
+                NavMeshData navMeshData = _surface.navMeshData;
+                AsyncOperation operation =_surface.UpdateNavMesh(navMeshData);
+
+                while (!operation.isDone)
+                {
+                    await Awaitable.NextFrameAsync();
+                }
+            }
 
             //グリッドの位置をリスト化
             List<Vector3> gridPosList = GridCreate();
@@ -91,18 +119,35 @@ namespace Orchestration.InGame
             //グリッドを生成
             if (_gridPrefab)
             {
-                await GridPrefabInstantiate(gridPosList, surface.transform);
-            }
-
-            _chunkQueue.Enqueue(surface.gameObject);
-
-            if (_chunkQueue.Count > 3)
-            {
-                GameObject chunk = _chunkQueue.Dequeue();
-                Destroy(chunk);
+                await GridPrefabInstantiate(gridPosList, chunk.transform);
             }
         }
 
+        /// <summary>
+        /// 指定したチャンクを削除する
+        /// </summary>
+        /// <param name="chunk"></param>
+        private void DestroyChunk(GameObject chunk)
+        {
+            try
+            {
+                //チャンクのグリッドを全て取得
+                Transform gridPrefabRoot = chunk.transform.Find(GridPrefabsName);
+                GridInfo[] positions = gridPrefabRoot.GetComponentsInChildren<GridInfo>().ToArray();
+
+                //削除するチャンクのグリッドをリムーブ
+                foreach (GridInfo info in positions)
+                {
+                    _griInfoList.Remove(info);
+                }
+
+                Destroy(chunk);
+            }
+            catch
+            {
+                Debug.LogWarning("指定されたチャンクを削除できませんでした");
+            }
+        }
 
         /// <summary>
         /// NavMeshがある場所を検索しグリッドを生成
