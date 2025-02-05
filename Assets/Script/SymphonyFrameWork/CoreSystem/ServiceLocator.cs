@@ -69,6 +69,15 @@ namespace SymphonyFrameWork.CoreSystem
         /// 指定した型のインスタンスを破棄する
         /// </summary>
         /// <typeparam name="T">破棄したいインスタンスの型</typeparam>
+        public static void DestroyInstance<T>(T instance) where T : MonoBehaviour
+        {
+            DestroyInstance<T>();
+        }
+
+        /// <summary>
+        /// 指定した型のインスタンスを破棄する
+        /// </summary>
+        /// <typeparam name="T">破棄したいインスタンスの型</typeparam>
         public static void DestroyInstance<T>() where T : MonoBehaviour
         {
             if (_singletonObjects.TryGetValue(typeof(T), out MonoBehaviour md))
