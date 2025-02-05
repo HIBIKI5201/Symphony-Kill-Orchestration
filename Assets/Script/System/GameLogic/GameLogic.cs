@@ -17,10 +17,18 @@ namespace Orchestration
 
         private void Awake()
         {
-            ServiceLocator.SetInstance(this);
-
             _changer = new SceneChanger();
             _systemUIManager = GetComponentInChildren<SystemUIManager>();
+        }
+
+        private void OnEnable()
+        {
+            ServiceLocator.SetInstance(this);
+        }
+
+        private void OnDisable()
+        {
+            ServiceLocator.DestroyInstance(this);
         }
 
         public void SceneChange(SceneEnum scene)

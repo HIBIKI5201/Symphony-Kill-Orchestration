@@ -60,7 +60,7 @@ namespace Orchestration.InGame
 
         private void OnDisable()
         {
-            ServiceLocator.DestroySingleton<GridManager>();
+            ServiceLocator.DestroyInstance(this);
         }
 
         private void Awake()

@@ -18,11 +18,19 @@ namespace Orchestration.System
 
         private void Awake()
         {
-            ServiceLocator.SetInstance(this);
-
             AudioSourceInit();
 
             _audioDict[AudioType.BGM].source.loop = true;
+        }
+
+        private void OnEnable()
+        {
+            ServiceLocator.SetInstance(this);
+        }
+
+        private void OnDisable()
+        {
+            ServiceLocator.DestroyInstance<AudioManager>();
         }
 
         private void AudioSourceInit()
@@ -46,7 +54,7 @@ namespace Orchestration.System
                     source.playOnAwake = false;
 
                     //‰Šú‚Ì‰¹—Ê‚ğæ“¾
-                    _mixer.GetFloat(name, out float value);
+                    _mixer.GetFloat($"{name}_Volume", out float value);
 
                     //î•ñ‚ğ«‘“o˜^
                     _audioDict.Add(type, (group, source, value));

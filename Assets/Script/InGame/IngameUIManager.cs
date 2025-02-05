@@ -14,8 +14,6 @@ namespace Orchestration
 
         private void Awake()
         {
-            ServiceLocator.SetInstance(this);
-
             _document = GetComponent<UIDocument>();
             if (_document)
             {
@@ -25,9 +23,19 @@ namespace Orchestration
             }
         }
 
+        private void OnEnable()
+        {
+            ServiceLocator.SetInstance(this);
+        }
+
+        private void OnDisable()
+        {
+            ServiceLocator.DestroyInstance(this);
+        }
+
         private void OnDestroy()
         {
-            ServiceLocator.DestroyInstance<IngameUIManager>();
+            ServiceLocator.DestroyInstance(this);
         }
 
         private void Start()
