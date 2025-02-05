@@ -69,7 +69,7 @@ namespace Orchestration.Entity
 
             if (Input.GetMouseButtonDown(1))
             {
-                ServiceLocator.GetSingleton<GridManager>().ChunkBuild();
+                var task = ServiceLocator.GetSingleton<GridManager>().ChunkBuild();
             }
 
             if (Input.GetKeyDown(KeyCode.Space))

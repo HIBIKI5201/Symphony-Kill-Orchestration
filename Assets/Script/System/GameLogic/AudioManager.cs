@@ -30,7 +30,7 @@ namespace Orchestration.System
 
         private void OnDisable()
         {
-            ServiceLocator.DestroyInstance<AudioManager>();
+            ServiceLocator.DestroyInstance(this);
         }
 
         private void AudioSourceInit()
