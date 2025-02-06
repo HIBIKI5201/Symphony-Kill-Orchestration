@@ -39,6 +39,7 @@ namespace Orchestration.Entity
             if (_soldierData != null && _ui.NullCheckComponent($"{name}‚ÌUI‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½"))
             {
                 _soldierData.OnHealthChanged += value => _ui.HealthBarUpdate(value / data.MaxHealthPoint);
+                _soldierData.OnHealthChanged += OnDeath;
             }
         }
 
@@ -131,6 +132,18 @@ namespace Orchestration.Entity
         /// </summary>
         /// <param name="heal"></param>
         public void AddHeal(float heal) => _soldierData.HealthPoint += heal;
+
+        /// <summary>
+        /// ƒwƒ‹ƒX‚ª0ˆÈ‰º‚É‚È‚Á‚½‚ç©ŒÈ”j‰óˆ—‚·‚é
+        /// </summary>
+        /// <param name="health"></param>
+        private void OnDeath(float health)
+        {
+            if (health <= 0)
+            {
+                Destroy(gameObject);
+            }
+        }
 
 #if UNITY_EDITOR
         private void OnDrawGizmos()

@@ -59,5 +59,11 @@ namespace Orchestration.Entity
         /// </summary>
         /// <param name="proportion"></param>
         public void HealthBarUpdate(float proportion) => _info.HealthBarUpdate(proportion);
+
+        private void OnDestroy()
+        {
+            _info.RemoveFromHierarchy();
+            _info = null;
+        }
     }
 }
