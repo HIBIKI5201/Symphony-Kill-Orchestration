@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83d20b33c815c33498990f684308b4c5, type: 3}
   m_Name: SoldierData
   m_EditorClassIdentifier: 
+  _name: "\u7A81\u6483\u5175"
   _maxHealthPoint: 100
   _maxStaminaPoint: 50
+  _attack: 10
+  _attackRange: 8
