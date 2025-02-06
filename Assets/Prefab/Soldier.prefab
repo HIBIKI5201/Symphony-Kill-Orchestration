@@ -74,7 +74,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8994952510775268647}
   m_Layer: 0
-  m_Name: Target
+  m_Name: ForwardRigTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -271,7 +271,7 @@ GameObject:
   - component: {fileID: 3909104269574438776}
   - component: {fileID: 2304358196249017281}
   m_Layer: 0
-  m_Name: TargetRig
+  m_Name: ForwardRig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -453,9 +453,11 @@ GameObject:
   - component: {fileID: 2852204906293816622}
   - component: {fileID: 8582153300400858969}
   - component: {fileID: 7466211388178101979}
+  - component: {fileID: 1998768509652785766}
   - component: {fileID: 7556696147891581541}
   - component: {fileID: 1131597482435999097}
   - component: {fileID: 4628807394301753388}
+  - component: {fileID: 4456531500057234285}
   m_Layer: 0
   m_Name: Soldier
   m_TagString: Untagged
@@ -507,8 +509,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17ee6de31027a824784c6f6940ec8bf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _target: {fileID: 8994952510775268647}
-  _targetRig: {fileID: 2304358196249017281}
+  _targetLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  _forwardRig: {fileID: 2304358196249017281}
+  _forwardRigTarget: {fileID: 8994952510775268647}
+  _muzzleFlash: {fileID: 3993513998850006426}
+  _healthBarOffset: {x: 0, y: 2, z: 0}
+--- !u!114 &1998768509652785766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4818443321490436054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5446d2286bdc4fc4a88e37aed8573656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7556696147891581541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -533,7 +552,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58091868545ea4844a098ab05d32552a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthBarOffset: {x: 0, y: 2, z: 0}
 --- !u!195 &4628807394301753388
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -556,6 +574,27 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!65 &4456531500057234285
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4818443321490436054}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.5, y: 1.8, z: 0.5}
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!1 &4878801505905230511
 GameObject:
   m_ObjectHideFlags: 0
