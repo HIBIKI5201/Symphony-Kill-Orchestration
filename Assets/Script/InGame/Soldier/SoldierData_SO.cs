@@ -6,6 +6,12 @@ namespace Orchestration.Entity
     [CreateAssetMenu(fileName = "SoldierData", menuName = "GameDataSO/SoldierData")]
     public class SoldierData_SO : ScriptableObject
     {
+        public void Awake()
+        {
+            _healthPoint = _maxHealthPoint;
+        }
+
+
         [SerializeField]
         private string _name;
         public string Name { get
@@ -22,9 +28,11 @@ namespace Orchestration.Entity
             }
         }
 
+        [Header("体力ステータス")]
+
         //ヘルス
         [SerializeField]
-        private float _maxHealthPoint;
+        private float _maxHealthPoint = 100;
         public float MaxHealthPoint { get => _maxHealthPoint; }
 
         private float _healthPoint;
@@ -41,12 +49,28 @@ namespace Orchestration.Entity
 
         //スタミナ
         [SerializeField]
-        private float _maxStaminaPoint;
-        public float MaxStaminaPoint { get => _maxStaminaPoint; }
+        private float _maxStaminaPoint = 100;
+        public float MaxSpecialPoint { get => _maxStaminaPoint; }
 
-        public void Awake()
+        private float _specialPoint;
+        public float SpecialPoint
         {
-            _healthPoint = _maxHealthPoint;
+            get => _specialPoint;
+            set
+            {
+                _specialPoint = value;
+                OnSpecialPointChanged?.Invoke(_specialPoint);
+            }
         }
+
+        public event Action<float> OnSpecialPointChanged;
+
+        [Space]
+
+        [Header("攻撃ステータス")]
+
+        [SerializeField]
+        private float _attackRange = 1;
+        public float AttackRange { get => _attackRange; }
     }
 }
