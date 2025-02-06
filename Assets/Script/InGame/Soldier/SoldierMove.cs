@@ -9,54 +9,25 @@ namespace Orchestration.Entity
     [RequireComponent(typeof(NavMeshAgent))]
     public class SoldierMove : MonoBehaviour
     {
-        private NavMeshAgent _agent;
-        public NavMeshAgent Agent { get => _agent; }
-
-        private Animator _animator;
-        public Animator Animator { get => _animator; }
-
-        private Vector2 _currentDirection;
-
-        private void Awake()
-        {
-            _agent = GetComponent<NavMeshAgent>();
-            _animator = GetComponentInChildren<Animator>();
-        }
-
-        public void Init()
-        {
-            if (_agent.NullCheckComponent("NavMeshAgentが見つかりません"))
-            {
-                //手動で動かすためアップデートはなし
-                _agent.updatePosition = false;
-                _agent.updateRotation = false;
-
-                _agent.autoTraverseOffMeshLink = true;
-            }
-
-            if (_animator.NullCheckComponent("Animatorが見つかりません"))
-            {
-                _animator.applyRootMotion = false;
-            }
-        }
+        private Vector2 _currentDirection = Vector2.zero;
 
         /// <summary>
         /// アニメーターに移動パラメータを渡し、座標を更新
         /// </summary>
-        public void Move()
+        public void Move(NavMeshAgent agent, Animator animator)
         {
             //ターゲットのベクトルを計算
-            Vector3 localNextPos = transform.InverseTransformPoint(_agent.nextPosition);
+            Vector3 localNextPos = transform.InverseTransformPoint(agent.nextPosition);
             Vector2 direction = new Vector2(localNextPos.x, localNextPos.z).normalized;
 
             //Lerpで滑らかに変化
             _currentDirection = Vector2.Lerp(_currentDirection, direction, Time.deltaTime * 3);
 
-            _animator.SetFloat("Right", _currentDirection.x);
-            _animator.SetFloat("Forward", _currentDirection.y);
+            animator.SetFloat("Right", _currentDirection.x);
+            animator.SetFloat("Forward", _currentDirection.y);
 
             //自身の位置をAgentに同期
-            transform.position = _agent.nextPosition;
+            transform.position = agent.nextPosition;
         }
 
         /// <summary>
@@ -76,7 +47,7 @@ namespace Orchestration.Entity
         /// <summary>
         /// 移動場所を取得し設定
         /// </summary>
-        public void SetDirection()
+        public void SetDirection(NavMeshAgent agent)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -87,7 +58,7 @@ namespace Orchestration.Entity
                 //ヒットした場所のグリッド位置を目標地点にセット
                 if (gridManager.GetGridPosition(hit.point, out Vector3 pos))
                 {
-                    _agent.SetDestination(pos);
+                    agent.SetDestination(pos);
                 }
             }
         }

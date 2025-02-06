@@ -18,8 +18,10 @@ namespace Orchestration.Entity
         private SoldierModel _model;
 
         private SoldierMove _move;
+        private SoldierAttack _attack;
 
         private SoldierUI _ui;
+
 
         private void Awake()
         {
@@ -27,6 +29,8 @@ namespace Orchestration.Entity
             _soldierData = data;
 
             _model = GetComponent<SoldierModel>();
+
+            _attack = GetComponent<SoldierAttack>();
 
             _move = GetComponent<SoldierMove>();
 
@@ -42,28 +46,28 @@ namespace Orchestration.Entity
         {
             _model.Init();
 
-            _move.Init();
-
-            string name = _soldierData.Name;
-
-            _ui.Init(name);
+            _ui.Init(_soldierData.Name);
         }
 
         private void Update()
         {
+            //これはプレイヤーのマネージャーに移動予定
             if (Input.GetMouseButtonDown(0))
             {
-                _move.SetDirection();
+                _move.SetDirection(_model.Agent);
             }
 
-            GridHighLight();
+            GridHighLight(); //これはプレイヤーのマネージャーに移動予定
 
-            Vector3 direction = _model.TargetDirection();
+            //移動方向に回転
+            Vector3 direction = _model.Agent.velocity.normalized;
             _move.Rotation(direction);
 
-            _move.Move();
+            //移動
+            _move.Move(_model.Agent, _model.Animator);
 
-            _ui.HealthBarMove(transform.position);
+            //ヘルスバーの位置更新
+            _ui.HealthBarMove(transform.position, _model.HealthBarOffset);
 
             #region デバッグ機能
 
@@ -80,6 +84,9 @@ namespace Orchestration.Entity
             #endregion
         }
 
+        /// <summary>
+        /// マウスに重なっているグリッドのハイライトする
+        /// </summary>
         private void GridHighLight()
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -96,13 +103,22 @@ namespace Orchestration.Entity
             }
         }
 
-        private void AddDamage(float damage) => _soldierData.HealthPoint -= damage;
-        private void AddHeal(float heal) => _soldierData.HealthPoint += heal;
+        /// <summary>
+        /// 兵士にダメージを与える
+        /// </summary>
+        /// <param name="damage"></param>
+        public void AddDamage(float damage) => _soldierData.HealthPoint -= damage;
+
+        /// <summary>
+        /// 兵士に回復を与える
+        /// </summary>
+        /// <param name="heal"></param>
+        public void AddHeal(float heal) => _soldierData.HealthPoint += heal;
 
 #if UNITY_EDITOR
         private void OnDrawGizmos()
         {
-            NavMeshAgent agent = _move?.Agent;
+            NavMeshAgent agent = _model.Agent;
 
             if (agent != null && agent.path != null)
             {

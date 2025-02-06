@@ -8,15 +8,11 @@ namespace Orchestration.Entity
 {
     public class SoldierUI : MonoBehaviour
     {
-        private IngameUIManager _ingameUIManager;
-        UnitInfomationSoldier _info;
+        private UnitInfomationSoldier _info;
 
         private UIDocument _document;
         private VisualElement _healthBar;
         
-
-        [SerializeField]
-        private Vector3 _healthBarOffset = Vector3.zero;
         private void Awake()
         {
             _document = GetComponentInChildren<UIDocument>();
@@ -28,12 +24,12 @@ namespace Orchestration.Entity
 
         public void Init(string name)
         {
-            _ingameUIManager = ServiceLocator.GetInstance<IngameUIManager>();
-            if (_ingameUIManager)
+            var ingameUIManager = ServiceLocator.GetInstance<IngameUIManager>();
+            if (ingameUIManager)
             {
                 _info = new UnitInfomationSoldier();
                 _info.SetName(name);
-                _ingameUIManager.AddSoldierInfo(_info);
+                ingameUIManager.AddSoldierInfo(_info);
             }
         }
 
@@ -41,7 +37,7 @@ namespace Orchestration.Entity
         /// ヘルスバーの位置を更新する
         /// </summary>
         /// <param name="pos"></param>
-        public void HealthBarMove(Vector3 pos)
+        public void HealthBarMove(Vector3 pos, Vector3 healthBarOffset)
         {
             if (_healthBar == null)
             {
@@ -49,7 +45,7 @@ namespace Orchestration.Entity
             }
 
             //スクリーン座標系に変換
-            Vector3 screenPos = Camera.main.WorldToScreenPoint(pos + _healthBarOffset);
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(pos + healthBarOffset);
 
             float centerX = screenPos.x - (_healthBar.resolvedStyle.width / 2);
             float centerY = Screen.height - screenPos.y; //UITK座標系では値が高いほど下に移動する

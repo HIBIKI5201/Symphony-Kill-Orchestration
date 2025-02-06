@@ -1,3 +1,4 @@
+using SymphonyFrameWork.Utility;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Animations.Rigging;
@@ -6,41 +7,59 @@ namespace Orchestration
 {
     public class SoldierModel : MonoBehaviour
     {
+        #region コンポーネント
         private NavMeshAgent _agent;
+        public NavMeshAgent Agent { get => _agent; }
+
+        private Animator _animator;
+        public Animator Animator { get => _animator; }
+        #endregion
+
+        [Header("Attack")]
+
+        [SerializeField, Tooltip("攻撃したい兵士のレイヤー")]
+        private LayerMask _targetLayer;
+        public LayerMask TargetLayer { get => _targetLayer; }
+
+        [Header("Rig")]
+
+        [SerializeField, Tooltip("上半身のリグ")]
+        private Rig _forwardRig;
+
+        [SerializeField, Tooltip("上半身のリグのターゲット")]
+        private Transform _forwardRigTarget;
+        public Vector3 TargetPosition { get => _forwardRigTarget.position; }
+
+        [Header("UI")]
 
         [SerializeField]
-        private Transform _target;
-        public Vector3 TargetPosition { get => _target.position; }
+        private Vector3 _healthBarOffset = Vector3.zero;
+        public Vector3 HealthBarOffset { get => _healthBarOffset; }
 
-        [SerializeField]
-        private Rig _targetRig;
 
-        private void Awake()
+        public void Init()
         {
             _agent = GetComponent<NavMeshAgent>();
-        }
+            _animator = GetComponentInChildren<Animator>();
 
-        public Vector3 TargetDirection()
-        {
-            return _agent.velocity.normalized;
+            if (_agent.NullCheckComponent("NavMeshAgentが見つかりません"))
+            {
+                //手動で動かすためアップデートはなし
+                _agent.updatePosition = false;
+                _agent.updateRotation = false;
+
+                _agent.autoTraverseOffMeshLink = true;
+            }
+
+            if (_animator.NullCheckComponent("Animatorが見つかりません"))
+            {
+                _animator.applyRootMotion = false;
+            }
         }
 
         public void SetTargetRigWeight(float value)
         {
-            _targetRig.weight = value;
-        }
-
-        public void Init()
-        {
-            if (!_target)
-            {
-                Debug.LogError("ターゲットが見つかりません");
-            }
-
-            if (!_targetRig)
-            {
-                Debug.LogError("ターゲットリグが見つかりません");
-            }
+            _forwardRig.weight = value;
         }
     }
 }
