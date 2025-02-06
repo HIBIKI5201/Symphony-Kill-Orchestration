@@ -2,6 +2,7 @@ using SymphonyFrameWork.Utility;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Animations.Rigging;
+using UnityEngine.VFX;
 
 namespace Orchestration
 {
@@ -21,7 +22,7 @@ namespace Orchestration
         private LayerMask _targetLayer;
         public LayerMask TargetLayer { get => _targetLayer; }
 
-        [Header("Rig")]
+        [Header("Animation")]
 
         [SerializeField, Tooltip("上半身のリグ")]
         private Rig _forwardRig;
@@ -29,6 +30,12 @@ namespace Orchestration
         [SerializeField, Tooltip("上半身のリグのターゲット")]
         private Transform _forwardRigTarget;
         public Vector3 TargetPosition { get => _forwardRigTarget.position; }
+
+        [Space]
+
+        [SerializeField, Tooltip("マズルフラッシュのVFX")]
+        private VisualEffect _muzzleFlash;
+        public VisualEffect MuzzleFlash { get => _muzzleFlash; }
 
         [Header("UI")]
 

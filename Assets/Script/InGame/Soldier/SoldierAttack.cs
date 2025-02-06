@@ -1,16 +1,26 @@
 using Orchestration.Entity;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.VFX;
 
 namespace Orchestration
 {
     public class SoldierAttack : MonoBehaviour
     {
+        private float _attackTimer;
+
+        /// <summary>
+        /// 攻撃のインターバルが終了しているかどうか
+        /// </summary>
+        /// <param name="interval"></param>
+        /// <returns></returns>
+        public bool CanAttack(float interval) => interval + _attackTimer < Time.time;
+
         /// <summary>
         /// 範囲内の兵士の中で最も近い者を取得する
         /// </summary>
         /// <param name="radius">探索半径</param>
-        /// <param name="layerMask"></param>
+        /// <param name="layerMask">攻撃対象のレイヤー</param>
         /// <param name="soldier"></param>
         /// <returns>範囲内に対象がいるかどうか</returns>
         public bool SearchTarget(float radius, LayerMask layerMask, out SoldierManager soldier)
@@ -36,11 +46,18 @@ namespace Orchestration
         /// </summary>
         /// <param name="soldier"></param>
         /// <param name="damage"></param>
-        public void AttackEnemy(SoldierManager soldier, float damage)
+        public void AttackEnemy(SoldierManager soldier, float damage, VisualEffect flash)
         {
             if (soldier)
             {
                 soldier.AddDamage(damage);
+
+                if (flash)
+                {
+                    flash.Play();
+                }
+
+                _attackTimer = Time.time; //インターバルをリセット
             }
         }
     }

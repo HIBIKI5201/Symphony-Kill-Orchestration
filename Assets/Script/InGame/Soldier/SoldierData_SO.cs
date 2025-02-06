@@ -70,6 +70,14 @@ namespace Orchestration.Entity
         [Header("攻撃ステータス")]
 
         [SerializeField]
+        private float _attack = 10;
+        public float Attack { get => _attack; }
+
+        [SerializeField]
+        private float _attackIntarval = 1;
+        public float AttackInterval { get => _attackIntarval; }
+
+        [SerializeField]
         private float _attackRange = 1;
         public float AttackRange { get => _attackRange; }
     }

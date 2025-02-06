@@ -59,9 +59,26 @@ namespace Orchestration.Entity
 
             GridHighLight(); //これはプレイヤーのマネージャーに移動予定
 
-            //移動方向に回転
-            Vector3 direction = _model.Agent.velocity.normalized;
-            _move.Rotation(direction);
+
+            //兵士の正面方向を定義
+            Vector3 forwardDirecion = Vector3.zero;
+
+            //周囲に敵がいる場合は攻撃、いない場合は移動方向を向く
+            if (_attack.SearchTarget(_soldierData.AttackRange, _model.TargetLayer, out var enemy))
+            {
+                if (_attack.CanAttack(_soldierData.AttackInterval))
+                {
+                    _attack.AttackEnemy(enemy, _soldierData.Attack, _model.MuzzleFlash);
+                }
+
+                //敵の方向に向く
+                forwardDirecion = (enemy.transform.position - transform.position).normalized;
+            }
+            else
+            {
+                forwardDirecion = _model.Agent.velocity.normalized;
+            }
+            _move.Rotation(forwardDirecion);
 
             //移動
             _move.Move(_model.Agent, _model.Animator);
@@ -118,7 +135,7 @@ namespace Orchestration.Entity
 #if UNITY_EDITOR
         private void OnDrawGizmos()
         {
-            NavMeshAgent agent = _model.Agent;
+            NavMeshAgent agent = _model?.Agent;
 
             if (agent != null && agent.path != null)
             {
@@ -131,6 +148,12 @@ namespace Orchestration.Entity
 
                 Gizmos.color = Color.blue;
                 Gizmos.DrawLineStrip(path.corners, false);
+            }
+
+            if (_soldierData)
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawWireSphere(transform.position, _soldierData.AttackRange);
             }
         }
 
