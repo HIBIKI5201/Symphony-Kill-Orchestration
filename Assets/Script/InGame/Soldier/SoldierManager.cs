@@ -1,4 +1,5 @@
 using Orchestration.InGame;
+using Orchestration.System;
 using SymphonyFrameWork.CoreSystem;
 using SymphonyFrameWork.Utility;
 using UnityEngine;
@@ -46,7 +47,6 @@ namespace Orchestration.Entity
         private void Start()
         {
             _model.Init();
-
             _ui.Init(_soldierData.Name);
         }
 
@@ -91,12 +91,12 @@ namespace Orchestration.Entity
 
             if (Input.GetMouseButtonDown(1))
             {
-                var task = ServiceLocator.GetSingleton<GridManager>().ChunkBuild();
+                var task = ServiceLocator.GetInstance<GridManager>().ChunkBuild();
             }
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                ServiceLocator.GetSingleton<GameLogic>().SceneChange(System.SceneEnum.InGame);
+                ServiceLocator.GetInstance<GameLogic>().SceneChange(System.SceneEnum.InGame);
             }
 
             #endregion
@@ -111,7 +111,7 @@ namespace Orchestration.Entity
 
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                var gridManager = ServiceLocator.GetSingleton<GridManager>();
+                var gridManager = ServiceLocator.GetInstance<GridManager>();
 
                 //ヒットした場所のグリッド位置を目標地点にセット
                 if (gridManager.GetGridPosition(hit.point, out Vector3 pos, out int index))
