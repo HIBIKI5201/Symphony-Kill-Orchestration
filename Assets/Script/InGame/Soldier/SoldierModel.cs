@@ -95,7 +95,9 @@ namespace Orchestration
 
             if (_shootAudioClip)
             {
-                _muzzleAudio?.PlayOneShot(_shootAudioClip);
+                _muzzleAudio.Stop();
+                _muzzleAudio.clip = _shootAudioClip;
+                _muzzleAudio?.Play();
             }
 
             if (_animator)
