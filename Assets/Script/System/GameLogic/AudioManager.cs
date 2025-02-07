@@ -16,13 +16,6 @@ namespace Orchestration.System
 
         private Dictionary<AudioType, (AudioMixerGroup group, AudioSource source, float originalVolume)> _audioDict = new();
 
-        private void Awake()
-        {
-            AudioSourceInit();
-
-            _audioDict[AudioType.BGM].source.loop = true;
-        }
-
         private void OnEnable()
         {
             ServiceLocator.SetInstance(this);
@@ -31,6 +24,13 @@ namespace Orchestration.System
         private void OnDisable()
         {
             ServiceLocator.DestroyInstance(this);
+        }
+
+        private void Awake()
+        {
+            AudioSourceInit();
+
+            _audioDict[AudioType.BGM].source.loop = true;
         }
 
         private void AudioSourceInit()
@@ -81,6 +81,13 @@ namespace Orchestration.System
 
             _mixer.SetFloat(type.ToString(), db);
         }
+
+        /// <summary>
+        /// ミキサーグループを取得
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public AudioMixerGroup GetMixerGroup(AudioType type)=> _audioDict[type].group;
     }
 
     public enum AudioType
