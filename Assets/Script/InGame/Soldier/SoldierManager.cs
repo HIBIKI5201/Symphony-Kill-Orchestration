@@ -70,7 +70,8 @@ namespace Orchestration.Entity
             {
                 if (_attack.CanAttack(_soldierData.AttackInterval))
                 {
-                    _attack.AttackEnemy(enemy, _soldierData.Attack, _model.MuzzleFlash);
+                    _attack.AttackEnemy(enemy, _soldierData.Attack);
+                    _model.Shoot();
                 }
 
                 //“G‚Ì•ûŒü‚ÉŒü‚­

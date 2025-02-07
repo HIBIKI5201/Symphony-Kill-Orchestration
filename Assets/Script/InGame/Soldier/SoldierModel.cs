@@ -1,3 +1,5 @@
+using Orchestration.System;
+using SymphonyFrameWork.CoreSystem;
 using SymphonyFrameWork.Utility;
 using UnityEngine;
 using UnityEngine.AI;
@@ -37,6 +39,14 @@ namespace Orchestration
         private VisualEffect _muzzleFlash;
         public VisualEffect MuzzleFlash { get => _muzzleFlash; }
 
+        [Header("Audio")]
+        [SerializeField, Tooltip("マズルのオーディオソース")]
+        private AudioSource _muzzleAudio;
+
+        [SerializeField]
+        private AudioClip _shootAudioClip;
+        public AudioClip ShootAudioClip { get => _shootAudioClip; }
+
         [Header("UI")]
 
         [SerializeField]
@@ -48,6 +58,13 @@ namespace Orchestration
         {
             _agent = GetComponent<NavMeshAgent>();
             _animator = GetComponentInChildren<Animator>();
+
+            if (_muzzleAudio)
+            {
+                //SE用のMixerGroupに指定
+                _muzzleAudio.outputAudioMixerGroup = ServiceLocator.GetInstance<AudioManager>().GetMixerGroup(System.AudioType.SE);
+                _muzzleAudio.playOnAwake = false;
+            }
 
             if (_agent.NullCheckComponent("NavMeshAgentが見つかりません"))
             {
@@ -67,6 +84,24 @@ namespace Orchestration
         public void SetTargetRigWeight(float value)
         {
             _forwardRig.weight = value;
+        }
+
+        public void Shoot()
+        {
+            if (_muzzleFlash)
+            {
+                _muzzleFlash.Play();
+            }
+
+            if (_shootAudioClip)
+            {
+                _muzzleAudio?.PlayOneShot(_shootAudioClip);
+            }
+
+            if (_animator)
+            {
+                _animator.SetTrigger("ShootTrigger");
+            }
         }
     }
 }

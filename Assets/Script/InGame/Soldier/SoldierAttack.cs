@@ -46,16 +46,11 @@ namespace Orchestration
         /// </summary>
         /// <param name="soldier"></param>
         /// <param name="damage"></param>
-        public void AttackEnemy(SoldierManager soldier, float damage, VisualEffect flash)
+        public void AttackEnemy(SoldierManager soldier, float damage)
         {
             if (soldier)
             {
                 soldier.AddDamage(damage);
-
-                if (flash)
-                {
-                    flash.Play();
-                }
 
                 _attackTimer = Time.time; //インターバルをリセット
             }
