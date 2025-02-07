@@ -129,6 +129,7 @@ namespace SymphonyFrameWork.CoreSystem
         /// <typeparam name="T">シングルトン化する型</typeparam>
         /// <param name="instance">シングルトンインスタンス</param>
         /// <returns>辞書に追加が成功したらtrue、失敗したらfalse</returns>
+        [Obsolete("このメソッドは旧型式です。" + nameof(SetInstance) + "を使ってください")]
         public static void SetSinglton<T>(T instance) where T : MonoBehaviour
         {
             SetInstance(instance, LocateType.Singleton);
@@ -139,6 +140,7 @@ namespace SymphonyFrameWork.CoreSystem
         /// </summary>
         /// <typeparam name="T">取得したいシングルトンインスタンスの型</typeparam>
         /// <returns>指定した型のインスタンス</returns>
+        [Obsolete("このメソッドは旧型式です。" + nameof(GetInstance) + "を使ってください")]
         public static T GetSingleton<T>() where T : MonoBehaviour
         {
             return GetInstance<T>();
@@ -148,6 +150,7 @@ namespace SymphonyFrameWork.CoreSystem
         /// 指定した型のインスタンスを破棄する
         /// </summary>
         /// <typeparam name="T"></typeparam>
+        [Obsolete("このメソッドは旧型式です。" + nameof(DestroyInstance) + "を使ってください")]
         public static void DestroySingleton<T>() where T : MonoBehaviour
         {
             DestroyInstance<T>();
