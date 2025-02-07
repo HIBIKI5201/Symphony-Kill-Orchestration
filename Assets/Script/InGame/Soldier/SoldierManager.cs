@@ -63,6 +63,7 @@ namespace Orchestration.Entity
 
             //•ºm‚Ì³–Ê•ûŒü‚ğ’è‹`
             Vector3 forwardDirecion = Vector3.zero;
+            float rotateTime = 3;
 
             //üˆÍ‚É“G‚ª‚¢‚éê‡‚ÍUŒ‚A‚¢‚È‚¢ê‡‚ÍˆÚ“®•ûŒü‚ğŒü‚­
             if (_attack.SearchTarget(_soldierData.AttackRange, _model.TargetLayer, out var enemy))
@@ -74,12 +75,13 @@ namespace Orchestration.Entity
 
                 //“G‚Ì•ûŒü‚ÉŒü‚­
                 forwardDirecion = (enemy.transform.position - transform.position).normalized;
+                rotateTime = 5;
             }
             else
             {
                 forwardDirecion = _model.Agent.velocity.normalized;
             }
-            _move.Rotation(forwardDirecion);
+            _move.Rotation(forwardDirecion, rotateTime);
 
             //ˆÚ“®
             _move.Move(_model.Agent, _model.Animator);

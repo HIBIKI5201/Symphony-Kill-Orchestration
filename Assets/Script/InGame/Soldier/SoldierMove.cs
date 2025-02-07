@@ -35,14 +35,15 @@ namespace Orchestration.Entity
         /// <summary>
         /// ˆø”‚Ì•ûŒü‚É‰ñ“]‚³‚¹‚é
         /// </summary>
-        /// <param name="direction"></param>
-        public void Rotation(Vector3 direction)
+        /// <param name="direction">Œü‚©‚¹‚é•ûŒü</param>
+        /// <param name="time">Œü‚­‚Ü‚Å‚ÉŠ|‚©‚é•½‹Ï“I‚ÈŠÔ</param>
+        public void Rotation(Vector3 direction, float time = 3)
         {
             // is•ûŒü‚ª‚ ‚éê‡‚Ì‚İ‰ñ“]
             if (direction.magnitude > 0.1f)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 3f);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * time);
             }
         }
 
