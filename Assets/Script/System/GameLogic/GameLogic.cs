@@ -10,7 +10,7 @@ namespace Orchestration
         private SystemUIManager _systemUIManager;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-        private static async void BeforeSceneLoad()
+        private static async void SystemSceneLoad()
         {
             await SceneLoader.LoadScene("System");
         }
