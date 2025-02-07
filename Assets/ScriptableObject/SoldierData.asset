@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SoldierData
   m_EditorClassIdentifier: 
   _name: "\u7A81\u6483\u5175"
-  _maxHealthPoint: 100
+  _maxHealthPoint: 200
   _maxStaminaPoint: 50
   _attack: 1
-  _attackIntarval: 0.2
+  _attackIntarval: 0.1
   _attackRange: 8
