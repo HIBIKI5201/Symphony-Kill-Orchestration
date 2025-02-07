@@ -1,5 +1,4 @@
 using SymphonyFrameWork.CoreSystem;
-using SymphonyFrameWork.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +6,9 @@ using System.Threading.Tasks;
 using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Rendering;
 
 namespace Orchestration.InGame
 {
-
     /// <summary>
     /// グリッドのマネージャークラス
     /// </summary>
@@ -42,8 +39,10 @@ namespace Orchestration.InGame
 
         private Vector3 _originPosition;
 
+        private List<GridInfo> _usedGridList = new();
 
         [Space]
+
         [SerializeField]
         private GameObject _chunkPrefab;
 
@@ -103,7 +102,7 @@ namespace Orchestration.InGame
             foreach (GameObject go in _chunkQueue.ToArray())
             {
                 NavMeshData navMeshData = _surface.navMeshData;
-                AsyncOperation operation =_surface.UpdateNavMesh(navMeshData);
+                AsyncOperation operation = _surface.UpdateNavMesh(navMeshData);
 
                 while (!operation.isDone)
                 {
@@ -282,20 +281,9 @@ namespace Orchestration.InGame
         /// </summary>
         /// <param name="position">検索したい座標</param>
         /// <param name="pos">グリッドの座標</param>
-        /// <returns>グリッドが存在するか</returns>
-        public bool GetGridPosition(Vector3 position, out Vector3 pos)
-        {
-            return GetGridPosition(position, out pos, out _);
-        }
-
-        /// <summary>
-        /// 入力された座標に一番近いグリッド上の座標を返す
-        /// </summary>
-        /// <param name="position">検索したい座標</param>
-        /// <param name="pos">グリッドの座標</param>
         ///<param name="index">グリッドのインデックス番号</param>
         /// <returns>グリッドが存在するか</returns>
-        public bool GetGridPosition(Vector3 position, out Vector3 pos, out int index)
+        public bool GetGridPosition(Vector3 position, out GridInfo info)
         {
             //原点からの距離
             Vector3 vector = (position - _originPosition);
@@ -304,11 +292,38 @@ namespace Orchestration.InGame
             //グリッド座標系のポジションを出す
             vector = new Vector3((int)(vector.x / _gridSize), (int)(vector.y / _gridSize), (int)(vector.z / _gridSize));
             //一番近いグリッドの座標を出す
-            pos = vector * _gridSize + _originPosition;
+            Vector3 pos = vector * _gridSize + _originPosition;
 
             //そこにグリッドがあるかを判定
-            index = _griInfoList.Select(gi => gi.transform.position).ToList().IndexOf(pos);
-            return 0 <= index;
+            info = _griInfoList.Find(gi => gi.transform.position == pos);
+            return info != null;
+        }
+
+        /// <summary>
+        /// グリッドが未使用の場合は登録する
+        /// 使用されている場合はfalseを返す
+        /// </summary>
+        /// <param name="info"></param>
+        /// <returns></returns>
+        public bool TryRegisterGridInfo(GridInfo info)
+        {
+            if (!_usedGridList.Contains(info))
+            {
+                _usedGridList.Add(info);
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// 使用登録を解除する
+        /// </summary>
+        /// <param name="info"></param>
+        /// <returns></returns>
+        public bool TryUnregisterGridInfo(GridInfo info)
+        {
+            return _usedGridList.Remove(info);
         }
 
         /// <summary>
@@ -316,10 +331,9 @@ namespace Orchestration.InGame
         /// 入力がリストにない場合はハイライトを消す
         /// </summary>
         /// <param name="index">グリッドのインデックス番号</param>
-        public void HighLightGrid(int index)
+        public void HighLightGrid(GridInfo info)
         {
-            //範囲内だった時
-            if (0 <= index && index < _griInfoList.Count)
+            if (info != null)
             {
                 //前のグリッドのハイライトをオフに
                 if (_highLightingGrid != null)
@@ -328,8 +342,6 @@ namespace Orchestration.InGame
                 }
 
                 //ハイライトを表示し記録
-                GridInfo info = _griInfoList[index];
-
                 HighLightSet(info, true);
 
                 _highLightingGrid = info;
