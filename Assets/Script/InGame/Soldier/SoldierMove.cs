@@ -53,7 +53,7 @@ namespace Orchestration.Entity
 
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                var gridManager = ServiceLocator.GetSingleton<GridManager>();
+                var gridManager = ServiceLocator.GetInstance<GridManager>();
 
                 //ヒットした場所のグリッド位置を目標地点にセット
                 if (gridManager.GetGridPosition(hit.point, out Vector3 pos))

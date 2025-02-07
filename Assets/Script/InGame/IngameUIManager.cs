@@ -33,11 +33,6 @@ namespace Orchestration
             ServiceLocator.DestroyInstance(this);
         }
 
-        private void OnDestroy()
-        {
-            ServiceLocator.DestroyInstance(this);
-        }
-
         private void Start()
         {
 

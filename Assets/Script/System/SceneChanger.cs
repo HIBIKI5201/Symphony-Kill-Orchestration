@@ -116,13 +116,13 @@ namespace Orchestration.System
         /// 画面をフェードインする
         /// </summary>
         private async Awaitable FadeIn(float time) =>
-            await ServiceLocator.GetSingleton<GameLogic>().FadeIn(time);
+            await ServiceLocator.GetInstance<GameLogic>().FadeIn(time);
 
         /// <summary>
         /// 画面をフェードアウトする
         /// </summary>
         private async Awaitable FadeOut(float time) =>
-            await ServiceLocator.GetSingleton<GameLogic>().FadeOut(time);
+            await ServiceLocator.GetInstance<GameLogic>().FadeOut(time);
 
 
         /// <summary>
