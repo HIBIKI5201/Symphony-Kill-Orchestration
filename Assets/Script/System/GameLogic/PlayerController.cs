@@ -10,7 +10,7 @@ namespace Orchestration.System
         private PlayerInput _input;
 
         public InputContext<Vector2> Move;
-        public InputContext<float> Look;
+        public InputContext<Vector2> Look;
 
 
         private void OnEnable()
@@ -33,7 +33,7 @@ namespace Orchestration.System
             _input.notificationBehavior = PlayerNotifications.InvokeCSharpEvents;
 
             Move = new InputContext<Vector2>(_input.actions["Move"]);
-            Look = new InputContext<float>(_input.actions["Look"]);
+            Look = new InputContext<Vector2>(_input.actions["Look"]);
         }
 
         public class InputContext<T> where T : struct
