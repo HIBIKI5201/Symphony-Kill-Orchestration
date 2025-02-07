@@ -11,6 +11,8 @@ namespace Orchestration.Entity
     {
         private Vector2 _currentDirection = Vector2.zero;
 
+        private GridInfo _currentGridInfo;
+
         /// <summary>
         /// アニメーターに移動パラメータを渡し、座標を更新
         /// </summary>
@@ -55,10 +57,14 @@ namespace Orchestration.Entity
             {
                 var gridManager = ServiceLocator.GetInstance<GridManager>();
 
-                //ヒットした場所のグリッド位置を目標地点にセット
-                if (gridManager.GetGridPosition(hit.point, out Vector3 pos))
+                //ヒットした場所のグリッド位置が未使用なら目的地にセット
+                if (gridManager.GetGridPosition(hit.point, out GridInfo info) && gridManager.TryRegisterGridInfo(info))
                 {
-                    agent.SetDestination(pos);
+                    agent.SetDestination(info.transform.position);
+
+                    //前のグリッドの使用登録を解除
+                    gridManager.TryUnregisterGridInfo(_currentGridInfo);
+                    _currentGridInfo = info;
                 }
             }
         }

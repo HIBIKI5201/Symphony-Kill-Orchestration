@@ -114,9 +114,9 @@ namespace Orchestration.Entity
                 var gridManager = ServiceLocator.GetInstance<GridManager>();
 
                 //ヒットした場所のグリッド位置を目標地点にセット
-                if (gridManager.GetGridPosition(hit.point, out Vector3 pos, out int index))
+                if (gridManager.GetGridPosition(hit.point, out GridInfo info))
                 {
-                    gridManager.HighLightGrid(index);
+                    gridManager.HighLightGrid(info);
                 }
             }
         }
