@@ -22,7 +22,7 @@ namespace Orchestration.UI
             return Task.CompletedTask;
         }
 
-        public void SetName(string name)
+        public void Init(string name)
         {
             _name.text = name;
         }
@@ -30,6 +30,11 @@ namespace Orchestration.UI
         public void HealthBarUpdate(float proportion)
         {
             _healthBar.style.width = Length.Percent(proportion * 100);
+        }
+
+        public void Destroy()
+        {
+            RemoveFromHierarchy();
         }
     }
 }

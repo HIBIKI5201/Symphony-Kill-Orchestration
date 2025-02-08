@@ -28,7 +28,7 @@ namespace Orchestration.Entity
             if (ingameUIManager)
             {
                 _info = new UnitInfomationSoldier();
-                _info.SetName(name);
+                _info.Init(name);
                 ingameUIManager.AddSoldierInfo(_info);
             }
         }
@@ -62,7 +62,7 @@ namespace Orchestration.Entity
 
         private void OnDestroy()
         {
-            _info.RemoveFromHierarchy();
+            _info.Destroy();
             _info = null;
         }
     }
