@@ -22,6 +22,20 @@ namespace Orchestration
             }
 
             GridHighLight();
+
+            #region デバッグ機能
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                var task = ServiceLocator.GetInstance<GridManager>().ChunkBuild();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                PauseManager.Pause = !PauseManager.Pause;
+            }
+
+            #endregion
         }
 
         /// <summary>
