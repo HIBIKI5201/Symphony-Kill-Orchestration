@@ -24,6 +24,7 @@ namespace Orchestration
 
             if (controller)
             {
+                //ˆÚ“®“ü—Í‚ğvelocity‚É‹L˜^
                 controller.Move.OnPerformed += d => _velocity = d;
                 controller.Move.OnCanseled +=d => _velocity = Vector2.zero;
             }
@@ -31,8 +32,8 @@ namespace Orchestration
 
         private void Update()
         {
-
-            transform.position += new Vector3(_velocity.x, 0, _velocity.y).normalized * _speed * Time.time;
+            //ƒJƒƒ‰‚ÌˆÚ“®
+            transform.position += new Vector3(_velocity.x, 0, _velocity.y).normalized * _speed * Time.deltaTime;
         }
     }
 }
