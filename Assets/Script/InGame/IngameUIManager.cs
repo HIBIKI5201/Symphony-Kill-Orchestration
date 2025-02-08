@@ -11,6 +11,7 @@ namespace Orchestration
 
         private MiniMap _miniMap;
         private UnitInfomation _unitInfo;
+        private UnitSelector _unitSelector;
 
         private void Awake()
         {
@@ -20,6 +21,7 @@ namespace Orchestration
                 VisualElement root = _document.rootVisualElement;
                 _miniMap = root.Q<MiniMap>();
                 _unitInfo = root.Q<UnitInfomation>();
+                _unitSelector = root.Q<UnitSelector>();
             }
         }
 
@@ -33,11 +35,7 @@ namespace Orchestration
             ServiceLocator.DestroyInstance(this);
         }
 
-        private void Start()
-        {
-
-        }
-
         public void AddSoldierInfo(UnitInfomationSoldier info) => _unitInfo?.AddSoldierInfo(info);
+        public void AddSoldierSelector(UnitSelectorSoldier info) => _unitSelector?.AddSoldierInfo(info);
     }
 }
