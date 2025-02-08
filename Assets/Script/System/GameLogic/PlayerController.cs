@@ -26,14 +26,14 @@ namespace Orchestration.System
         private void Awake()
         {
             _input = GetComponent<PlayerInput>();
-        }
 
-        private void Start()
-        {
-            _input.notificationBehavior = PlayerNotifications.InvokeCSharpEvents;
+            if (_input)
+            {
+                _input.notificationBehavior = PlayerNotifications.InvokeCSharpEvents;
 
-            Move = new InputContext<Vector2>(_input.actions["Move"]);
-            Look = new InputContext<Vector2>(_input.actions["Look"]);
+                Move = new InputContext<Vector2>(_input.actions["Move"]);
+                Look = new InputContext<Vector2>(_input.actions["Look"]);
+            }
         }
 
         public class InputContext<T> where T : struct
