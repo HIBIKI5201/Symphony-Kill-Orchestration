@@ -89,5 +89,10 @@ namespace Orchestration.Entity
                 }
             }
         }
+
+        public void OnPauseMove(NavMeshAgent agent)
+        {
+            agent.nextPosition = transform.position;
+        }
     }
 }

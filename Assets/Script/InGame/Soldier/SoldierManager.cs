@@ -1,5 +1,3 @@
-using Orchestration.InGame;
-using Orchestration.System;
 using SymphonyFrameWork.CoreSystem;
 using SymphonyFrameWork.Utility;
 using UnityEngine;
@@ -11,7 +9,7 @@ namespace Orchestration.Entity
     /// 兵士のベースクラス
     /// </summary>
     [RequireComponent(typeof(SoldierMove), typeof(SoldierUI))]
-    public class SoldierManager : MonoBehaviour
+    public class SoldierManager : MonoBehaviour, PauseManager.IPausable
     {
         [SerializeField]
         private SoldierData_SO _soldierData;
@@ -23,7 +21,7 @@ namespace Orchestration.Entity
 
         private SoldierUI _ui;
 
-
+        private bool _isPause;
         private void Awake()
         {
             var data = Instantiate(_soldierData);
@@ -42,6 +40,8 @@ namespace Orchestration.Entity
                 _soldierData.OnHealthChanged += value => _ui.HealthBarUpdate(value / data.MaxHealthPoint);
                 _soldierData.OnHealthChanged += OnDeath;
             }
+
+            PauseManager.IPausable.RegisterPauseManager(this);
         }
 
         private void Start()
@@ -53,6 +53,13 @@ namespace Orchestration.Entity
 
         private void Update()
         {
+            //ポーズ中の処理
+            if (_isPause)
+            {
+                _move.OnPauseMove(_model.Agent);
+                return;
+            }
+
             //兵士の正面方向を定義
             Vector3 forwardDirecion = Vector3.zero;
             float rotateTime = 3;
@@ -82,20 +89,6 @@ namespace Orchestration.Entity
 
             //ヘルスバーの位置更新
             _ui.HealthBarMove(transform.position, _model.HealthBarOffset);
-
-            #region デバッグ機能
-
-            if (Input.GetMouseButtonDown(1))
-            {
-                var task = ServiceLocator.GetInstance<GridManager>().ChunkBuild();
-            }
-
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                ServiceLocator.GetInstance<GameLogic>().SceneChange(System.SceneEnum.InGame);
-            }
-
-            #endregion
         }
 
         public void SetDirection()
@@ -126,6 +119,10 @@ namespace Orchestration.Entity
                 Destroy(gameObject);
             }
         }
+
+        public void Pause() => _isPause = true;
+        public void Resume() => _isPause = false;
+
 
 #if UNITY_EDITOR
         private void OnDrawGizmos()
