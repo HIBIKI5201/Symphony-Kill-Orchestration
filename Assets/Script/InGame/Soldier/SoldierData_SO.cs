@@ -52,8 +52,8 @@ namespace Orchestration.Entity
         private float _maxStaminaPoint = 100;
         public float MaxSpecialPoint { get => _maxStaminaPoint; }
 
-        private float _specialPoint;
-        public float SpecialPoint
+        private int _specialPoint;
+        public int SpecialPoint
         {
             get => _specialPoint;
             set
@@ -63,7 +63,7 @@ namespace Orchestration.Entity
             }
         }
 
-        public event Action<float> OnSpecialPointChanged;
+        public event Action<int> OnSpecialPointChanged;
 
         [Space]
 

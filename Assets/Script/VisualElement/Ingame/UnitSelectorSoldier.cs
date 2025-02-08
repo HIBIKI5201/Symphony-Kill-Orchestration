@@ -27,7 +27,12 @@ namespace Orchestration.UI
             _icon.style.backgroundImage = new StyleBackground(texture);
         }
 
-        public void UpdateSpecialPointInfo(float proportion, int count)
+        public void SpecialPointGuageUpdate(float proportion)
+        {
+
+        }
+
+        public void SpecialPointCountUpdate(int count)
         {
 
         }

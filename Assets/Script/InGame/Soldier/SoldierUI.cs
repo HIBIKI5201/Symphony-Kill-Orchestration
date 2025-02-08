@@ -9,6 +9,7 @@ namespace Orchestration.Entity
     public class SoldierUI : MonoBehaviour
     {
         private UnitInfomationSoldier _info;
+        private UnitSelectorSoldier _selector;
 
         private UIDocument _document;
         private VisualElement _healthBar;
@@ -22,7 +23,7 @@ namespace Orchestration.Entity
             }
         }
 
-        public void Init(string name)
+        public void Init(string name, Texture2D icon)
         {
             var ingameUIManager = ServiceLocator.GetInstance<IngameUIManager>();
             if (ingameUIManager)
@@ -30,6 +31,10 @@ namespace Orchestration.Entity
                 _info = new UnitInfomationSoldier();
                 _info.Init(name);
                 ingameUIManager.AddSoldierInfo(_info);
+
+                _selector = new UnitSelectorSoldier();
+                _selector.Init(icon);
+                ingameUIManager.AddSoldierSelector(_selector);
             }
         }
 
@@ -60,10 +65,21 @@ namespace Orchestration.Entity
         /// <param name="proportion"></param>
         public void HealthBarUpdate(float proportion) => _info.HealthBarUpdate(proportion);
 
+        /// <summary>
+        /// スペシャルポイントの量を更新する
+        /// </summary>
+        /// <param name="proportion"></param>
+        /// <param name="count"></param>
+        public void SpecialPointGuageUpdate(float proportion) => _selector.SpecialPointGuageUpdate(proportion);
+
+        public void SpecialPointCountUpdate(int count) => _selector.SpecialPointCountUpdate(count);
         private void OnDestroy()
         {
             _info.Destroy();
             _info = null;
+
+            _selector.Destroy();
+            _selector = null;
         }
     }
 }

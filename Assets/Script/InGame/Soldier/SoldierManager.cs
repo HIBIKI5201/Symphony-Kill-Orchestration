@@ -41,6 +41,8 @@ namespace Orchestration.Entity
             {
                 _soldierData.OnHealthChanged += value => _ui.HealthBarUpdate(value / data.MaxHealthPoint);
                 _soldierData.OnHealthChanged += OnDeath;
+
+                _soldierData.OnSpecialPointChanged += value => _ui.SpecialPointCountUpdate(value);
             }
 
             PauseManager.IPausable.RegisterPauseManager(this);
@@ -50,7 +52,7 @@ namespace Orchestration.Entity
         {
             _model.Init();
             _move.Init(_model.Agent);
-            _ui.Init(_soldierData.Name);
+            _ui.Init(_soldierData.Name, null);
         }
 
         private void Update()
