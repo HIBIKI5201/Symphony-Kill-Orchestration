@@ -1,7 +1,11 @@
 #Version
-1.16.5
+1.16.6
 
 #Log
+1.16.6
+[Update]
+SymphonyVisualElement
+
 1.16.5
 [Update]
 PauseManager
