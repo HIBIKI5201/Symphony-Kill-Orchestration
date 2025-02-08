@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -9,12 +10,12 @@ namespace SymphonyFrameWork.Utility
     {
         public Task InitializeTask { get; private set; }
 
-        public SymphonyVisualElement(string path, Position position = Position.Absolute)
+        public SymphonyVisualElement(string path, InitializeType type = InitializeType.All)
         {
-            InitializeTask = Initialize(path, position);
+            InitializeTask = Initialize(path, type);
         }
 
-        private async Task Initialize(string path, Position position)
+        private async Task Initialize(string path, InitializeType type)
         {
             VisualTreeAsset treeAsset = default;
             if (!string.IsNullOrEmpty(path))
@@ -41,12 +42,16 @@ namespace SymphonyFrameWork.Utility
                 container.RegisterCallback<KeyDownEvent>(e => e.StopPropagation());
                 container.pickingMode = PickingMode.Ignore;
 
-                this.style.position = position;
+                if ((type & InitializeType.Absolute) != 0)
+                {
+                    this.style.position = Position.Absolute;
+                }
 
-                this.style.height = Length.Percent(100);
-
-
-                this.style.width = Length.Percent(100);
+                if ((type & InitializeType.FullRangth) != 0)
+                {
+                    this.style.height = Length.Percent(100);
+                    this.style.width = Length.Percent(100);
+                }
 
 
                 hierarchy.Add(container);
@@ -63,5 +68,14 @@ namespace SymphonyFrameWork.Utility
         }
 
         protected abstract Task Initialize_S(TemplateContainer container);
+
+        [Flags]
+        public enum InitializeType
+        {
+            None = 0,
+            Absolute = 1 << 1,
+            FullRangth = 1 << 2,
+            All = Absolute | FullRangth
+        }
     }
 }

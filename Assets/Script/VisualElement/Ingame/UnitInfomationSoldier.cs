@@ -10,7 +10,7 @@ namespace Orchestration.UI
         private Label _name;
         private VisualElement _healthBar;
 
-        public UnitInfomationSoldier() : base("UXML/Ingame/HUD/UnitInfomation-Soldier", Position.Relative) { }
+        public UnitInfomationSoldier() : base("UXML/Ingame/HUD/UnitInfomation-Soldier", InitializeType.FullRangth) { }
         protected override Task Initialize_S(TemplateContainer container)
         {
             this.style.maxHeight = Length.Percent(30);
