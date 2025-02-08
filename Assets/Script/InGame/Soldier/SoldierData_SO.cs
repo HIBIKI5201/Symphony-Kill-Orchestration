@@ -11,10 +11,17 @@ namespace Orchestration.Entity
             _healthPoint = _maxHealthPoint;
         }
 
+        [Header("基本情報")]
+
+        [SerializeField]
+        private Texture2D _icon;
+        public Texture2D Icon { get => _icon; }
 
         [SerializeField]
         private string _name;
-        public string Name { get
+        public string Name
+        {
+            get
             {
                 //名前がなければデフォルト名を返す
                 if (string.IsNullOrEmpty(_name))
@@ -37,7 +44,7 @@ namespace Orchestration.Entity
 
         private float _healthPoint;
         public float HealthPoint
-        { 
+        {
             get => _healthPoint;
             set
             {

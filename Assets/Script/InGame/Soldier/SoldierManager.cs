@@ -52,7 +52,7 @@ namespace Orchestration.Entity
         {
             _model.Init();
             _move.Init(_model.Agent);
-            _ui.Init(_soldierData.Name, null);
+            _ui.Init(_soldierData.Name, _soldierData.Icon);
         }
 
         private void Update()
