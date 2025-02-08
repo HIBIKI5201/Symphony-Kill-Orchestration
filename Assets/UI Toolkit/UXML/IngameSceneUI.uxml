@@ -1,4 +1,5 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Orchestration.UI.MiniMap class="map" />
+    <Orchestration.UI.MiniMap />
     <Orchestration.UI.UnitInfomation />
+    <Orchestration.UI.UnitSelector />
 </engine:UXML>
