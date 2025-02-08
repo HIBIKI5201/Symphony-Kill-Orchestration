@@ -13,6 +13,26 @@ namespace Orchestration.Entity
 
         private GridInfo _currentGridInfo;
 
+        public async void Init(NavMeshAgent agent)
+        {
+            GridManager manager = ServiceLocator.GetInstance<GridManager>();
+
+            //初期化が終わるまで待機
+            await SymphonyTask.WaitUntil(() => manager.IsInitializeDone, destroyCancellationToken);
+
+            //自分の場所を一番近いグリッドまで移動
+            if (manager.GetGridPosition(transform.position, out GridInfo info))
+            {
+                if (manager.TryRegisterGridInfo(info))
+                {
+                    transform.position = info.transform.position;
+                    agent.nextPosition = info.transform.position;
+
+                    _currentGridInfo = info;
+                }
+            }
+        }
+
         /// <summary>
         /// アニメーターに移動パラメータを渡し、座標を更新
         /// </summary>

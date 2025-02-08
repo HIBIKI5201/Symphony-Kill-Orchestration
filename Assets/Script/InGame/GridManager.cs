@@ -52,6 +52,8 @@ namespace Orchestration.InGame
 
         private float _lastChunkPos = 0;
 
+        public bool IsInitializeDone { get; private set; }
+
         private void OnEnable()
         {
             ServiceLocator.SetInstance(this);
@@ -65,6 +67,8 @@ namespace Orchestration.InGame
         private void Awake()
         {
             _surface = GetComponent<NavMeshSurface>();
+
+            IsInitializeDone = false;
         }
 
         private async void Start()
@@ -75,6 +79,8 @@ namespace Orchestration.InGame
             {
                 await ChunkBuild();
             }
+
+            IsInitializeDone = true;
         }
 
 

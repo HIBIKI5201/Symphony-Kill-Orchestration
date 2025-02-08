@@ -47,6 +47,7 @@ namespace Orchestration.Entity
         private void Start()
         {
             _model.Init();
+            _move.Init(_model.Agent);
             _ui.Init(_soldierData.Name);
         }
 
