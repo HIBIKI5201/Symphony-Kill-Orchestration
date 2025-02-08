@@ -52,7 +52,7 @@ namespace Orchestration.InGame
 
         private float _lastChunkPos = 0;
 
-        public bool IsInitializeDone { get; private set; }
+        public bool IsInitializeDone { get => _griInfoList.Count > 0; }
 
         private void OnEnable()
         {
@@ -67,8 +67,6 @@ namespace Orchestration.InGame
         private void Awake()
         {
             _surface = GetComponent<NavMeshSurface>();
-
-            IsInitializeDone = false;
         }
 
         private async void Start()
@@ -79,8 +77,6 @@ namespace Orchestration.InGame
             {
                 await ChunkBuild();
             }
-
-            IsInitializeDone = true;
         }
 
 
