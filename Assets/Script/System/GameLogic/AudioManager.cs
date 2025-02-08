@@ -1,9 +1,7 @@
-using Codice.CM.SEIDInfo;
 using SymphonyFrameWork.CoreSystem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -87,7 +85,7 @@ namespace Orchestration.System
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public AudioMixerGroup GetMixerGroup(AudioType type)=> _audioDict[type].group;
+        public AudioMixerGroup GetMixerGroup(AudioType type) => _audioDict[type].group;
     }
 
     public enum AudioType

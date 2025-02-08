@@ -36,6 +36,10 @@ namespace Orchestration.System
             }
         }
 
+        /// <summary>
+        /// イベントのコンテナを生成
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
         public class InputContext<T> where T : struct
         {
             /// <summary>
