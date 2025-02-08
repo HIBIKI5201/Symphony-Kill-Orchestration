@@ -8,7 +8,9 @@ namespace Orchestration.Entity
     /// <summary>
     /// 兵士のベースクラス
     /// </summary>
-    [RequireComponent(typeof(SoldierMove), typeof(SoldierUI))]
+    [RequireComponent(typeof(SoldierMove), typeof(SoldierUI), typeof(SoldierModel))]
+    [RequireComponent(typeof(SoldierAttack))]
+
     public class SoldierManager : MonoBehaviour, PauseManager.IPausable
     {
         [SerializeField]
@@ -120,8 +122,17 @@ namespace Orchestration.Entity
             }
         }
 
-        public void Pause() => _isPause = true;
-        public void Resume() => _isPause = false;
+        public void Pause()
+        {
+            _isPause = true;
+            _model.OnPause(true);
+        }
+
+        public void Resume()
+        {
+            _isPause = false;
+            _model.OnPause(false);
+        }
 
 
 #if UNITY_EDITOR

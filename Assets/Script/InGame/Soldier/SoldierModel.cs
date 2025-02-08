@@ -105,5 +105,17 @@ namespace Orchestration
                 _animator.SetTrigger("ShootTrigger");
             }
         }
+
+        public void OnPause(bool pause)
+        {
+            if (pause)
+            {
+                _animator.speed = 0;
+            }
+            else
+            {
+                _animator.speed = 1;
+            }
+        }
     }
 }
