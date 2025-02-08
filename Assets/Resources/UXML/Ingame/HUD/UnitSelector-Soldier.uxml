@@ -1,3 +1,15 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <engine:VisualElement style="min-width: 20%; height: 100%; background-color: rgba(255, 0, 0, 0.53); min-height: auto; width: 100%;" />
+    <engine:VisualElement style="min-width: 20%; height: 100%; background-color: rgb(26, 26, 26); min-height: auto; width: 100%; justify-content: space-evenly;">
+        <engine:VisualElement name="icon" style="width: 100%; height: 60%; align-self: center; -unity-background-scale-mode: scale-to-fit; padding-top: 5%; padding-right: 5%; padding-bottom: 5%; padding-left: 5%;" />
+        <engine:VisualElement style="width: 100%; height: 25%; flex-direction: row; padding-top: 3%; padding-right: 3%; padding-bottom: 3%; padding-left: 3%;">
+            <engine:VisualElement style="width: 25%; height: 100%; justify-content: center;">
+                <engine:Label text="0" name="count" style="font-size: 60%; color: rgb(255, 255, 255); -unity-text-align: middle-center;" />
+            </engine:VisualElement>
+            <engine:VisualElement style="flex-grow: 1; height: 100%; width: 75%; justify-content: center;">
+                <engine:VisualElement style="height: 40%; background-color: rgb(77, 77, 77);">
+                    <engine:VisualElement name="guage" style="width: 100%; height: 100%; background-color: rgb(218, 195, 29);" />
+                </engine:VisualElement>
+            </engine:VisualElement>
+        </engine:VisualElement>
+    </engine:VisualElement>
 </engine:UXML>

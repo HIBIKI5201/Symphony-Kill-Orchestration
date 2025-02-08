@@ -19,6 +19,11 @@ namespace Orchestration.UI
             this.style.maxWidth = Length.Percent(30);
             this.style.minWidth = Length.Percent(15);
 
+            _icon = container.Q<VisualElement>("icon");
+
+            _specialPointGuage = container.Q<VisualElement>("guage");
+            _specialPointCount = container.Q<Label>("count");
+
             return Task.CompletedTask;
         }
 

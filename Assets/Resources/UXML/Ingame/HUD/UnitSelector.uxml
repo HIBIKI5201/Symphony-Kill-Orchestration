@@ -1,5 +1,5 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <engine:VisualElement style="width: 35%; height: 20%; align-self: center; position: absolute; bottom: 0;">
-        <engine:VisualElement name="SelectPanel" style="width: 100%; height: 70%; background-color: rgba(0, 0, 0, 0.8); flex-direction: row;" />
+        <engine:VisualElement name="SelectPanel" style="width: 100%; height: 70%; background-color: rgba(0, 0, 0, 0.8); flex-direction: row; justify-content: center;" />
     </engine:VisualElement>
 </engine:UXML>
