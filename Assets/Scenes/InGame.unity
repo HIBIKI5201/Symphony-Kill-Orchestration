@@ -629,6 +629,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1530492465}
+  - component: {fileID: 1530492466}
   m_Layer: 0
   m_Name: IngameSystem
   m_TagString: Untagged
@@ -651,6 +652,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1530492466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530492464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5ee44f16dbfa0a4b87da0c20967b87b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1662652853
 GameObject:
   m_ObjectHideFlags: 0
@@ -889,6 +902,10 @@ PrefabInstance:
     - target: {fileID: 3728075587336020075, guid: 12f896a871666aa4caa60e3390b20189, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3906896080444735472, guid: 12f896a871666aa4caa60e3390b20189, type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6266570956525183635, guid: 12f896a871666aa4caa60e3390b20189, type: 3}
       propertyPath: m_Name

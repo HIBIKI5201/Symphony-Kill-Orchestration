@@ -53,15 +53,6 @@ namespace Orchestration.Entity
 
         private void Update()
         {
-            //これはプレイヤーのマネージャーに移動予定
-            if (Input.GetMouseButtonDown(0))
-            {
-                _move.SetDirection(_model.Agent);
-            }
-
-            GridHighLight(); //これはプレイヤーのマネージャーに移動予定
-
-
             //兵士の正面方向を定義
             Vector3 forwardDirecion = Vector3.zero;
             float rotateTime = 3;
@@ -81,6 +72,7 @@ namespace Orchestration.Entity
             }
             else
             {
+                //移動方向に向く
                 forwardDirecion = _model.Agent.velocity.normalized;
             }
             _move.Rotation(forwardDirecion, rotateTime);
@@ -106,23 +98,9 @@ namespace Orchestration.Entity
             #endregion
         }
 
-        /// <summary>
-        /// マウスに重なっているグリッドのハイライトする
-        /// </summary>
-        private void GridHighLight()
+        public void SetDirection()
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {
-                var gridManager = ServiceLocator.GetInstance<GridManager>();
-
-                //ヒットした場所のグリッド位置を目標地点にセット
-                if (gridManager.GetGridPosition(hit.point, out GridInfo info))
-                {
-                    gridManager.HighLightGrid(info);
-                }
-            }
+            _move.SetDirection(_model.Agent);
         }
 
         /// <summary>
