@@ -1,9 +1,5 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <engine:Template name="UnitSelector-Soldier" src="project://database/Assets/Resources/UXML/Ingame/HUD/UnitSelector-Soldier.uxml?fileID=9197481963319205126&amp;guid=68bd75d43deeaf641ba23f454fc388c1&amp;type=3#UnitSelector-Soldier" />
     <engine:VisualElement style="width: 35%; height: 20%; align-self: center; position: absolute; bottom: 0;">
-        <engine:VisualElement style="width: 100%; height: 70%; background-color: rgba(0, 0, 0, 0.8); flex-direction: row;">
-            <engine:Instance template="UnitSelector-Soldier" style="height: 100%; width: 100%;" />
-            <engine:Instance template="UnitSelector-Soldier" style="height: 100%; width: 100%;" />
-        </engine:VisualElement>
+        <engine:VisualElement name="SelectPanel" style="width: 100%; height: 70%; background-color: rgba(0, 0, 0, 0.8); flex-direction: row;" />
     </engine:VisualElement>
 </engine:UXML>
