@@ -25,8 +25,15 @@ namespace SymphonyFrameWork.CoreSystem
                 OnPauseChanged?.Invoke(value);
             }
         }
+
+        [Tooltip("ポーズ時にtrue、リズーム時にfalseで実行するイベント")]
         public static event Action<bool> OnPauseChanged;
 
+        /// <summary>
+        /// ポーズ時に停止するWaitForSecond
+        /// </summary>
+        /// <param name="time"></param>
+        /// <returns></returns>
         public static IEnumerator PausableWaitForSecond(float time)
         {
             while (time > 0)
@@ -39,6 +46,12 @@ namespace SymphonyFrameWork.CoreSystem
             }
         }
 
+        /// <summary>
+        /// ポーズ時に停止するWaitForSecond
+        /// </summary>
+        /// <param name="time"></param>
+        /// <param name="token"></param>
+        /// <returns></returns>
         public static async Task PausableWaitForSecondAsync(float time, CancellationToken token = default)
         {
             while (time > 0)
@@ -56,17 +69,21 @@ namespace SymphonyFrameWork.CoreSystem
             void Pause();
             void Resume();
 
-            void RegisterPauseManager()
+            /// <summary>
+            /// PauseManagerにポーズ時のイベントを購買登録する
+            /// </summary>
+            /// <param name="pausable"></param>
+            static void RegisterPauseManager(IPausable pausable)
             {
-                PauseManager.OnPauseChanged += value =>
+                OnPauseChanged += value =>
                 {
                     if (value)
                     {
-                        Pause();
+                        pausable.Pause();
                     }
                     else
                     {
-                        Resume();
+                        pausable.Resume();
                     }
                 };
             }
