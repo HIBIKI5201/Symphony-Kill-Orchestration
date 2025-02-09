@@ -1,5 +1,6 @@
 using Orchestration.System;
 using SymphonyFrameWork.CoreSystem;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Orchestration
@@ -11,10 +12,10 @@ namespace Orchestration
             var controller = ServiceLocator.GetInstance<PlayerController>();
             if (controller)
             {
-                controller.Active.OnStarted += _ => StartGame();
-                controller.Move.OnStarted += _ => StartGame();
-                controller.Look.OnStarted += _ => StartGame();
-                controller.Select.OnStarted += _ => StartGame();
+                controller.Active.OnStarted += StartGame;
+                controller.Move.OnStarted += StartGame;
+                controller.Look.OnStarted += StartGame;
+                controller.Select.OnStarted += StartGame;
             }
         }
 
@@ -23,13 +24,15 @@ namespace Orchestration
             var controller = ServiceLocator.GetInstance<PlayerController>();
             if (controller)
             {
-                controller.Active.OnStarted -= _ => StartGame();
-                controller.Move.OnStarted -= _ => StartGame();
-                controller.Look.OnStarted -= _ => StartGame();
-                controller.Select.OnStarted -= _ => StartGame();
+                controller.Active.OnStarted -= StartGame;
+                controller.Move.OnStarted -= StartGame;
+                controller.Look.OnStarted -= StartGame;
+                controller.Select.OnStarted -= StartGame;
             }
         }
 
+        private void StartGame(float _) => StartGame();
+        private void StartGame(Vector2 _) => StartGame();
         private void StartGame()
         {
             GameLogic logic = ServiceLocator.GetInstance<GameLogic>();
