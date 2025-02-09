@@ -8,7 +8,9 @@ namespace Orchestration.InGame
     /// </summary>
     public class GridInfo : MonoBehaviour
     {
+        [SerializeField]
         private GameObject _highLight;
+        [SerializeField]
         private GameObject _ground;
 
         private MeshRenderer _groundRenderer;
@@ -20,8 +22,6 @@ namespace Orchestration.InGame
         {
             _isActive = true;
 
-            _highLight = gameObject.transform.Find("HighLight").gameObject;
-
             if (_highLight)
             {
                 _highLight.SetActive(false);
@@ -30,8 +30,6 @@ namespace Orchestration.InGame
             {
                 Debug.LogWarning("グリッドのハイライトが見つかりません");
             }
-
-            _ground = gameObject.transform.Find("Ground").gameObject;
 
             if (_ground)
             {

@@ -245,10 +245,7 @@ namespace Orchestration.InGame
                 for (int i = 0; i < objects.Length; i++)
                 {
                     GameObject obj = objects[i];
-                    _griInfoList.Add(
-                        obj.TryGetComponent<GridInfo>(out var info) ?
-                        info : obj.AddComponent<GridInfo>()
-                        );
+                    _griInfoList.Add(obj.GetComponent<GridInfo>());
                     obj.transform.localScale = Vector3.one * _gridSize;
                 }
             }

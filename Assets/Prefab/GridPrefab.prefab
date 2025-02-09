@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2763533407618758369}
+  - component: {fileID: 3030343186928913142}
   m_Layer: 0
   m_Name: GridPrefab
   m_TagString: Untagged
@@ -33,6 +34,20 @@ Transform:
   - {fileID: 4609920441230244569}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3030343186928913142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4214150798941196078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef182687b50fbd8418e0228520502e19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _highLight: {fileID: 5900513945747325688}
+  _ground: {fileID: 4235605637153058621}
 --- !u!1 &4235605637153058621
 GameObject:
   m_ObjectHideFlags: 0

@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 398798752}
   - component: {fileID: 398798751}
   m_Layer: 0
-  m_Name: BounderyLine
+  m_Name: OverBounderyLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
