@@ -41,8 +41,10 @@ namespace Orchestration.Entity
 
         protected override void OnDeath()
         {
-            base.OnDeath();
             var manager = ServiceLocator.GetInstance<UnitManager>();
+            manager.DeathSoldier(this);
+
+            base.OnDeath();
         }
     }
 }
