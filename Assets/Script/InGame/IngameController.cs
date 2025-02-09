@@ -7,20 +7,9 @@ namespace Orchestration.InGame
 {
     public class IngameController : MonoBehaviour
     {
-        [SerializeField]
-        private SoldierManager _selectSolider;
 
         private void Update()
         {
-            //選んでいる兵士に移動指示を与える
-            if (Input.GetMouseButtonDown(0))
-            {
-                if (_selectSolider)
-                {
-                    _selectSolider.SetDirection();
-                }
-            }
-
             GridHighLight();
 
             #region デバッグ機能

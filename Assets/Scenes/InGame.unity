@@ -579,8 +579,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1932433301}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &931259714
@@ -595,10 +594,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e146ec9462f42b46bc9b384a10fc74d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _asult: {fileID: 0}
-  _medic: {fileID: 0}
-  _support: {fileID: 0}
-  _recon: {fileID: 0}
+  _asult: {fileID: 6266570956525183635, guid: 12f896a871666aa4caa60e3390b20189, type: 3}
+  _medic: {fileID: 6266570956525183635, guid: 12f896a871666aa4caa60e3390b20189, type: 3}
+  _support: {fileID: 6266570956525183635, guid: 12f896a871666aa4caa60e3390b20189, type: 3}
+  _recon: {fileID: 6266570956525183635, guid: 12f896a871666aa4caa60e3390b20189, type: 3}
+  _selectSolider: {fileID: 0}
 --- !u!1 &972983721
 GameObject:
   m_ObjectHideFlags: 0
@@ -928,7 +928,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5ee44f16dbfa0a4b87da0c20967b87b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _selectSolider: {fileID: 1932433315}
 --- !u!114 &1530492467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1070,79 +1069,6 @@ Transform:
   - {fileID: 1961419522}
   m_Father: {fileID: 972983723}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!1001 &1932433300
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 931259713}
-    m_Modifications:
-    - target: {fileID: 3728075587336020075, guid: 12f896a871666aa4caa60e3390b20189, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3728075587336020075, guid: 12f896a871666aa4caa60e3390b20189, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3728075587336020075, guid: 12f896a871666aa4caa60e3390b20189, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3728075587336020075, guid: 12f896a871666aa4caa60e3390b20189, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3728075587336020075, guid: 12f896a871666aa4caa60e3390b20189, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3728075587336020075, guid: 12f896a871666aa4caa60e3390b20189, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3728075587336020075, guid: 12f896a871666aa4caa60e3390b20189, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3728075587336020075, guid: 12f896a871666aa4caa60e3390b20189, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3728075587336020075, guid: 12f896a871666aa4caa60e3390b20189, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3728075587336020075, guid: 12f896a871666aa4caa60e3390b20189, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6266570956525183635, guid: 12f896a871666aa4caa60e3390b20189, type: 3}
-      propertyPath: m_Name
-      value: Player Soldier
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 12f896a871666aa4caa60e3390b20189, type: 3}
---- !u!4 &1932433301 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3728075587336020075, guid: 12f896a871666aa4caa60e3390b20189, type: 3}
-  m_PrefabInstance: {fileID: 1932433300}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1932433315 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3680618899376478644, guid: 12f896a871666aa4caa60e3390b20189, type: 3}
-  m_PrefabInstance: {fileID: 1932433300}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb82c1ff32e48574fbaa4cad7241b983, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1961419521
 GameObject:
   m_ObjectHideFlags: 0
