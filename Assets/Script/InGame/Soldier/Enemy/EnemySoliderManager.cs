@@ -7,7 +7,7 @@ namespace Orchestration.Entity
         protected override void Start_S()
         {
             _model.Init();
-            _move.Init(_model.Agent);
+            _move.MoveGridPosition(_model.Agent);
         }
     }
 }

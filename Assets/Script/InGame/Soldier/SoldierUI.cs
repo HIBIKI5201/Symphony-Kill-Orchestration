@@ -24,7 +24,7 @@ namespace Orchestration.Entity
             }
         }
 
-        public void Init(string name, Texture2D icon)
+        public void AddInfomationForHUD(string name, Texture2D icon)
         {
             var ingameUIManager = ServiceLocator.GetInstance<IngameUIManager>();
             if (ingameUIManager)
@@ -76,10 +76,10 @@ namespace Orchestration.Entity
         public void SpecialPointCountUpdate(int count) => _selector.SpecialPointCountUpdate(count);
         private void OnDestroy()
         {
-            _info.Destroy();
+            _info?.Destroy();
             _info = null;
 
-            _selector.Destroy();
+            _selector?.Destroy();
             _selector = null;
         }
     }

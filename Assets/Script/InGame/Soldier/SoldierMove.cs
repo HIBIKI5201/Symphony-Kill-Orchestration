@@ -13,7 +13,7 @@ namespace Orchestration.Entity
 
         private GridInfo _currentGridInfo;
 
-        public async void Init(NavMeshAgent agent)
+        public async void MoveGridPosition(NavMeshAgent agent)
         {
             GridManager manager = ServiceLocator.GetInstance<GridManager>();
 

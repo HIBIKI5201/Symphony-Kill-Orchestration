@@ -53,8 +53,8 @@ namespace Orchestration.Entity
         protected virtual void Start_S()
         {
             _model.Init();
-            _move.Init(_model.Agent);
-            _ui.Init(_soldierData.Name, _soldierData.Icon);
+            _move.MoveGridPosition(_model.Agent);
+            _ui.AddInfomationForHUD(_soldierData.Name, _soldierData.Icon);
         }
 
         private void Update()
