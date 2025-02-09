@@ -18,7 +18,7 @@ namespace Orchestration.Entity
         private void Awake()
         {
             _document = GetComponentInChildren<UIDocument>();
-            if (_document.NullCheckComponent("UI Document‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ"))
+            if (_document)
             {
                 _soldierMark = _document.rootVisualElement.Q<VisualElement>("Mark");
             }
@@ -67,8 +67,6 @@ namespace Orchestration.Entity
 
             float centerX = screenPos.x - (_soldierMark.resolvedStyle.width / 2);
             float centerY = Screen.height - screenPos.y; //UITKÀ•WŒn‚Å‚Í’l‚ª‚‚¢‚Ù‚Ç‰º‚ÉˆÚ“®‚·‚é
-
-            Debug.Log(centerX + " " + centerY);
 
             _soldierMark.style.left = centerX;
             _soldierMark.style.top = centerY;
