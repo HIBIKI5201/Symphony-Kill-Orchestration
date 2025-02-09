@@ -94,7 +94,7 @@ namespace Orchestration.InGame
 
             int NextIndex(int index, float axis)
             {
-                index = Convert.ToInt32((index + axis) % _soldiers.Count);
+                index = (int)(index + axis) % _soldiers.Count;
                 if (index < 0)
                 {
                     index = _soldiers.Count - 1;
@@ -219,6 +219,15 @@ namespace Orchestration.InGame
             }
 
             _soldiers.Remove(type.Key);
+
+            if (_soldiers.Count < 1)
+            {
+                GameLogic logic = ServiceLocator.GetInstance<GameLogic>();
+                if (logic)
+                {
+                    logic.SceneChange(SceneEnum.Home);
+                }
+            }
         }
 
         public enum SoldierType
