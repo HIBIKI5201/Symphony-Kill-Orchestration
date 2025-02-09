@@ -20,7 +20,7 @@ namespace Orchestration.Entity
             _document = GetComponentInChildren<UIDocument>();
             if (_document.NullCheckComponent("UI Documentが見つかりません"))
             {
-                _soldierMark = _document.rootVisualElement.Q<VisualElement>();
+                _soldierMark = _document.rootVisualElement.Q<VisualElement>("Mark");
             }
         }
 
@@ -63,7 +63,7 @@ namespace Orchestration.Entity
             }
 
             //スクリーン座標系に変換
-            Vector2 screenPos = Camera.main.WorldToScreenPoint(pos);
+            Vector2 screenPos = Camera.main.WorldToScreenPoint(pos + healthBarOffset);
 
             float centerX = screenPos.x - (_soldierMark.resolvedStyle.width / 2);
             float centerY = Screen.height - screenPos.y; //UITK座標系では値が高いほど下に移動する
