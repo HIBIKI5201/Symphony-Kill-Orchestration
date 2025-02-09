@@ -67,6 +67,14 @@ namespace Orchestration.System
             /// </summary>
            ~InputContext()
             {
+                Reset();
+            }
+
+            /// <summary>
+            /// イベントをリセットする
+            /// </summary>
+            public void Reset()
+            {
                 OnStarted = null;
                 OnPerformed = null;
                 OnCanseled = null;
