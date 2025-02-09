@@ -39,7 +39,7 @@ namespace Orchestration.InGame
                 var manager = ServiceLocator.GetInstance<GroundManager>();
 
                 //ヒットした場所のグリッド位置を目標地点にセット
-                if (manager.GetGridPosition(hit.point, out GridInfo info))
+                if (manager.GetGridByPosition(hit.point, out GridInfo info))
                 {
                     manager.HighLightGrid(info);
                 }

@@ -302,7 +302,7 @@ namespace Orchestration.InGame
         /// <param name="pos">グリッドの座標</param>
         ///<param name="index">グリッドのインデックス番号</param>
         /// <returns>グリッドが存在するか</returns>
-        public bool GetGridPosition(Vector3 position, out GridInfo info)
+        public bool GetGridByPosition(Vector3 position, out GridInfo info)
         {
             //原点からの距離
             Vector3 vector = (position - _originPosition);
@@ -344,6 +344,13 @@ namespace Orchestration.InGame
         /// <param name="info"></param>
         /// <returns></returns>
         public bool TryUnregisterGridInfo(GridInfo info) => _usedGridList.Remove(info);
+
+        /// <summary>
+        /// グリッドが使用済みに登録されているかどうか
+        /// </summary>
+        /// <param name="info"></param>
+        /// <returns></returns>
+        public bool IsRegisterGridInfo(GridInfo info) => _usedGridList.Contains(info);
 
         /// <summary>
         /// 指定したグリッドをハイライトする
