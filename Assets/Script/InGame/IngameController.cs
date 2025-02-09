@@ -27,7 +27,7 @@ namespace Orchestration.InGame
 
             if (Input.GetMouseButtonDown(1))
             {
-                var task = ServiceLocator.GetInstance<GridManager>().ChunkBuild();
+                ServiceLocator.GetInstance<IngameSystemManager>().NextStage();
             }
 
             if (Input.GetKeyDown(KeyCode.Space))
