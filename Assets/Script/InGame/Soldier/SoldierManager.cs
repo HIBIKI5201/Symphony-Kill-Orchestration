@@ -14,16 +14,17 @@ namespace Orchestration.Entity
     public class SoldierManager : MonoBehaviour, PauseManager.IPausable
     {
         [SerializeField]
-        private SoldierData_SO _soldierData;
+        protected SoldierData_SO _soldierData;
 
-        private SoldierModel _model;
+        protected SoldierModel _model;
 
-        private SoldierMove _move;
-        private SoldierAttack _attack;
+        protected SoldierMove _move;
+        protected SoldierAttack _attack;
 
-        private SoldierUI _ui;
+        protected SoldierUI _ui;
 
-        private bool _isPause;
+        protected bool _isPause;
+
         private void Awake()
         {
             var data = Instantiate(_soldierData);
@@ -37,18 +38,19 @@ namespace Orchestration.Entity
 
             _ui = GetComponent<SoldierUI>();
 
-            if (_soldierData != null && _ui.NullCheckComponent($"{name}‚ÌUI‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½"))
-            {
-                _soldierData.OnHealthChanged += value => _ui.HealthBarUpdate(value / data.MaxHealthPoint);
-                _soldierData.OnHealthChanged += OnDeath;
-
-                _soldierData.OnSpecialPointChanged += value => _ui.SpecialPointCountUpdate(value);
-            }
-
             PauseManager.IPausable.RegisterPauseManager(this);
+
+            Awake_S();
         }
 
+        public virtual void Awake_S() { }
+
         private void Start()
+        {
+            Start_S();
+        }
+
+        protected virtual void Start_S()
         {
             _model.Init();
             _move.Init(_model.Agent);
@@ -64,28 +66,14 @@ namespace Orchestration.Entity
                 return;
             }
 
-            //•ºm‚Ì³–Ê•ûŒü‚ğ’è‹`
-            Vector3 forwardDirecion = Vector3.zero;
-            float rotateTime = 3;
+            Update_S();
+        }
 
-            //üˆÍ‚É“G‚ª‚¢‚éê‡‚ÍUŒ‚A‚¢‚È‚¢ê‡‚ÍˆÚ“®•ûŒü‚ğŒü‚­
-            if (_attack.SearchTarget(_soldierData.AttackRange, _model.TargetLayer, out var enemy))
-            {
-                if (_attack.CanAttack(_soldierData.AttackInterval))
-                {
-                    _attack.AttackEnemy(enemy, _soldierData.Attack);
-                    _model.Shoot();
-                }
+        protected virtual void Update_S()
+        {
+            //UŒ‚‚µŒü‚­•ûŒü‚ğæ“¾
+            (Vector3 forwardDirecion, float rotateTime) = Attack();
 
-                //“G‚Ì•ûŒü‚ÉŒü‚­
-                forwardDirecion = (enemy.transform.position - transform.position).normalized;
-                rotateTime = 5;
-            }
-            else
-            {
-                //ˆÚ“®•ûŒü‚ÉŒü‚­
-                forwardDirecion = _model.Agent.velocity.normalized;
-            }
             _move.Rotation(forwardDirecion, rotateTime);
 
             //ˆÚ“®
@@ -95,6 +83,36 @@ namespace Orchestration.Entity
             _ui.HealthBarMove(transform.position, _model.HealthBarOffset);
         }
 
+        /// <summary>
+        /// UŒ‚‚·‚é
+        /// </summary>
+        /// <returns>Œü‚­•ûŒü‚Æ‘¬“x</returns>
+        protected virtual (Vector3, float) Attack()
+        {
+            //üˆÍ‚É“G‚ª‚¢‚éê‡‚ÍUŒ‚A‚¢‚È‚¢ê‡‚ÍˆÚ“®•ûŒü‚ğŒü‚­
+            if (_attack.SearchTarget(_soldierData.AttackRange, _model.TargetLayer, out var enemy))
+            {
+                if (_attack.CanAttack(_soldierData.AttackInterval))
+                {
+                    _attack.AttackEnemy(enemy, _soldierData.Attack);
+                    _model.Shoot();
+                }
+
+                //‚‘¬‚Å“G‚Ì•ûŒü‚ÉŒü‚­
+                return((enemy.transform.position - transform.position).normalized, 5);
+            }
+            else
+            {
+                //‚ä‚Á‚­‚èˆÚ“®•ûŒü‚ÉŒü‚­
+                return (_model.Agent.velocity.normalized, 3);
+            }
+
+
+        }
+
+        /// <summary>
+        /// ˆÚ“®–Ú•W‚ğXV
+        /// </summary>
         public void SetDirection()
         {
             _move.SetDirection(_model.Agent);
@@ -116,7 +134,7 @@ namespace Orchestration.Entity
         /// ƒwƒ‹ƒX‚ª0ˆÈ‰º‚É‚È‚Á‚½‚ç©ŒÈ”j‰óˆ—‚·‚é
         /// </summary>
         /// <param name="health"></param>
-        private void OnDeath(float health)
+        protected void OnDeath(float health)
         {
             if (health <= 0)
             {
