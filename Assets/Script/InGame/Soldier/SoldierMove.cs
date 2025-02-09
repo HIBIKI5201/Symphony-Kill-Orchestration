@@ -23,7 +23,7 @@ namespace Orchestration.Entity
             agent.enabled = true;
 
             //自分の場所を一番近いグリッドまで移動
-            if (manager.GetGridPosition(transform.position, out GridInfo info))
+            if (manager.GetGridByPosition(transform.position, out GridInfo info))
             {
                 if (manager.TryRegisterGridInfo(info))
                 {
@@ -72,23 +72,18 @@ namespace Orchestration.Entity
         /// <summary>
         /// 移動場所を取得し設定
         /// </summary>
-        public void SetDirection(NavMeshAgent agent)
+        public void SetDirection(NavMeshAgent agent, Vector3 point)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            var manager = ServiceLocator.GetInstance<GroundManager>();
 
-            if (Physics.Raycast(ray, out RaycastHit hit))
+            //ヒットした場所のグリッド位置が未使用なら目的地にセット
+            if (manager.GetGridByPosition(point, out GridInfo info) && manager.TryRegisterGridInfo(info))
             {
-                var manager = ServiceLocator.GetInstance<GroundManager>();
+                agent.SetDestination(info.transform.position);
 
-                //ヒットした場所のグリッド位置が未使用なら目的地にセット
-                if (manager.GetGridPosition(hit.point, out GridInfo info) && manager.TryRegisterGridInfo(info))
-                {
-                    agent.SetDestination(info.transform.position);
-
-                    //前のグリッドの使用登録を解除
-                    manager.TryUnregisterGridInfo(_currentGridInfo);
-                    _currentGridInfo = info;
-                }
+                //前のグリッドの使用登録を解除
+                manager.TryUnregisterGridInfo(_currentGridInfo);
+                _currentGridInfo = info;
             }
         }
 
