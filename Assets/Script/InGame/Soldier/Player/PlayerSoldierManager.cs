@@ -10,7 +10,7 @@ namespace Orchestration.Entity
     {
         public void Select(bool active)
         {
-            //_ui.Select(active);
+            _ui.Select(active);
         }
 
         public override void Awake_S()
