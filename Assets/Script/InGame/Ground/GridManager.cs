@@ -71,9 +71,20 @@ namespace Orchestration.InGame
 
         private async void Start()
         {
+            //ステージが変わるとチャンクを生成するイベントを登録
+            IngameSystemManager system = ServiceLocator.GetInstance<IngameSystemManager>();
+            system.OnStageChanged += counter => OnStageChanged();
+
+            //初期NavMeshを生成
             _surface.BuildNavMesh();
 
             for (int i = 0; i < 3; i++)
+            {
+                await ChunkBuild();
+            }
+
+
+            async void OnStageChanged()
             {
                 await ChunkBuild();
             }
