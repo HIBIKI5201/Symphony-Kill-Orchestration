@@ -60,6 +60,24 @@ namespace Orchestration.InGame
             SelectorSoldier(_soldiers[SoldierType.Asult]);
         }
 
+        private void Update()
+        {
+            var groundManager = ServiceLocator.GetInstance<GroundManager>();
+            var system = ServiceLocator.GetInstance<IngameSystemManager>();
+
+            foreach (var soldier in _soldiers.Values)
+            {
+                //兵士がNext境界線以上にいるかどうか
+                if (soldier.transform.position.x > 
+                    system.StageCounter * GroundManager.ChunkSize + groundManager.FirstBoundaryLineX
+                    + GroundManager.ChunkSize * 2)
+                {
+                    system.NextStage();
+                    break;
+                }
+            }
+        }
+
         /// <summary>
         /// 選択中の兵士を変更
         /// </summary>
@@ -67,12 +85,12 @@ namespace Orchestration.InGame
         private void SelectSwitch(float axis)
         {
             //選択中の兵士のインデックス
-            int index = _soldiers.ToList().FindIndex(kvp => kvp.Value == _selectSolider);
+            int index = _soldiers.Values.ToList().FindIndex(s => s == _selectSolider);
             
             axis = Math.Sign(axis);
             index = NextIndex(index, axis);
 
-            SelectorSoldier(_soldiers.ToArray()[index].Value);
+            SelectorSoldier(_soldiers.Values.ToArray()[index]);
 
             int NextIndex(int index, float axis)
             {
@@ -117,7 +135,7 @@ namespace Orchestration.InGame
         {
             var manager = ServiceLocator.GetInstance<GroundManager>();
 
-            float lineX = count * GroundManager.ChunkSize + manager.FirstBoudaryLineX;
+            float lineX = count * GroundManager.ChunkSize + manager.FirstBoundaryLineX;
 
             foreach (var soldier in _soldiers.Values)
             {

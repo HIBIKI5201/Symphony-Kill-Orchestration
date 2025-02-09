@@ -16,7 +16,7 @@ namespace Orchestration.InGame
         private Transform _nextBoundaryLine;
 
         private float _firstBoundaryLineX;
-        public float FirstBoudaryLineX { get => _firstBoundaryLineX; }
+        public float FirstBoundaryLineX { get => _firstBoundaryLineX; }
 
         [SerializeField]
         private float _boundaryLineSpeed = 5;

@@ -1,6 +1,5 @@
 using SymphonyFrameWork.CoreSystem;
 using System;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Orchestration.InGame
@@ -8,6 +7,7 @@ namespace Orchestration.InGame
     public class IngameSystemManager : MonoBehaviour
     {
         private int _stageCounter = 0;
+        public int StageCounter { get => _stageCounter; }
 
         public event Action<int> OnStageChanged;
 
