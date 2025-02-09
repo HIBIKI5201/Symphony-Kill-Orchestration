@@ -44,7 +44,10 @@ namespace Orchestration.InGame
         [Space]
 
         [SerializeField]
-        private GameObject _chunkPrefab;
+        private GameObject _normalChunkPrefab;
+
+        [SerializeField]
+        private List<GameObject> _enemyChunkPrefabList = new();
 
         private Queue<GameObject> _chunkQueue = new();
 
@@ -52,7 +55,7 @@ namespace Orchestration.InGame
 
         private float _lastChunkPos = 0;
 
-        public bool IsInitializeDone { get => _griInfoList.Count > 0; }
+        public bool IsInitializeDone { get; private set; }
 
         private void OnEnable()
         {
@@ -67,6 +70,8 @@ namespace Orchestration.InGame
         private void Awake()
         {
             _surface = GetComponent<NavMeshSurface>();
+
+            IsInitializeDone = false;
         }
 
         private async void Start()
@@ -80,13 +85,22 @@ namespace Orchestration.InGame
 
             for (int i = 0; i < 3; i++)
             {
-                await ChunkBuild();
+                await ChunkBuild(_normalChunkPrefab);
             }
 
+            IsInitializeDone = true;
 
             async void OnStageChanged()
             {
-                await ChunkBuild();
+                IsInitializeDone = false;
+
+                //エネミーチャンクからランダムに取得
+                int index = UnityEngine.Random.Range(0, _enemyChunkPrefabList.Count);
+                GameObject chunk = _enemyChunkPrefabList[index];
+
+                await ChunkBuild(chunk);
+
+                IsInitializeDone = true;
             }
         }
 
@@ -96,9 +110,9 @@ namespace Orchestration.InGame
         /// チャンクを生成する
         /// </summary>
         /// <returns></returns>
-        public async Task ChunkBuild()
+        public async Task ChunkBuild(GameObject chunkPrefab)
         {
-            GameObject chunk = Instantiate(_chunkPrefab, new Vector3(_lastChunkPos, 0, 0), Quaternion.identity);
+            GameObject chunk = Instantiate(chunkPrefab, new Vector3(_lastChunkPos, 0, 0), Quaternion.identity);
             chunk.transform.parent = transform;
 
             _lastChunkPos += 10;
