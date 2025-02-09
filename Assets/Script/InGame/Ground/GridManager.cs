@@ -55,22 +55,15 @@ namespace Orchestration.InGame
 
         private float _lastChunkPos = 0;
 
+        private const int ChunkCapacity = 4;
+
         public bool IsInitializeDone { get; private set; }
-
-        private void OnEnable()
-        {
-            ServiceLocator.SetInstance(this);
-        }
-
-        private void OnDisable()
-        {
-            ServiceLocator.DestroyInstance(this);
-        }
 
         private void Awake()
         {
             _surface = GetComponent<NavMeshSurface>();
 
+            _lastChunkPos = -10;
             IsInitializeDone = false;
         }
 
@@ -83,7 +76,7 @@ namespace Orchestration.InGame
             //初期NavMeshを生成
             _surface.BuildNavMesh();
 
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < ChunkCapacity; i++)
             {
                 await ChunkBuild(_normalChunkPrefab);
             }
@@ -119,7 +112,7 @@ namespace Orchestration.InGame
 
             //アクティブなチャンクのコレクションに追加
             _chunkQueue.Enqueue(chunk.gameObject);
-            if (_chunkQueue.Count > 3)
+            if (_chunkQueue.Count > ChunkCapacity)
             {
                 GameObject obj = _chunkQueue.Dequeue();
                 DestroyChunk(obj);
@@ -239,7 +232,6 @@ namespace Orchestration.InGame
             //プレハブの親オブジェクトを生成
             rootObj.transform.parent = parent;
 
-
             if (list.Count > 0)
             {
                 //親オブジェクトの子としてグリッドプレハブを一括生成
@@ -314,10 +306,13 @@ namespace Orchestration.InGame
         {
             //原点からの距離
             Vector3 vector = (position - _originPosition);
+
             //原点から半グリッドずらす
             vector += new Vector3(_gridSize / 2, _gridSize / 2, _gridSize / 2);
+
             //グリッド座標系のポジションを出す
             vector = new Vector3((int)(vector.x / _gridSize), (int)(vector.y / _gridSize), (int)(vector.z / _gridSize));
+            
             //一番近いグリッドの座標を出す
             Vector3 pos = vector * _gridSize + _originPosition;
 
@@ -348,10 +343,7 @@ namespace Orchestration.InGame
         /// </summary>
         /// <param name="info"></param>
         /// <returns></returns>
-        public bool TryUnregisterGridInfo(GridInfo info)
-        {
-            return _usedGridList.Remove(info);
-        }
+        public bool TryUnregisterGridInfo(GridInfo info) => _usedGridList.Remove(info);
 
         /// <summary>
         /// 指定したグリッドをハイライトする
