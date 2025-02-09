@@ -47,12 +47,12 @@ namespace Orchestration.InGame
 
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                var gridManager = ServiceLocator.GetInstance<GridManager>();
+                var manager = ServiceLocator.GetInstance<GroundManager>();
 
                 //ヒットした場所のグリッド位置を目標地点にセット
-                if (gridManager.GetGridPosition(hit.point, out GridInfo info))
+                if (manager.GetGridPosition(hit.point, out GridInfo info))
                 {
-                    gridManager.HighLightGrid(info);
+                    manager.HighLightGrid(info);
                 }
             }
         }

@@ -15,10 +15,10 @@ namespace Orchestration.Entity
 
         public async void MoveGridPosition(NavMeshAgent agent)
         {
-            GridManager manager = ServiceLocator.GetInstance<GridManager>();
+            GroundManager manager = ServiceLocator.GetInstance<GroundManager>();
 
             //初期化が終わるまで待機
-            await SymphonyTask.WaitUntil(() => manager.IsInitializeDone, destroyCancellationToken);
+            await SymphonyTask.WaitUntil(() => manager.GridInitializeDone, destroyCancellationToken);
 
             agent.enabled = true;
 
@@ -78,15 +78,15 @@ namespace Orchestration.Entity
 
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                var gridManager = ServiceLocator.GetInstance<GridManager>();
+                var manager = ServiceLocator.GetInstance<GroundManager>();
 
                 //ヒットした場所のグリッド位置が未使用なら目的地にセット
-                if (gridManager.GetGridPosition(hit.point, out GridInfo info) && gridManager.TryRegisterGridInfo(info))
+                if (manager.GetGridPosition(hit.point, out GridInfo info) && manager.TryRegisterGridInfo(info))
                 {
                     agent.SetDestination(info.transform.position);
 
                     //前のグリッドの使用登録を解除
-                    gridManager.TryUnregisterGridInfo(_currentGridInfo);
+                    manager.TryUnregisterGridInfo(_currentGridInfo);
                     _currentGridInfo = info;
                 }
             }
