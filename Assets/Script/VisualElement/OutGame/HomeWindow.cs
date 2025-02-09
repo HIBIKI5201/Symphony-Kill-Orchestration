@@ -1,19 +1,18 @@
+using SymphonyFrameWork.Utility;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Orchestration.UI
 {
-    public class HomeWindow : MonoBehaviour
+    [UxmlElement]
+    public partial class HomeWindow : SymphonyVisualElement
     {
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
-        {
-        
-        }
+        public HomeWindow() : base("UXML/OutGame/HomeWindow") { }
 
-        // Update is called once per frame
-        void Update()
+        protected override Task Initialize_S(TemplateContainer container)
         {
-        
+            return Task.CompletedTask;
         }
     }
 }
