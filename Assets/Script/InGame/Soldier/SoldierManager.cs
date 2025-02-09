@@ -43,7 +43,14 @@ namespace Orchestration.Entity
             Awake_S();
         }
 
-        public virtual void Awake_S() { }
+        public virtual void Awake_S()
+        {
+            if (_soldierData != null)
+            {
+                _soldierData.OnHealthChanged += OnDeath;
+            }
+        }
+
 
         private void Start()
         {
