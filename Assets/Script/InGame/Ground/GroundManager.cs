@@ -11,13 +11,18 @@ namespace Orchestration.InGame
         public bool GridInitializeDone { get => _gridManager.IsInitializeDone; }
 
         [SerializeField]
-        private Transform _boundaryLine;
+        private Transform _overBoundaryLine;
+        [SerializeField]
+        private Transform _nextBoundaryLine;
 
         private float _firstBoundaryLineX;
         public float FirstBoudaryLineX { get => _firstBoundaryLineX; }
 
         [SerializeField]
         private float _boundaryLineSpeed = 5;
+
+        public const int ChunkCapacity = 4;
+        public const float ChunkSize = 10;
 
         private void OnEnable()
         {
@@ -33,9 +38,9 @@ namespace Orchestration.InGame
         {
             _gridManager = GetComponent<GridManager>();
 
-            if (_boundaryLine)
+            if (_overBoundaryLine)
             {
-                _firstBoundaryLineX = _boundaryLine.position.x;
+                _firstBoundaryLineX = _overBoundaryLine.position.x;
             }
             else
             {
@@ -51,18 +56,20 @@ namespace Orchestration.InGame
 
         private async void MoveBoundaryLine(int count)
         {
-            float nextPosX = count * 10 + _firstBoundaryLineX;
+            float nextPosX = count * ChunkSize + _firstBoundaryLineX;
 
             //次のステージ位置に移動するまで繰り返す
-            while (nextPosX >= _boundaryLine.position.x)
+            while (nextPosX >= _overBoundaryLine.position.x)
             {
-                _boundaryLine.position += new Vector3(_boundaryLineSpeed * Time.deltaTime, 0, 0);
+                _overBoundaryLine.position += new Vector3(_boundaryLineSpeed * Time.deltaTime, 0, 0);
+                _nextBoundaryLine.position += new Vector3(_boundaryLineSpeed * Time.deltaTime, 0, 0);
 
                 await Awaitable.NextFrameAsync();
             }
 
             //移動完了したら整数値に戻す
-            _boundaryLine.position = new Vector3(nextPosX, _boundaryLine.position.y, _boundaryLine.position.z);
+            _overBoundaryLine.position = new Vector3(nextPosX, _overBoundaryLine.position.y, _overBoundaryLine.position.z);
+            _nextBoundaryLine.position = new Vector3(nextPosX + ChunkSize * 2, _nextBoundaryLine.position.y, _nextBoundaryLine.position.z);
         }
 
         /// <summary>
