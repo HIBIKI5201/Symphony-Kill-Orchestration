@@ -105,8 +105,6 @@ namespace Orchestration.InGame
                     while (info == null || manager.IsRegisterGridInfo(info));
 
                     soldier.SetDirection(info.transform.position);
-
-                    Debug.Log($"move point : {movePoint}");
                 }
             }
         }
