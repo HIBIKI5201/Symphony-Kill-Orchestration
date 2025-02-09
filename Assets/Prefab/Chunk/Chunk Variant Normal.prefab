@@ -119,7 +119,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 294847547799432051, guid: f848e1014319b4b40836cd583e47f3be, type: 3}
       propertyPath: m_Name
-      value: Chunk Variant
+      value: Chunk Variant Normal
       objectReference: {fileID: 0}
     - target: {fileID: 858542129126910981, guid: f848e1014319b4b40836cd583e47f3be, type: 3}
       propertyPath: m_LocalPosition.x
