@@ -80,23 +80,22 @@ namespace Orchestration.InGame
             }
 
             IsInitializeDone = true;
-
-            async void OnStageChanged()
-            {
-                IsInitializeDone = false;
-
-                //エネミーチャンクからランダムに取得
-                int index = UnityEngine.Random.Range(0, _enemyChunkPrefabList.Count);
-                GameObject chunk = _enemyChunkPrefabList[index];
-
-                await ChunkBuild(chunk);
-
-                IsInitializeDone = true;
-            }
         }
 
+        [ContextMenu("OnStageChangedCreateChunk")]
+        private async void OnStageChanged()
+        {
+            IsInitializeDone = false;
 
-        [ContextMenu("New Chunk Create")]
+            //エネミーチャンクからランダムに取得
+            int index = UnityEngine.Random.Range(0, _enemyChunkPrefabList.Count);
+            GameObject chunk = _enemyChunkPrefabList[index];
+
+            await ChunkBuild(chunk);
+
+            IsInitializeDone = true;
+        }
+
         /// <summary>
         /// チャンクを生成する
         /// </summary>
