@@ -1,3 +1,4 @@
+using Orchestration.Entity;
 using UnityEngine;
 
 namespace Orchestration.InGame
@@ -12,8 +13,13 @@ namespace Orchestration.InGame
 
         private MeshRenderer _groundRenderer;
 
+        private bool _isActive;
+        public bool IsActive { get => _isActive; set => _isActive = value; }
+
         private void Awake()
         {
+            _isActive = true;
+
             _highLight = gameObject.transform.Find("HighLight").gameObject;
 
             if (_highLight)
