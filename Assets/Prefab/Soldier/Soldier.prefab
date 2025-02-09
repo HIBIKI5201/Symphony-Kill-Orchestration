@@ -506,6 +506,7 @@ MonoBehaviour:
   _muzzleAudio: {fileID: 2454968635907306165}
   _shootAudioClip: {fileID: 8300000, guid: 65201ddabb4144f6a8fb9480120b7656, type: 3}
   _healthBarOffset: {x: 0, y: 2, z: 0}
+  _moveLineRenderer: {fileID: 0}
 --- !u!114 &1998768509652785766
 MonoBehaviour:
   m_ObjectHideFlags: 0
