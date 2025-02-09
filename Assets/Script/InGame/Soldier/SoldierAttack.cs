@@ -1,5 +1,7 @@
 using Orchestration.Entity;
+using SymphonyFrameWork.CoreSystem;
 using System.Linq;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -9,8 +11,17 @@ namespace Orchestration.Entity
     {
         private float _attackTimer;
 
+        private void Update()
+        {
+            //ポーズ中はタイマーを保つ
+            if (PauseManager.Pause)
+            {
+                _attackTimer += Time.deltaTime;
+            }
+        }
+
         /// <summary>
-        /// 攻撃のインターバルが終了しているかどうか
+        /// 攻撃できる状態かどうか
         /// </summary>
         /// <param name="interval"></param>
         /// <returns></returns>
@@ -35,7 +46,30 @@ namespace Orchestration.Entity
                     .Select(c => c.GetComponent<SoldierManager>())
                     .Where(sm => sm).ToArray();
 
-                soldier = soldiers.OrderBy(s => Vector3.Distance(transform.position, s.transform.position)).FirstOrDefault();
+                soldier = soldiers
+                    //近い順番にソート
+                    .OrderBy(s => Vector3.Distance(transform.position, s.transform.position))
+                    //射線が通っているかを判定
+                    .Where(s => 
+                    {
+                        //兵士に向けてRayを作成
+                        Ray ray = new Ray(
+                            transform.position + new Vector3(0, 1, 0),
+                            (s.transform.position - transform.position).normalized
+                            );
+
+                        //当たったものがターゲットの兵士かどうか1
+                        if (Physics.Raycast(ray, out var hitInfo))
+                        {
+                            if (hitInfo.transform == s.transform)
+                            {
+                                return true;
+                            }
+                        }
+                        return false;
+                    })
+                    .FirstOrDefault();
+
                 return soldier != null;
             }
             return false;
