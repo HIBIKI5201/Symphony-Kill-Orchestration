@@ -13,14 +13,14 @@ namespace Orchestration.Entity
         private UnitSelectorSoldier _selector;
 
         private UIDocument _document;
-        private VisualElement _healthBar;
+        private VisualElement _soldierMark;
         
         private void Awake()
         {
             _document = GetComponentInChildren<UIDocument>();
             if (_document.NullCheckComponent("UI Documentが見つかりません"))
             {
-                _healthBar = _document.rootVisualElement.Q<VisualElement>("health-bar");
+                _soldierMark = _document.rootVisualElement.Q<VisualElement>();
             }
         }
 
@@ -39,25 +39,39 @@ namespace Orchestration.Entity
             }
         }
 
+        public void Select(bool active)
+        {
+            if (active)
+            {
+                _soldierMark.style.unityBackgroundImageTintColor = Color.yellow;
+            }
+            else
+            {
+                _soldierMark.style.unityBackgroundImageTintColor = Color.blue;
+            }
+        }
+
         /// <summary>
         /// ヘルスバーの位置を更新する
         /// </summary>
         /// <param name="pos"></param>
         public void HealthBarMove(Vector3 pos, Vector3 healthBarOffset)
         {
-            if (_healthBar == null)
+            if (_soldierMark == null)
             {
                 return;
             }
 
             //スクリーン座標系に変換
-            Vector3 screenPos = Camera.main.WorldToScreenPoint(pos + healthBarOffset);
+            Vector2 screenPos = Camera.main.WorldToScreenPoint(pos);
 
-            float centerX = screenPos.x - (_healthBar.resolvedStyle.width / 2);
+            float centerX = screenPos.x - (_soldierMark.resolvedStyle.width / 2);
             float centerY = Screen.height - screenPos.y; //UITK座標系では値が高いほど下に移動する
 
-            _healthBar.style.left = centerX;
-            _healthBar.style.top = centerY;
+            Debug.Log(centerX + " " + centerY);
+
+            _soldierMark.style.left = centerX;
+            _soldierMark.style.top = centerY;
         }
 
         /// <summary>
@@ -73,7 +87,12 @@ namespace Orchestration.Entity
         /// <param name="count"></param>
         public void SpecialPointGuageUpdate(float proportion) => _selector.SpecialPointGuageUpdate(proportion);
 
+        /// <summary>
+        /// スペシャルポイントのカウント量を更新する
+        /// </summary>
+        /// <param name="count"></param>
         public void SpecialPointCountUpdate(int count) => _selector.SpecialPointCountUpdate(count);
+
         private void OnDestroy()
         {
             _info?.Destroy();

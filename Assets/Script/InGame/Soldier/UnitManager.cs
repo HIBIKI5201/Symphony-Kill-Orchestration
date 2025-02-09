@@ -1,5 +1,6 @@
 using Orchestration.Entity;
 using Orchestration.System;
+using Orchestration.UI;
 using SymphonyFrameWork.CoreSystem;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace Orchestration.InGame
         private Dictionary<SoldierType, PlayerSoldierManager> _soldiers = new();
 
         [SerializeField]
-        private SoldierManager _selectSolider;
+        private PlayerSoldierManager _selectSolider;
 
         private void OnEnable()
         {
@@ -46,7 +47,7 @@ namespace Orchestration.InGame
             var controller = ServiceLocator.GetInstance<PlayerController>();
             if (controller)
             {
-                controller.Active.OnStarted += c => SelectSoldierMove();
+                controller.Active.OnStarted += c => SoldierMove();
                 controller.Select.OnStarted += SelectSwitch;
             }
 
@@ -56,7 +57,7 @@ namespace Orchestration.InGame
                 system.OnStageChanged += BorderOutSoldierMove;
             }
 
-            _selectSolider = _soldiers[SoldierType.Asult];
+            SelectorSoldier(_soldiers[SoldierType.Asult]);
         }
 
         /// <summary>
@@ -71,7 +72,7 @@ namespace Orchestration.InGame
             axis = Math.Sign(axis);
             index = NextIndex(index, axis);
 
-            _selectSolider = _soldiers.ToArray()[index].Value;
+            SelectorSoldier(_soldiers.ToArray()[index].Value);
 
             int NextIndex(int index, float axis)
             {
@@ -85,7 +86,21 @@ namespace Orchestration.InGame
             }
         }
 
-        private void SelectSoldierMove()
+        private void SelectorSoldier(PlayerSoldierManager soldier)
+        {
+            //元のセレクト状態を解除
+            if (_selectSolider)
+            {
+                _selectSolider.Select(false);
+            }
+
+            //新たにセレクト状態にする
+            _selectSolider = soldier;
+            _selectSolider.Select(true);
+
+        }
+
+        private void SoldierMove()
         {
             if (_selectSolider)
             {

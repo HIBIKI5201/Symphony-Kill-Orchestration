@@ -1,12 +1,18 @@
 using Orchestration.InGame;
 using SymphonyFrameWork.CoreSystem;
 using SymphonyFrameWork.Utility;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Orchestration.Entity
 {
     public class PlayerSoldierManager : SoldierManager
     {
+        public void Select(bool active)
+        {
+            //_ui.Select(active);
+        }
+
         public override void Awake_S()
         {
             base.Awake_S();
@@ -23,7 +29,6 @@ namespace Orchestration.Entity
         {
             base.OnDeath();
             var manager = ServiceLocator.GetInstance<UnitManager>();
-           
         }
     }
 }
