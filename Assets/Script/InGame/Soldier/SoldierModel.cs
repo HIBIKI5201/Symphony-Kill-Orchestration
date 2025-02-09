@@ -53,7 +53,9 @@ namespace Orchestration.Entity
         private Vector3 _healthBarOffset = Vector3.zero;
         public Vector3 HealthBarOffset { get => _healthBarOffset; }
 
-
+        [SerializeField]
+        private LineRenderer _moveLineRenderer;
+        public LineRenderer MoveLineRenderer { get => _moveLineRenderer; }
         public void Init()
         {
             _agent = GetComponent<NavMeshAgent>();
@@ -61,6 +63,8 @@ namespace Orchestration.Entity
             _agent.enabled = false;
 
             _animator = GetComponentInChildren<Animator>();
+
+            _moveLineRenderer = GetComponent<LineRenderer>();
 
             if (_muzzleAudio)
             {

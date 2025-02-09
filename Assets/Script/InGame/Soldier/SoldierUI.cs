@@ -3,6 +3,7 @@ using Orchestration.UI;
 using SymphonyFrameWork.CoreSystem;
 using SymphonyFrameWork.Utility;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UIElements;
 
 namespace Orchestration.Entity
@@ -90,6 +91,16 @@ namespace Orchestration.Entity
         /// </summary>
         /// <param name="count"></param>
         public void SpecialPointCountUpdate(int count) => _selector.SpecialPointCountUpdate(count);
+
+        public void MoveLineRender(NavMeshAgent agent, LineRenderer renderer)
+        {
+            if (agent)
+            {
+                Vector3[] corners = agent.path.corners;
+                renderer.positionCount = corners.Length;
+                renderer.SetPositions(corners);
+            }
+        }
 
         private void OnDestroy()
         {

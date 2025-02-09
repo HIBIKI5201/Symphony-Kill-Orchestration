@@ -25,6 +25,20 @@ namespace Orchestration.Entity
             }
         }
 
+        protected override void Update_S()
+        {
+            base.Update_S();
+
+            //ヘルスバーの位置更新
+            _ui.HealthBarMove(transform.position, _model.HealthBarOffset);
+
+            //移動経路線を描画
+            if (_model.Agent.path.corners.Length > 0)
+            {
+                _ui.MoveLineRender(_model.Agent, _model.MoveLineRenderer);
+            }
+        }
+
         protected override void OnDeath()
         {
             base.OnDeath();
