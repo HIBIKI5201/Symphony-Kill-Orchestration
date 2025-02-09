@@ -32,6 +32,10 @@ PrefabInstance:
       propertyPath: _targetLayer.m_Bits
       value: 256
       objectReference: {fileID: 0}
+    - target: {fileID: 8582153300400858969, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
+      propertyPath: _soldierData
+      value: 
+      objectReference: {fileID: 11400000, guid: fa23862264a9df54cb07f8df86a17483, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
