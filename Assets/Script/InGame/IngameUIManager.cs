@@ -56,7 +56,7 @@ namespace Orchestration.InGame
 
         private async void MoveMiniMapCamera(int count)
         {
-            float nextPosX = count * 10 + _miniMapFirstPosX;
+            float nextPosX = count * GroundManager.ChunkSize + _miniMapFirstPosX;
 
             //次のステージ位置に移動するまで繰り返す
             while (nextPosX >= _miniMapCamera.position.x)

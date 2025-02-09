@@ -67,7 +67,7 @@ namespace Orchestration.InGame
 
         private async void MoveConfiger(int count)
         {
-            float nextPosX = count * 10 + 10;
+            float nextPosX = (count + 1) * GroundManager.ChunkSize;
 
             //次のステージ位置に移動するまで繰り返す
             while (nextPosX >= _configer.position.x)

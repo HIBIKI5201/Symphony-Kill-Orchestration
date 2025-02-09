@@ -55,15 +55,13 @@ namespace Orchestration.InGame
 
         private float _lastChunkPos = 0;
 
-        private const int ChunkCapacity = 4;
-
         public bool IsInitializeDone { get; private set; }
 
         private void Awake()
         {
             _surface = GetComponent<NavMeshSurface>();
 
-            _lastChunkPos = -10;
+            _lastChunkPos = -GroundManager.ChunkSize;
             IsInitializeDone = false;
         }
 
@@ -76,7 +74,7 @@ namespace Orchestration.InGame
             //初期NavMeshを生成
             _surface.BuildNavMesh();
 
-            for (int i = 0; i < ChunkCapacity; i++)
+            for (int i = 0; i < GroundManager.ChunkCapacity; i++)
             {
                 await ChunkBuild(_normalChunkPrefab);
             }
@@ -108,11 +106,11 @@ namespace Orchestration.InGame
             GameObject chunk = Instantiate(chunkPrefab, new Vector3(_lastChunkPos, 0, 0), Quaternion.identity);
             chunk.transform.parent = transform;
 
-            _lastChunkPos += 10;
+            _lastChunkPos += GroundManager.ChunkSize;
 
             //アクティブなチャンクのコレクションに追加
             _chunkQueue.Enqueue(chunk.gameObject);
-            if (_chunkQueue.Count > ChunkCapacity)
+            if (_chunkQueue.Count > GroundManager.ChunkCapacity)
             {
                 GameObject obj = _chunkQueue.Dequeue();
                 DestroyChunk(obj);

@@ -74,7 +74,7 @@ namespace Orchestration.InGame
         {
             var manager = ServiceLocator.GetInstance<GroundManager>();
 
-            float lineX = count * 10 + manager.FirstBoudaryLineX;
+            float lineX = count * GroundManager.ChunkSize + manager.FirstBoudaryLineX;
 
             foreach (var soldier in _soldiers.Values)
             {
