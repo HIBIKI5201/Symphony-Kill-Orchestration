@@ -1,16 +1,30 @@
 using SymphonyFrameWork.CoreSystem;
+using System;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Orchestration.InGame
 {
     public class IngameSystemManager : MonoBehaviour
     {
-        int _stageCounter = 0;
+        private int _stageCounter = 0;
 
-        GridManager _gridManager;
-        private void Start()
+        public event Action<int> OnStageChanged;
+
+        private void OnEnable()
         {
-            _gridManager = ServiceLocator.GetInstance<GridManager>();
+            ServiceLocator.SetInstance(this);
+        }
+
+        private void OnDisable()
+        {
+            ServiceLocator.DestroyInstance(this);
+        }
+
+        public void NextStage()
+        {
+            _stageCounter++;
+            OnStageChanged?.Invoke(_stageCounter);
         }
     }
 }
