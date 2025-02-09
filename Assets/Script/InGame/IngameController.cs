@@ -1,5 +1,6 @@
 using Orchestration.Entity;
 using Orchestration.InGame;
+using Orchestration.System;
 using SymphonyFrameWork.CoreSystem;
 using UnityEngine;
 
@@ -7,6 +8,18 @@ namespace Orchestration.InGame
 {
     public class IngameController : MonoBehaviour
     {
+        private void Start()
+        {
+            var controller = ServiceLocator.GetInstance<PlayerController>();
+
+            //押されたら選択中の兵士に移動指示
+            var unitManager = ServiceLocator.GetInstance<UnitManager>();
+            if (controller)
+            {
+                controller.Active.OnStarted += c => unitManager.SoldierMove();
+                controller.Select.OnStarted += unitManager.SelectSwitch;
+            }
+        }
 
         private void Update()
         {
@@ -14,17 +27,25 @@ namespace Orchestration.InGame
 
             #region デバッグ機能
 
-            if (Input.GetMouseButtonDown(1))
-            {
-                ServiceLocator.GetInstance<IngameSystemManager>().NextStage();
-            }
-
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 PauseManager.Pause = !PauseManager.Pause;
             }
 
             #endregion
+        }
+
+        private void OnDestroy()
+        {
+            var controller = ServiceLocator.GetInstance<PlayerController>();
+
+            //押されたら選択中の兵士に移動指示
+            var unitManager = ServiceLocator.GetInstance<UnitManager>();
+            if (controller)
+            {
+                controller.Active.OnStarted -= c => unitManager.SoldierMove();
+                controller.Select.OnStarted -= unitManager.SelectSwitch;
+            }
         }
 
         /// <summary>

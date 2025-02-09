@@ -45,13 +45,28 @@ namespace Orchestration.InGame
             if (controller)
             {
                 //ˆÚ“®“ü—Í‚ðvelocity‚É‹L˜^
-                controller.Move.OnPerformed += d => _velocity = d;
-                controller.Move.OnCanseled += d => _velocity = Vector2.zero;
+                controller.Move.OnPerformed += UpdateVelocity;
+                controller.Move.OnCanseled += ResetVelocity;
             }
 
             IngameSystemManager system = ServiceLocator.GetInstance<IngameSystemManager>();
             system.OnStageChanged += MoveConfiger;
         }
+
+        private void OnDestroy()
+        {
+            PlayerController controller = ServiceLocator.GetInstance<PlayerController>();
+
+            if (controller)
+            {
+                //ˆÚ“®“ü—Í‚ðvelocity‚É‹L˜^
+                controller.Move.OnPerformed -= UpdateVelocity;
+                controller.Move.OnCanseled -= ResetVelocity;
+            }
+        }
+
+        private void UpdateVelocity(Vector2 direction) => _velocity = direction;
+        private void ResetVelocity(Vector2 direction) => _velocity = Vector2.zero;
 
         private void Update()
         {

@@ -1,10 +1,10 @@
 using Orchestration.Entity;
 using Orchestration.System;
-using Orchestration.UI;
 using SymphonyFrameWork.CoreSystem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Orchestration.InGame
@@ -43,14 +43,6 @@ namespace Orchestration.InGame
             AddSoldier(SoldierType.Medic, new Vector3(0.5f, 0, 1.5f));
             AddSoldier(SoldierType.Recon, new Vector3(0.5f, 0, 3.5f));
 
-            //押されたら選択中の兵士に移動指示
-            var controller = ServiceLocator.GetInstance<PlayerController>();
-            if (controller)
-            {
-                controller.Active.OnStarted += c => SoldierMove();
-                controller.Select.OnStarted += SelectSwitch;
-            }
-
             var system = ServiceLocator.GetInstance<IngameSystemManager>();
             if (system)
             {
@@ -68,7 +60,7 @@ namespace Orchestration.InGame
             foreach (var soldier in _soldiers.Values)
             {
                 //兵士がNext境界線以上にいるかどうか
-                if (soldier.transform.position.x > 
+                if (soldier.transform.position.x >
                     system.StageCounter * GroundManager.ChunkSize + groundManager.FirstBoundaryLineX
                     + GroundManager.ChunkSize * 2)
                 {
@@ -82,11 +74,11 @@ namespace Orchestration.InGame
         /// 選択中の兵士を変更
         /// </summary>
         /// <param name="axis"></param>
-        private void SelectSwitch(float axis)
+        public void SelectSwitch(float axis)
         {
             //選択中の兵士のインデックス
             int index = _soldiers.Values.ToList().FindIndex(s => s == _selectSolider);
-            
+
             axis = Math.Sign(axis);
             index = NextIndex(index, axis);
 
@@ -118,8 +110,9 @@ namespace Orchestration.InGame
 
         }
 
-        private void SoldierMove()
+        public void SoldierMove()
         {
+
             if (_selectSolider)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
