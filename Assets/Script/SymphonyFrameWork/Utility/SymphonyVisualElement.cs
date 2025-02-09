@@ -37,10 +37,14 @@ namespace SymphonyFrameWork.Utility
                 container.style.width = Length.Percent(100);
                 container.style.height = Length.Percent(100);
 
-                this.RegisterCallback<KeyDownEvent>(e => e.StopPropagation());
-                pickingMode = PickingMode.Ignore;
-                container.RegisterCallback<KeyDownEvent>(e => e.StopPropagation());
-                container.pickingMode = PickingMode.Ignore;
+                if ((type & InitializeType.PickModeIgnore) != 0)
+                {
+                    this.RegisterCallback<KeyDownEvent>(e => e.StopPropagation());
+                    pickingMode = PickingMode.Ignore;
+
+                    container.RegisterCallback<KeyDownEvent>(e => e.StopPropagation());
+                    container.pickingMode = PickingMode.Ignore;
+                }
 
                 if ((type & InitializeType.Absolute) != 0)
                 {
@@ -73,9 +77,10 @@ namespace SymphonyFrameWork.Utility
         public enum InitializeType
         {
             None = 0,
-            Absolute = 1 << 1,
-            FullRangth = 1 << 2,
-            All = Absolute | FullRangth
+            Absolute = 1 << 0,
+            FullRangth = 1 << 1,
+            PickModeIgnore = 1 << 2,
+            All = Absolute | FullRangth 
         }
     }
 }
