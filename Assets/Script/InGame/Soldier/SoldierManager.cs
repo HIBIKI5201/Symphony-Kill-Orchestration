@@ -1,5 +1,4 @@
 using SymphonyFrameWork.CoreSystem;
-using SymphonyFrameWork.Utility;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -47,7 +46,13 @@ namespace Orchestration.Entity
         {
             if (_soldierData != null)
             {
-                _soldierData.OnHealthChanged += OnDeath;
+                _soldierData.OnHealthChanged += health =>
+                {
+                    if (health <= 0)
+                    {
+                        OnDeath();
+                    }
+                };
             }
         }
 
@@ -106,23 +111,21 @@ namespace Orchestration.Entity
                 }
 
                 //‚‘¬‚Å“G‚Ì•ûŒü‚ÉŒü‚­
-                return((enemy.transform.position - transform.position).normalized, 5);
+                return ((enemy.transform.position - transform.position).normalized, 5);
             }
             else
             {
                 //‚ä‚Á‚­‚èˆÚ“®•ûŒü‚ÉŒü‚­
                 return (_model.Agent.velocity.normalized, 3);
             }
-
-
         }
 
         /// <summary>
         /// ˆÚ“®–Ú•W‚ğXV
         /// </summary>
-        public void SetDirection()
+        public void SetDirection(Vector3 point)
         {
-            _move.SetDirection(_model.Agent);
+            _move.SetDirection(_model.Agent, point);
         }
 
         /// <summary>
@@ -141,12 +144,9 @@ namespace Orchestration.Entity
         /// ƒwƒ‹ƒX‚ª0ˆÈ‰º‚É‚È‚Á‚½‚ç©ŒÈ”j‰óˆ—‚·‚é
         /// </summary>
         /// <param name="health"></param>
-        protected void OnDeath(float health)
+        protected virtual void OnDeath()
         {
-            if (health <= 0)
-            {
-                Destroy(gameObject);
-            }
+            Destroy(gameObject);
         }
 
         public void Pause()

@@ -1,3 +1,5 @@
+using Orchestration.InGame;
+using SymphonyFrameWork.CoreSystem;
 using SymphonyFrameWork.Utility;
 using UnityEngine;
 
@@ -15,6 +17,13 @@ namespace Orchestration.Entity
 
                 _soldierData.OnSpecialPointChanged += value => _ui.SpecialPointCountUpdate(value);
             }
+        }
+
+        protected override void OnDeath()
+        {
+            base.OnDeath();
+            var manager = ServiceLocator.GetInstance<UnitManager>();
+           
         }
     }
 }
