@@ -1,9 +1,9 @@
 using Orchestration.Entity;
 using Orchestration.System;
 using SymphonyFrameWork.CoreSystem;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Orchestration.InGame
@@ -47,14 +47,42 @@ namespace Orchestration.InGame
             if (controller)
             {
                 controller.Active.OnStarted += c => SelectSoldierMove();
+                controller.Select.OnStarted += SelectSwitch;
             }
 
             var system = ServiceLocator.GetInstance<IngameSystemManager>();
-            if (system) {
+            if (system)
+            {
                 system.OnStageChanged += BorderOutSoldierMove;
-                    }
+            }
 
             _selectSolider = _soldiers[SoldierType.Asult];
+        }
+
+        /// <summary>
+        /// 選択中の兵士を変更
+        /// </summary>
+        /// <param name="axis"></param>
+        private void SelectSwitch(float axis)
+        {
+            //選択中の兵士のインデックス
+            int index = _soldiers.ToList().FindIndex(kvp => kvp.Value == _selectSolider);
+            
+            axis = Math.Sign(axis);
+            index = NextIndex(index, axis);
+
+            _selectSolider = _soldiers.ToArray()[index].Value;
+
+            int NextIndex(int index, float axis)
+            {
+                index = Convert.ToInt32((index + axis) % _soldiers.Count);
+                if (index < 0)
+                {
+                    index = _soldiers.Count - 1;
+                }
+
+                return index;
+            }
         }
 
         private void SelectSoldierMove()
@@ -142,15 +170,22 @@ namespace Orchestration.InGame
                 _soldiers.Add(type, psm);
             }
         }
-        
+
         /// <summary>
         /// 兵士が死亡したことを記録する
         /// </summary>
         /// <param name="soldierManager"></param>
         public void DeathSoldier(PlayerSoldierManager soldierManager)
         {
-            SoldierType type = _soldiers.ToList().Find(kvp => kvp.Value == soldierManager).Key;
-            _soldiers.Remove(type);
+            var type = _soldiers.ToList().Find(kvp => kvp.Value == soldierManager);
+
+            //もし選択中の兵士なら次の兵士に変更
+            if (type.Value == _selectSolider)
+            {
+                SelectSwitch(1);
+            }
+
+            _soldiers.Remove(type.Key);
         }
 
         public enum SoldierType
