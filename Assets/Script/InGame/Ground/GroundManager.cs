@@ -12,9 +12,12 @@ namespace Orchestration.InGame
 
         [SerializeField]
         private Transform _boundaryLine;
+
+        private float _firstBoundaryLineX;
+        public float FirstBoudaryLineX { get => _firstBoundaryLineX; }
+
         [SerializeField]
         private float _boundaryLineSpeed = 5;
-        private float _firstBoundaryLinePosX;
 
         private void OnEnable()
         {
@@ -30,7 +33,11 @@ namespace Orchestration.InGame
         {
             _gridManager = GetComponent<GridManager>();
 
-            if (!_boundaryLine)
+            if (_boundaryLine)
+            {
+                _firstBoundaryLineX = _boundaryLine.position.x;
+            }
+            else
             {
                 Debug.LogError("境界線が見つかりません");
             }
@@ -44,7 +51,7 @@ namespace Orchestration.InGame
 
         private async void MoveBoundaryLine(int count)
         {
-            float nextPosX = count * 10 + _firstBoundaryLinePosX;
+            float nextPosX = count * 10 + _firstBoundaryLineX;
 
             //次のステージ位置に移動するまで繰り返す
             while (nextPosX >= _boundaryLine.position.x)
@@ -65,8 +72,8 @@ namespace Orchestration.InGame
         /// <param name="pos">グリッドの座標</param>
         ///<param name="index">グリッドのインデックス番号</param>
         /// <returns>グリッドが存在するか</returns>
-        public bool GetGridPosition(Vector3 position, out GridInfo info) =>
-            _gridManager.GetGridPosition(position, out info);
+        public bool GetGridByPosition(Vector3 position, out GridInfo info) =>
+            _gridManager.GetGridByPosition(position, out info);
 
         /// <summary>
         /// グリッドが未使用の場合は登録する
@@ -89,5 +96,12 @@ namespace Orchestration.InGame
         /// </summary>
         /// <param name="index">グリッドのインデックス番号</param>
         public void HighLightGrid(GridInfo info) => _gridManager.HighLightGrid(info);
+
+        /// <summary>
+        /// グリッドが使用済みに登録されているかどうか
+        /// </summary>
+        /// <param name="info"></param>
+        /// <returns></returns>
+        public bool IsRegisterGridInfo(GridInfo info) => _gridManager.IsRegisterGridInfo(info);
     }
 }
