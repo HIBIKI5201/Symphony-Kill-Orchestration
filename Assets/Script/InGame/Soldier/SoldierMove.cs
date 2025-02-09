@@ -20,6 +20,8 @@ namespace Orchestration.Entity
             //初期化が終わるまで待機
             await SymphonyTask.WaitUntil(() => manager.IsInitializeDone, destroyCancellationToken);
 
+            agent.enabled = true;
+
             //自分の場所を一番近いグリッドまで移動
             if (manager.GetGridPosition(transform.position, out GridInfo info))
             {

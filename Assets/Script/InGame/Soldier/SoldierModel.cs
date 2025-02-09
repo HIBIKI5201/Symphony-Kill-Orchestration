@@ -57,6 +57,9 @@ namespace Orchestration.Entity
         public void Init()
         {
             _agent = GetComponent<NavMeshAgent>();
+
+            _agent.enabled = false;
+
             _animator = GetComponentInChildren<Animator>();
 
             if (_muzzleAudio)
