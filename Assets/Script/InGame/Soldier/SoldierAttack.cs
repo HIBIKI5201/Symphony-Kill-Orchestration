@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.VFX;
 
-namespace Orchestration
+namespace Orchestration.Entity
 {
     public class SoldierAttack : MonoBehaviour
     {

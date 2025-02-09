@@ -6,7 +6,7 @@ using UnityEngine.AI;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.VFX;
 
-namespace Orchestration
+namespace Orchestration.Entity
 {
     public class SoldierModel : MonoBehaviour
     {

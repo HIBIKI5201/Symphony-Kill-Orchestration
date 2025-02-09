@@ -3,7 +3,7 @@ using SymphonyFrameWork.CoreSystem;
 using Unity.Cinemachine;
 using UnityEngine;
 
-namespace Orchestration
+namespace Orchestration.InGame
 {
     public class IngameCameraController : MonoBehaviour, PauseManager.IPausable
     {

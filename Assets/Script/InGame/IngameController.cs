@@ -3,7 +3,7 @@ using Orchestration.InGame;
 using SymphonyFrameWork.CoreSystem;
 using UnityEngine;
 
-namespace Orchestration
+namespace Orchestration.InGame
 {
     public class IngameController : MonoBehaviour
     {
