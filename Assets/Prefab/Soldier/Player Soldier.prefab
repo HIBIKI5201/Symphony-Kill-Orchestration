@@ -32,8 +32,30 @@ PrefabInstance:
       propertyPath: _targetLayer.m_Bits
       value: 512
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8582153300400858969, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4818443321490436054, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 3680618899376478644}
   m_SourcePrefab: {fileID: 100100000, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
+--- !u!1 &6266570956525183635 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4818443321490436054, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
+  m_PrefabInstance: {fileID: 1452931768037199173}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3680618899376478644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6266570956525183635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb82c1ff32e48574fbaa4cad7241b983, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soldierData: {fileID: 11400000, guid: 6b6b8f7323687c04ea62386d4cbf411d, type: 2}
