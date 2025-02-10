@@ -2,7 +2,9 @@ using Orchestration.InGame;
 using SymphonyFrameWork.CoreSystem;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Services.Analytics;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Orchestration.Entity
 {
@@ -43,7 +45,31 @@ namespace Orchestration.Entity
         public override void AddDamage(float damage, SoldierManager target)
         {
             base.AddDamage(damage, target);
-            GoToTarget(target);
+
+            //もし攻撃外から撃たれた場合は近付く
+            if (_soldierData.AttackRange < Vector3.Distance(target.transform.position, transform.position))
+            {
+                GoToTarget(target);
+            }
+            //攻撃が範囲内からなら動かない
+            else
+            {
+                //目標地点が自地点でない場合は自地点に更新する
+                NavMeshAgent agent = _model.Agent;
+                if (agent.isActiveAndEnabled && !agent.pathPending)
+                {
+                    if (agent.remainingDistance > agent.stoppingDistance) //移動中の時だけ
+                    {
+                        GroundManager manager = ServiceLocator.GetInstance<GroundManager>();
+
+                        //移動方向のグリッドに移動するようにオフセットを生成
+                        Vector3 direction = agent.velocity.normalized;
+                        direction *= manager.GridSize;
+
+                        _move.SetDirection(_model.Agent, transform.position + direction);
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -96,7 +122,7 @@ namespace Orchestration.Entity
                 }
             }
 
-            End:
+        End:
             SetDirection(info.transform.position);
             return; // 最も近いグリッドが見つかったら終了
         }
