@@ -21,6 +21,16 @@ namespace Orchestration.InGame
 
         private float _miniMapFirstPosX;
 
+        private void OnEnable()
+        {
+            ServiceLocator.SetInstance(this);
+        }
+
+        private void OnDisable()
+        {
+            ServiceLocator.DestroyInstance(this);
+        }
+
         private void Awake()
         {
             _document = GetComponent<UIDocument>();
@@ -41,17 +51,21 @@ namespace Orchestration.InGame
         {
             IngameSystemManager system = ServiceLocator.GetInstance<IngameSystemManager>();
             system.OnStageChanged += MoveMiniMapCamera;
+            system.OnStageChanged += CountUpdate;
+            system.OnKillCounterChanged += KillCountUpdate;
+
+            CountUpdate(0);
+            KillCountUpdate(0);
         }
 
-        private void OnEnable()
+        private void OnDestroy()
         {
-            ServiceLocator.SetInstance(this);
+            IngameSystemManager system = ServiceLocator.GetInstance<IngameSystemManager>();
+            system.OnStageChanged -= MoveMiniMapCamera;
+            system.OnStageChanged -= CountUpdate;
+            system.OnKillCounterChanged -= KillCountUpdate;
         }
 
-        private void OnDisable()
-        {
-            ServiceLocator.DestroyInstance(this);
-        }
 
         public void AddSoldierInfo(UnitInfomationSoldier info) => _unitInfo?.AddSoldierInfo(info);
         public void AddSoldierSelector(UnitSelectorSoldier info) => _unitSelector?.AddSoldierInfo(info);
@@ -71,5 +85,8 @@ namespace Orchestration.InGame
             //ˆÚ“®Š®—¹‚µ‚½‚ç®”’l‚É–ß‚·
             _miniMapCamera.position = new Vector3(nextPosX, _miniMapCamera.position.y, _miniMapCamera.position.z);
         }
+
+        public void CountUpdate(int count) => _stageInfo?.CountUpdate(count);
+        public void KillCountUpdate(int count) => _stageInfo?.KillCountUpdate(count);
     }
 }
