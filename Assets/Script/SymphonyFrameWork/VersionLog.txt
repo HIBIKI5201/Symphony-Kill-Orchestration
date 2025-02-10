@@ -2,6 +2,10 @@
 1.16.6
 
 #Log
+1.16.7
+[Update]
+PauseManager
+
 1.16.6
 [Update]
 SymphonyVisualElement

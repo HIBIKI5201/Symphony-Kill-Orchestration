@@ -64,6 +64,25 @@ namespace SymphonyFrameWork.CoreSystem
             }
         }
 
+        /// <summary>
+        /// É|Å[ÉYíÜÇ…í‚é~Ç∑ÇÈGameObjectÇÃDestroy
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="t"></param>
+        public static async void PausableDestroy(GameObject obj, float t, CancellationToken token = default)
+        {
+            await PausableWaitForSecondAsync(t, token);
+
+            UnityEngine.Object.Destroy(obj);
+        }
+
+        public static async void PausableInvoke(Action action, float t, CancellationToken token = default)
+        {
+            await PausableWaitForSecondAsync(t, token);
+
+            action?.Invoke();
+        }
+
         public interface IPausable
         {
             void Pause();
