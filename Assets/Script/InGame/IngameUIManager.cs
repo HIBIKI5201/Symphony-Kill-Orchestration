@@ -12,6 +12,7 @@ namespace Orchestration.InGame
         private MiniMap _miniMap;
         private UnitInfomation _unitInfo;
         private UnitSelector _unitSelector;
+        private StageInfomation _stageInfo;
 
         private Transform _miniMapCamera;
 
@@ -29,6 +30,7 @@ namespace Orchestration.InGame
                 _miniMap = root.Q<MiniMap>();
                 _unitInfo = root.Q<UnitInfomation>();
                 _unitSelector = root.Q<UnitSelector>();
+                _stageInfo = root.Q<StageInfomation>();
             }
 
             _miniMapCamera = GetComponentInChildren<Camera>().transform;

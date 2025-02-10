@@ -2,4 +2,5 @@
     <Orchestration.UI.MiniMap />
     <Orchestration.UI.UnitInfomation />
     <Orchestration.UI.UnitSelector />
+    <Orchestration.UI.StageInfomation />
 </engine:UXML>
