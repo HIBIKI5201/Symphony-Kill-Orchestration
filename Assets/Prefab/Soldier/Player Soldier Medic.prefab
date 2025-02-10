@@ -49,6 +49,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 25549ad1664003542931b565c8134317, type: 2}
     - target: {fileID: 7466211388178101979, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
+      propertyPath: _shootAudioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1b766da7cc2d648aa84e36cb5fe8abcb, type: 3}
+    - target: {fileID: 7466211388178101979, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
       propertyPath: _targetLayer.m_Bits
       value: 512
       objectReference: {fileID: 0}
