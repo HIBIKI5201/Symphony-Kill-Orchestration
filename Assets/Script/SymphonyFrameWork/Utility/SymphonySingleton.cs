@@ -23,12 +23,6 @@ namespace SymphonyFrameWork.Utility
             }
         }
 
-        private void Start()
-        {
-            var a = ServiceLocator.GetInstance<Camera>();
-            Debug.Log(a.name);
-        }
-
         private void OnDisable()
         {
             if (_target)
