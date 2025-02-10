@@ -16,6 +16,6 @@ MonoBehaviour:
   _name: "\u5075\u5BDF\u5175"
   _maxHealthPoint: 250
   _maxStaminaPoint: 50
-  _attack: 7.5
-  _attackRatePerMinute: 400
+  _attack: 15
+  _attackRatePerMinute: 200
   _attackRange: 12
