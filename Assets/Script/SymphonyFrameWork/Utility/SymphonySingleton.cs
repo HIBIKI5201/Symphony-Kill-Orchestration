@@ -33,14 +33,16 @@ namespace SymphonyFrameWork.Utility
         {
             if (_target)
             {
-                //Targetのクラスをキャストして実行する
                 Type targetType = _target.GetType();
-                MethodInfo method = typeof(ServiceLocator)
-                    .GetMethod(nameof(ServiceLocator.DestroyInstance),
-                    BindingFlags.Static | BindingFlags.Public, null,
-                    new Type[] { typeof(Component) }, null);
 
-                method.Invoke(null, new object[] { _target });
+                //ServiceLocator.DestroyInstanceを取得する
+                MethodInfo destroyMethod = typeof(ServiceLocator)
+                            .GetMethod("DestroyInstance",
+                            BindingFlags.Public | BindingFlags.Static,
+                            null, Type.EmptyTypes, null)
+                            .MakeGenericMethod(targetType);
+
+                destroyMethod.Invoke(null, null);
             }
         }
     }
