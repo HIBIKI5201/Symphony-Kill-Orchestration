@@ -184,37 +184,6 @@ namespace Orchestration.Entity
                 Gizmos.DrawWireSphere(transform.position, _soldierData.AttackRange);
             }
         }
-
-        #region ‚¨ŽŽ‚µOnGUI
-        /*
-        GUIStyle Style
-        {
-            get
-            {
-                GUIStyle style = new GUIStyle();
-                style = new GUIStyle();
-                style.fontSize = 30;
-                style.normal.textColor = Color.white;
-                return style;
-            }
-        }
-
-        /// <summary>
-        /// ŽŽ‚µ‚ÉOnGUI‚ðŽg—p‚µ‚Ä‚Ý‚½
-        /// </summary>
-        private void OnGUI()
-        {
-            string[] logs = new string[2] { "a", "b" };
-
-            float y = 10;
-            foreach (string log in logs)
-            {
-                GUI.Label(new Rect(0, y, 350, 40), log, Style);
-                y += 40;
-            }
-        }
-        */
-        #endregion
 #endif
     }
 }

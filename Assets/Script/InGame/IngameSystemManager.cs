@@ -26,6 +26,12 @@ namespace Orchestration.InGame
             ServiceLocator.DestroyInstance(this);
         }
 
+        private void Start()
+        {
+            var audio = ServiceLocator.GetInstance<AudioManager>();
+            audio.BGMChanged(1, 2);
+        }
+
         public void NextStage()
         {
             _stageCounter++;
