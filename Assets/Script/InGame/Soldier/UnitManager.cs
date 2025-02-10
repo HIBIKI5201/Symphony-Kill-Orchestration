@@ -212,10 +212,10 @@ namespace Orchestration.InGame
 
             if (_soldiers.Count < 1)
             {
-                GameLogic logic = ServiceLocator.GetInstance<GameLogic>();
-                if (logic)
+                var system = ServiceLocator.GetInstance<IngameSystemManager>();
+                if (system)
                 {
-                    logic.SceneChange(SceneEnum.Home);
+                    system.ResultOpen();
                 }
             }
         }

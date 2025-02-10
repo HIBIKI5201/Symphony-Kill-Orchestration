@@ -1,3 +1,4 @@
+using Orchestration.System;
 using SymphonyFrameWork.CoreSystem;
 using System;
 using UnityEngine;
@@ -10,6 +11,8 @@ namespace Orchestration.InGame
         public int StageCounter { get => _stageCounter; }
 
         public event Action<int> OnStageChanged;
+
+        public event Action OnResultOpen;
 
         private void OnEnable()
         {
@@ -25,6 +28,14 @@ namespace Orchestration.InGame
         {
             _stageCounter++;
             OnStageChanged?.Invoke(_stageCounter);
+        }
+
+        public void ResultOpen()
+        {
+            OnResultOpen?.Invoke();
+
+            var logic = ServiceLocator.GetInstance<GameLogic>();
+            logic.SceneChange(SceneEnum.Home);
         }
     }
 }
