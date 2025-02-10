@@ -1,6 +1,6 @@
-using UnityEngine;
 using SymphonyFrameWork.Utility;
 using System.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace Orchestration.UI
@@ -8,6 +8,7 @@ namespace Orchestration.UI
     [UxmlElement]
     public partial class UnitSelectorSoldier : SymphonyVisualElement
     {
+        private VisualElement _selecter;
         private VisualElement _icon;
         private VisualElement _specialPointGuage;
         private Label _specialPointCount;
@@ -24,12 +25,28 @@ namespace Orchestration.UI
             _specialPointGuage = container.Q<VisualElement>("guage");
             _specialPointCount = container.Q<Label>("count");
 
+            _selecter = container.Q<VisualElement>("selecter");
+
             return Task.CompletedTask;
         }
 
         public void Init(Texture2D texture)
         {
             _icon.style.backgroundImage = new StyleBackground(texture);
+        }
+
+        public void Selected(bool active)
+        {
+            const string selectClass = "select";
+
+            if (active)
+            {
+                _selecter.AddToClassList(selectClass);
+            }
+            else
+            {
+                _selecter.RemoveFromClassList(selectClass);
+            }
         }
 
         public void SpecialPointGuageUpdate(float proportion)

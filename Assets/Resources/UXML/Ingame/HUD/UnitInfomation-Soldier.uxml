@@ -1,6 +1,6 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Resources/USS/UnitInfomation-Soldier.uss?fileID=7433441132597879392&amp;guid=40b2873e2b834a74ab90b798659f1ec9&amp;type=3#UnitInfomation-Soldier" />
-    <engine:VisualElement class="un-select">
+    <engine:VisualElement name="info" class="un-select">
         <engine:Label text="突撃兵" name="name" style="white-space: pre-wrap; color: rgb(255, 255, 255); font-size: 30%; -unity-text-align: middle-center; width: 25%; height: 100%;" />
         <engine:VisualElement style="width: 75%; height: 100%;">
             <engine:VisualElement style="flex-grow: 1; margin-top: 3%; margin-right: 3%; margin-bottom: 3%; margin-left: 3%; background-color: rgb(166, 0, 0);">

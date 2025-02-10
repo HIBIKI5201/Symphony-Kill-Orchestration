@@ -1,0 +1,12 @@
+.un-select {
+    width: 0;
+    height: 5%;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+}
+
+.select {
+    width: 100%;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-out-cubic;
+}
