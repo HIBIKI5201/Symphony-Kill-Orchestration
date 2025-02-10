@@ -80,7 +80,7 @@ namespace SymphonyFrameWork.Utility
             Absolute = 1 << 0,
             FullRangth = 1 << 1,
             PickModeIgnore = 1 << 2,
-            All = Absolute | FullRangth 
+            All = Absolute | FullRangth | PickModeIgnore
         }
     }
 }
