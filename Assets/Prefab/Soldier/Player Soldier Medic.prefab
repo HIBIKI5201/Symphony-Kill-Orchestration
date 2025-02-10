@@ -26,7 +26,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4818443321490436054, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
       propertyPath: m_Name
-      value: Player Soldier Asult
+      value: Player Soldier Medic
       objectReference: {fileID: 0}
     - target: {fileID: 4818443321490436054, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
       propertyPath: m_Layer
@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb82c1ff32e48574fbaa4cad7241b983, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soldierData: {fileID: 11400000, guid: 6b6b8f7323687c04ea62386d4cbf411d, type: 2}
+  _soldierData: {fileID: 11400000, guid: fe453611a618d6b4a8e61232a92a51cd, type: 2}
 --- !u!120 &-5440457604786556256
 LineRenderer:
   serializedVersion: 2
