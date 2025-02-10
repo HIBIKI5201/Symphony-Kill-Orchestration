@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Orchestration
+namespace Orchestration.OutGame
 {
     public class HomeUIManager : MonoBehaviour
     {

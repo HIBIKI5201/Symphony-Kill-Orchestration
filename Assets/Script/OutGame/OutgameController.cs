@@ -1,10 +1,8 @@
 using Orchestration.System;
 using SymphonyFrameWork.CoreSystem;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-namespace Orchestration
+namespace Orchestration.OutGame
 {
     public class OutgameController : MonoBehaviour
     {
