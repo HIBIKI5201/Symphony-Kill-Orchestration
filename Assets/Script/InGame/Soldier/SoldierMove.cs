@@ -94,5 +94,16 @@ namespace Orchestration.Entity
         {
             agent.nextPosition = transform.position;
         }
+
+        private void OnDestroy()
+        {
+            var manager = ServiceLocator.GetInstance<GroundManager>();
+
+            //自分がいたグリッドの使用登録を解除
+            if (manager)
+            {
+                manager.TryUnregisterGridInfo(_currentGridInfo);
+            }
+        }
     }
 }
