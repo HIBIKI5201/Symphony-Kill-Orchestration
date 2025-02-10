@@ -58,7 +58,7 @@ namespace Orchestration.Entity
                 NavMeshAgent agent = _model.Agent;
                 if (agent.isActiveAndEnabled && !agent.pathPending)
                 {
-                    if (agent.remainingDistance > agent.stoppingDistance) //ˆÚ“®’†‚Ì‚¾‚¯
+                    if (agent.remainingDistance > 2) //—×‚ÌƒOƒŠƒbƒhˆÈã‚Ì‹——£‚ª‚ ‚éê‡‚Ì‚İ
                     {
                         GroundManager manager = ServiceLocator.GetInstance<GroundManager>();
 
