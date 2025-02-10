@@ -5,12 +5,19 @@ using UnityEngine.UIElements;
 
 namespace Orchestration.UI
 {
-    public class StageInfomation : SymphonyVisualElement
+    [UxmlElement]
+    public partial class StageInfomation : SymphonyVisualElement
     {
-        public StageInfomation() : base("") { }
+        private Label _count;
+        private Label _killCount;
+
+        public StageInfomation() : base("UXML/Ingame/HUD/StageInfomation") { }
 
         protected override Task Initialize_S(TemplateContainer container)
         {
+            _count = container.Q<Label>("count");
+            _killCount = container.Q<Label>("kill-count");
+
             return Task.CompletedTask;
         }
     }
