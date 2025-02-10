@@ -9,8 +9,10 @@ namespace Orchestration.InGame
     {
         private int _stageCounter = 0;
         public int StageCounter { get => _stageCounter; }
-
         public event Action<int> OnStageChanged;
+
+        private int _killCounter = 0;
+        public event Action<int> OnKillCounterChanged;
 
         public event Action OnResultOpen;
 
@@ -28,6 +30,12 @@ namespace Orchestration.InGame
         {
             _stageCounter++;
             OnStageChanged?.Invoke(_stageCounter);
+        }
+
+        public void KillEnemy()
+        {
+            _killCounter++;
+            OnKillCounterChanged?.Invoke(_killCounter);
         }
 
         public void ResultOpen()
