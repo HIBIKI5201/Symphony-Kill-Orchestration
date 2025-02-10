@@ -25,12 +25,6 @@ namespace Orchestration.System
         [SerializeField]
         private AudioVolumeSetting _webGLSetting;
 
-#if UNITY_EDITOR
-        [Space]
-
-        [SerializeField]
-        private AudioVolumeSetting _editorSetting;
-#endif
         [Serializable]
         private struct AudioVolumeSetting
         {
@@ -66,17 +60,28 @@ namespace Orchestration.System
 
         private void Start()
         {
-#if UNITY_EDITOR
-            _mixer.SetFloat($"{AudioType.Master}_Volume", _editorSetting.Master);
-            _mixer.SetFloat($"{AudioType.BGM}_Volume", _editorSetting.BGM);
-            _mixer.SetFloat($"{AudioType.SE}_Volume", _editorSetting.SE);
-            _mixer.SetFloat($"{AudioType.Voice}_Volume", _editorSetting.Voice);
-#else
-            _mixer.SetFloat($"{AudioType.Master}_Volume", _webGLSetting.Master);
-            _mixer.SetFloat($"{AudioType.BGM}_Volume", _webGLSetting.BGM);
-            _mixer.SetFloat($"{AudioType.SE}_Volume", _webGLSetting.SE);
-            _mixer.SetFloat($"{AudioType.Voice}_Volume", _webGLSetting.Voice);
-#endif
+            if (!Application.isEditor)
+            {
+                if (_webGLSetting.Master != 0)
+                {
+                    _mixer.SetFloat($"{AudioType.Master}_Volume", _webGLSetting.Master);
+                }
+
+                if (_webGLSetting.BGM != 0)
+                {
+                    _mixer.SetFloat($"{AudioType.BGM}_Volume", _webGLSetting.BGM);
+                }
+                
+                if (_webGLSetting.SE != 0)
+                {
+                    _mixer.SetFloat($"{AudioType.SE}_Volume", _webGLSetting.SE);
+                }
+
+                if (_webGLSetting.Voice != 0)
+                {
+                    _mixer.SetFloat($"{AudioType.Voice}_Volume", _webGLSetting.Voice);
+                }
+            }
         }
 
         private void AudioSourceInit()
@@ -135,10 +140,10 @@ namespace Orchestration.System
         /// <returns></returns>
         public AudioMixerGroup GetMixerGroup(AudioType type) => _audioDict[type].group;
 
-        public void BGMChanged(int index, float duration)
+        public async void BGMChanged(int index, float duration)
         {
             //キャンセルされていなければ止める
-            if (!_bgmChangeToken.IsCancellationRequested)
+            if (_bgmChangeToken != null && !_bgmChangeToken.IsCancellationRequested)
             {
                 _bgmChangeToken.Cancel();
             }
@@ -146,36 +151,48 @@ namespace Orchestration.System
             _bgmChangeToken = new();
             var token = _bgmChangeToken.Token;
 
+            await BGMChange(index, duration, token);
+
             //BGMをフェードする処理
-            Task task = new Task(async () =>
+            async Task BGMChange(int index, float duration, CancellationToken token)
             {
                 AudioSource source = _audioDict[AudioType.BGM].source;
                 AudioClip bgm = _bgmList[index];
 
                 //音量が少なくなるまで待つ
-                while (source.volume > 0)
+                try
                 {
-                    source.volume -= duration / 2 * Time.time;
-                    await Awaitable.NextFrameAsync();
+                    while (source.volume > 0)
+                    {
+                        source.volume -= duration / 2 * Time.time;
+                        await Awaitable.NextFrameAsync(token);
+                    }
+                }
+                finally
+                {
+                    source.volume = 0;
+
+                    //クリップを入れ替え
+                    source.Stop();
+                    source.clip = bgm;
+                    source.Play();
                 }
 
-                source.volume = 0;
-
-                //クリップを入れ替え
-                source.Stop();
-                source.clip = bgm;
-                source.Play();
 
                 //音量が大きくなるまで待つ
-                while (source.volume < 1)
+                try
                 {
-                    source.volume += duration / 2 * Time.time;
-                    await Awaitable.NextFrameAsync();
+                    while (source.volume < 1)
+                    {
+                        source.volume += duration / 2 * Time.time;
+                        await Awaitable.NextFrameAsync(token);
+                    }
                 }
-
-                source.volume = 1;
-
-            }, token);
+                finally
+                {
+                    source.volume = 1;
+                }
+            }
         }
 
         #region OnGUI
@@ -187,7 +204,7 @@ namespace Orchestration.System
                 GUIStyle style = new GUIStyle();
                 style = new GUIStyle();
                 style.fontSize = 30;
-                style.normal.textColor = Color.white;
+                style.normal.textColor = Color.gray;
                 return style;
             }
         }
