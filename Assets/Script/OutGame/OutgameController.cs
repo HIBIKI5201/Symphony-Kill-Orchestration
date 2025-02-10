@@ -7,14 +7,14 @@ namespace Orchestration
 {
     public class OutgameController : MonoBehaviour
     {
-        void Start()
+        private void Start()
         {
+            //‰½‚©‚Ì“ü—Í‚ª‚ ‚Á‚½‚ÉƒQ[ƒ€‚ğŠJn‚·‚é
             var controller = ServiceLocator.GetInstance<PlayerController>();
             if (controller)
             {
                 controller.Active.OnStarted += StartGame;
                 controller.Move.OnStarted += StartGame;
-                controller.Look.OnStarted += StartGame;
                 controller.Select.OnStarted += StartGame;
             }
         }
@@ -26,7 +26,6 @@ namespace Orchestration
             {
                 controller.Active.OnStarted -= StartGame;
                 controller.Move.OnStarted -= StartGame;
-                controller.Look.OnStarted -= StartGame;
                 controller.Select.OnStarted -= StartGame;
             }
         }
