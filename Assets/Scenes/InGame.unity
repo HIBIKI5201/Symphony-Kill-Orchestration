@@ -643,6 +643,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _miniMapCameraSpeed: 10
+  format: 0
 --- !u!1 &1198083049
 GameObject:
   m_ObjectHideFlags: 0
@@ -992,6 +993,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5ee44f16dbfa0a4b87da0c20967b87b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gridActiveLayer:
+    serializedVersion: 2
+    m_Bits: 65
 --- !u!114 &1530492467
 MonoBehaviour:
   m_ObjectHideFlags: 0

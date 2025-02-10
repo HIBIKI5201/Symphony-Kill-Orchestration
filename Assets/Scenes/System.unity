@@ -549,14 +549,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e7350b1515d0e2d418e77380a02475c8, type: 3}
   - {fileID: 8300000, guid: a49706c2809f2de47b37111b15c1a99f, type: 3}
   _webGLSetting:
-    Master: -50
+    Master: -20
     BGM: 0
-    SE: 0
-    Voice: 0
-  _editorSetting:
-    Master: 0
-    BGM: 0
-    SE: 0
+    SE: -40
     Voice: 0
 --- !u!4 &632562493
 Transform:
