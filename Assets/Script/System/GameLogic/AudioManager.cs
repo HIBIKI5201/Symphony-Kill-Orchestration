@@ -2,7 +2,8 @@ using SymphonyFrameWork.CoreSystem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml.Serialization;
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -14,6 +15,12 @@ namespace Orchestration.System
         private AudioMixer _mixer;
 
         private Dictionary<AudioType, (AudioMixerGroup group, AudioSource source, float originalVolume)> _audioDict = new();
+
+        [SerializeField]
+        private List<AudioClip> _bgmList = new();
+        private CancellationTokenSource _bgmChangeToken;
+
+        [Space]
 
         [SerializeField]
         private AudioVolumeSetting _webGLSetting;
@@ -127,6 +134,88 @@ namespace Orchestration.System
         /// <param name="type"></param>
         /// <returns></returns>
         public AudioMixerGroup GetMixerGroup(AudioType type) => _audioDict[type].group;
+
+        public void BGMChanged(int index, float duration)
+        {
+            //キャンセルされていなければ止める
+            if (!_bgmChangeToken.IsCancellationRequested)
+            {
+                _bgmChangeToken.Cancel();
+            }
+
+            _bgmChangeToken = new();
+            var token = _bgmChangeToken.Token;
+
+            //BGMをフェードする処理
+            Task task = new Task(async () =>
+            {
+                AudioSource source = _audioDict[AudioType.BGM].source;
+                AudioClip bgm = _bgmList[index];
+
+                //音量が少なくなるまで待つ
+                while (source.volume > 0)
+                {
+                    source.volume -= duration / 2 * Time.time;
+                    await Awaitable.NextFrameAsync();
+                }
+
+                source.volume = 0;
+
+                //クリップを入れ替え
+                source.Stop();
+                source.clip = bgm;
+                source.Play();
+
+                //音量が大きくなるまで待つ
+                while (source.volume < 1)
+                {
+                    source.volume += duration / 2 * Time.time;
+                    await Awaitable.NextFrameAsync();
+                }
+
+                source.volume = 1;
+
+            }, token);
+        }
+
+        #region OnGUI
+
+        private GUIStyle Style
+        {
+            get
+            {
+                GUIStyle style = new GUIStyle();
+                style = new GUIStyle();
+                style.fontSize = 30;
+                style.normal.textColor = Color.white;
+                return style;
+            }
+        }
+
+        /// <summary>
+        /// 試しにOnGUIを使用してみた
+        /// </summary>
+        private void OnGUI()
+        {
+            List<string> logs = new();
+
+            foreach (string name in Enum.GetNames(typeof(AudioType)))
+            {
+                if (_mixer.GetFloat($"{name}_Volume", out float value))
+                {
+                    logs.Add($"{name} volume : {value}");
+                }
+            }
+
+            float y = 10;
+            foreach (string log in logs)
+            {
+                GUI.Label(new Rect(0, y, 350, 40), log, Style);
+                y += 40;
+            }
+        }
+
+        #endregion
     }
 
     public enum AudioType

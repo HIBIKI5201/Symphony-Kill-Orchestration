@@ -545,13 +545,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mixer: {fileID: 24100000, guid: 4bfcf7f3d138e24489063acfde621917, type: 2}
+  _bgmList:
+  - {fileID: 8300000, guid: e7350b1515d0e2d418e77380a02475c8, type: 3}
+  - {fileID: 8300000, guid: a49706c2809f2de47b37111b15c1a99f, type: 3}
   _webGLSetting:
     Master: -50
     BGM: 0
     SE: 0
     Voice: 0
   _editorSetting:
-    Master: 0
+    Master: -20.6
     BGM: 0
     SE: 0
     Voice: 0
