@@ -9,6 +9,8 @@ namespace Orchestration.OutGame
         private void Start()
         {
             var audio = ServiceLocator.GetInstance<AudioManager>();
+
+            audio.BGMChanged(0, 2);
         }
     }
 }
