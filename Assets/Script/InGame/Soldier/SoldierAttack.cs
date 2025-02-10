@@ -1,10 +1,6 @@
-using Mono.Cecil.Cil;
-using Orchestration.Entity;
 using SymphonyFrameWork.CoreSystem;
 using System.Linq;
-using UnityEditor.Rendering;
 using UnityEngine;
-using UnityEngine.VFX;
 
 namespace Orchestration.Entity
 {
@@ -55,7 +51,7 @@ namespace Orchestration.Entity
                     //‹ß‚¢‡”Ô‚Éƒ\[ƒg
                     .OrderBy(s => Vector3.Distance(transform.position, s.transform.position))
                     //Ëü‚ª’Ê‚Á‚Ä‚¢‚é‚©‚ğ”»’è
-                    .Where(s => 
+                    .Where(s =>
                     {
                         //•ºm‚ÉŒü‚¯‚ÄRay‚ğì¬
                         Ray ray = new Ray(
