@@ -21,7 +21,7 @@ namespace Orchestration.UI
             return Task.CompletedTask;
         }
 
-        public void CountUpdate(int count) => _count.text = count.ToString();
+        public void CountUpdate(int count) => _count.text = $"{count * 10}m";
         public void KillCountUpdate(int count) => _killCount.text = count.ToString("000");
     }
 }
