@@ -41,6 +41,18 @@ namespace Orchestration.Entity
             }
         }
 
+        protected override void OnDeath()
+        {
+            var system = ServiceLocator.GetInstance<IngameSystemManager>();
+            //€–S‚ÉƒVƒXƒeƒ€‚É’Ê
+            if (system)
+            {
+                system.KillEnemy();
+            }
+
+            base.OnDeath();
+        }
+
         public override void AddDamage(float damage, SoldierManager target)
         {
             base.AddDamage(damage, target);
