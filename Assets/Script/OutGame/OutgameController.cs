@@ -2,31 +2,33 @@ using Orchestration.System;
 using SymphonyFrameWork.CoreSystem;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Orchestration
 {
     public class OutgameController : MonoBehaviour
     {
+        PlayerController _playerController;
+
         private void Start()
         {
             //何かの入力があった時にゲームを開始する
-            var controller = ServiceLocator.GetInstance<PlayerController>();
-            if (controller)
+            _playerController = ServiceLocator.GetInstance<PlayerController>();
+            if (_playerController)
             {
-                controller.Active.OnStarted += StartGame;
-                controller.Move.OnStarted += StartGame;
-                controller.Select.OnStarted += StartGame;
+                _playerController.Active.OnStarted += StartGame;
+                _playerController.Move.OnStarted += StartGame;
+                _playerController.Select.OnStarted += StartGame;
             }
         }
 
         private void OnDestroy()
         {
-            var controller = ServiceLocator.GetInstance<PlayerController>();
-            if (controller)
+            if (_playerController)
             {
-                controller.Active.OnStarted -= StartGame;
-                controller.Move.OnStarted -= StartGame;
-                controller.Select.OnStarted -= StartGame;
+                _playerController.Active.OnStarted -= StartGame;
+                _playerController.Move.OnStarted -= StartGame;
+                _playerController.Select.OnStarted -= StartGame;
             }
         }
 
@@ -36,6 +38,11 @@ namespace Orchestration
         {
             GameLogic logic = ServiceLocator.GetInstance<GameLogic>();
             logic.SceneChange(SceneEnum.InGame);
+
+            //入力をリセットする
+            _playerController.Active.Reset();
+            _playerController.Move.Reset();
+            _playerController.Select.Reset();
         }
     }
 }
