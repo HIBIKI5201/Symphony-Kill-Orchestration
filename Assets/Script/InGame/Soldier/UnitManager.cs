@@ -110,17 +110,16 @@ namespace Orchestration.InGame
 
         }
 
-        public void SoldierMove()
+        /// <summary>
+        /// •ºm‚ğƒJƒƒ‰‚Ì³–Ê•ûŒü‚ÉˆÚ“®‚³‚¹‚é
+        /// </summary>
+        public void SoldierMove(Vector3 point)
         {
 
             if (_selectSolider)
             {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                _selectSolider.SetDirection(point);
 
-                if (Physics.Raycast(ray, out RaycastHit hit))
-                {
-                    _selectSolider.SetDirection(hit.point);
-                }
             }
         }
 
