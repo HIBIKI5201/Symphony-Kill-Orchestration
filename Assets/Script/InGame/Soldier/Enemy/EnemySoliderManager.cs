@@ -2,7 +2,6 @@ using Orchestration.InGame;
 using SymphonyFrameWork.CoreSystem;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.Services.Analytics;
 using UnityEngine;
 using UnityEngine.AI;
 

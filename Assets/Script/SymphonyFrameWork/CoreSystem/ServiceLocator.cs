@@ -57,7 +57,7 @@ namespace SymphonyFrameWork.CoreSystem
             }
 
             Debug.Log($"{typeof(T).Name}クラスの{instance.name}が" +
-                $"{type switch { LocateType.Locator => "ロケート", LocateType.Singleton => "シングルトン", _ => string.Empty}}登録されました");
+                $"{type switch { LocateType.Locator => "ロケート", LocateType.Singleton => "シングルトン", _ => string.Empty }}登録されました");
 
             if (type == LocateType.Singleton)
             {
@@ -156,6 +156,6 @@ namespace SymphonyFrameWork.CoreSystem
             DestroyInstance<T>();
         }
 
-#endregion
+        #endregion
     }
 }

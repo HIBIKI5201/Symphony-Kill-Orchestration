@@ -307,7 +307,7 @@ namespace Orchestration.InGame
 
             //グリッド座標系のポジションを出す
             vector = new Vector3((int)(vector.x / _gridSize), (int)(vector.y / _gridSize), (int)(vector.z / _gridSize));
-            
+
             //一番近いグリッドの座標を出す
             Vector3 pos = vector * _gridSize + _originPosition;
 
