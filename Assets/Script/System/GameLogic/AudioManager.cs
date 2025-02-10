@@ -2,6 +2,7 @@ using SymphonyFrameWork.CoreSystem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -13,6 +14,31 @@ namespace Orchestration.System
         private AudioMixer _mixer;
 
         private Dictionary<AudioType, (AudioMixerGroup group, AudioSource source, float originalVolume)> _audioDict = new();
+
+        [SerializeField]
+        private AudioVolumeSetting _webGLSetting;
+
+#if UNITY_EDITOR
+        [Space]
+
+        [SerializeField]
+        private AudioVolumeSetting _editorSetting;
+#endif
+        [Serializable]
+        private struct AudioVolumeSetting
+        {
+            [Range(-80f, 20)]
+            public float Master;
+
+            [Range(-80f, 20)]
+            public float BGM;
+
+            [Range(-80f, 20)]
+            public float SE;
+
+            [Range(-80f, 20)]
+            public float Voice;
+        }
 
         private void OnEnable()
         {
@@ -29,6 +55,21 @@ namespace Orchestration.System
             AudioSourceInit();
 
             _audioDict[AudioType.BGM].source.loop = true;
+        }
+
+        private void Start()
+        {
+#if UNITY_EDITOR
+            _mixer.SetFloat($"{AudioType.Master}_Volume", _editorSetting.Master);
+            _mixer.SetFloat($"{AudioType.BGM}_Volume", _editorSetting.BGM);
+            _mixer.SetFloat($"{AudioType.SE}_Volume", _editorSetting.SE);
+            _mixer.SetFloat($"{AudioType.Voice}_Volume", _editorSetting.Voice);
+#else
+            _mixer.SetFloat($"{AudioType.Master}_Volume", _webGLSetting.Master);
+            _mixer.SetFloat($"{AudioType.BGM}_Volume", _webGLSetting.BGM);
+            _mixer.SetFloat($"{AudioType.SE}_Volume", _webGLSetting.SE);
+            _mixer.SetFloat($"{AudioType.Voice}_Volume", _webGLSetting.Voice);
+#endif
         }
 
         private void AudioSourceInit()
