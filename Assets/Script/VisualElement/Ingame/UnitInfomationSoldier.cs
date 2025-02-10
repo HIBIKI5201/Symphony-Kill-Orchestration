@@ -7,6 +7,7 @@ namespace Orchestration.UI
     [UxmlElement]
     public partial class UnitInfomationSoldier : SymphonyVisualElement
     {
+        private VisualElement _info;
         private Label _name;
         private VisualElement _healthBar;
 
@@ -16,6 +17,7 @@ namespace Orchestration.UI
             this.style.maxHeight = Length.Percent(30);
             this.style.minHeight = Length.Percent(15);
 
+            _info = container.Q<VisualElement>("info");
             _name = container.Q<Label>("name");
             _healthBar = container.Q<VisualElement>("health-bar");
 
@@ -30,6 +32,21 @@ namespace Orchestration.UI
         public void HealthBarUpdate(float proportion)
         {
             _healthBar.style.width = Length.Percent(proportion * 100);
+        }
+
+        public void Selected(bool active)
+        {
+            const string selectClass = "select";
+
+            if (active)
+            {
+                _info.AddToClassList(selectClass);
+            }
+            else
+            {
+                _info.RemoveFromClassList(selectClass);
+            }
+
         }
 
         public void Destroy()
