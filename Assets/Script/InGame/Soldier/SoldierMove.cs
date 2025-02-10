@@ -79,7 +79,7 @@ namespace Orchestration.Entity
             //ヒットした場所のグリッド位置が未使用なら目的地にセット
             if (manager.GetGridByPosition(point, out GridInfo info) && manager.TryRegisterGridInfo(info))
             {
-                if (info.IsActive)
+                if (agent.isActiveAndEnabled)
                 {
                     agent.SetDestination(info.transform.position);
 

@@ -103,7 +103,7 @@ namespace Orchestration.Entity
             {
                 if (_attack.CanAttack(_soldierData.AttackRatePerMinute))
                 {
-                    _attack.AttackEnemy(enemy, _soldierData.Attack);
+                    _attack.AttackEnemy(enemy, _soldierData.Attack, this);
                     _model.Shoot();
                 }
 
@@ -129,13 +129,14 @@ namespace Orchestration.Entity
         /// •ºm‚Éƒ_ƒ[ƒW‚ğ—^‚¦‚é
         /// </summary>
         /// <param name="damage"></param>
-        public void AddDamage(float damage) => _soldierData.HealthPoint -= damage;
+        /// <param name="target">UŒ‚‚µ‚½‘ÎÛ</param>
+        public virtual void AddDamage(float damage, SoldierManager target) => _soldierData.HealthPoint -= damage;
 
         /// <summary>
         /// •ºm‚É‰ñ•œ‚ğ—^‚¦‚é
         /// </summary>
         /// <param name="heal"></param>
-        public void AddHeal(float heal) => _soldierData.HealthPoint += heal;
+        public virtual void AddHeal(float heal) => _soldierData.HealthPoint += heal;
 
         /// <summary>
         /// ƒwƒ‹ƒX‚ª0ˆÈ‰º‚É‚È‚Á‚½‚ç©ŒÈ”j‰óˆ—‚·‚é

@@ -1,3 +1,4 @@
+using Mono.Cecil.Cil;
 using Orchestration.Entity;
 using SymphonyFrameWork.CoreSystem;
 using System.Linq;
@@ -82,13 +83,13 @@ namespace Orchestration.Entity
         /// <summary>
         /// 対象を攻撃する
         /// </summary>
-        /// <param name="soldier"></param>
+        /// <param name="target"></param>
         /// <param name="damage"></param>
-        public void AttackEnemy(SoldierManager soldier, float damage)
+        public void AttackEnemy(SoldierManager target, float damage, SoldierManager me)
         {
-            if (soldier)
+            if (target)
             {
-                soldier.AddDamage(damage);
+                target.AddDamage(damage, me);
 
                 _attackTimer = Time.time; //インターバルをリセット
             }
