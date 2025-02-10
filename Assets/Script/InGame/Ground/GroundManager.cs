@@ -10,6 +10,8 @@ namespace Orchestration.InGame
 
         public bool GridInitializeDone { get => _gridManager.IsInitializeDone; }
 
+        public float GridSize { get => _gridManager.GridSize; }
+
         [SerializeField]
         private Transform _overBoundaryLine;
         [SerializeField]

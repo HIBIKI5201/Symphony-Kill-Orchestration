@@ -20,6 +20,7 @@ namespace Orchestration.InGame
 
         [SerializeField, Tooltip("ƒOƒŠƒbƒh‚Ì‘å‚«‚³")]
         private float _gridSize = 1f;
+        public float GridSize { get => _gridSize; }
 
         [Space]
 
