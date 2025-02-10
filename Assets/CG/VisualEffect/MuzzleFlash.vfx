@@ -134,8 +134,8 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 2.5
-    min: 1
+      m_SerializableObject: 1
+    min: 0.1
     max: 10
     enumValues: []
     descendantCount: 0
@@ -202,15 +202,6 @@ MonoBehaviour:
     - model: {fileID: 8926484042661614882}
       id: 0
       isStickyNote: 0
-    - model: {fileID: 8926484042661614897}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661614909}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 0}
-      id: 0
-      isStickyNote: 0
     - model: {fileID: 8926484042661614994}
       id: 0
       isStickyNote: 0
@@ -229,15 +220,6 @@ MonoBehaviour:
       id: 0
       isStickyNote: 0
     - model: {fileID: 8926484042661614915}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661614921}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661614923}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661614926}
       id: 0
       isStickyNote: 0
     - model: {fileID: 8926484042661614975}
@@ -3219,7 +3201,7 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
   m_UIPosition: {x: 0, y: 0}
-  m_UICollapsed: 1
+  m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
   m_OutputSlots:
@@ -3410,7 +3392,7 @@ MonoBehaviour:
     m_Type:
       m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
-    m_SerializableObject: 1
+    m_SerializableObject: 0.1
   m_Max:
     m_Type:
       m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
@@ -3454,7 +3436,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 2.5
+      m_SerializableObject: 1
     m_Space: -1
   m_Property:
     name: o
