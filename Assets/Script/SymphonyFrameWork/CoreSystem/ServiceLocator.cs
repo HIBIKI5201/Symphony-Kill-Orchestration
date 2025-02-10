@@ -21,7 +21,7 @@ namespace SymphonyFrameWork.CoreSystem
         [Tooltip("シングルトン化するインスタンスのコンテナ")]
         private static GameObject _instance;
         [Tooltip("シングルトン登録されている型のインスタンス辞書")]
-        private static Dictionary<Type, MonoBehaviour> _singletonObjects = new();
+        private static Dictionary<Type, Component> _singletonObjects = new();
 
         /// <summary>
         /// インスタンスコンテナが無い場合に生成する
@@ -45,7 +45,7 @@ namespace SymphonyFrameWork.CoreSystem
         /// <typeparam name="T">登録する型</typeparam>
         /// <param name="instance">インスタンス</param>
         /// <returns>登録が成功したらtrue、失敗したらfalse</returns>
-        public static void SetInstance<T>(T instance, LocateType type = LocateType.Locator) where T : MonoBehaviour
+        public static void SetInstance<T>(T instance, LocateType type = LocateType.Locator) where T : Component
         {
             CreateInstance();
 
@@ -66,21 +66,25 @@ namespace SymphonyFrameWork.CoreSystem
         }
 
         /// <summary>
-        /// 指定した型のインスタンスを破棄する
+        /// 指定したインスタンスを破棄する
         /// </summary>
         /// <typeparam name="T">破棄したいインスタンスの型</typeparam>
-        public static void DestroyInstance<T>(T instance) where T : MonoBehaviour
+        public static void DestroyInstance<T>(T instance) where T : Component
         {
-            DestroyInstance<T>();
+            //インスタンスが登録されたコンポーネントか
+            if (_singletonObjects.TryGetValue(typeof(T), out Component md) && md == instance)
+            {
+                DestroyInstance<T>();
+            }
         }
 
         /// <summary>
         /// 指定した型のインスタンスを破棄する
         /// </summary>
         /// <typeparam name="T">破棄したいインスタンスの型</typeparam>
-        public static void DestroyInstance<T>() where T : MonoBehaviour
+        public static void DestroyInstance<T>() where T : Component
         {
-            if (_singletonObjects.TryGetValue(typeof(T), out MonoBehaviour md))
+            if (_singletonObjects.TryGetValue(typeof(T), out Component md))
             {
                 Object.Destroy(md.gameObject);
                 _singletonObjects.Remove(typeof(T));
@@ -97,9 +101,9 @@ namespace SymphonyFrameWork.CoreSystem
         /// </summary>
         /// <typeparam name="T">取得したいインスタンスの型</typeparam>
         /// <returns>指定した型のインスタンス</returns>
-        public static T GetInstance<T>() where T : MonoBehaviour
+        public static T GetInstance<T>() where T : Component
         {
-            if (_singletonObjects.TryGetValue(typeof(T), out MonoBehaviour md))
+            if (_singletonObjects.TryGetValue(typeof(T), out Component md))
             {
                 if (md != null)
                 {
@@ -130,7 +134,7 @@ namespace SymphonyFrameWork.CoreSystem
         /// <param name="instance">シングルトンインスタンス</param>
         /// <returns>辞書に追加が成功したらtrue、失敗したらfalse</returns>
         [Obsolete("このメソッドは旧型式です。" + nameof(SetInstance) + "を使ってください")]
-        public static void SetSinglton<T>(T instance) where T : MonoBehaviour
+        public static void SetSinglton<T>(T instance) where T : Component
         {
             SetInstance(instance, LocateType.Singleton);
         }
@@ -141,7 +145,7 @@ namespace SymphonyFrameWork.CoreSystem
         /// <typeparam name="T">取得したいシングルトンインスタンスの型</typeparam>
         /// <returns>指定した型のインスタンス</returns>
         [Obsolete("このメソッドは旧型式です。" + nameof(GetInstance) + "を使ってください")]
-        public static T GetSingleton<T>() where T : MonoBehaviour
+        public static T GetSingleton<T>() where T : Component
         {
             return GetInstance<T>();
         }
@@ -151,7 +155,7 @@ namespace SymphonyFrameWork.CoreSystem
         /// </summary>
         /// <typeparam name="T"></typeparam>
         [Obsolete("このメソッドは旧型式です。" + nameof(DestroyInstance) + "を使ってください")]
-        public static void DestroySingleton<T>() where T : MonoBehaviour
+        public static void DestroySingleton<T>() where T : Component
         {
             DestroyInstance<T>();
         }
