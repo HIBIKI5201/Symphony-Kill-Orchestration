@@ -1,3 +1,7 @@
+using Orchestration.InGame;
+using SymphonyFrameWork.CoreSystem;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Orchestration.Entity
@@ -20,7 +24,7 @@ namespace Orchestration.Entity
             {
                 if (_attack.CanAttack(_soldierData.AttackRatePerMinute))
                 {
-                    _attack.AttackEnemy(enemy, _soldierData.Attack);
+                    _attack.AttackEnemy(enemy, _soldierData.Attack, this);
                     _model.Shoot();
 
                     _lastTarget = enemy;
@@ -36,5 +40,65 @@ namespace Orchestration.Entity
             }
         }
 
+        public override void AddDamage(float damage, SoldierManager target)
+        {
+            base.AddDamage(damage, target);
+            GoToTarget(target);
+        }
+
+        /// <summary>
+        /// 対象の場所の近くに行く（幅優先探索）
+        /// </summary>
+        /// <param name="target"></param>
+        public void GoToTarget(SoldierManager target)
+        {
+            var manager = ServiceLocator.GetInstance<GroundManager>();
+
+            Vector3 start = target.transform.position;
+
+            // 各方位を持つ配列（4方向）
+            Vector3[] directions = new Vector3[]
+            {
+                Vector3.right, Vector3.left, Vector3.forward, Vector3.back
+            }.Select(v => v * manager.GridSize).ToArray();
+
+            GridInfo info = null;
+            var queue = new Queue<Vector3>(); // BFSの探索用キュー
+            var visited = new HashSet<Vector3>(); // 探索済みリスト（重複防止）
+
+            queue.Enqueue(start);
+            visited.Add(start);
+
+            while (queue.Count > 0)
+            {
+                Vector3 current = queue.Dequeue(); // キューの先頭を取得
+
+                foreach (var dir in directions)
+                {
+                    Vector3 nextPos = current + dir;
+
+                    // すでに訪れた場所はスキップ
+                    if (visited.Contains(nextPos))
+                    {
+                        continue;
+                    }
+
+                    visited.Add(nextPos); // 訪問済みとしてマーク
+
+                    // グリッドがあるか確認
+                    if (manager.GetGridByPosition(nextPos, out info) && !manager.IsRegisterGridInfo(info))
+                    {
+                        goto End;
+                    }
+
+                    // 次の探索候補として追加
+                    queue.Enqueue(nextPos);
+                }
+            }
+
+            End:
+            SetDirection(info.transform.position);
+            return; // 最も近いグリッドが見つかったら終了
+        }
     }
 }
