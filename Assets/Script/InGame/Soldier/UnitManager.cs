@@ -12,7 +12,7 @@ namespace Orchestration.InGame
     public class UnitManager : MonoBehaviour
     {
         [SerializeField]
-        private GameObject _asult;
+        private GameObject _assault;
         [SerializeField]
         private GameObject _medic;
         [SerializeField]
@@ -22,7 +22,6 @@ namespace Orchestration.InGame
 
         private Dictionary<SoldierType, PlayerSoldierManager> _soldiers = new();
 
-        [SerializeField]
         private PlayerSoldierManager _selectSolider;
 
         private void OnEnable()
@@ -38,7 +37,7 @@ namespace Orchestration.InGame
         private void Start()
         {
             //Še•ºŽm‚ð¶¬
-            AddSoldier(SoldierType.Asult, new Vector3(0.5f, 0, -3.5f));
+            AddSoldier(SoldierType.Assault, new Vector3(0.5f, 0, -3.5f));
             AddSoldier(SoldierType.Support, new Vector3(0.5f, 0, -1.5f));
             AddSoldier(SoldierType.Medic, new Vector3(0.5f, 0, 1.5f));
             AddSoldier(SoldierType.Recon, new Vector3(0.5f, 0, 3.5f));
@@ -49,7 +48,7 @@ namespace Orchestration.InGame
                 system.OnStageChanged += BorderOutSoldierMove;
             }
 
-            SelectorSoldier(_soldiers[SoldierType.Asult]);
+            SelectorSoldier(_soldiers[SoldierType.Assault]);
         }
 
         private void Update()
@@ -171,7 +170,7 @@ namespace Orchestration.InGame
         {
             return type switch
             {
-                SoldierType.Asult => _asult,
+                SoldierType.Assault => _assault,
                 SoldierType.Medic => _medic,
                 SoldierType.Support => _support,
                 SoldierType.Recon => _recon,
@@ -224,7 +223,7 @@ namespace Orchestration.InGame
 
         public enum SoldierType
         {
-            Asult,
+            Assault,
             Medic,
             Support,
             Recon,
