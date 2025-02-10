@@ -40,7 +40,7 @@ namespace Orchestration.Entity
             }
         }
 
-        public void Select(bool active)
+        public async void Select(bool active)
         {
             if (active)
             {
@@ -50,6 +50,10 @@ namespace Orchestration.Entity
             {
                 _soldierMark.style.unityBackgroundImageTintColor = Color.blue;
             }
+
+            await SymphonyTask.WaitUntil(() => _info != null && _selector != null, destroyCancellationToken);
+            _info.Selected(active);
+            _selector.Selected(active);
         }
 
         /// <summary>
