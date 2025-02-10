@@ -1,8 +1,5 @@
-using Orchestration.Entity;
-using Orchestration.InGame;
 using Orchestration.System;
 using SymphonyFrameWork.CoreSystem;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Orchestration.InGame
@@ -10,6 +7,9 @@ namespace Orchestration.InGame
     public class IngameController : MonoBehaviour
     {
         UnitManager _unitManager;
+
+        [SerializeField]
+        private LayerMask _gridActiveLayer;
 
         private void Start()
         {
@@ -26,9 +26,8 @@ namespace Orchestration.InGame
 
         private void Update()
         {
-            //ƒŒƒC‚ª
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit))
+            if (Physics.Raycast(ray, out RaycastHit hit, float.PositiveInfinity, _gridActiveLayer))
             {
                 GridHighLight(hit.point);
             }
@@ -59,7 +58,7 @@ namespace Orchestration.InGame
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out RaycastHit hit))
+            if (Physics.Raycast(ray, out RaycastHit hit, float.PositiveInfinity, _gridActiveLayer))
             {
                 _unitManager.SoldierMove(hit.point);
             }
