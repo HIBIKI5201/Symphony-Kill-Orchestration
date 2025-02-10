@@ -68,7 +68,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: M590
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2226155110419817650, guid: d23a8096a28feda43abefd7286bc584b, type: 3}
     m_RemovedGameObjects:
     - {fileID: 4226233824151964933, guid: d23a8096a28feda43abefd7286bc584b, type: 3}
     - {fileID: 1212658060755732419, guid: d23a8096a28feda43abefd7286bc584b, type: 3}
@@ -103,12 +104,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4372350224500275771, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'mixamorig:RightArm'\n\tTransform 'mixamorig:LeftArm'\n\tTransform
-        'mixamorig:RightHand'\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:LeftForeArm'\n\tTransform
-        'mixamorig:RightForeArm'\n\tTransform 'mixamorig:Spine'\n\tTransform 'mixamorig:LeftHand'\n\tTransform
-        'mixamorig:RightArm'\n\tTransform 'mixamorig:LeftArm'\n\tand more ..."
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4818443321490436054, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
       propertyPath: m_Name
@@ -129,6 +125,18 @@ PrefabInstance:
     - target: {fileID: 5863673829139978737, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.0459
+      objectReference: {fileID: 0}
+    - target: {fileID: 6638625027038390506, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.53
+      objectReference: {fileID: 0}
+    - target: {fileID: 6638625027038390506, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 6638625027038390506, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.022
       objectReference: {fileID: 0}
     - target: {fileID: 6877460112978904899, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'

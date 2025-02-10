@@ -573,11 +573,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e146ec9462f42b46bc9b384a10fc74d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _asult: {fileID: 6266570956525183635, guid: ee9b80322f4321947b46294c03e81c52, type: 3}
-  _medic: {fileID: 6266570956525183635, guid: 12f896a871666aa4caa60e3390b20189, type: 3}
-  _support: {fileID: 6266570956525183635, guid: d7249351744f50b4ebf6038f70669733, type: 3}
-  _recon: {fileID: 6266570956525183635, guid: 12f896a871666aa4caa60e3390b20189, type: 3}
-  _selectSolider: {fileID: 0}
+  _assault: {fileID: 6266570956525183635, guid: d7249351744f50b4ebf6038f70669733, type: 3}
+  _medic: {fileID: 6266570956525183635, guid: ee9b80322f4321947b46294c03e81c52, type: 3}
+  _support: {fileID: 6266570956525183635, guid: 9e17871b7bec22d49802cc4c78aeee19, type: 3}
+  _recon: {fileID: 6266570956525183635, guid: 54532a8e677f84d43b847d7322af1d99, type: 3}
 --- !u!1 &972983721
 GameObject:
   m_ObjectHideFlags: 0
