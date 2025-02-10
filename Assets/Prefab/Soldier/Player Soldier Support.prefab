@@ -171,9 +171,17 @@ PrefabInstance:
       value: -0.043306705
       objectReference: {fileID: 0}
     - target: {fileID: 7466211388178101979, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
+      propertyPath: _iconMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 25549ad1664003542931b565c8134317, type: 2}
+    - target: {fileID: 7466211388178101979, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
       propertyPath: _targetLayer.m_Bits
       value: 512
       objectReference: {fileID: 0}
+    - target: {fileID: 7466211388178101979, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
+      propertyPath: _selectedIconMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 6c1f2954b60d9594c90eb7f55081253d, type: 2}
     m_RemovedComponents:
     - {fileID: 8582153300400858969, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
     m_RemovedGameObjects:

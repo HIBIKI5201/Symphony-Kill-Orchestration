@@ -8,11 +8,6 @@ namespace Orchestration.Entity
 {
     public class PlayerSoldierManager : SoldierManager
     {
-        public void Select(bool active)
-        {
-            _ui.Select(active);
-        }
-
         public override void Awake_S()
         {
             base.Awake_S();
@@ -36,6 +31,30 @@ namespace Orchestration.Entity
             if (_model.Agent.path.corners.Length > 0)
             {
                 _ui.MoveLineRender(_model.Agent, _model.MoveLineRenderer);
+            }
+        }
+
+        public void Select(bool active)
+        {
+            _ui.Select(active);
+
+            IconSelect(_model.MiniMapIcon, active);
+        }
+
+        private async void IconSelect(MeshRenderer renderer, bool active)
+        {
+            await Awaitable.NextFrameAsync();
+
+            if (renderer)
+            {
+                if (active)
+                {
+                    renderer.material = _model.SelectedIconMaterial;
+                }
+                else
+                {
+                    renderer.material = _model.IconMaterial;
+                }
             }
         }
 

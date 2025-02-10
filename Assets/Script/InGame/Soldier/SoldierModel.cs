@@ -54,6 +54,18 @@ namespace Orchestration.Entity
         public Vector3 HealthBarOffset { get => _healthBarOffset; }
 
         [SerializeField]
+        private MeshRenderer _miniMapIcon;
+        public MeshRenderer MiniMapIcon { get => _miniMapIcon; }
+
+        [SerializeField]
+        private Material _iconMaterial;
+        public Material IconMaterial { get => _iconMaterial; }
+
+        [SerializeField]
+        private Material _selectedIconMaterial;
+        public Material SelectedIconMaterial { get => _selectedIconMaterial; }
+
+        [SerializeField]
         private LineRenderer _moveLineRenderer;
         public LineRenderer MoveLineRenderer { get => _moveLineRenderer; }
         public void Init()
@@ -65,6 +77,11 @@ namespace Orchestration.Entity
             _animator = GetComponentInChildren<Animator>();
 
             _moveLineRenderer = GetComponent<LineRenderer>();
+
+            if (_miniMapIcon && _iconMaterial)
+            {
+                _miniMapIcon.material = _iconMaterial;
+            }
 
             if (_muzzleAudio)
             {
