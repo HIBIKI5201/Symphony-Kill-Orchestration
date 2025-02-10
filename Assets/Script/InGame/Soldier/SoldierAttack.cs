@@ -23,9 +23,13 @@ namespace Orchestration.Entity
         /// <summary>
         /// UŒ‚‚Å‚«‚éó‘Ô‚©‚Ç‚¤‚©
         /// </summary>
-        /// <param name="interval"></param>
+        /// <param name="rpm"></param>
         /// <returns></returns>
-        public bool CanAttack(float interval) => interval + _attackTimer < Time.time;
+        public bool CanAttack(float rpm)
+        {
+            float interval = 60 / rpm;
+            return interval + _attackTimer < Time.time;
+        }
 
         /// <summary>
         /// ”ÍˆÍ“à‚Ì•ºm‚Ì’†‚ÅÅ‚à‹ß‚¢Ò‚ğæ“¾‚·‚é

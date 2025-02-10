@@ -101,7 +101,7 @@ namespace Orchestration.Entity
             //üˆÍ‚É“G‚ª‚¢‚éê‡‚ÍUŒ‚A‚¢‚È‚¢ê‡‚ÍˆÚ“®•ûŒü‚ğŒü‚­
             if (_attack.SearchTarget(_soldierData.AttackRange, _model.TargetLayer, out var enemy))
             {
-                if (_attack.CanAttack(_soldierData.AttackInterval))
+                if (_attack.CanAttack(_soldierData.AttackRatePerMinute))
                 {
                     _attack.AttackEnemy(enemy, _soldierData.Attack);
                     _model.Shoot();

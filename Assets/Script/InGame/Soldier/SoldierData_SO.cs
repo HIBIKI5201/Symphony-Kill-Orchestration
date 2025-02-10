@@ -81,8 +81,8 @@ namespace Orchestration.Entity
         public float Attack { get => _attack; }
 
         [SerializeField]
-        private float _attackIntarval = 1;
-        public float AttackInterval { get => _attackIntarval; }
+        private float _attackRatePerMinute = 600;
+        public float AttackRatePerMinute { get => _attackRatePerMinute; }
 
         [SerializeField]
         private float _attackRange = 1;
