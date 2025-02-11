@@ -48,29 +48,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4093876058632838393, guid: 62fb34c49b244e647b1f674963319942, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 4094129943706882985, guid: 62fb34c49b244e647b1f674963319942, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 4094858708961731505, guid: 62fb34c49b244e647b1f674963319942, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 4094891995618283689, guid: 62fb34c49b244e647b1f674963319942, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
     - target: {fileID: 4999898249564858003, guid: 62fb34c49b244e647b1f674963319942, type: 3}
       propertyPath: m_Name
       value: Tree_01
-      objectReference: {fileID: 0}
-    - target: {fileID: 4999898249564858003, guid: 62fb34c49b244e647b1f674963319942, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -466,6 +446,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6084537114193571709}
     m_Modifications:
+    - target: {fileID: -1834802138870590203, guid: 45e93d828e8d09a41839166046e28903, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5437460021492972423, guid: 45e93d828e8d09a41839166046e28903, type: 3}
       propertyPath: m_Name
       value: Block (1)
