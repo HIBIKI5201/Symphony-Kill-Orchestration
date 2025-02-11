@@ -15,7 +15,7 @@ namespace Orchestration.Entity
 
         private UIDocument _document;
         private VisualElement _soldierMark;
-        
+
         private void Awake()
         {
             _document = GetComponentInChildren<UIDocument>();
@@ -93,9 +93,12 @@ namespace Orchestration.Entity
         /// <param name="damage"></param>
         public void DamageTextInstantiate(float damage)
         {
-            DamageText text = new DamageText();
-            _document.rootVisualElement.Add(text);
-            text.Init(damage, transform.position);
+            if (_document && _document.rootVisualElement != null)
+            {
+                DamageText text = new DamageText();
+                _document.rootVisualElement.Add(text);
+                text.Init(damage, transform.position);
+            }
         }
 
         /// <summary>
