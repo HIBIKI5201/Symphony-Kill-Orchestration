@@ -10,7 +10,6 @@ namespace Orchestration.System
         private PlayerInput _input;
 
         public InputContext<Vector2> Move;
-        public InputContext<Vector2> Look;
         public InputContext<float> Active;
         public InputContext<float> Select;
 
@@ -33,7 +32,6 @@ namespace Orchestration.System
                 _input.notificationBehavior = PlayerNotifications.InvokeCSharpEvents;
 
                 Move = new InputContext<Vector2>(_input.actions["Move"]);
-                Look = new InputContext<Vector2>(_input.actions["Look"]);
                 Active = new InputContext<float>(_input.actions["Active"]);
                 Select = new InputContext<float>(_input.actions["Select"]);
             }
