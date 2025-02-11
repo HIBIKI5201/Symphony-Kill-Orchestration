@@ -120,9 +120,9 @@ namespace Orchestration.Entity
         /// <summary>
         /// ˆÚ“®–Ú•W‚ğXV
         /// </summary>
-        public void SetDirection(Vector3 point)
+        public void SetDestination(Vector3 point)
         {
-            _move.SetDirection(_model.Agent, point);
+            _move.SetDestination(_model.Agent, point);
         }
 
         /// <summary>

@@ -72,7 +72,7 @@ namespace Orchestration.Entity
         /// <summary>
         /// ˆÚ“®êŠ‚ğæ“¾‚µİ’è
         /// </summary>
-        public void SetDirection(NavMeshAgent agent, Vector3 point)
+        public void SetDestination(NavMeshAgent agent, Vector3 point)
         {
             var manager = ServiceLocator.GetInstance<GroundManager>();
 

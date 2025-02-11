@@ -77,7 +77,7 @@ namespace Orchestration.Entity
                         Vector3 direction = agent.velocity.normalized;
                         direction *= manager.GridSize;
 
-                        _move.SetDirection(_model.Agent, transform.position + direction);
+                        _move.SetDestination(_model.Agent, transform.position + direction);
                     }
                 }
             }
@@ -134,7 +134,7 @@ namespace Orchestration.Entity
             }
 
         End:
-            SetDirection(info.transform.position);
+            SetDestination(info.transform.position);
             return; // 最も近いグリッドが見つかったら終了
         }
     }
