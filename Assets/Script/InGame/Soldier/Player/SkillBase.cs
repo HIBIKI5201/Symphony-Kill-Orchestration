@@ -1,7 +1,7 @@
 using Orchestration.Entity;
 using UnityEngine;
 
-namespace Orchestration
+namespace Orchestration.Entity
 {
     public abstract class SkillBase : MonoBehaviour
     {
