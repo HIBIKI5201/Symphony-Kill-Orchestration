@@ -23,6 +23,8 @@ namespace Orchestration.InGame
 
         private Vector2 _velocity;
 
+        private float _firstPosX;
+
         private bool _isPause = false;
 
         public void Pause() => _isPause = true;
@@ -34,6 +36,8 @@ namespace Orchestration.InGame
             _configer = GetComponentInChildren<Collider>().transform;
 
             PauseManager.IPausable.RegisterPauseManager(this);
+
+            _firstPosX = _configer.transform.position.x;
         }
 
         private void Start()
@@ -82,7 +86,7 @@ namespace Orchestration.InGame
 
         private async void MoveConfiger(int count)
         {
-            float nextPosX = (count + 1) * GroundManager.ChunkSize;
+            float nextPosX = (count) * GroundManager.ChunkSize + _firstPosX;
 
             //次のステージ位置に移動するまで繰り返す
             while (nextPosX >= _configer.position.x)
