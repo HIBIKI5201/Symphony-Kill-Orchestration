@@ -2,7 +2,6 @@ using SymphonyFrameWork.Utility;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UIElements;
-using static UnityEngine.EventSystems.EventTrigger;
 
 namespace Orchestration.UI
 {
@@ -26,9 +25,7 @@ namespace Orchestration.UI
 
             await Awaitable.NextFrameAsync();
 
-            //ダメージをちょっとランダムにかさまし
-            damage += UnityEngine.Random.Range(-5, 5);
-            _text.text = damage.ToString("0");
+            _text.text = Mathf.Floor(damage).ToString("0");
 
             //スクリーン座標系に変換
             Vector2 screenPos = Camera.main.WorldToScreenPoint(position);
