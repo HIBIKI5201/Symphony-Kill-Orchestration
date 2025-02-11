@@ -17,6 +17,8 @@ MonoBehaviour:
   _maxHealthPoint: 1500
   _attack: 10
   _attackRatePerMinute: 600
+  _criticalChance: 3
   _attackRange: 8
+  _distanceDecay: 0.8
   _skillCost: 10
   _maxSpecialPoint: 0
