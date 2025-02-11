@@ -55,6 +55,7 @@ namespace Orchestration.InGame
             var groundManager = ServiceLocator.GetInstance<GroundManager>();
             var system = ServiceLocator.GetInstance<IngameSystemManager>();
 
+            
             foreach (var soldier in _soldiers.Values)
             {
                 //兵士がNext境界線以上にいるかどうか
@@ -66,6 +67,7 @@ namespace Orchestration.InGame
                     break;
                 }
             }
+            
         }
 
         /// <summary>
@@ -116,7 +118,7 @@ namespace Orchestration.InGame
 
             if (_selectSolider)
             {
-                _selectSolider.SetDirection(point);
+                _selectSolider.SetDestination(point);
 
             }
         }
@@ -129,7 +131,7 @@ namespace Orchestration.InGame
 
             foreach (var soldier in _soldiers.Values)
             {
-                if (soldier.transform.position.x <= lineX)
+                if (soldier.AgentDestination.x <= lineX)
                 {
                     //位置の延長線上に移動する
                     Vector3 movePoint = soldier.transform.position;
@@ -155,7 +157,7 @@ namespace Orchestration.InGame
                     //グリッドがあるか使用済みの場合は繰り返す
                     while (info == null || manager.IsRegisterGridInfo(info));
 
-                    soldier.SetDirection(info.transform.position);
+                    soldier.SetDestination(info.transform.position);
                 }
             }
         }
