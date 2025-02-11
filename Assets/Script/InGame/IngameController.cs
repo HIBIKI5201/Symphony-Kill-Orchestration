@@ -11,6 +11,14 @@ namespace Orchestration.InGame
         [SerializeField]
         private LayerMask _gridActiveLayer;
 
+        private Ray ActiveRay
+        {
+            get
+            {
+                return Camera.main.ScreenPointToRay(Input.mousePosition);
+            }
+        }
+
         private void Start()
         {
             var controller = ServiceLocator.GetInstance<PlayerController>();
@@ -26,8 +34,7 @@ namespace Orchestration.InGame
 
         private void Update()
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit, float.PositiveInfinity, _gridActiveLayer))
+            if (Physics.Raycast(ActiveRay, out RaycastHit hit, float.PositiveInfinity, _gridActiveLayer))
             {
                 GridHighLight(hit.point);
             }
@@ -56,13 +63,10 @@ namespace Orchestration.InGame
 
         private void OnActive(float c)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out RaycastHit hit, float.PositiveInfinity, _gridActiveLayer))
+            if (Physics.Raycast(ActiveRay, out RaycastHit hit, float.PositiveInfinity, _gridActiveLayer))
             {
                 _unitManager.SoldierMove(hit.point);
             }
-
         }
 
         /// <summary>
@@ -75,8 +79,16 @@ namespace Orchestration.InGame
             //ヒットした場所のグリッド位置を目標地点にセット
             if (manager.GetGridByPosition(point, out GridInfo info))
             {
-
                 manager.HighLightGrid(info);
+            }
+        }
+
+        private void OnDrawGizmos()
+        {
+            if (Camera.main)
+            {
+                Gizmos.color = Color.yellow;
+                Gizmos.DrawLine(ActiveRay.origin, ActiveRay.origin + (ActiveRay.direction * 1000));
             }
         }
     }
