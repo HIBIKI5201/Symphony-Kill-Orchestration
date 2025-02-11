@@ -18,6 +18,10 @@ namespace Orchestration.InGame
 
         private int _activeEnemyValue = 0;
 
+        [SerializeField]
+        private float _stageLimit = 10;
+        private float _stageTimer = 0;
+
         private void OnEnable()
         {
             ServiceLocator.SetInstance(this);
@@ -32,12 +36,24 @@ namespace Orchestration.InGame
         {
             var audio = ServiceLocator.GetInstance<AudioManager>();
             audio.BGMChanged(1, 2);
+
+            _stageTimer = Time.time;
+        }
+
+        private void Update()
+        {
+            if (_stageTimer + _stageLimit < Time.time)
+            {
+                NextStage();
+            }
         }
 
         public void NextStage()
         {
             _stageCounter++;
             OnStageChanged?.Invoke(_stageCounter);
+
+            _stageTimer = Time.time;
         }
 
         public void KillEnemy()

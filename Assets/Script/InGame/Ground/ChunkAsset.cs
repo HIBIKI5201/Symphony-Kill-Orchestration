@@ -24,11 +24,6 @@ namespace Orchestration
         private void OnDestroy()
         {
             var system = ServiceLocator.GetInstance<IngameSystemManager>();
-
-            if (system)
-            {
-                system.AddAcviveEnemy(EnemyValue);
-            }
         }
     }
 }
