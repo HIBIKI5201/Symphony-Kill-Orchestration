@@ -17,8 +17,12 @@ namespace Orchestration.Entity
         {
             GroundManager manager = ServiceLocator.GetInstance<GroundManager>();
 
-            //初期化が終わるまで待機
-            await SymphonyTask.WaitUntil(() => manager.GridInitializeDone, destroyCancellationToken);
+            try
+            {
+                //初期化が終わるまで待機
+                await SymphonyTask.WaitUntil(() => manager.GridInitializeDone, destroyCancellationToken);
+            }
+            catch { }
 
             agent.enabled = true;
 
