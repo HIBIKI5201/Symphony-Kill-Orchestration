@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using UnityEngine;
 
@@ -7,10 +8,14 @@ namespace Orchestration.Entity
     {
         private float _buffStrength = 50;
 
+        [SerializeField]
         private float _duration = 4;
 
         [SerializeField]
         private LayerMask _target;
+
+        [SerializeField]
+        GameObject _particle;
 
         protected override bool SkillProccess(PlayerSoldierManager soldier, SoldierData_SO data)
         {
@@ -27,7 +32,9 @@ namespace Orchestration.Entity
 
                 //ƒoƒt‚ð’Ç‰Á‚·‚é
                 int count = soldiers.Length;
-                soldier.AttackBuff(Buff, true);
+                Func<float, float> buff = Buff;
+
+                soldier.AttackBuff(buff, true);
 
                 var attackModule = GetComponent<SoldierAttack>();
 
@@ -35,7 +42,12 @@ namespace Orchestration.Entity
                 foreach (var s in soldiers)
                 {
                     attackModule.AttackEnemy(s, data.Attack, soldier);
+                    Instantiate(_particle,
+                        s.transform.position + Vector3.one * UnityEngine.Random.Range(0f, 0.5f),
+                        Quaternion.identity);
                 }
+
+                BuffCancel(buff, soldier);
 
                 return true;
 
@@ -48,6 +60,16 @@ namespace Orchestration.Entity
             return false;
         }
 
-
+        private async void BuffCancel(Func<float, float> buff, SoldierManager soldier)
+        {
+            try
+            {
+                await Awaitable.WaitForSecondsAsync(_duration, destroyCancellationToken);
+            }
+            finally
+            {
+                soldier.AttackBuff(buff, false);
+            }
+        }
     }
 }
