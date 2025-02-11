@@ -108,7 +108,15 @@ namespace Orchestration.Entity
             get => _specialPointProportion;
             set
             {
-                _specialPointProportion = value;
+                float proportion = value;
+                if (1 <= proportion)
+                {
+                    SpecialPoint++;
+                    proportion -= 1;
+                }
+
+                OnSpecialPointProportionChanged?.Invoke(proportion);
+               _specialPointProportion = proportion;
             }
         }
 
