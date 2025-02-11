@@ -1,4 +1,6 @@
 using Orchestration.Entity;
+using Orchestration.InGame;
+using SymphonyFrameWork.CoreSystem;
 using UnityEngine;
 
 namespace Orchestration
@@ -11,12 +13,21 @@ namespace Orchestration
         [SerializeField]
         GameObject _object;
 
-        public int EnemyValue
+        private int _enemyValue;
+
+        public int EnemyValue { get => _enemyValue; }
+        private void Awake()
         {
-            get
+            var enemies = _enemy.GetComponentsInChildren<EnemySoliderManager>();
+            _enemyValue = enemies.Length;
+        }
+        private void OnDestroy()
+        {
+            var system = ServiceLocator.GetInstance<IngameSystemManager>();
+
+            if (system)
             {
-                var enemies = _enemy.GetComponentsInChildren<EnemySoliderManager>();
-                return enemies.Length;
+                system.AddAcviveEnemy(EnemyValue);
             }
         }
     }

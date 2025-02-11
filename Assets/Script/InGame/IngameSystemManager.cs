@@ -52,6 +52,10 @@ namespace Orchestration.InGame
             }
         }
 
+        /// <summary>
+        /// アクティブな敵を追加
+        /// </summary>
+        /// <param name="value"></param>
         public void AddAcviveEnemy(int value)
         {
             _activeEnemyValue += value;
