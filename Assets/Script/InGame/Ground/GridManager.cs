@@ -58,6 +58,8 @@ namespace Orchestration.InGame
 
         private float _lastChunkPos = 0;
 
+        private ChunkAsset _lastChunkAsset;
+
         public bool IsInitializeDone { get; private set; }
 
         private void Awake()
@@ -114,6 +116,19 @@ namespace Orchestration.InGame
                 Quaternion.Euler(new Vector3(0, randomRotation, 0) + chunkPrefab.transform.eulerAngles));
 
             chunk.transform.parent = transform;
+
+            //チャンクの情報を取得
+            if (chunk.TryGetComponent<ChunkAsset>(out var asset))
+            {
+                var system = ServiceLocator.GetInstance<IngameSystemManager>();
+
+                if (_lastChunkAsset != null) //一つ前のチャンクの敵を集計
+                {
+                    system.AddAcviveEnemy(_lastChunkAsset.EnemyValue);
+                }
+
+                _lastChunkAsset = asset;
+            }
 
             _lastChunkPos += GroundManager.ChunkSize;
 

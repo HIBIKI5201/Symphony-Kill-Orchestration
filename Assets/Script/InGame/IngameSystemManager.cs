@@ -16,6 +16,8 @@ namespace Orchestration.InGame
 
         public event Action OnResultOpen;
 
+        private int _activeEnemyValue = 0;
+
         private void OnEnable()
         {
             ServiceLocator.SetInstance(this);
@@ -42,6 +44,17 @@ namespace Orchestration.InGame
         {
             _killCounter++;
             OnKillCounterChanged?.Invoke(_killCounter);
+
+            _activeEnemyValue--;
+            if (_activeEnemyValue <= 0)
+            {
+                NextStage();
+            }
+        }
+
+        public void AddAcviveEnemy(int value)
+        {
+            _activeEnemyValue += value;
         }
 
         public void ResultOpen()

@@ -1,3 +1,4 @@
+using Orchestration.Entity;
 using UnityEngine;
 
 namespace Orchestration
@@ -9,5 +10,15 @@ namespace Orchestration
 
         [SerializeField]
         GameObject _object;
+
+        public int EnemyValue
+        {
+            get
+            {
+                var enemies = _enemy.GetComponentsInChildren<EnemySoliderManager>();
+                return enemies.Length;
+            }
+        }
     }
 }
+
