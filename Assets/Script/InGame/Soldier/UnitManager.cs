@@ -1,5 +1,4 @@
 using Orchestration.Entity;
-using Orchestration.System;
 using SymphonyFrameWork.CoreSystem;
 using System;
 using System.Collections.Generic;
@@ -55,7 +54,7 @@ namespace Orchestration.InGame
             var groundManager = ServiceLocator.GetInstance<GroundManager>();
             var system = ServiceLocator.GetInstance<IngameSystemManager>();
 
-            
+
             foreach (var soldier in _soldiers.Values)
             {
                 //•ºm‚ªNext‹«ŠEüˆÈã‚É‚¢‚é‚©‚Ç‚¤‚©
@@ -68,7 +67,7 @@ namespace Orchestration.InGame
                     break;
                 }
             }
-            
+
         }
 
         /// <summary>
@@ -99,6 +98,11 @@ namespace Orchestration.InGame
 
         private void SelectorSoldier(PlayerSoldierManager soldier)
         {
+            if (!soldier)
+            {
+                return;
+            }
+
             //Œ³‚ÌƒZƒŒƒNƒgó‘Ô‚ğ‰ğœ
             if (_selectSolider)
             {
@@ -116,13 +120,13 @@ namespace Orchestration.InGame
         /// </summary>
         public void SoldierMove(Vector3 point)
         {
-
             if (_selectSolider)
             {
                 _selectSolider.SetDestination(point);
-
             }
         }
+
+        public void SkillActive() => _selectSolider.SkillActive();
 
         private void BorderOutSoldierMove(int count)
         {

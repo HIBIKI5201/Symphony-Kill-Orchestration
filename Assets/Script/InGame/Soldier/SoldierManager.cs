@@ -13,7 +13,7 @@ namespace Orchestration.Entity
     public class SoldierManager : MonoBehaviour, PauseManager.IPausable
     {
         [SerializeField]
-        protected SoldierData_SO _soldierData;
+        protected SoldierData_SO _data;
 
         protected SoldierModel _model;
 
@@ -26,8 +26,8 @@ namespace Orchestration.Entity
 
         private void Awake()
         {
-            var data = Instantiate(_soldierData);
-            _soldierData = data;
+            var data = Instantiate(_data);
+            _data = data;
 
             _model = GetComponent<SoldierModel>();
 
@@ -44,9 +44,9 @@ namespace Orchestration.Entity
 
         public virtual void Awake_S()
         {
-            if (_soldierData != null)
+            if (_data != null)
             {
-                _soldierData.OnHealthChanged += health =>
+                _data.OnHealthChanged += health =>
                 {
                     if (health <= 0)
                     {
@@ -66,7 +66,7 @@ namespace Orchestration.Entity
         {
             _model.Init();
             _move.MoveGridPosition(_model.Agent);
-            _ui.AddInfomationForHUD(_soldierData.Name, _soldierData.Icon);
+            _ui.AddInfomationForHUD(_data.Name, _data.Icon);
         }
 
         private void Update()
@@ -99,11 +99,11 @@ namespace Orchestration.Entity
         protected virtual (Vector3, float) Attack()
         {
             //üˆÍ‚É“G‚ª‚¢‚éê‡‚ÍUŒ‚A‚¢‚È‚¢ê‡‚ÍˆÚ“®•ûŒü‚ğŒü‚­
-            if (_attack.SearchTarget(_soldierData.AttackRange, _model.TargetLayer, out var enemy))
+            if (_attack.SearchTarget(_data.AttackRange, _model.TargetLayer, out var enemy))
             {
-                if (_attack.CanAttack(_soldierData.AttackRatePerMinute))
+                if (_attack.CanAttack(_data.AttackRatePerMinute))
                 {
-                    _attack.AttackEnemy(enemy, _soldierData.Attack, this);
+                    _attack.AttackEnemy(enemy, _data.Attack, this);
                     _model.Shoot();
                 }
 
@@ -130,13 +130,13 @@ namespace Orchestration.Entity
         /// </summary>
         /// <param name="damage"></param>
         /// <param name="target">UŒ‚‚µ‚½‘ÎÛ</param>
-        public virtual void AddDamage(float damage, SoldierManager target) => _soldierData.HealthPoint -= damage;
+        public virtual void AddDamage(float damage, SoldierManager target) => _data.HealthPoint -= damage;
 
         /// <summary>
         /// •ºm‚É‰ñ•œ‚ğ—^‚¦‚é
         /// </summary>
         /// <param name="heal"></param>
-        public virtual void AddHeal(float heal) => _soldierData.HealthPoint += heal;
+        public virtual void AddHeal(float heal) => _data.HealthPoint += heal;
 
         /// <summary>
         /// ƒwƒ‹ƒX‚ª0ˆÈ‰º‚É‚È‚Á‚½‚ç©ŒÈ”j‰óˆ—‚·‚é
@@ -178,10 +178,10 @@ namespace Orchestration.Entity
                 Gizmos.DrawLineStrip(path.corners, false);
             }
 
-            if (_soldierData)
+            if (_data)
             {
                 Gizmos.color = Color.red;
-                Gizmos.DrawWireSphere(transform.position, _soldierData.AttackRange);
+                Gizmos.DrawWireSphere(transform.position, _data.AttackRange);
             }
         }
 #endif
