@@ -47,6 +47,18 @@ namespace Orchestration.UI
                 _info.RemoveFromClassList(selectClass);
             }
 
+            foreach (var element in _info.Children())
+            {
+                if (active)
+                {
+                    element.AddToClassList(selectClass);
+                }
+                else
+                {
+                    element.RemoveFromClassList(selectClass);
+                }
+            }
+
         }
 
         public void Destroy()
