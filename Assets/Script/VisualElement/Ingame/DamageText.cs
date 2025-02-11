@@ -19,13 +19,18 @@ namespace Orchestration.UI
             return Task.CompletedTask;
         }
 
-        public async void Init(float damage, Vector3 position)
+        public async void Init(float damage, Vector3 position, bool highLight)
         {
             position += new Vector3(0, 1.5f, 0);
 
             await Awaitable.NextFrameAsync();
 
             _text.text = Mathf.Floor(damage).ToString("0");
+
+            if (highLight)
+            {
+                _text.style.color = Color.yellow;
+            }
 
             //スクリーン座標系に変換
             Vector2 screenPos = Camera.main.WorldToScreenPoint(position);
@@ -43,7 +48,7 @@ namespace Orchestration.UI
             }
 
             TextMove(center);
-
+            
             //時間を待った後に消す
             float timer = 0;
             while (timer < 0.5f)
@@ -53,6 +58,11 @@ namespace Orchestration.UI
                 Physics(ref center, ref velocity);
 
                 velocity *= 0.9f; //段々と減速
+
+                if (highLight)
+                {
+                    _text.style.fontSize = Length.Percent(40 + timer * 20);
+                }
 
                 timer += Time.deltaTime;
                 await Awaitable.NextFrameAsync();
