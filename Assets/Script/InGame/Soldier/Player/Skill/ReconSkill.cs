@@ -4,6 +4,9 @@ namespace Orchestration.Entity
 {
     public class ReconSkill : SkillBase
     {
-        public override void SkillActive(PlayerSoldierManager soldier) => throw new global::System.NotImplementedException();
+        public override void SkillActive(PlayerSoldierManager soldier, SoldierData_SO data)
+        {
+            Debug.Log("ƒŠƒRƒ“ƒXƒLƒ‹”­“®");
+        }
     }
 }

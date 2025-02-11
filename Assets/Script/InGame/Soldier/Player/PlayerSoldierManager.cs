@@ -85,8 +85,7 @@ namespace Orchestration.Entity
             {
                 if (_data.SpecialCost <= _data.SpecialPoint)
                 {
-                    Debug.Log("ƒXƒLƒ‹”­“®");
-                    _skillBase.SkillActive(this);
+                    _skillBase.SkillActive(this, _data);
 
                     _data.SpecialPoint -= _data.SpecialCost;
                 }

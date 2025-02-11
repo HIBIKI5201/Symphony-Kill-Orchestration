@@ -4,6 +4,9 @@ namespace Orchestration.Entity
 {
     public class SpportSkill : SkillBase
     {
-        public override void SkillActive(PlayerSoldierManager soldier) => throw new global::System.NotImplementedException();
+        public override void SkillActive(PlayerSoldierManager soldier, SoldierData_SO data)
+        {
+            Debug.Log("サポートスキル発動");
+        }
     }
 }
