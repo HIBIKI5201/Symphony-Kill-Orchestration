@@ -126,7 +126,7 @@ namespace Orchestration.InGame
             }
         }
 
-        public void SkillActive() => _selectSolider.SkillActive();
+        public void SkillActive(float value) => _selectSolider.SkillActive();
 
         private void BorderOutSoldierMove(int count)
         {

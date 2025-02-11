@@ -18,8 +18,9 @@ namespace Orchestration.Entity
             {
                 _data.OnHealthChanged += value =>
                     _ui.HealthBarUpdate(value / _data.MaxHealthPoint);
-                _data.OnSpecialPointChanged += value =>
-                    _ui.SpecialPointCountUpdate(value);
+
+                _data.OnSpecialPointProportionChanged += _ui.SpecialPointGuageUpdate;
+                _data.OnSpecialPointChanged += _ui.SpecialPointCountUpdate;
             }
 
             _skillBase = GetComponent<SkillBase>();

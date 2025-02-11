@@ -8,7 +8,15 @@ namespace Orchestration.Entity
     {
         public void Awake()
         {
+            //数値の初期化
             _healthPoint = _maxHealthPoint;
+            _specialPoint = 0;
+            _specialPointProportion = 0;
+
+            //イベントを初期化
+            OnHealthChanged = null;
+            OnSpecialPointChanged = null;
+            OnSpecialPointProportionChanged = null;
         }
 
         [Header("基本情報")]
@@ -78,7 +86,7 @@ namespace Orchestration.Entity
         public int SpecialCost { get => _skillCost; }
 
         [SerializeField]
-        private float _maxSpecialPoint = 100;
+        private float _maxSpecialPoint = 10;
         public float MaxSpecialPoint { get => _maxSpecialPoint; }
 
         private int _specialPoint;
@@ -93,5 +101,17 @@ namespace Orchestration.Entity
         }
 
         public event Action<int> OnSpecialPointChanged;
+
+        private float _specialPointProportion = 0;
+        public float SpecialPointProportion
+        {
+            get => _specialPointProportion;
+            set
+            {
+                _specialPointProportion = value;
+            }
+        }
+
+        public event Action<float> OnSpecialPointProportionChanged;
     }
 }

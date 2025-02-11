@@ -29,6 +29,7 @@ namespace Orchestration.InGame
             {
                 controller.Active.OnStarted += OnActive;
                 controller.Select.OnStarted += _unitManager.SelectSwitch;
+                controller.Skill.OnStarted += _unitManager.SkillActive;
             }
         }
 
@@ -48,6 +49,7 @@ namespace Orchestration.InGame
             {
                 controller.Active.OnStarted -= OnActive;
                 controller.Select.OnStarted -= _unitManager.SelectSwitch;
+                controller.Skill.OnStarted -= _unitManager.SkillActive;
             }
         }
 

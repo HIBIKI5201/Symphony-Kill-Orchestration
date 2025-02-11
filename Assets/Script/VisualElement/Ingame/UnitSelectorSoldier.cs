@@ -49,15 +49,11 @@ namespace Orchestration.UI
             }
         }
 
-        public void SpecialPointGuageUpdate(float proportion)
-        {
+        public void SpecialPointGuageUpdate(float proportion) =>
+            _specialPointGuage.style.width = Length.Percent(proportion * 100);
 
-        }
-
-        public void SpecialPointCountUpdate(int count)
-        {
-
-        }
+        public void SpecialPointCountUpdate(int count) =>
+            _specialPointCount.text = count.ToString();
 
         public void Destroy()
         {
