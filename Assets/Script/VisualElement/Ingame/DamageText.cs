@@ -2,6 +2,7 @@ using SymphonyFrameWork.Utility;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEngine.EventSystems.EventTrigger;
 
 namespace Orchestration.UI
 {
@@ -21,21 +22,60 @@ namespace Orchestration.UI
 
         public async void Init(float damage, Vector3 position)
         {
-            _text.text = damage.ToString("0.0");
+            position += new Vector3(0, 1.5f, 0);
+
+            await Awaitable.NextFrameAsync();
+
+            //ダメージをちょっとランダムにかさまし
+            damage += UnityEngine.Random.Range(-5, 5);
+            _text.text = damage.ToString("0");
 
             //スクリーン座標系に変換
             Vector2 screenPos = Camera.main.WorldToScreenPoint(position);
 
-            float centerX = screenPos.x - (_text.resolvedStyle.width / 2);
-            float centerY = Screen.height - screenPos.y; //UITK座標系では値が高いほど下に移動する
+            //UITK座標系では値が高いほど下に移動する
+            Vector2 center = new(screenPos.x - (_text.resolvedStyle.width / 2), Screen.height - screenPos.y);
 
-            _text.style.left = centerX;
-            _text.style.top = centerY;
+            //物理的に飛ぶ
+            Vector2 velocity = new Vector2(Random.Range(-0.3f, 0.3f), Random.Range(-1f, 0f)).normalized * 750;
+
+            //最初にズレた場所から始まる
+            for (int i = 0; i < 5; i++)
+            {
+                Physics(ref center, ref velocity);
+            }
+
+            TextMove(center);
 
             //時間を待った後に消す
-            await Awaitable.WaitForSecondsAsync(1);
+            float timer = 0;
+            while (timer < 0.5f)
+            {
+                TextMove(center);
+
+                Physics(ref center, ref velocity);
+
+                velocity *= 0.9f; //段々と減速
+
+                timer += Time.deltaTime;
+                await Awaitable.NextFrameAsync();
+            }
 
             RemoveFromHierarchy();
+        }
+
+        private void Physics(ref Vector2 pos, ref Vector2 velocity)
+        {
+            velocity.y += 1000f * Time.deltaTime; //重力
+
+            pos.x += velocity.x * Time.deltaTime;
+            pos.y += velocity.y * Time.deltaTime;
+        }
+
+        private void TextMove(Vector2 position)
+        {
+            _text.style.left = position.x;
+            _text.style.top = position.y;
         }
     }
 }
