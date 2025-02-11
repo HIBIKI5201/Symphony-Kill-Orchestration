@@ -1,0 +1,4 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/USS/text.uss?fileID=7433441132597879392&amp;guid=532b434e280348644b8ef36234fdc00b&amp;type=3#text" />
+    <engine:Label text="0" name="Text" class="text" style="width: 5%; height: 3%; font-size: 40%; -unity-text-align: middle-center; color: rgb(255, 255, 255); -unity-font-style: bold; opacity: 0.8; text-shadow: 0 0 10px rgb(255, 0, 0);" />
+</engine:UXML>
