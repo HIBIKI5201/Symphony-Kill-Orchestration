@@ -4,9 +4,10 @@ namespace Orchestration.Entity
 {
     public class ReconSkill : SkillBase
     {
-        public override void SkillActive(PlayerSoldierManager soldier, SoldierData_SO data)
+        protected override bool SkillProccess(PlayerSoldierManager soldier, SoldierData_SO data)
         {
             Debug.Log("ƒŠƒRƒ“ƒXƒLƒ‹”­“®");
+            return true;
         }
     }
 }

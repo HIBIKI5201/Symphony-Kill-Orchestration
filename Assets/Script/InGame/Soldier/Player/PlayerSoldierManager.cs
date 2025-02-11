@@ -86,8 +86,6 @@ namespace Orchestration.Entity
                 if (_data.SpecialCost <= _data.SpecialPoint)
                 {
                     _skillBase.SkillActive(this, _data);
-
-                    _data.SpecialPoint -= _data.SpecialCost;
                 }
             }
         }

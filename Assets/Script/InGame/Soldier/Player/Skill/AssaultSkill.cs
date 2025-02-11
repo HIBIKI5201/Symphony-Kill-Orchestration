@@ -12,12 +12,14 @@ namespace Orchestration.Entity
         [SerializeField]
         private LayerMask _target;
 
-        public override void SkillActive(PlayerSoldierManager soldier, SoldierData_SO data)
+        protected override bool SkillProccess(PlayerSoldierManager soldier, SoldierData_SO data)
         {
             Collider[] colliders = Physics.OverlapSphere(transform.position, data.AttackRange, _target);
 
             if (colliders.Length > 0)
             {
+                Debug.Log("アサルトスキル発動");
+
                 //周囲の敵を全て取得する
                 SoldierManager[] soldiers = colliders
                     .Select(c => c.GetComponent<SoldierManager>())
@@ -35,13 +37,15 @@ namespace Orchestration.Entity
                     attackModule.AttackEnemy(s, data.Attack, soldier);
                 }
 
+                return true;
+
                 //バフの効果
                 float Buff(float damage)
                 {
                     return damage * (1 + (_buffStrength * count / 100));
                 }
             }
-                Debug.Log("アサルトスキル発動");
+            return false;
         }
 
 
