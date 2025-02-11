@@ -125,7 +125,10 @@ namespace Orchestration.Entity
 
         protected virtual void AttackProccess(SoldierManager enemy)
         {
-            _attack.AttackEnemy(enemy, _data.Attack, this);
+            float random = UnityEngine.Random.Range(0, 100);
+
+
+            _attack.AttackEnemy(enemy, new (_data.Attack, isCritical: _data.CriticalChance < random), this);
             _model.Shoot();
 
             //’eŠÛ‚ð¶¬‚·‚é

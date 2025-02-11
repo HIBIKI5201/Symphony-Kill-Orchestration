@@ -41,7 +41,7 @@ namespace Orchestration.Entity
                 //•ºm‚Éƒ_ƒ[ƒW‚ğ—^‚¦‚é
                 foreach (var s in soldiers)
                 {
-                    attackModule.AttackEnemy(s, data.Attack, soldier);
+                    attackModule.AttackEnemy(s, new (data.Attack), soldier);
                     Instantiate(_particle,
                         s.transform.position + Vector3.one * UnityEngine.Random.Range(0f, 0.5f),
                         Quaternion.identity);

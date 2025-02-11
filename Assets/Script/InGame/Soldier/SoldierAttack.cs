@@ -84,11 +84,18 @@ namespace Orchestration.Entity
         /// ëŒè€ÇçUåÇÇ∑ÇÈ
         /// </summary>
         /// <param name="target"></param>
-        /// <param name="damage"></param>
-        public void AttackEnemy(SoldierManager target, float damage, SoldierManager me)
+        /// <param name="attackData"></param>
+        public void AttackEnemy(SoldierManager target, AttackData attackData, SoldierManager me)
         {
             if (target)
             {
+                float damage = attackData.Damage;
+
+                if (attackData.IsCritical)
+                {
+                    damage *= 3;
+                }
+
                 //ãóó£å∏êä
                 float distance = Vector3.Distance(target.transform.position, me.transform.position);
                 float rate = distance / me.Data.AttackRange;
@@ -107,5 +114,19 @@ namespace Orchestration.Entity
 
         public void AddBuff(Func<float, float> func) => _buffList.Add(func);
         public void RemoveBuff(Func<float, float> func) => _buffList.Remove(func);
+    }
+
+    public struct AttackData
+    {
+        public float Damage;
+        public bool IsCritical;
+        public bool ActiveHighLight;
+
+        public AttackData(float damage, bool isCritical = false, bool activeHighLight = false)
+        {
+            Damage = damage;
+            IsCritical = isCritical;
+            ActiveHighLight = activeHighLight;
+        }
     }
 }
