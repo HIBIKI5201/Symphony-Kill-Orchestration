@@ -128,7 +128,7 @@ namespace Orchestration.Entity
             float random = UnityEngine.Random.Range(0, 100);
 
 
-            _attack.AttackEnemy(enemy, new (_data.Attack, isCritical: _data.CriticalChance < random), this);
+            _attack.AttackEnemy(enemy, new (_data.Attack, isCritical: random < _data.CriticalChance), this);
             _model.Shoot();
 
             //’eŠÛ‚ð¶¬‚·‚é
