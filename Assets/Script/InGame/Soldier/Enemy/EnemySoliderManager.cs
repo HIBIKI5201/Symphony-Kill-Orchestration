@@ -21,11 +21,11 @@ namespace Orchestration.Entity
         protected override (Vector3, float) Attack()
         {
             //üˆÍ‚É“G‚ª‚¢‚éê‡‚ÍUŒ‚A‚¢‚È‚¢ê‡‚ÍˆÚ“®•ûŒü‚ğŒü‚­
-            if (_attack.SearchTarget(_soldierData.AttackRange, _model.TargetLayer, out var enemy))
+            if (_attack.SearchTarget(_data.AttackRange, _model.TargetLayer, out var enemy))
             {
-                if (_attack.CanAttack(_soldierData.AttackRatePerMinute))
+                if (_attack.CanAttack(_data.AttackRatePerMinute))
                 {
-                    _attack.AttackEnemy(enemy, _soldierData.Attack, this);
+                    _attack.AttackEnemy(enemy, _data.Attack, this);
                     _model.Shoot();
 
                     _lastTarget = enemy;
@@ -58,7 +58,7 @@ namespace Orchestration.Entity
             base.AddDamage(damage, target);
 
             //‚à‚µUŒ‚ŠO‚©‚çŒ‚‚½‚ê‚½ê‡‚Í‹ß•t‚­
-            if (_soldierData.AttackRange < Vector3.Distance(target.transform.position, transform.position))
+            if (_data.AttackRange < Vector3.Distance(target.transform.position, transform.position))
             {
                 GoToTarget(target);
             }
