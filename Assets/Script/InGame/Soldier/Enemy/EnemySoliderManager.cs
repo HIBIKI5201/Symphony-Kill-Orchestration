@@ -25,9 +25,7 @@ namespace Orchestration.Entity
             {
                 if (_attack.CanAttack(_data.AttackRatePerMinute))
                 {
-                    _attack.AttackEnemy(enemy, _data.Attack, this);
-                    _model.Shoot();
-
+                    AttackProccess(enemy);
                     _lastTarget = enemy;
                 }
 
