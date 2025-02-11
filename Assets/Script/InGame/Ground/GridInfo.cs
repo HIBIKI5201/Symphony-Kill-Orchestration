@@ -18,6 +18,9 @@ namespace Orchestration.InGame
         private bool _isActive;
         public bool IsActive { get => _isActive; set => _isActive = value; }
 
+        private Vector3Int _position;
+        public Vector3Int Position { get => _position; }
+
         private void Awake()
         {
             _isActive = true;
@@ -41,6 +44,12 @@ namespace Orchestration.InGame
             }
         }
 
+        public void Init(Vector3 edge, float size)
+        {
+            _position = Vector3Int.FloorToInt(transform.position - edge);
+
+            transform.localScale = Vector3.one * size;
+        }
 
         public void HighLightSetActive(bool value)
         {

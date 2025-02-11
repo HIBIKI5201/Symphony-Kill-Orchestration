@@ -124,16 +124,10 @@ namespace Orchestration.InGame
             }
 
             //NavMeshを再生成
-            foreach (GameObject go in _chunkQueue.ToArray())
-            {
-                NavMeshData navMeshData = _surface.navMeshData;
-                AsyncOperation operation = _surface.UpdateNavMesh(navMeshData);
+            NavMeshData navMeshData = _surface.navMeshData;
+            AsyncOperation operation = _surface.UpdateNavMesh(navMeshData);
 
-                while (!operation.isDone)
-                {
-                    await Awaitable.NextFrameAsync();
-                }
-            }
+            await operation;
 
             //グリッドの位置をリスト化
             List<Vector3> gridPosList = GridCreate();
@@ -211,13 +205,15 @@ namespace Orchestration.InGame
         private List<Vector3> FilterNonexistentGrid(List<Vector3> list)
         {
             //検索の高速化のためにHashSetに変換
-            HashSet<Vector3> filter = new(_griInfoList.Select(gi => gi.transform.position));
+            HashSet<Vector3Int> filter = new(_griInfoList.Select(gi => gi.Position));
 
             List<Vector3> filtered = new();
 
             foreach (var pos in list)
             {
-                if (!filter.Contains(pos))
+                Vector3Int p = Vector3Int.FloorToInt(pos - _originPosition);
+
+                if (!filter.Contains(p))
                 {
                     filtered.Add(pos);
                 }
@@ -250,8 +246,9 @@ namespace Orchestration.InGame
                 for (int i = 0; i < objects.Length; i++)
                 {
                     GameObject obj = objects[i];
-                    _griInfoList.Add(obj.GetComponent<GridInfo>());
-                    obj.transform.localScale = Vector3.one * _gridSize;
+                    GridInfo info = obj.GetComponent<GridInfo>();
+                    info.Init(_originPosition - new Vector3(_gridSize / 2, 0, _gridSize /2), _gridSize);
+                    _griInfoList.Add(info);
                 }
             }
         }
