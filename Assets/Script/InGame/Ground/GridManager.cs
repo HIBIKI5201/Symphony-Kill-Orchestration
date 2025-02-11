@@ -38,7 +38,9 @@ namespace Orchestration.InGame
 
         private GridInfo _highLightingGrid;
 
-        private Vector3 _originPosition;
+        private Vector3? _originPosition;
+
+        public Vector3 Edge { get => _originPosition.Value - new Vector3(_gridSize / 2, 0, _gridSize / 2); }
 
         private List<GridInfo> _usedGridList = new();
 
@@ -110,24 +112,16 @@ namespace Orchestration.InGame
             GameObject chunk = Instantiate(chunkPrefab,
                 new Vector3(_lastChunkPos, 0, 0),
                 Quaternion.Euler(new Vector3(0, randomRotation, 0) + chunkPrefab.transform.eulerAngles));
-            
+
             chunk.transform.parent = transform;
 
             _lastChunkPos += GroundManager.ChunkSize;
 
             //アクティブなチャンクのコレクションに追加
             _chunkQueue.Enqueue(chunk.gameObject);
-            if (_chunkQueue.Count > GroundManager.ChunkCapacity)
-            {
-                GameObject obj = _chunkQueue.Dequeue();
-                DestroyChunk(obj);
-            }
 
             //NavMeshを再生成
-            NavMeshData navMeshData = _surface.navMeshData;
-            AsyncOperation operation = _surface.UpdateNavMesh(navMeshData);
-
-            await operation;
+            await _surface.UpdateNavMesh(_surface.navMeshData);
 
             //グリッドの位置をリスト化
             List<Vector3> gridPosList = GridCreate();
@@ -138,6 +132,16 @@ namespace Orchestration.InGame
             if (_gridPrefab)
             {
                 await GridPrefabInstantiate(gridPosList, chunk.transform);
+            }
+
+            //キャパシティ以上のチャンクを破壊
+            //（チャンク生成後に破壊しないと新しいチャンクにこのチャンクのグリッドが生成される）
+            if (_chunkQueue.Count > GroundManager.ChunkCapacity)
+            {
+                GameObject obj = _chunkQueue.Dequeue();
+                DestroyChunk(obj);
+
+                await _surface.UpdateNavMesh(_surface.navMeshData);
             }
         }
 
@@ -192,7 +196,10 @@ namespace Orchestration.InGame
                 }
             }
 
-            _originPosition = navMeshRange.min;
+            if (_originPosition == null)
+            {
+                _originPosition = navMeshRange.min;
+            }
 
             return list;
         }
@@ -211,7 +218,7 @@ namespace Orchestration.InGame
 
             foreach (var pos in list)
             {
-                Vector3Int p = Vector3Int.FloorToInt(pos - _originPosition);
+                Vector3Int p = Vector3Int.FloorToInt(pos - _originPosition.Value);
 
                 if (!filter.Contains(p))
                 {
@@ -228,10 +235,11 @@ namespace Orchestration.InGame
         /// <param name="list">グリッドの位置</param>
         private async Task GridPrefabInstantiate(List<Vector3> list, Transform parent)
         {
-            GameObject rootObj = new(GridPrefabsName);
-
             //プレハブの親オブジェクトを生成
-            rootObj.transform.parent = parent;
+            GameObject rootObj = new(GridPrefabsName);
+            rootObj.transform.SetParent(parent);
+            rootObj.transform.localPosition = Vector3.zero;
+            rootObj.transform.localRotation = Quaternion.Euler(Vector3.zero);
 
             if (list.Count > 0)
             {
@@ -247,7 +255,7 @@ namespace Orchestration.InGame
                 {
                     GameObject obj = objects[i];
                     GridInfo info = obj.GetComponent<GridInfo>();
-                    info.Init(_originPosition - new Vector3(_gridSize / 2, 0, _gridSize /2), _gridSize);
+                    info.Init(Edge, _gridSize);
                     _griInfoList.Add(info);
                 }
             }
@@ -303,20 +311,10 @@ namespace Orchestration.InGame
         /// <returns>グリッドが存在するか</returns>
         public bool GetGridByPosition(Vector3 position, out GridInfo info)
         {
-            //原点からの距離
-            Vector3 vector = (position - _originPosition);
-
-            //原点から半グリッドずらす
-            vector += new Vector3(_gridSize / 2, _gridSize / 2, _gridSize / 2);
-
-            //グリッド座標系のポジションを出す
-            vector = new Vector3((int)(vector.x / _gridSize), (int)(vector.y / _gridSize), (int)(vector.z / _gridSize));
-
-            //一番近いグリッドの座標を出す
-            Vector3 pos = vector * _gridSize + _originPosition;
+            Vector3Int pos = Vector3Int.FloorToInt(position - Edge + new Vector3(0, 0.3f, 0)); //少し上方向を優先する
 
             //そこにグリッドがあるかを判定
-            info = _griInfoList.Find(gi => gi.transform.position == pos);
+            info = _griInfoList.Find(gi => gi.Position == pos);
             return info != null;
         }
 
