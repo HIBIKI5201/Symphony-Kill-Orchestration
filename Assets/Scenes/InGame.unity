@@ -432,6 +432,7 @@ MonoBehaviour:
   _enemyChunkPrefabList:
   - {fileID: 3023448487693573733, guid: 2fcb1b30c2702d146b34d1b10ca6b185, type: 3}
   - {fileID: 3023448487693573733, guid: 740a03272d992cc469a2d4fddd88a7e1, type: 3}
+  - {fileID: 3023448487693573733, guid: 9e67fcca0e6e5a14a8f04b7792ee1713, type: 3}
   _gridPosVisible: 0
 --- !u!114 &664427130
 MonoBehaviour:
@@ -461,7 +462,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.033333335
+  m_VoxelSize: 0.05
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: d2b36b2c371d24d4587c50952dca14a2, type: 2}
   m_BuildHeightMesh: 0
@@ -513,7 +514,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: 10fc4df2da32a41aaa32d77bc913491c, type: 2}
+  sharedProfile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
 --- !u!4 &832575519
 Transform:
   m_ObjectHideFlags: 0
@@ -670,7 +671,7 @@ Transform:
   m_GameObject: {fileID: 1198083049}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 15, y: 0.25, z: 0}
+  m_LocalPosition: {x: 25, y: 0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0.05}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -740,7 +741,7 @@ GameObject:
   - component: {fileID: 1198487882}
   - component: {fileID: 1198487881}
   - component: {fileID: 1198487884}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: CinemachineCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -845,7 +846,7 @@ Transform:
   m_GameObject: {fileID: 1298476375}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10, y: 6, z: -5}
+  m_LocalPosition: {x: 15, y: 6, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -870,7 +871,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 1, z: 5}
+  m_Size: {x: 20, y: 1, z: 5}
   m_Center: {x: -5, y: 0, z: 0}
 --- !u!1 &1492088244
 GameObject:
@@ -994,7 +995,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gridActiveLayer:
     serializedVersion: 2
-    m_Bits: 65
+    m_Bits: 64
 --- !u!114 &1530492467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1129,7 +1130,7 @@ Transform:
   m_GameObject: {fileID: 1662652853}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 5, y: 10, z: 0}
+  m_LocalPosition: {x: 10, y: 10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
