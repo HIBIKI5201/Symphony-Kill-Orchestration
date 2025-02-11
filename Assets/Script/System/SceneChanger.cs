@@ -34,6 +34,12 @@ namespace Orchestration.System
                 Debug.LogError("ロードシーンを読み込めませんでした");
                 return;
             }
+            else
+            {
+                //ロードシーンをアクティブに
+                SceneLoader.GetExistScene(SceneEnum.LoadingScene.ToString(), out Scene scene);
+                SceneManager.SetActiveScene(scene);
+            }
 
             //ロードシーンのマネージャーを取得する
             LoadSceneManager manager = null;
