@@ -96,6 +96,7 @@ MonoBehaviour:
   _target:
     serializedVersion: 2
     m_Bits: 512
+  _particle: {fileID: 8762405910555896786, guid: fcb74f28d107e284e80af037bfec14ca, type: 3}
 --- !u!120 &-5440457604786556256
 LineRenderer:
   serializedVersion: 2
