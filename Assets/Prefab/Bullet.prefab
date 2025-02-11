@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c390ad4dfc4e95c4887597f87805765f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _destroyDistance: 1.2
+  _spread: {x: 0.1, y: 0.1, z: 0.1}
 --- !u!96 &2692023331366773501
 TrailRenderer:
   serializedVersion: 3
@@ -112,7 +114,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.9817116, b: 0, a: 1}
+      key0: {r: 1, g: 0.9817116, b: 0, a: 0.39215687}
       key1: {r: 1, g: 0.13070583, b: 0, a: 0}
       key2: {r: 1, g: 0.4114244, b: 0, a: 0}
       key3: {r: 1, g: 1, b: 1, a: 0}
