@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _icon: {fileID: 2800000, guid: 0def4c8354f9f3141a9e646ce79bd43a, type: 3}
   _name: "\u885B\u751F\u5175"
-  _maxHealthPoint: 350
-  _attack: 0.6
+  _maxHealthPoint: 3500
+  _attack: 6
   _attackRatePerMinute: 900
   _attackRange: 6
   _skillCost: 8
