@@ -89,24 +89,22 @@ namespace Orchestration.Entity
         {
             if (target)
             {
-                float damage = attackData.Damage;
-
                 if (attackData.IsCritical)
                 {
-                    damage *= 3;
+                    attackData.Damage *= 3;
                 }
 
                 //距離減衰
                 float distance = Vector3.Distance(target.transform.position, me.transform.position);
                 float rate = distance / me.Data.AttackRange;
-                damage *= 1 - (1 - me.Data.DistanceDecay) * Mathf.Min(rate, 1);
+                attackData.Damage *= 1 - (1 - me.Data.DistanceDecay) * Mathf.Min(rate, 1);
 
                 foreach (var buff in _buffList)
                 {
-                    damage = buff.Invoke(damage);
+                    attackData.Damage = buff.Invoke(attackData.Damage);
                 }
 
-                target.AddDamage(damage, me);
+                target.AddDamage(attackData, me);
 
                 _attackTimer = Time.time; //インターバルをリセット
             }

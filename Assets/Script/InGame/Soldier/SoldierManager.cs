@@ -164,10 +164,10 @@ namespace Orchestration.Entity
         /// </summary>
         /// <param name="damage"></param>
         /// <param name="target">UŒ‚‚µ‚½‘ÎÛ</param>
-        public virtual void AddDamage(float damage, SoldierManager target)
+        public virtual void AddDamage(AttackData data, SoldierManager target)
         {
-            _data.HealthPoint -= damage;
-            _ui.DamageTextInstantiate(damage);
+            _ui.DamageTextInstantiate(data);
+            _data.HealthPoint -= data.Damage;
         }
 
         /// <summary>

@@ -66,6 +66,7 @@ namespace Orchestration.InGame
             system.OnKillCounterChanged -= KillCountUpdate;
         }
 
+        public void Add(VisualElement element) => _document.rootVisualElement.Add(element);
 
         public void AddSoldierInfo(UnitInfomationSoldier info) => _unitInfo?.AddSoldierInfo(info);
         public void AddSoldierSelector(UnitSelectorSoldier info) => _unitSelector?.AddSoldierInfo(info);

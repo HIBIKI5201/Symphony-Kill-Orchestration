@@ -51,9 +51,9 @@ namespace Orchestration.Entity
             base.OnDeath();
         }
 
-        public override void AddDamage(float damage, SoldierManager target)
+        public override void AddDamage(AttackData data, SoldierManager target)
         {
-            base.AddDamage(damage, target);
+            base.AddDamage(data, target);
 
             //‚à‚µUŒ‚ŠO‚©‚çŒ‚‚½‚ê‚½ê‡‚Í‹ß•t‚­
             if (_data.AttackRange < Vector3.Distance(target.transform.position, transform.position))

@@ -90,14 +90,14 @@ namespace Orchestration.Entity
         /// <summary>
         /// ダメージ表示を追加
         /// </summary>
-        /// <param name="damage"></param>
-        public void DamageTextInstantiate(float damage)
+        /// <param name="data"></param>
+        public void DamageTextInstantiate(AttackData data)
         {
             if (_document && _document.rootVisualElement != null)
             {
                 DamageText text = new DamageText();
-                _document.rootVisualElement.Add(text);
-                text.Init(damage, transform.position);
+                text.Init(data.Damage, transform.position, data.IsCritical);
+                ServiceLocator.GetInstance<IngameUIManager>().Add(text);
             }
         }
 
