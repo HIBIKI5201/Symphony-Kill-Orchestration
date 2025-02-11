@@ -87,5 +87,28 @@ namespace Orchestration.Entity
         [SerializeField]
         private float _attackRange = 1;
         public float AttackRange { get => _attackRange; }
+
+        [Space]
+
+        [SerializeField]
+        private int _skillMaxPoint = 10;
+        public int SkillMaxPoint { get => _skillMaxPoint; }
+
+        private int _skillPoint = 0;
+        public int SkillPoint
+        { 
+            get => _skillPoint;
+            set
+            {
+                _skillPoint = value;
+                SkillPointChanged?.Invoke(_skillPoint);
+            }
+        }
+
+        public event Action<int> SkillPointChanged;
+
+        [SerializeField]
+        private int _skillCost = 10;
+        public int SkillCost { get => _skillCost; }
     }
 }
