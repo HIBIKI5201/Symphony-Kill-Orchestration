@@ -38,6 +38,12 @@ namespace Orchestration.Entity
             {
                 _ui.MoveLineRender(_model.Agent, _model.MoveLineRenderer);
             }
+
+            if (_data.SpecialPoint < _data.MaxSpecialPoint)
+            {
+                //毎秒スキルをチャージ
+                _data.SpecialPointProportion += Time.deltaTime;
+            }
         }
 
         /// <summary>
@@ -84,6 +90,8 @@ namespace Orchestration.Entity
                 {
                     Debug.Log("スキル発動");
                     _skillBase.SkillActive(this);
+
+                    _data.SpecialPoint -= _data.SpecialCost;
                 }
             }
         }
