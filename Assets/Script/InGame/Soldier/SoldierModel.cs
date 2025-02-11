@@ -47,6 +47,10 @@ namespace Orchestration.Entity
         private AudioClip _shootAudioClip;
         public AudioClip ShootAudioClip { get => _shootAudioClip; }
 
+        [SerializeField]
+        private GameObject _bulletPrefab;
+        public GameObject BulletPrefab { get => _bulletPrefab; }
+
         [Header("UI")]
 
         [SerializeField]

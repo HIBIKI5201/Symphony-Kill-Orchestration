@@ -110,8 +110,7 @@ namespace Orchestration.Entity
             {
                 if (_attack.CanAttack(_data.AttackRatePerMinute))
                 {
-                    _attack.AttackEnemy(enemy, _data.Attack, this);
-                    _model.Shoot();
+                    AttackProccess(enemy);
                 }
 
                 //‚‘¬‚Å“G‚Ì•ûŒü‚ÉŒü‚­
@@ -121,6 +120,19 @@ namespace Orchestration.Entity
             {
                 //‚ä‚Á‚­‚èˆÚ“®•ûŒü‚ÉŒü‚­
                 return (_model.Agent.velocity.normalized, 3);
+            }
+        }
+
+        protected virtual void AttackProccess(SoldierManager enemy)
+        {
+            _attack.AttackEnemy(enemy, _data.Attack, this);
+            _model.Shoot();
+
+            //’eŠÛ‚ğ¶¬‚·‚é
+            if (_model.BulletPrefab)
+            {
+                var bullet = Instantiate(_model.BulletPrefab, _model.MuzzleFlash.transform.position, Quaternion.identity);
+                bullet.GetComponent<Bullet>().Init(15, enemy.transform, new Vector3(0, 1, 0));
             }
         }
 
