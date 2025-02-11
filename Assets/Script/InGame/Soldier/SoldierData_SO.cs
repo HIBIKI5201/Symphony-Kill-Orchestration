@@ -75,6 +75,12 @@ namespace Orchestration.Entity
         public float AttackRatePerMinute { get => _attackRatePerMinute; }
 
         [SerializeField]
+        private float _criticalChance = 5;
+        public float CriticalChance { get => _criticalChance; }
+
+        [Space]
+
+        [SerializeField]
         private float _attackRange = 1;
         public float AttackRange { get => _attackRange; }
 
