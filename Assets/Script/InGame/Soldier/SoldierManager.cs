@@ -59,6 +59,8 @@ namespace Orchestration.Entity
 
         private void Start()
         {
+            _ui.MarkColorSet(_model.IconMaterial.color);
+
             Start_S();
         }
 

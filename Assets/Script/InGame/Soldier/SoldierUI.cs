@@ -25,6 +25,11 @@ namespace Orchestration.Entity
             }
         }
 
+        public void MarkColorSet(Color color)
+        {
+            _soldierMark.style.unityBackgroundImageTintColor = color;
+        }
+
         public void AddInfomationForHUD(string name, Texture2D icon)
         {
             var ingameUIManager = ServiceLocator.GetInstance<IngameUIManager>();
