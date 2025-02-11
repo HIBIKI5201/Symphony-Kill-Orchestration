@@ -38,16 +38,6 @@ namespace Orchestration.InGame
             {
                 GridHighLight(hit.point);
             }
-
-
-            #region デバッグ機能
-
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                PauseManager.Pause = !PauseManager.Pause;
-            }
-
-            #endregion
         }
 
         private void OnDestroy()

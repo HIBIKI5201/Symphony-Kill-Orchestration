@@ -12,6 +12,7 @@ namespace Orchestration.System
         public InputContext<Vector2> Move;
         public InputContext<float> Active;
         public InputContext<float> Select;
+        public InputContext<float> Skill;
 
         private void OnEnable()
         {
@@ -34,6 +35,7 @@ namespace Orchestration.System
                 Move = new InputContext<Vector2>(_input.actions["Move"]);
                 Active = new InputContext<float>(_input.actions["Active"]);
                 Select = new InputContext<float>(_input.actions["Select"]);
+                Skill = new InputContext<float>(_input.actions["Skill"]);
             }
         }
 
