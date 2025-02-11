@@ -54,24 +54,6 @@ namespace Orchestration.Entity
         }
         public event Action<float> OnHealthChanged;
 
-        //スタミナ
-        [SerializeField]
-        private float _maxStaminaPoint = 100;
-        public float MaxSpecialPoint { get => _maxStaminaPoint; }
-
-        private int _specialPoint;
-        public int SpecialPoint
-        {
-            get => _specialPoint;
-            set
-            {
-                _specialPoint = value;
-                OnSpecialPointChanged?.Invoke(_specialPoint);
-            }
-        }
-
-        public event Action<int> OnSpecialPointChanged;
-
         [Space]
 
         [Header("攻撃ステータス")]
@@ -88,27 +70,28 @@ namespace Orchestration.Entity
         private float _attackRange = 1;
         public float AttackRange { get => _attackRange; }
 
-        [Space]
+        [Header("スキル")]
+
+        //スペシャルポイント
+        [SerializeField]
+        private int _skillCost = 10;
+        public int SpecialCost { get => _skillCost; }
 
         [SerializeField]
-        private int _skillMaxPoint = 10;
-        public int SkillMaxPoint { get => _skillMaxPoint; }
+        private float _maxSpecialPoint = 100;
+        public float MaxSpecialPoint { get => _maxSpecialPoint; }
 
-        private int _skillPoint = 0;
-        public int SkillPoint
-        { 
-            get => _skillPoint;
+        private int _specialPoint;
+        public int SpecialPoint
+        {
+            get => _specialPoint;
             set
             {
-                _skillPoint = value;
-                SkillPointChanged?.Invoke(_skillPoint);
+                _specialPoint = value;
+                OnSpecialPointChanged?.Invoke(_specialPoint);
             }
         }
 
-        public event Action<int> SkillPointChanged;
-
-        [SerializeField]
-        private int _skillCost = 10;
-        public int SkillCost { get => _skillCost; }
+        public event Action<int> OnSpecialPointChanged;
     }
 }
