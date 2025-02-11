@@ -89,6 +89,11 @@ namespace Orchestration.Entity
         {
             if (target)
             {
+                //ãóó£å∏êä
+                float distance = Vector3.Distance(target.transform.position, me.transform.position);
+                float rate = distance / me.Data.AttackRange;
+                damage *= 1 - (1 - me.Data.DistanceDecay) * Mathf.Min(rate, 1);
+
                 foreach (var buff in _buffList)
                 {
                     damage = buff.Invoke(damage);

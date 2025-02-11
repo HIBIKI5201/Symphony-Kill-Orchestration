@@ -78,6 +78,10 @@ namespace Orchestration.Entity
         private float _attackRange = 1;
         public float AttackRange { get => _attackRange; }
 
+        [SerializeField]
+        private float _distanceDecay = 0.8f;
+        public float DistanceDecay { get => _distanceDecay; }
+
         [Header("スキル")]
 
         //スペシャルポイント

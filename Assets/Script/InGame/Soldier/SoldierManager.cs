@@ -15,6 +15,7 @@ namespace Orchestration.Entity
     {
         [SerializeField]
         protected SoldierData_SO _data;
+        public SoldierData_SO Data { get => _data; }
 
         protected SoldierModel _model;
 
