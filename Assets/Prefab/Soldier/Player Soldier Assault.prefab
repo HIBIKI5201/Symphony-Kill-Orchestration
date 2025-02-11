@@ -205,7 +205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb82c1ff32e48574fbaa4cad7241b983, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soldierData: {fileID: 11400000, guid: 39af459fb4741a840a3b30ba81179c61, type: 2}
+  _data: {fileID: 11400000, guid: 39af459fb4741a840a3b30ba81179c61, type: 2}
 --- !u!120 &-5440457604786556256
 LineRenderer:
   serializedVersion: 2
