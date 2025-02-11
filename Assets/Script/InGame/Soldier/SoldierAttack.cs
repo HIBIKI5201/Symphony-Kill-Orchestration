@@ -1,4 +1,6 @@
 using SymphonyFrameWork.CoreSystem;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -7,6 +9,8 @@ namespace Orchestration.Entity
     public class SoldierAttack : MonoBehaviour
     {
         private float _attackTimer;
+
+        private List<Func<float, float>> _buffList = new();
 
         private void Update()
         {
@@ -85,10 +89,18 @@ namespace Orchestration.Entity
         {
             if (target)
             {
+                foreach (var buff in _buffList)
+                {
+                    damage = buff.Invoke(damage);
+                }
+
                 target.AddDamage(damage, me);
 
                 _attackTimer = Time.time; //インターバルをリセット
             }
         }
+
+        public void AddBuff(Func<float, float> func) => _buffList.Add(func);
+        public void RemoveBuff(Func<float, float> func) => _buffList.Remove(func);
     }
 }

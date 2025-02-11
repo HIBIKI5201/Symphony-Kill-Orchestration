@@ -1,4 +1,5 @@
 using SymphonyFrameWork.CoreSystem;
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -119,6 +120,18 @@ namespace Orchestration.Entity
             {
                 //‚ä‚Á‚­‚èˆÚ“®•ûŒü‚ÉŒü‚­
                 return (_model.Agent.velocity.normalized, 3);
+            }
+        }
+
+        public void AttackBuff(Func<float, float> func, bool active)
+        {
+            if (active)
+            {
+                _attack.AddBuff(func);
+            }
+            else
+            {
+                _attack.RemoveBuff(func);
             }
         }
 
