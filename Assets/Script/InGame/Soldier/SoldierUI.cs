@@ -88,6 +88,17 @@ namespace Orchestration.Entity
         }
 
         /// <summary>
+        /// ダメージ表示を追加
+        /// </summary>
+        /// <param name="damage"></param>
+        public void DamageTextInstantiate(float damage)
+        {
+            DamageText text = new DamageText();
+            _document.rootVisualElement.Add(text);
+            text.Init(damage, transform.position);
+        }
+
+        /// <summary>
         /// ヘルスバーの量を更新する
         /// </summary>
         /// <param name="proportion"></param>
