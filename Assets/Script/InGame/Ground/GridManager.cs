@@ -103,7 +103,14 @@ namespace Orchestration.InGame
         /// <returns></returns>
         public async Task ChunkBuild(GameObject chunkPrefab)
         {
-            GameObject chunk = Instantiate(chunkPrefab, new Vector3(_lastChunkPos, 0, 0), Quaternion.identity);
+            //ƒ‰ƒ“ƒ_ƒ€‚È‰ñ“]‚ğ‰Á‚¦‚é
+            float randomRotation = UnityEngine.Random.Range(0, 4) * 90;
+
+            //ƒ`ƒƒƒ“ƒN‚ğ¶¬
+            GameObject chunk = Instantiate(chunkPrefab,
+                new Vector3(_lastChunkPos, 0, 0),
+                Quaternion.Euler(new Vector3(0, randomRotation, 0) + chunkPrefab.transform.eulerAngles));
+            
             chunk.transform.parent = transform;
 
             _lastChunkPos += GroundManager.ChunkSize;

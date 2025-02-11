@@ -55,6 +55,10 @@ namespace Orchestration.InGame
             system.OnStageChanged += MoveBoundaryLine;
         }
 
+        /// <summary>
+        /// ‹«ŠEü‚ğˆÚ“®‚³‚¹‚é
+        /// </summary>
+        /// <param name="count"></param>
         private async void MoveBoundaryLine(int count)
         {
             float nextPosX = count * ChunkSize + _firstBoundaryLineX;
