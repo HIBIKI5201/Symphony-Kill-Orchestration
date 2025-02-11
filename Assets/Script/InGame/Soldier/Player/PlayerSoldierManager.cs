@@ -8,6 +8,8 @@ namespace Orchestration.Entity
 {
     public class PlayerSoldierManager : SoldierManager
     {
+        public Vector3 AgentDestination { get => _model.Agent.destination; }
+
         public override void Awake_S()
         {
             base.Awake_S();
