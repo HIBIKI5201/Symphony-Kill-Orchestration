@@ -65,7 +65,7 @@ namespace Orchestration.Entity
         /// ヘルスバーの位置を更新する
         /// </summary>
         /// <param name="pos"></param>
-        public void HealthBarMove(Vector3 pos, Vector3 healthBarOffset)
+        public void MarkMove(Vector3 pos, Vector3 healthBarOffset)
         {
             if (_soldierMark == null)
             {

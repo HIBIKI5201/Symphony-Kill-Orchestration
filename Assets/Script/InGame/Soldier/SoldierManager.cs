@@ -90,6 +90,9 @@ namespace Orchestration.Entity
 
             //移動
             _move.Move(_model.Agent, _model.Animator);
+
+            //ヘルスバーの位置更新
+            _ui.MarkMove(transform.position, _model.HealthBarOffset);
         }
 
         /// <summary>

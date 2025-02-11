@@ -30,9 +30,6 @@ namespace Orchestration.Entity
         {
             base.Update_S();
 
-            //ヘルスバーの位置更新
-            _ui.HealthBarMove(transform.position, _model.HealthBarOffset);
-
             //移動経路線を描画
             if (_model.Agent.path.corners.Length > 0)
             {
