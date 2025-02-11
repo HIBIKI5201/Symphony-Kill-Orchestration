@@ -22,7 +22,8 @@ namespace Orchestration.InGame
         [SerializeField]
         private float _boundaryLineSpeed = 5;
 
-        public const int ChunkCapacity = 4;
+        public const int NextBoundaryLineCount = 3;
+        public const int ChunkCapacity = 5;
         public const float ChunkSize = 10;
 
         private void OnEnable()
@@ -74,7 +75,7 @@ namespace Orchestration.InGame
 
             //ˆÚ“®Š®—¹‚µ‚½‚ç®”’l‚É–ß‚·
             _overBoundaryLine.position = new Vector3(nextPosX, _overBoundaryLine.position.y, _overBoundaryLine.position.z);
-            _nextBoundaryLine.position = new Vector3(nextPosX + ChunkSize * 2, _nextBoundaryLine.position.y, _nextBoundaryLine.position.z);
+            _nextBoundaryLine.position = new Vector3(nextPosX + ChunkSize * NextBoundaryLineCount, _nextBoundaryLine.position.y, _nextBoundaryLine.position.z);
         }
 
         /// <summary>

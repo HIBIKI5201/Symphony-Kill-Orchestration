@@ -60,8 +60,9 @@ namespace Orchestration.InGame
             {
                 //•ºŽm‚ªNext‹«ŠEüˆÈã‚É‚¢‚é‚©‚Ç‚¤‚©
                 if (soldier.transform.position.x >
-                    system.StageCounter * GroundManager.ChunkSize + groundManager.FirstBoundaryLineX
-                    + GroundManager.ChunkSize * 2)
+                    system.StageCounter * GroundManager.ChunkSize
+                    + groundManager.FirstBoundaryLineX
+                    + GroundManager.ChunkSize * (GroundManager.NextBoundaryLineCount - 1))
                 {
                     system.NextStage();
                     break;
