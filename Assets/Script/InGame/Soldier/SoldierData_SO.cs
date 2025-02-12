@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Orchestration.Entity
@@ -68,6 +69,12 @@ namespace Orchestration.Entity
             {
                 float amount = value;
 
+                //バフ効果を受ける
+                foreach (var buff in _healthBuffList)
+                {
+                    amount = buff.Invoke(value);
+                }
+
                 if (MaxHealthPoint < amount)
                 {
                     amount = MaxHealthPoint;
@@ -79,14 +86,31 @@ namespace Orchestration.Entity
         }
         public event Action<float> OnHealthChanged;
 
+        private List<Func<float, float>> _healthBuffList = new();
+
+        public void AddHealthBuff(Func<float, float> func) => _healthBuffList.Add(func);
+        public void RemoveHealthBuff(Func<float, float> func) => _healthBuffList.Remove(func);
+
         [Space]
 
         [Header("攻撃ステータス")]
 
         [SerializeField]
         private float _attack = 10;
-        public float Attack { get => _attack; }
+        public float Attack
+        {
+            get
+            {
+                float value = _attack;
 
+                foreach (var buff in _attackBuffList)
+                {
+                    value = buff.Invoke(value);
+                }
+
+                return value;
+            }
+        }
         [SerializeField]
         private float _attackRatePerMinute = 600;
         public float AttackRatePerMinute { get => _attackRatePerMinute; }
@@ -94,6 +118,12 @@ namespace Orchestration.Entity
         [SerializeField]
         private float _criticalChance = 5;
         public float CriticalChance { get => _criticalChance; }
+
+        private List<Func<float, float>> _attackBuffList = new();
+
+        public void AddAttackBuff(Func<float, float> func) => _attackBuffList.Add(func);
+        public void RemoveAttackBuff(Func<float, float> func) => _attackBuffList.Remove(func);
+
 
         [Space]
 
@@ -150,7 +180,7 @@ namespace Orchestration.Entity
                 }
 
                 OnSpecialPointProportionChanged?.Invoke(proportion);
-               _specialPointProportion = proportion;
+                _specialPointProportion = proportion;
             }
         }
 

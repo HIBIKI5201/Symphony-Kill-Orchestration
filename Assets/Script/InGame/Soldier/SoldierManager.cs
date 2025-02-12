@@ -155,11 +155,23 @@ namespace Orchestration.Entity
         {
             if (active)
             {
-                _attack.AddBuff(func);
+                _data.AddAttackBuff(func);
             }
             else
             {
-                _attack.RemoveBuff(func);
+                _data.RemoveAttackBuff(func);
+            }
+        }
+
+        public void HealthBuff(Func<float, float> func, bool active)
+        {
+            if (active)
+            {
+                _data.AddHealthBuff(func);
+            }
+            else
+            {
+                _data.RemoveHealthBuff(func);
             }
         }
 

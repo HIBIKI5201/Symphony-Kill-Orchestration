@@ -10,8 +10,6 @@ namespace Orchestration.Entity
     {
         private float _attackTimer;
 
-        private List<Func<float, float>> _buffList = new();
-
         private void Update()
         {
             //ポーズ中はタイマーを保つ
@@ -99,19 +97,12 @@ namespace Orchestration.Entity
                 float rate = distance / me.Data.AttackRange;
                 attackData.Damage *= 1 - (1 - me.Data.DistanceDecay) * Mathf.Min(rate, 1);
 
-                foreach (var buff in _buffList)
-                {
-                    attackData.Damage = buff.Invoke(attackData.Damage);
-                }
-
                 target.AddDamage(attackData, me);
 
                 _attackTimer = Time.time; //インターバルをリセット
             }
         }
 
-        public void AddBuff(Func<float, float> func) => _buffList.Add(func);
-        public void RemoveBuff(Func<float, float> func) => _buffList.Remove(func);
     }
 
     public struct AttackData
