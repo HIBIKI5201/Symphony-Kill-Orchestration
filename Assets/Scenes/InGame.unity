@@ -434,7 +434,9 @@ MonoBehaviour:
   _gridPrefab: {fileID: 4214150798941196078, guid: 62aca0bfaacb29947a343d770e710416, type: 3}
   _unselectGridMaterial: {fileID: 2100000, guid: 1cf04cdae9bd1a14d966d084a123ea73, type: 2}
   _selectGridMaterial: {fileID: 2100000, guid: 53eb311c2de861e47b481529c02e2442, type: 2}
-  _normalChunkPrefab: {fileID: 3023448487693573733, guid: ae2f1af10df48d0488f7f0599613a9a4, type: 3}
+  _normalChunkPrefab:
+  - {fileID: 3023448487693573733, guid: 0a32cd81206a8b2498c0b1836ce31d2d, type: 3}
+  - {fileID: 3023448487693573733, guid: ae2f1af10df48d0488f7f0599613a9a4, type: 3}
   _enemyChunkPrefabList:
   - {fileID: 3023448487693573733, guid: 2fcb1b30c2702d146b34d1b10ca6b185, type: 3}
   - {fileID: 3023448487693573733, guid: 740a03272d992cc469a2d4fddd88a7e1, type: 3}

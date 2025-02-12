@@ -86,6 +86,54 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1953388447761326294, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
+      propertyPath: m_PropertySheet.m_NamedObject.m_Array.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1953388447761326294, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1953388447761326294, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
+      propertyPath: m_PropertySheet.m_NamedObject.m_Array.Array.data[1].m_Name
+      value: Shell
+      objectReference: {fileID: 0}
+    - target: {fileID: 1953388447761326294, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
+      propertyPath: m_PropertySheet.m_NamedObject.m_Array.Array.data[2].m_Name
+      value: Metallic Map
+      objectReference: {fileID: 0}
+    - target: {fileID: 1953388447761326294, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
+      propertyPath: m_PropertySheet.m_NamedObject.m_Array.Array.data[3].m_Name
+      value: Normal Map
+      objectReference: {fileID: 0}
+    - target: {fileID: 1953388447761326294, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
+      propertyPath: m_PropertySheet.m_NamedObject.m_Array.Array.data[1].m_Value
+      value: 
+      objectReference: {fileID: 5143040753161359390, guid: fb6bc006cdfdf5b41bcbe02775b29407, type: 3}
+    - target: {fileID: 1953388447761326294, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
+      propertyPath: m_PropertySheet.m_NamedObject.m_Array.Array.data[2].m_Value
+      value: 
+      objectReference: {fileID: 2800000, guid: 5e21f0f2409d2e546b81a639ebb078c0, type: 3}
+    - target: {fileID: 1953388447761326294, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
+      propertyPath: m_PropertySheet.m_NamedObject.m_Array.Array.data[3].m_Value
+      value: 
+      objectReference: {fileID: 2800000, guid: 2d201d2882f838c40ab0a53808b12fd6, type: 3}
+    - target: {fileID: 1953388447761326294, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
+      propertyPath: m_PropertySheet.m_NamedObject.m_Array.Array.data[0].m_Overridden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1953388447761326294, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
+      propertyPath: m_PropertySheet.m_NamedObject.m_Array.Array.data[1].m_Overridden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1953388447761326294, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
+      propertyPath: m_PropertySheet.m_NamedObject.m_Array.Array.data[2].m_Overridden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1953388447761326294, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
+      propertyPath: m_PropertySheet.m_NamedObject.m_Array.Array.data[3].m_Overridden
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2852204906293816622, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
