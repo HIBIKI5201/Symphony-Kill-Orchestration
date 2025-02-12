@@ -1,5 +1,6 @@
 using Orchestration.UI;
 using SymphonyFrameWork.CoreSystem;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -13,6 +14,7 @@ namespace Orchestration.InGame
         private UnitInfomation _unitInfo;
         private UnitSelector _unitSelector;
         private StageInfomation _stageInfo;
+        private ResultWindow _resultWindow;
 
         private Transform _miniMapCamera;
 
@@ -41,6 +43,7 @@ namespace Orchestration.InGame
                 _unitInfo = root.Q<UnitInfomation>();
                 _unitSelector = root.Q<UnitSelector>();
                 _stageInfo = root.Q<StageInfomation>();
+                _resultWindow = root.Q<ResultWindow>();
             }
 
             _miniMapCamera = GetComponentInChildren<Camera>().transform;
@@ -89,5 +92,8 @@ namespace Orchestration.InGame
 
         public void CountUpdate(int count) => _stageInfo?.CountUpdate(count);
         public void KillCountUpdate(int count) => _stageInfo?.KillCountUpdate(count);
+
+        public async Task ResultWindowStart(int score, int stage, int kill) =>
+            await _resultWindow.ResultWindowStart(score, stage, kill);
     }
 }
