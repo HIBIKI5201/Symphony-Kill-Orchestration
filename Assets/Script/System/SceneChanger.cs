@@ -1,5 +1,4 @@
 using SymphonyFrameWork.CoreSystem;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +9,7 @@ namespace Orchestration.System
         private string _currentSceneName;
 
         private bool _isLoading;
+        public bool IsLoading { get => _isLoading; }
 
         public SceneChanger()
         {

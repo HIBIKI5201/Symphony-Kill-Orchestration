@@ -9,6 +9,8 @@ namespace Orchestration
         private SceneChanger _changer;
         private SystemUIManager _systemUIManager;
 
+        public bool IsSceneLoading { get => _changer.IsLoading; }
+
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static async void SystemSceneLoad()
         {

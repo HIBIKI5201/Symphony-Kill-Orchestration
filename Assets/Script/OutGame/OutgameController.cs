@@ -25,13 +25,18 @@ namespace Orchestration.OutGame
         private void StartGame()
         {
             GameLogic logic = ServiceLocator.GetInstance<GameLogic>();
-            logic.SceneChange(SceneEnum.InGame);
 
-            if (_playerController)
+            //ロード中でなければゲームをスタート
+            if (!logic.IsSceneLoading)
             {
-                _playerController.Active.OnStarted -= StartGame;
-                _playerController.Move.OnStarted -= StartGame;
-                _playerController.Select.OnStarted -= StartGame;
+                logic.SceneChange(SceneEnum.InGame);
+
+                if (_playerController)
+                {
+                    _playerController.Active.OnStarted -= StartGame;
+                    _playerController.Move.OnStarted -= StartGame;
+                    _playerController.Select.OnStarted -= StartGame;
+                }
             }
         }
     }
