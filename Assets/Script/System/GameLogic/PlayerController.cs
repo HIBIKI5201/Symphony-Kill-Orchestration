@@ -13,6 +13,7 @@ namespace Orchestration.System
         public InputContext<float> Active;
         public InputContext<float> Select;
         public InputContext<float> Skill;
+        public InputContext<float> Zoom;
 
         private void OnEnable()
         {
@@ -36,6 +37,7 @@ namespace Orchestration.System
                 Active = new InputContext<float>(_input.actions["Active"]);
                 Select = new InputContext<float>(_input.actions["Select"]);
                 Skill = new InputContext<float>(_input.actions["Skill"]);
+                Zoom = new InputContext<float>(_input.actions["Zoom"]);
             }
         }
 
