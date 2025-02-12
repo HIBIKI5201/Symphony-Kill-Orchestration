@@ -15,6 +15,7 @@ namespace Orchestration.InGame
         public event Action<int> OnKillCounterChanged;
 
         public event Action OnResultOpen;
+        public event Action OnResultEnd;
 
         private int _activeEnemyValue = 0;
 
@@ -77,12 +78,23 @@ namespace Orchestration.InGame
             _activeEnemyValue += value;
         }
 
-        public void ResultOpen()
+        public async void ResultOpen()
         {
+            //ゲームをポーズする
+            PauseManager.Pause = true;
+
+            //リザルト開始時のイベント
             OnResultOpen?.Invoke();
 
-            var logic = ServiceLocator.GetInstance<GameLogic>();
-            logic.SceneChange(SceneEnum.Home);
+            int score = _killCounter * 100 + _stageCounter * 50;
+
+            //リザルトウィンドウの演出
+            var ui = ServiceLocator.GetInstance<IngameUIManager>();
+            await ui.ResultWindowStart(score, _stageCounter * 10, _killCounter);
+
+
+            //リザルト演出終了時のイベント
+            OnResultEnd?.Invoke();
         }
     }
 }
