@@ -194,45 +194,46 @@ namespace Orchestration.System
                 }
             }
         }
+        /*
+                #region OnGUI
 
-        #region OnGUI
-
-        private GUIStyle Style
-        {
-            get
-            {
-                GUIStyle style = new GUIStyle();
-                style = new GUIStyle();
-                style.fontSize = 30;
-                style.normal.textColor = Color.gray;
-                return style;
-            }
-        }
-
-        /// <summary>
-        /// 試しにOnGUIを使用してみた
-        /// </summary>
-        private void OnGUI()
-        {
-            List<string> logs = new();
-
-            foreach (string name in Enum.GetNames(typeof(AudioType)))
-            {
-                if (_mixer.GetFloat($"{name}_Volume", out float value))
+                private GUIStyle Style
                 {
-                    logs.Add($"{name} volume : {value}");
+                    get
+                    {
+                        GUIStyle style = new GUIStyle();
+                        style = new GUIStyle();
+                        style.fontSize = 30;
+                        style.normal.textColor = Color.gray;
+                        return style;
+                    }
                 }
-            }
 
-            float y = 10;
-            foreach (string log in logs)
-            {
-                GUI.Label(new Rect(0, y, 350, 40), log, Style);
-                y += 40;
-            }
-        }
+                /// <summary>
+                /// 試しにOnGUIを使用してみた
+                /// </summary>
+                private void OnGUI()
+                {
+                    List<string> logs = new();
 
-        #endregion
+                    foreach (string name in Enum.GetNames(typeof(AudioType)))
+                    {
+                        if (_mixer.GetFloat($"{name}_Volume", out float value))
+                        {
+                            logs.Add($"{name} volume : {value}");
+                        }
+                    }
+
+                    float y = 10;
+                    foreach (string log in logs)
+                    {
+                        GUI.Label(new Rect(0, y, 350, 40), log, Style);
+                        y += 40;
+                    }
+                }
+
+                #endregion
+        */
     }
 
     public enum AudioType
@@ -242,4 +243,5 @@ namespace Orchestration.System
         SE,
         Voice,
     }
+
 }
