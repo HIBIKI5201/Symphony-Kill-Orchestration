@@ -5,4 +5,5 @@
     <Orchestration.UI.UnitSelector class="text" />
     <Orchestration.UI.StageInfomation class="text" />
     <Orchestration.UI.ResultWindow />
+    <Orchestration.UI.SkillInfomation />
 </engine:UXML>

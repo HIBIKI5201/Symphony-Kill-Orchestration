@@ -1,0 +1,10 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/USS/text.uss?fileID=7433441132597879392&amp;guid=532b434e280348644b8ef36234fdc00b&amp;type=3#text" />
+    <engine:VisualElement class="text" style="width: 30%; height: 35%; position: absolute; bottom: 0; left: 0; background-color: rgb(26, 26, 26);">
+        <engine:Label text="スキル" style="font-size: 40%; -unity-text-align: middle-center; width: 100%; height: 10%; margin-top: 2%; margin-right: 0; margin-bottom: 2%; margin-left: 0;" />
+        <engine:VisualElement style="width: 100%; height: 100%; padding-top: 2%; padding-right: 2%; padding-bottom: 2%; padding-left: 2%;">
+            <engine:Label text="スキル名" name="name" style="-unity-text-align: upper-center; font-size: 60%; height: 20%; width: 100%;" />
+            <engine:Label text="説明" name="explanation" style="-unity-text-align: upper-left; width: 100%; height: 80%; font-size: 40%; padding-top: 3%; padding-right: 3%; padding-bottom: 3%; padding-left: 3%; white-space: normal;" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>
