@@ -117,7 +117,7 @@ namespace Orchestration.InGame
         }
 
         /// <summary>
-        /// •ºm‚ğƒJƒƒ‰‚Ì³–Ê•ûŒü‚ÉˆÚ“®‚³‚¹‚é
+        /// •ºm‚ğ‘I‘ğ‚µ‚½êŠ‚ÉˆÚ“®‚³‚¹‚é
         /// </summary>
         public void SoldierMove(Vector3 point)
         {
@@ -129,6 +129,10 @@ namespace Orchestration.InGame
 
         public void SkillActive(float value) => _selectSolider.SkillActive();
 
+        /// <summary>
+        /// ‹«ŠEüŠO‚É‚¢‚é•ºm‚ğ‹«ŠEü“à‚ÌˆÊ’u‚ÉˆÚ“®‚³‚¹‚é
+        /// </summary>
+        /// <param name="count"></param>
         private void BorderOutSoldierMove(int count)
         {
             var manager = ServiceLocator.GetInstance<GroundManager>();

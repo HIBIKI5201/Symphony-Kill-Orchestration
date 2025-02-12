@@ -70,7 +70,11 @@ namespace Orchestration.InGame
                 _overBoundaryLine.position += new Vector3(_boundaryLineSpeed * Time.deltaTime, 0, 0);
                 _nextBoundaryLine.position += new Vector3(_boundaryLineSpeed * Time.deltaTime, 0, 0);
 
-                await Awaitable.NextFrameAsync();
+                try
+                {
+                    await Awaitable.NextFrameAsync(destroyCancellationToken);
+                }
+                catch { }
             }
 
             //ˆÚ“®Š®—¹‚µ‚½‚ç®”’l‚É–ß‚·
