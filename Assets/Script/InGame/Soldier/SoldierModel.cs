@@ -19,9 +19,10 @@ namespace Orchestration.Entity
 
         private AudioSource _foodStepAudio;
         public AudioSource FoodStepAudio { get => _foodStepAudio; }
+        private bool _isFoodStepPlayed;
         #endregion
 
-        [Header("Attack")]
+[Header("Attack")]
 
         [SerializeField, Tooltip("攻撃したい兵士のレイヤー")]
         private LayerMask _targetLayer;
@@ -154,10 +155,24 @@ namespace Orchestration.Entity
             if (pause)
             {
                 _animator.speed = 0;
+
+                //もし歩きサウンドが再生中だったら状態を保存して停止
+                if (_foodStepAudio.isPlaying)
+                {
+                    _isFoodStepPlayed = true;
+                    _foodStepAudio.Stop();
+                }
             }
             else
             {
                 _animator.speed = 1;
+
+                //もし歩きサウンドが再生していたら再開
+                if (_isFoodStepPlayed)
+                {
+                    _isFoodStepPlayed = false;
+                    _foodStepAudio.Play();
+                }
             }
         }
     }
