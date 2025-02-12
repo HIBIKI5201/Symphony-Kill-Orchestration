@@ -116,7 +116,7 @@ namespace SymphonyFrameWork.CoreSystem
                 }
             }
 
-            Debug.LogError($"{typeof(T).Name} ‚Í“o˜^‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB");
+            Debug.LogWarning($"{typeof(T).Name} ‚Í“o˜^‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB");
             return null;
         }
 
