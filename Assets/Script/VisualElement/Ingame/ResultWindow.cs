@@ -22,7 +22,7 @@ namespace Orchestration.UI
         {
             _score = container.Q<VisualElement>("score");
 
-            _scoreCounter = container.Q<Label>("stage-counter");
+            _stageCounter = container.Q<Label>("stage-counter");
             _killCounter = container.Q<Label>("kill-counter");
             _scoreCounter = container.Q<Label>("score-counter");
 
