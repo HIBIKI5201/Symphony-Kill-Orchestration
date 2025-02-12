@@ -1,6 +1,8 @@
 using Orchestration.System;
 using SymphonyFrameWork.CoreSystem;
 using SymphonyFrameWork.Utility;
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Animations.Rigging;
@@ -22,13 +24,13 @@ namespace Orchestration.Entity
         private bool _isFoodStepPlayed;
         #endregion
 
-        [Header("Attack")]
+        [Header("攻撃")]
 
         [SerializeField, Tooltip("攻撃したい兵士のレイヤー")]
         private LayerMask _targetLayer;
         public LayerMask TargetLayer { get => _targetLayer; }
 
-        [Header("Animation")]
+        [Header("演出")]
 
         [SerializeField, Tooltip("上半身のリグ")]
         private Rig _forwardRig;
@@ -43,21 +45,23 @@ namespace Orchestration.Entity
         private VisualEffect _muzzleFlash;
         public VisualEffect MuzzleFlash { get => _muzzleFlash; }
 
-        [Header("Audio")]
-        [SerializeField, Tooltip("マズルのオーディオソース")]
-        private AudioSource _muzzleAudio;
+        [SerializeField]
+        private Light _muzzleFlashLight;
+        private Task _muzzleFlashLightTask;
 
         [SerializeField]
-        private AudioClip _shootAudioClip;
-        public AudioClip ShootAudioClip { get => _shootAudioClip; }
+        private VisualEffect _shellVFX;
 
         [SerializeField]
         private GameObject _bulletPrefab;
         public GameObject BulletPrefab { get => _bulletPrefab; }
 
+        [Header("オーディオ")]
+        [SerializeField, Tooltip("マズルのオーディオソース")]
+        private AudioSource _muzzleAudio;
+
         [SerializeField]
-        private VisualEffect _shellVFX;
-        public VisualEffect ShellVFX { get => _shellVFX; }
+        private AudioClip _shootAudioClip;
 
         [Header("UI")]
 
@@ -103,6 +107,11 @@ namespace Orchestration.Entity
                 _muzzleAudio.outputAudioMixerGroup = ServiceLocator.GetInstance<AudioManager>().GetMixerGroup(System.AudioType.SE);
                 _muzzleAudio.playOnAwake = false;
                 _muzzleAudio.spatialBlend = 1;
+            }
+
+            if (_muzzleFlashLight)
+            {
+                _muzzleFlashLight.enabled = false;
             }
 
             if (_agent.NullCheckComponent("NavMeshAgentが見つかりません"))
@@ -156,6 +165,34 @@ namespace Orchestration.Entity
             if (_shellVFX)
             {
                 _shellVFX.Play();
+            }
+
+            if (_muzzleFlashLight)
+            {
+                //まだライトが付いているならスキップ
+                if (_muzzleFlashLightTask != null && !_muzzleFlashLightTask.IsCompleted)
+                {
+                    goto MuzzleFlashEnd;
+                }
+
+                _muzzleFlashLightTask = LightUp(destroyCancellationToken);
+
+                async Task LightUp(CancellationToken token)
+                {
+                    const float interval = 0.025f;
+                    try
+                    {
+                        _muzzleFlashLight.enabled = true;
+                        await Awaitable.WaitForSecondsAsync(interval, token);
+                    }
+                    finally
+                    {
+                        _muzzleFlashLight.enabled = false;
+                        await Awaitable.WaitForSecondsAsync(interval, token);
+                    }
+                }
+
+            MuzzleFlashEnd:;
             }
         }
 
