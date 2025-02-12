@@ -69,12 +69,6 @@ namespace Orchestration.Entity
             {
                 float amount = value;
 
-                //ƒoƒtŒø‰Ê‚ðŽó‚¯‚é
-                foreach (var buff in _healthBuffList)
-                {
-                    amount = buff.Invoke(value);
-                }
-
                 if (MaxHealthPoint < amount)
                 {
                     amount = MaxHealthPoint;
@@ -85,11 +79,6 @@ namespace Orchestration.Entity
             }
         }
         public event Action<float> OnHealthChanged;
-
-        private List<Func<float, float>> _healthBuffList = new();
-
-        public void AddHealthBuff(Func<float, float> func) => _healthBuffList.Add(func);
-        public void RemoveHealthBuff(Func<float, float> func) => _healthBuffList.Remove(func);
 
         [Space]
 

@@ -1,6 +1,7 @@
 using Orchestration.InGame;
 using SymphonyFrameWork.CoreSystem;
 using SymphonyFrameWork.Utility;
+using System;
 using UnityEngine;
 
 namespace Orchestration.Entity
@@ -10,6 +11,8 @@ namespace Orchestration.Entity
         public Vector3 AgentDestination { get => _model.Agent.destination; }
 
         private SkillBase _skillBase;
+
+        private bool _isSupportBuff; //ˆê’Uboolen‚É‚µ‚Ä‘Îˆ
         public override void Awake_S()
         {
             base.Awake_S();
@@ -42,6 +45,21 @@ namespace Orchestration.Entity
                 _data.SpecialPointProportion += Time.deltaTime / 4;
             }
         }
+
+        public override void AddDamage(AttackData data, SoldierManager target)
+        {
+            if (_isSupportBuff)
+            {
+                data.Damage = 0;
+            }
+            base.AddDamage(data, target);
+        }
+
+        public void SupportBuff(bool active)
+        {
+            _isSupportBuff = active;
+        }
+
 
         /// <summary>
         /// ‘I‘ğ‚³‚ê‚½‚Ì‰‰o

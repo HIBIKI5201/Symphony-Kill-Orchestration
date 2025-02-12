@@ -163,18 +163,6 @@ namespace Orchestration.Entity
             }
         }
 
-        public void HealthBuff(Func<float, float> func, bool active)
-        {
-            if (active)
-            {
-                _data.AddHealthBuff(func);
-            }
-            else
-            {
-                _data.RemoveHealthBuff(func);
-            }
-        }
-
         /// <summary>
         /// ˆÚ“®–Ú•W‚ğXV
         /// </summary>
