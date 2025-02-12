@@ -64,9 +64,13 @@ namespace Orchestration.InGame
         private void OnDestroy()
         {
             IngameSystemManager system = ServiceLocator.GetInstance<IngameSystemManager>();
-            system.OnStageChanged -= MoveMiniMapCamera;
-            system.OnStageChanged -= CountUpdate;
-            system.OnKillCounterChanged -= KillCountUpdate;
+
+            if (system)
+            {
+                system.OnStageChanged -= MoveMiniMapCamera;
+                system.OnStageChanged -= CountUpdate;
+                system.OnKillCounterChanged -= KillCountUpdate;
+            }
         }
 
         public void Add(VisualElement element) => _document.rootVisualElement.Add(element);
