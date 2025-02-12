@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbc7e78a1ba261346952add81bf3cdd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healAmountPercent: 60
+  _healAmountPercent: 15
   _particle: {fileID: 4515497926535975121, guid: bddb971e34eb14d48be30c7b922eb077, type: 3}
 --- !u!120 &-5440457604786556256
 LineRenderer:
