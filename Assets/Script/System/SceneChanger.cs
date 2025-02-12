@@ -25,6 +25,7 @@ namespace Orchestration.System
                 return;
             }
             _isLoading = true;
+            PauseManager.Pause = true;
 
             await FadeOut(1.5f);
 
@@ -115,6 +116,7 @@ namespace Orchestration.System
 
             await FadeIn(1.5f);
 
+            PauseManager.Pause = false;
             _isLoading = false;
         }
 
