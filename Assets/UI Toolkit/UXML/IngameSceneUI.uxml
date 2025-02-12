@@ -4,4 +4,5 @@
     <Orchestration.UI.UnitInfomation class="text" />
     <Orchestration.UI.UnitSelector class="text" />
     <Orchestration.UI.StageInfomation class="text" />
+    <Orchestration.UI.ResultWindow />
 </engine:UXML>
