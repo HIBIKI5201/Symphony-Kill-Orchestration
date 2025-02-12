@@ -56,8 +56,15 @@ namespace Orchestration.Entity
             get => _healthPoint;
             set
             {
-                _healthPoint = value;
-                OnHealthChanged?.Invoke(_healthPoint);
+                float amount = value;
+
+                if (MaxHealthPoint < amount)
+                {
+                    amount = MaxHealthPoint;
+                }
+
+                _healthPoint = amount;
+                OnHealthChanged?.Invoke(amount);
             }
         }
         public event Action<float> OnHealthChanged;
@@ -96,8 +103,8 @@ namespace Orchestration.Entity
         public int SpecialCost { get => _skillCost; }
 
         [SerializeField]
-        private float _maxSpecialPoint = 10;
-        public float MaxSpecialPoint { get => _maxSpecialPoint; }
+        private int _maxSpecialPoint = 10;
+        public int MaxSpecialPoint { get => _maxSpecialPoint; }
 
         private int _specialPoint;
         public int SpecialPoint
@@ -105,8 +112,15 @@ namespace Orchestration.Entity
             get => _specialPoint;
             set
             {
-                _specialPoint = value;
-                OnSpecialPointChanged?.Invoke(_specialPoint);
+                int amount = value;
+
+                if (MaxSpecialPoint < amount)
+                {
+                    amount = MaxSpecialPoint;
+                }
+
+                _specialPoint = amount;
+                OnSpecialPointChanged?.Invoke(amount);
             }
         }
 
