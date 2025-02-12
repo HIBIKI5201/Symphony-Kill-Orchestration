@@ -88,20 +88,23 @@ namespace Orchestration.InGame
             {
                 controller.Select.OnStarted += ResultCotrol;
             }
+        }
 
-            void ResultCotrol(float c)
+        private void ResultCotrol(float c)
+        {
+            var logic = ServiceLocator.GetInstance<GameLogic>();
+
+            if (0 < c)
             {
-                var logic = ServiceLocator.GetInstance<GameLogic>();
-
-                if (0 < c)
-                {
-                    logic.SceneChange(SceneEnum.Home);
-                }
-                else
-                {
-                    logic.SceneChange(SceneEnum.InGame);
-                }
+                logic.SceneChange(SceneEnum.Home);
             }
+            else
+            {
+                logic.SceneChange(SceneEnum.InGame);
+            }
+
+            var controller = ServiceLocator.GetInstance<PlayerController>();
+            controller.Select.OnStarted -= ResultCotrol;
         }
 
         private void OnDrawGizmos()
