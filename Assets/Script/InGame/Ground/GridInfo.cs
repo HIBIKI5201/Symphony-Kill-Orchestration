@@ -13,21 +13,30 @@ namespace Orchestration.InGame
         [SerializeField]
         private GameObject _ground;
 
+        private MeshRenderer _hightLightRenderer;
         private MeshRenderer _groundRenderer;
 
-        private bool _isActive;
-        public bool IsActive { get => _isActive; set => _isActive = value; }
+        [Space]
+
+        [SerializeField]
+        private Material _highLightMaterial;
+        [SerializeField]
+        private Material _highLightMaterialWarning;
+
+        private bool _isUsed;
+        public bool IsUsed { get => _isUsed; set => _isUsed = value; }
 
         private Vector3Int _position;
         public Vector3Int Position { get => _position; }
 
         private void Awake()
         {
-            _isActive = true;
+            _isUsed = false;
 
             if (_highLight)
             {
                 _highLight.SetActive(false);
+                _hightLightRenderer = _highLight.GetComponent<MeshRenderer>();
             }
             else
             {
@@ -54,6 +63,8 @@ namespace Orchestration.InGame
         public void HighLightSetActive(bool value)
         {
             _highLight?.SetActive(value);
+            _hightLightRenderer.material =
+                !_isUsed ? _highLightMaterial : _highLightMaterialWarning;
         }
 
         public void GroundMaterialChange(Material material)

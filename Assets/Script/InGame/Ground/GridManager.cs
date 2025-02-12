@@ -356,6 +356,7 @@ namespace Orchestration.InGame
             if (!_usedGridList.Contains(info))
             {
                 _usedGridList.Add(info);
+                info.IsUsed = true;
                 return true;
             }
 
@@ -367,7 +368,15 @@ namespace Orchestration.InGame
         /// </summary>
         /// <param name="info"></param>
         /// <returns></returns>
-        public bool TryUnregisterGridInfo(GridInfo info) => _usedGridList.Remove(info);
+        public bool TryUnregisterGridInfo(GridInfo info)
+        {
+            if (_usedGridList.Remove(info))
+            {
+                info.IsUsed = false;
+                return true;
+            }
+            return false;
+        }
 
         /// <summary>
         /// グリッドが使用済みに登録されているかどうか

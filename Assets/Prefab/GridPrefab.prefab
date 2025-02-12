@@ -48,6 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _highLight: {fileID: 5900513945747325688}
   _ground: {fileID: 4235605637153058621}
+  _highLightMaterial: {fileID: 2100000, guid: db28330cfff713f43a4efa24d44974f2, type: 2}
+  _highLightMaterialWarning: {fileID: 2100000, guid: 3a157cf2cad720a4dafc0456400520d6, type: 2}
 --- !u!1 &4235605637153058621
 GameObject:
   m_ObjectHideFlags: 0
