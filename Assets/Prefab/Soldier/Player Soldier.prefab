@@ -9,6 +9,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1953388447761326294, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
+      propertyPath: m_InitialEventName
+      value: OnStop
+      objectReference: {fileID: 0}
+    - target: {fileID: 1953388447761326294, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
+      propertyPath: m_InitialEventNameOverriden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1953388447761326294, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
       propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Value
       value: 5
       objectReference: {fileID: 0}
