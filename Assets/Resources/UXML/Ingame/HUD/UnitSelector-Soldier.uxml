@@ -5,7 +5,7 @@
         <engine:VisualElement name="icon" style="width: 100%; height: 60%; align-self: center; -unity-background-scale-mode: scale-to-fit; padding-top: 5%; padding-right: 5%; padding-bottom: 5%; padding-left: 5%;" />
         <engine:VisualElement style="width: 100%; height: 25%; flex-direction: row; padding-top: 3%; padding-right: 3%; padding-bottom: 3%; padding-left: 3%;">
             <engine:VisualElement style="width: 25%; height: 100%; justify-content: center;">
-                <engine:Label text="0" name="count" style="font-size: 60%; color: rgb(255, 255, 255); -unity-text-align: middle-center;" />
+                <engine:Label text="0" name="count" style="font-size: 50%; color: rgb(255, 255, 255); -unity-text-align: middle-center; width: 100%; height: 100%; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
             </engine:VisualElement>
             <engine:VisualElement style="flex-grow: 1; height: 100%; width: 75%; justify-content: center;">
                 <engine:VisualElement style="height: 40%; background-color: rgb(77, 77, 77);">
