@@ -1,3 +1,5 @@
+using Orchestration.InGame;
+using SymphonyFrameWork.CoreSystem;
 using System;
 using System.Linq;
 using UnityEngine;
@@ -31,11 +33,19 @@ namespace Orchestration.Entity
                     .Select(c => c.GetComponent<SoldierManager>())
                     .Where(sm => sm).ToArray();
 
-                //バフを追加する
+                //味方にバフを追加する
                 int count = soldiers.Length;
-                Func<float, float> buff = Buff;
+                Func<float, float> buff = damage => damage * (1 + (_buffAmountPercent * count / 100));
 
-                soldier.AttackBuff(buff, true);
+                var unit = ServiceLocator.GetInstance<UnitManager>();
+                if (unit)
+                {
+                    foreach (var s in unit.UnitSoldiers)
+                    {
+                        s.AttackBuff(buff, true);
+                    }
+                }
+
 
                 var attackModule = GetComponent<SoldierAttack>();
 
@@ -51,12 +61,6 @@ namespace Orchestration.Entity
                 BuffCancel(buff, soldier);
 
                 return true;
-
-                //バフの効果
-                float Buff(float damage)
-                {
-                    return damage * (1 + (_buffAmountPercent * count / 100));
-                }
             }
             return false;
         }
@@ -69,7 +73,14 @@ namespace Orchestration.Entity
             }
             finally
             {
-                soldier.AttackBuff(buff, false);
+                var unit = ServiceLocator.GetInstance<UnitManager>();
+                if (unit)
+                {
+                    foreach (var s in unit.UnitSoldiers)
+                    {
+                        s.AttackBuff(buff, false);
+                    }
+                }
             }
         }
     }
