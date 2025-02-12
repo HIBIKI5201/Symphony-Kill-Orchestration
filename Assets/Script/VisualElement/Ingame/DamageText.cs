@@ -15,6 +15,7 @@ namespace Orchestration.UI
         protected override Task Initialize_S(TemplateContainer container)
         {
             _text = container.Q<Label>("Text");
+            style.visibility = Visibility.Hidden;
 
             return Task.CompletedTask;
         }
@@ -23,8 +24,10 @@ namespace Orchestration.UI
         {
             position += new Vector3(0, 1.5f, 0);
 
-            await Awaitable.NextFrameAsync();
+            await Awaitable.NextFrameAsync(); //UIÇÃèâä˙âªë“Çø
 
+            style.visibility = Visibility.Visible;
+            
             _text.text = Mathf.Floor(damage).ToString("0");
 
             if (highLight)
