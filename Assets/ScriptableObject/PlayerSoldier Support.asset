@@ -23,5 +23,5 @@ MonoBehaviour:
   _criticalChance: 20
   _attackRange: 7
   _distanceDecay: 0.5
-  _skillCost: 8
-  _maxSpecialPoint: 10
+  _skillCost: 12
+  _maxSpecialPoint: 12
