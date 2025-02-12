@@ -47,7 +47,7 @@ namespace Orchestration.InGame
         [Space]
 
         [SerializeField]
-        private GameObject _normalChunkPrefab;
+        private List<GameObject> _normalChunkPrefab;
 
         [SerializeField]
         private List<GameObject> _enemyChunkPrefabList = new();
@@ -81,7 +81,8 @@ namespace Orchestration.InGame
 
             for (int i = 0; i < GroundManager.ChunkCapacity; i++)
             {
-                await ChunkBuild(_normalChunkPrefab);
+                int random = UnityEngine.Random.Range(0, _normalChunkPrefab.Count);
+                await ChunkBuild(_normalChunkPrefab[random]);
             }
 
             IsInitializeDone = true;
