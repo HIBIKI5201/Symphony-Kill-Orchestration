@@ -57,7 +57,6 @@ namespace Orchestration.Entity
             //自身の位置をAgentに同期
             transform.position = agent.nextPosition;
 
-            Debug.Log("magnitude is " + localNextPos.magnitude);
             //歩きサウンドを再生
             if (0 < localNextPos.magnitude)
             {
