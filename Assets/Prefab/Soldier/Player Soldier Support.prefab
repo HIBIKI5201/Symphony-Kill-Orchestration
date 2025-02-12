@@ -328,6 +328,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad51db397b6f6cc4f931a050c4931264, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _duration: 6
+  _particle: {fileID: 1835355836541019294, guid: 4790206eadc817b4196e071640e653af, type: 3}
 --- !u!120 &-5440457604786556256
 LineRenderer:
   serializedVersion: 2
