@@ -96,9 +96,14 @@ namespace Orchestration.InGame
             int index = UnityEngine.Random.Range(0, _enemyChunkPrefabList.Count);
             GameObject chunk = _enemyChunkPrefabList[index];
 
-            await ChunkBuild(chunk);
-
-            IsInitializeDone = true;
+            try
+            {
+                await ChunkBuild(chunk);
+            }
+            finally
+            {
+                IsInitializeDone = true;
+            }
         }
 
         /// <summary>
