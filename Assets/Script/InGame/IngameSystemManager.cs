@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Orchestration.InGame
 {
-    public class IngameSystemManager : MonoBehaviour
+    public class IngameSystemManager : MonoBehaviour, PauseManager.IPausable
     {
         private int _stageCounter = 0;
         public int StageCounter { get => _stageCounter; }
@@ -25,14 +25,18 @@ namespace Orchestration.InGame
         private float _stageLimit = 10;
         private float _stageTimer = 0;
 
+        private bool _isPause;
+
         private void OnEnable()
         {
             ServiceLocator.SetInstance(this);
+            PauseManager.IPausable.RegisterPauseManager(this);
         }
 
         private void OnDisable()
         {
             ServiceLocator.DestroyInstance(this);
+            PauseManager.IPausable.UnregisterPauseManager(this);
         }
 
         private void Start()
@@ -45,6 +49,11 @@ namespace Orchestration.InGame
 
         private void Update()
         {
+            if (_isPause)
+            {
+                _stageTimer += Time.deltaTime;
+            }
+
             if (_stageTimer + _stageLimit < Time.time)
             {
                 NextStage();
@@ -54,6 +63,11 @@ namespace Orchestration.InGame
         public async void NextStage()
         {
             await Task.Yield();
+
+            if (destroyCancellationToken.IsCancellationRequested)
+            {
+                return;
+            }
 
             _stageCounter++;
             OnStageChanged?.Invoke(_stageCounter);
@@ -105,6 +119,16 @@ namespace Orchestration.InGame
 
             //リザルト演出終了時のイベント
             OnResultEnd?.Invoke();
+        }
+
+        public void Pause()
+        {
+            _isPause = true;
+        }
+
+        public void Resume()
+        {
+            _isPause = false;
         }
 
         private enum ActiveEnemyUpdateMode { Add, Remove }
