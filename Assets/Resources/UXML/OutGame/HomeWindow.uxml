@@ -1,6 +1,10 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/USS/button.uss?fileID=7433441132597879392&amp;guid=682f31145780442488d450ca3d2d4b8c&amp;type=3#button" />
-    <engine:VisualElement style="position: absolute; right: 10%; bottom: 10%; width: 20%; height: 10%; background-color: rgb(0, 0, 0);">
-        <engine:Label text="Press Any Button&#10;To Start" style="width: 100%; height: 100%; font-size: 50%; -unity-text-align: middle-center; color: rgb(255, 255, 255); white-space: pre; text-overflow: ellipsis;" />
+    <Style src="project://database/Assets/UI%20Toolkit/USS/text.uss?fileID=7433441132597879392&amp;guid=532b434e280348644b8ef36234fdc00b&amp;type=3#text" />
+    <engine:VisualElement class="text" style="position: absolute; right: 5%; bottom: 10%; width: 40%; height: 80%; align-items: center;">
+        <engine:Label text="Symphony Kill&#10;The Orchastration&#10;" style="width: 100%; height: 40%; font-size: 90%; -unity-text-align: middle-center; -unity-font-style: normal;" />
+        <engine:VisualElement style="width: 100%; height: 100%; margin-top: 30%;">
+            <engine:Label text="Press Any Button&#10;To Start" style="width: 100%; height: 100%; font-size: 50%; -unity-text-align: middle-center; color: rgb(255, 255, 255); white-space: pre; text-overflow: ellipsis;" />
+        </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>
