@@ -132,6 +132,10 @@ namespace Orchestration.InGame
         private void BorderOutSoldierMove(int count)
         {
             var manager = ServiceLocator.GetInstance<GroundManager>();
+            if (manager)
+            {
+                return;
+            }
 
             float lineX = count * GroundManager.ChunkSize + manager.FirstBoundaryLineX;
 

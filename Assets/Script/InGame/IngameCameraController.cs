@@ -103,7 +103,14 @@ namespace Orchestration.InGame
             {
                 _configer.position += new Vector3(_configerSpeed * Time.deltaTime, 0, 0);
 
-                await Awaitable.NextFrameAsync(destroyCancellationToken);
+                try
+                {
+                    await Awaitable.NextFrameAsync(destroyCancellationToken);
+                }
+                catch
+                {
+                    return;
+                }
             }
 
             //ˆÚ“®Š®—¹‚µ‚½‚ç®”’l‚É–ß‚·

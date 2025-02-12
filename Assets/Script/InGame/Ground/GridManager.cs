@@ -98,6 +98,11 @@ namespace Orchestration.InGame
 
             try
             {
+                if (destroyCancellationToken.IsCancellationRequested)
+                {
+                    return;
+                }
+
                 await ChunkBuild(chunk);
             }
             finally
@@ -268,7 +273,9 @@ namespace Orchestration.InGame
                     count: list.Count,
                     parent: rootObj.transform,
                     positions: new Span<Vector3>(list.ToArray()),
-                    rotations: new Span<Quaternion>(Enumerable.Repeat(Quaternion.identity, list.Count).ToArray()));
+                    rotations: new Span<Quaternion>(Enumerable.Repeat(Quaternion.identity, list.Count).ToArray()),
+                    cancellationToken: destroyCancellationToken);
+
 
                 //生成したオブジェクトのGridInfoを取得
                 for (int i = 0; i < objects.Length; i++)
