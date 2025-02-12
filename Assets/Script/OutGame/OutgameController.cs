@@ -12,29 +12,28 @@ namespace Orchestration.OutGame
             var playerController = ServiceLocator.GetInstance<PlayerController>();
             if (playerController)
             {
-                playerController.Active.OnStarted += StartGame;
-                playerController.Move.OnStarted += StartGame;
-                playerController.Select.OnStarted += StartGame;
+                playerController.Active.OnStarted += StartGameFloat;
+                playerController.Move.OnStarted += StartGameVector;
+                playerController.Select.OnStarted += StartGameFloat;
             }
-        }
 
-        private void StartGame(float _) => StartGame();
-        private void StartGame(Vector2 _) => StartGame();
-        private void StartGame()
-        {
-            GameLogic logic = ServiceLocator.GetInstance<GameLogic>();
-
-            var playerController = ServiceLocator.GetInstance<PlayerController>();
-
-            //ロード中でなければゲームをスタート
-            if (!logic.IsSceneLoading && playerController)
+            //ゲームスタートのメソッド
+            void StartGame()
             {
-                logic.SceneChange(SceneEnum.InGame);
+                GameLogic logic = ServiceLocator.GetInstance<GameLogic>();
 
-                playerController.Active.OnStarted -= StartGame;
-                playerController.Move.OnStarted -= StartGame;
-                playerController.Select.OnStarted -= StartGame;
+                //ロード中でなければゲームをスタート
+                if (!logic.IsSceneLoading && playerController)
+                {
+                    logic.SceneChange(SceneEnum.InGame);
+
+                    playerController.Active.OnStarted -= StartGameFloat;
+                    playerController.Move.OnStarted -= StartGameVector;
+                    playerController.Select.OnStarted -= StartGameFloat;
+                }
             }
+            void StartGameFloat(float _) => StartGame();
+            void StartGameVector(Vector2 _) => StartGame();
         }
     }
 }
