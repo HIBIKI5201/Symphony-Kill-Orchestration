@@ -1,7 +1,6 @@
 using SymphonyFrameWork.Utility;
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 
 namespace Orchestration.UI
@@ -48,18 +47,18 @@ namespace Orchestration.UI
             await Awaitable.WaitForSecondsAsync(0.5f);
 
             //ステージカウントをカウントアップ
-            await CountUp(_stageCounter, stage, 2, "m");
+            await CountUp(_stageCounter, stage, 1, "m");
 
             await Awaitable.WaitForSecondsAsync(0.25f);
 
             //キルカウントをカウントアップ
-            await CountUp(_killCounter, kill, 2);
+            await CountUp(_killCounter, kill, 1);
 
 
             await Awaitable.WaitForSecondsAsync(0.25f);
 
             //スコアをカウントアップ
-            await CountUp(_scoreCounter, score, 2);
+            await CountUp(_scoreCounter, score, 1);
 
             await Awaitable.WaitForSecondsAsync(0.5f);
 
@@ -74,7 +73,7 @@ namespace Orchestration.UI
             {
                 float proportion = (Time.time - timer) / duration;
 
-                label.text = count * proportion + unit;
+                label.text = (count * proportion).ToString("0") + unit;
 
                 await Awaitable.NextFrameAsync();
             }

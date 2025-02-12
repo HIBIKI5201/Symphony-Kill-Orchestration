@@ -22,7 +22,7 @@ namespace Orchestration.Entity
         private bool _isFoodStepPlayed;
         #endregion
 
-[Header("Attack")]
+        [Header("Attack")]
 
         [SerializeField, Tooltip("UŒ‚‚µ‚½‚¢•ºm‚ÌƒŒƒCƒ„[")]
         private LayerMask _targetLayer;
