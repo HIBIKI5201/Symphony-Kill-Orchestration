@@ -6,7 +6,7 @@ namespace Orchestration.OutGame
 {
     public class OutgameController : MonoBehaviour
     {
-        PlayerController _playerController;
+        private PlayerController _playerController;
 
         private void Start()
         {
@@ -20,16 +20,6 @@ namespace Orchestration.OutGame
             }
         }
 
-        private void OnDestroy()
-        {
-            if (_playerController)
-            {
-                _playerController.Active.OnStarted -= StartGame;
-                _playerController.Move.OnStarted -= StartGame;
-                _playerController.Select.OnStarted -= StartGame;
-            }
-        }
-
         private void StartGame(float _) => StartGame();
         private void StartGame(Vector2 _) => StartGame();
         private void StartGame()
@@ -37,10 +27,12 @@ namespace Orchestration.OutGame
             GameLogic logic = ServiceLocator.GetInstance<GameLogic>();
             logic.SceneChange(SceneEnum.InGame);
 
-            //“ü—Í‚ðƒŠƒZƒbƒg‚·‚é
-            _playerController.Active.Reset();
-            _playerController.Move.Reset();
-            _playerController.Select.Reset();
+            if (_playerController)
+            {
+                _playerController.Active.OnStarted -= StartGame;
+                _playerController.Move.OnStarted -= StartGame;
+                _playerController.Select.OnStarted -= StartGame;
+            }
         }
     }
 }
