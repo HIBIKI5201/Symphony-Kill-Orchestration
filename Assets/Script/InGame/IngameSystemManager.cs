@@ -1,6 +1,7 @@
 using Orchestration.System;
 using SymphonyFrameWork.CoreSystem;
 using System;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Orchestration.InGame
@@ -50,8 +51,10 @@ namespace Orchestration.InGame
             }
         }
 
-        public void NextStage()
+        public async void NextStage()
         {
+            await Task.Yield();
+
             _stageCounter++;
             OnStageChanged?.Invoke(_stageCounter);
 
@@ -63,26 +66,27 @@ namespace Orchestration.InGame
             _killCounter++;
             OnKillCounterChanged?.Invoke(_killCounter);
 
-            ChangeActiveEnemy(-1);
-            if (_activeEnemyValue == 0)
-            {
-                NextStage();
-            }
+            ChangeActiveEnemy(-1, ActiveEnemyUpdateMode.Remove);
         }
 
         /// <summary>
         /// アクティブな敵を追加
         /// </summary>
         /// <param name="value"></param>
-        public void AddAcviveEnemy(int value) => ChangeActiveEnemy(value);
+        public void AddAcviveEnemy(int value) => ChangeActiveEnemy(value, ActiveEnemyUpdateMode.Add);
 
-        private void ChangeActiveEnemy(int value)
+        private void ChangeActiveEnemy(int value, ActiveEnemyUpdateMode mode)
         {
             lock (_enemyValueLock)
             {
                 _activeEnemyValue += value;
 
                 Debug.Log($"{value} : {_activeEnemyValue}");
+
+                if (mode == ActiveEnemyUpdateMode.Remove && _activeEnemyValue <= 0)
+                {
+                    NextStage();
+                }
             }
         }
 
@@ -104,5 +108,7 @@ namespace Orchestration.InGame
             //リザルト演出終了時のイベント
             OnResultEnd?.Invoke();
         }
+
+        private enum ActiveEnemyUpdateMode { Add, Remove }
     }
 }
