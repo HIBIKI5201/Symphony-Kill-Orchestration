@@ -30,12 +30,20 @@ namespace Orchestration.InGame
         public void Pause() => _isPause = true;
         public void Resume() => _isPause = false;
 
+        private void OnEnable()
+        {
+            PauseManager.IPausable.RegisterPauseManager(this);
+        }
+
+        private void OnDisable()
+        {
+            PauseManager.IPausable.UnregisterPauseManager(this);
+        }
+
         private void Awake()
         {
             _camera = GetComponentInChildren<CinemachineCamera>();
             _configer = GetComponentInChildren<Collider>().transform;
-
-            PauseManager.IPausable.RegisterPauseManager(this);
 
             _firstPosX = _configer.transform.position.x;
         }
