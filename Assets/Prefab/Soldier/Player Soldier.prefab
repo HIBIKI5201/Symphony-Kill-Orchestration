@@ -73,7 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb82c1ff32e48574fbaa4cad7241b983, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soldierData: {fileID: 11400000, guid: 6b6b8f7323687c04ea62386d4cbf411d, type: 2}
+  _data: {fileID: 0}
 --- !u!120 &-5440457604786556256
 LineRenderer:
   serializedVersion: 2
@@ -140,8 +140,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0, g: 0.9635854, b: 1, a: 1}
-      key1: {r: 0.7528302, g: 0.9740376, b: 1, a: 1}
+      key0: {r: 0, g: 0.9635854, b: 1, a: 0.39215687}
+      key1: {r: 0.7528302, g: 0.9740376, b: 1, a: 0.39215687}
       key2: {r: 0, g: 0, b: 0, a: 1}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
