@@ -116,10 +116,7 @@ namespace Orchestration.Entity
             //üˆÍ‚É“G‚ª‚¢‚éê‡‚ÍUŒ‚A‚¢‚È‚¢ê‡‚ÍˆÚ“®•ûŒü‚ğŒü‚­
             if (_attack.SearchTarget(_data.AttackRange, _model.TargetLayer, out var enemy))
             {
-                if (_attack.CanAttack(_data.AttackRatePerMinute))
-                {
-                    AttackProccess(enemy);
-                }
+                AttackProccess(enemy);
 
                 //‚‘¬‚Å“G‚Ì•ûŒü‚ÉŒü‚­
                 return ((enemy.transform.position - transform.position).normalized, 5);
@@ -133,9 +130,15 @@ namespace Orchestration.Entity
 
         protected virtual void AttackProccess(SoldierManager enemy)
         {
+            //UŒ‚‚Å‚«‚È‚¢‚È‚çƒŠƒ^[ƒ“
+            if (!_attack.CanAttack(_data.AttackRatePerMinute))
+            {
+                return;
+            }
+
             float random = UnityEngine.Random.Range(0, 100);
 
-
+            //“G‚Éƒ_ƒ[ƒW‚ğ—^‚¦‚é
             _attack.AttackEnemy(enemy, new (_data.Attack, isCritical: random < _data.CriticalChance), this);
             _model.Shoot();
 

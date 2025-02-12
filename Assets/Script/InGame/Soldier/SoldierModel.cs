@@ -55,6 +55,10 @@ namespace Orchestration.Entity
         private GameObject _bulletPrefab;
         public GameObject BulletPrefab { get => _bulletPrefab; }
 
+        [SerializeField]
+        private VisualEffect _shellVFX;
+        public VisualEffect ShellVFX { get => _shellVFX; }
+
         [Header("UI")]
 
         [SerializeField]
@@ -147,6 +151,11 @@ namespace Orchestration.Entity
             if (_animator)
             {
                 _animator.SetTrigger("ShootTrigger");
+            }
+
+            if (_shellVFX)
+            {
+                _shellVFX.Play();
             }
         }
 
