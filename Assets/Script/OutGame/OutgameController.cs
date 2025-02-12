@@ -6,8 +6,10 @@ namespace Orchestration.OutGame
 {
     public class OutgameController : MonoBehaviour
     {
-        private void Start()
+        private async void Start()
         {
+            await Awaitable.WaitForSecondsAsync(1.5f);
+
             //何かの入力があった時にゲームを開始する
             var playerController = ServiceLocator.GetInstance<PlayerController>();
             if (playerController)
@@ -20,13 +22,11 @@ namespace Orchestration.OutGame
             //ゲームスタートのメソッド
             void StartGame()
             {
-                GameLogic logic = ServiceLocator.GetInstance<GameLogic>();
+                var system = ServiceLocator.GetInstance<OutGameSystemManager>();
 
-                //ロード中でなければゲームをスタート
-                if (!logic.IsSceneLoading && playerController)
+                //ロードが成功したら操作を解除
+                if (system.InGameLoad() && playerController)
                 {
-                    logic.SceneChange(SceneEnum.InGame);
-
                     playerController.Active.OnStarted -= StartGameFloat;
                     playerController.Move.OnStarted -= StartGameVector;
                     playerController.Select.OnStarted -= StartGameFloat;
