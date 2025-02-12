@@ -39,19 +39,6 @@ namespace Orchestration.Entity
             }
         }
 
-        protected override void OnDeath()
-        {
-            var system = ServiceLocator.GetInstance<IngameSystemManager>();
-            //死亡時にシステムに通告
-            if (system)
-            {
-                system.KillEnemy();
-            }
-            else Debug.LogError("インゲームシステムが見つかりませんでした");
-
-            base.OnDeath();
-        }
-
         public override void AddDamage(AttackData data, SoldierManager target)
         {
             base.AddDamage(data, target);
@@ -135,6 +122,16 @@ namespace Orchestration.Entity
         End:
             SetDestination(info.transform.position);
             return; // 最も近いグリッドが見つかったら終了
+        }
+
+        private void OnDestroy()
+        {
+            var system = ServiceLocator.GetInstance<IngameSystemManager>();
+            //死亡時にシステムに通告
+            if (system)
+            {
+                system.KillEnemy();
+            }
         }
     }
 }

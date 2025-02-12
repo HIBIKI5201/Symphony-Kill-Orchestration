@@ -81,8 +81,6 @@ namespace Orchestration.InGame
             {
                 _activeEnemyValue += value;
 
-                Debug.Log($"{value} : {_activeEnemyValue}");
-
                 if (mode == ActiveEnemyUpdateMode.Remove && _activeEnemyValue <= 0)
                 {
                     NextStage();
