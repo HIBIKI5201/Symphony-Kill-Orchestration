@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _icon: {fileID: 2800000, guid: 0def4c8354f9f3141a9e646ce79bd43a, type: 3}
   _name: "\u30A2\u30B5\u30EB\u30C8"
+  _skillName: "\u5BA3\u6226\u5E03\u544A"
+  _skillExplanation: "SP\u30927\u3067\u4F7F\u7528\u53EF\u80FD\n\u81EA\u8EAB\u306E\u653B\u6483\u7BC4\u56F2\u5185\u306E\u6575\u306E\u6570\xD7\u653B\u6483\u529B50%\u5897\u52A0\u309210\u79D2\u9593\u767A\u52D5\u3057\u3001\u653B\u6483\u7BC4\u56F2\u5185\u306E\u5168\u3066\u306E\u6575\u306B\u653B\u6483\u3092\u4E0E\u3048\u308B\u3002"
   _maxHealthPoint: 5000
   _attack: 25
   _attackRatePerMinute: 600

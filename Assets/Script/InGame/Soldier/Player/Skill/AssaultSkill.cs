@@ -6,10 +6,11 @@ namespace Orchestration.Entity
 {
     public class AssaultSkill : SkillBase
     {
-        private float _buffStrength = 50;
+        [SerializeField]
+        private float _buffAmountPercent = 50;
 
         [SerializeField]
-        private float _duration = 4;
+        private float _duration = 10;
 
         [SerializeField]
         private LayerMask _target;
@@ -54,7 +55,7 @@ namespace Orchestration.Entity
                 //ƒoƒt‚ÌŒø‰Ê
                 float Buff(float damage)
                 {
-                    return damage * (1 + (_buffStrength * count / 100));
+                    return damage * (1 + (_buffAmountPercent * count / 100));
                 }
             }
             return false;
