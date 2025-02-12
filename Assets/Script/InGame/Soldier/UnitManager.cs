@@ -22,6 +22,7 @@ namespace Orchestration.InGame
 
         private PlayerSoldierManager _selectSolider;
 
+        public PlayerSoldierManager[] UnitSoldiers { get => _soldiers.Values.ToArray(); }
         private void OnEnable()
         {
             ServiceLocator.SetInstance(this);
