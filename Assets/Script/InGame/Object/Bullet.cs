@@ -6,8 +6,10 @@ namespace Orchestration
     public class Bullet : MonoBehaviour
     {
         private Transform _target;
-        private float _speed;
         private Vector3 _offset;
+
+        [SerializeField]
+        private float _speed = 5;
 
         [SerializeField]
         private float _destroyDistance = 1;
