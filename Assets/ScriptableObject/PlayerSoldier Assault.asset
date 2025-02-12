@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerSoldier Assault
   m_EditorClassIdentifier: 
   _icon: {fileID: 2800000, guid: 0def4c8354f9f3141a9e646ce79bd43a, type: 3}
-  _name: "\u7A81\u6483\u5175"
+  _name: "\u30A2\u30B5\u30EB\u30C8"
   _maxHealthPoint: 5000
   _attack: 25
   _attackRatePerMinute: 600
