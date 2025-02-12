@@ -1,0 +1,30 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/USS/text.uss?fileID=7433441132597879392&amp;guid=532b434e280348644b8ef36234fdc00b&amp;type=3#text" />
+    <engine:VisualElement class="text" style="position: absolute; width: 100%; height: 100%; align-items: center; justify-content: center;">
+        <engine:VisualElement style="width: 60%; height: 80%; background-color: rgba(0, 0, 0, 0.7); align-items: center; justify-content: center;">
+            <engine:Label text="リザルト" style="font-size: 125%; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%; padding-top: 2%; padding-right: 2%; padding-bottom: 2%; padding-left: 2%;" />
+            <engine:VisualElement name="score" style="width: 70%; height: 30%; align-items: center; justify-content: center; margin-top: 3%; margin-right: 3%; margin-bottom: 3%; margin-left: 3%;">
+                <engine:VisualElement style="flex-direction: row; width: 100%; height: 100%; justify-content: center; align-items: center; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%;">
+                    <engine:Label text="進行距離" style="font-size: 75%; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%; width: 50%; height: 100%; -unity-text-align: middle-right;" />
+                    <engine:Label text="0m" name="stage-counter" style="font-size: 75%; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%; -unity-text-align: middle-right; width: 50%; height: 100%;" />
+                </engine:VisualElement>
+                <engine:VisualElement style="flex-direction: row; width: 100%; height: 100%; justify-content: center; align-items: center; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%;">
+                    <engine:Label text="撃破数" style="font-size: 75%; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%; width: 50%; height: 100%; -unity-text-align: middle-right;" />
+                    <engine:Label text="0" name="kill-counter" style="font-size: 75%; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%; -unity-text-align: middle-right; width: 50%; height: 100%;" />
+                </engine:VisualElement>
+                <engine:VisualElement style="flex-direction: row; width: 100%; height: 100%; justify-content: center; align-items: center; margin-top: 5%;">
+                    <engine:Label text="スコア" style="font-size: 75%; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%; width: 50%; height: 100%; -unity-text-align: middle-right;" />
+                    <engine:Label text="0" name="score-counter" style="font-size: 75%; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%; -unity-text-align: middle-right; width: 50%; height: 100%;" />
+                </engine:VisualElement>
+            </engine:VisualElement>
+            <engine:VisualElement name="buttons" style="width: 80%; height: 10%; flex-direction: row; justify-content: space-between; margin-top: 2%; margin-right: 2%; margin-bottom: 2%; margin-left: 2%;">
+                <engine:VisualElement style="width: 35%; height: 100px; background-color: rgb(26, 26, 26);">
+                    <engine:Label text="リスタート　Q" style="width: 100%; height: 100%; font-size: 60%; -unity-text-align: middle-center;" />
+                </engine:VisualElement>
+                <engine:VisualElement style="width: 35%; background-color: rgb(26, 26, 26);">
+                    <engine:Label text="タイトル　E" style="width: 100%; height: 100%; font-size: 60%; -unity-text-align: middle-center;" />
+                </engine:VisualElement>
+            </engine:VisualElement>
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>
