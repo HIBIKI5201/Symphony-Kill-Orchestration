@@ -1,6 +1,5 @@
 using Orchestration.System;
 using SymphonyFrameWork.CoreSystem;
-using System.Xml.Serialization;
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -51,6 +50,9 @@ namespace Orchestration.InGame
         private void Start()
         {
             _brain = Camera.main.GetComponent<CinemachineBrain>();
+
+
+            _brain.transform.position = _camera.transform.position;
 
             PlayerController controller = ServiceLocator.GetInstance<PlayerController>();
 
