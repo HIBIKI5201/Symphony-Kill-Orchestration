@@ -26,6 +26,16 @@ namespace Orchestration.Entity
 
         protected bool _isPause;
 
+        private void OnEnable()
+        {
+            PauseManager.IPausable.RegisterPauseManager(this);
+        }
+
+        private void OnDisable()
+        {
+            PauseManager.IPausable.UnregisterPauseManager(this);
+        }
+
         private void Awake()
         {
             var data = Instantiate(_data);
@@ -38,8 +48,6 @@ namespace Orchestration.Entity
             _move = GetComponent<SoldierMove>();
 
             _ui = GetComponent<SoldierUI>();
-
-            PauseManager.IPausable.RegisterPauseManager(this);
 
             Awake_S();
         }
