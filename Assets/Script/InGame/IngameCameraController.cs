@@ -133,13 +133,21 @@ namespace Orchestration.InGame
             Collider current = _confiner.BoundingVolume;
 
             //次のコライダーに変更
-            int index = Array.IndexOf(_configers, current);
-            index = ++index % _configers.Length;
-            _confiner.BoundingVolume = _configers[index];
+            if (current)
+            {
+                int index = Array.IndexOf(_configers, current);
+                index = ++index % _configers.Length;
+                _confiner.BoundingVolume = _configers[index];
 
-            //同じ位置関係に移動
-            Vector3 localPos = current.transform.InverseTransformPoint(_camera.transform.position);
-            _brain.transform.position = _configers[index].transform.position + localPos;
+
+                //同じ位置関係に移動
+                Vector3 localPos = current.transform.InverseTransformPoint(_camera.transform.position);
+                _brain.transform.position = _configers[index].transform.position + localPos;
+            }
+            else
+            {
+                _confiner.BoundingVolume = _configers.FirstOrDefault();
+            }
         }
     }
 }
