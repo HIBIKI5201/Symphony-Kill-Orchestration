@@ -6,17 +6,15 @@ namespace Orchestration.OutGame
 {
     public class OutgameController : MonoBehaviour
     {
-        private PlayerController _playerController;
-
         private void Start()
         {
             //何かの入力があった時にゲームを開始する
-            _playerController = ServiceLocator.GetInstance<PlayerController>();
-            if (_playerController)
+            var playerController = ServiceLocator.GetInstance<PlayerController>();
+            if (playerController)
             {
-                _playerController.Active.OnStarted += StartGame;
-                _playerController.Move.OnStarted += StartGame;
-                _playerController.Select.OnStarted += StartGame;
+                playerController.Active.OnStarted += StartGame;
+                playerController.Move.OnStarted += StartGame;
+                playerController.Select.OnStarted += StartGame;
             }
         }
 
@@ -26,17 +24,16 @@ namespace Orchestration.OutGame
         {
             GameLogic logic = ServiceLocator.GetInstance<GameLogic>();
 
+            var playerController = ServiceLocator.GetInstance<PlayerController>();
+
             //ロード中でなければゲームをスタート
-            if (!logic.IsSceneLoading)
+            if (!logic.IsSceneLoading && playerController)
             {
                 logic.SceneChange(SceneEnum.InGame);
 
-                if (_playerController)
-                {
-                    _playerController.Active.OnStarted -= StartGame;
-                    _playerController.Move.OnStarted -= StartGame;
-                    _playerController.Select.OnStarted -= StartGame;
-                }
+                playerController.Active.OnStarted -= StartGame;
+                playerController.Move.OnStarted -= StartGame;
+                playerController.Select.OnStarted -= StartGame;
             }
         }
     }
