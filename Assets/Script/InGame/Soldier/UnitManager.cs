@@ -136,7 +136,7 @@ namespace Orchestration.InGame
         private void BorderOutSoldierMove(int count)
         {
             var manager = ServiceLocator.GetInstance<GroundManager>();
-            if (manager)
+            if (!manager)
             {
                 return;
             }
