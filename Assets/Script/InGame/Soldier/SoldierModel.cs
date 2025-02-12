@@ -16,6 +16,9 @@ namespace Orchestration.Entity
 
         private Animator _animator;
         public Animator Animator { get => _animator; }
+
+        private AudioSource _foodStepAudio;
+        public AudioSource FoodStepAudio { get => _foodStepAudio; }
         #endregion
 
         [Header("Attack")]
@@ -82,6 +85,8 @@ namespace Orchestration.Entity
 
             _moveLineRenderer = GetComponent<LineRenderer>();
 
+            _foodStepAudio = GetComponent<AudioSource>();
+
             if (_miniMapIcon && _iconMaterial)
             {
                 _miniMapIcon.material = _iconMaterial;
@@ -92,6 +97,7 @@ namespace Orchestration.Entity
                 //SE用のMixerGroupに指定
                 _muzzleAudio.outputAudioMixerGroup = ServiceLocator.GetInstance<AudioManager>().GetMixerGroup(System.AudioType.SE);
                 _muzzleAudio.playOnAwake = false;
+                _muzzleAudio.spatialBlend = 1;
             }
 
             if (_agent.NullCheckComponent("NavMeshAgentが見つかりません"))
@@ -106,6 +112,15 @@ namespace Orchestration.Entity
             if (_animator.NullCheckComponent("Animatorが見つかりません"))
             {
                 _animator.applyRootMotion = false;
+            }
+
+            if (_foodStepAudio.NullCheckComponent())
+            {
+                //SE用のMixerGroupに指定
+                _foodStepAudio.outputAudioMixerGroup = ServiceLocator.GetInstance<AudioManager>().GetMixerGroup(System.AudioType.SE);
+                _foodStepAudio.playOnAwake = false;
+                _foodStepAudio.Stop();
+                _foodStepAudio.spatialBlend = 1;
             }
         }
 

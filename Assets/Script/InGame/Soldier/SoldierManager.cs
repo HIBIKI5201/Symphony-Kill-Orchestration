@@ -93,7 +93,7 @@ namespace Orchestration.Entity
             _move.Rotation(forwardDirecion, rotateTime);
 
             //移動
-            _move.Move(_model.Agent, _model.Animator);
+            _move.Move(_model.Agent, _model.Animator, _model.FoodStepAudio);
 
             //ヘルスバーの位置更新
             _ui.MarkMove(transform.position, _model.HealthBarOffset);

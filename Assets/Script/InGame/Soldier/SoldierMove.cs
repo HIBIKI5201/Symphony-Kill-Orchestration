@@ -42,7 +42,7 @@ namespace Orchestration.Entity
         /// <summary>
         /// アニメーターに移動パラメータを渡し、座標を更新
         /// </summary>
-        public void Move(NavMeshAgent agent, Animator animator)
+        public void Move(NavMeshAgent agent, Animator animator, AudioSource foodStepAudio)
         {
             //ターゲットのベクトルを計算
             Vector3 localNextPos = transform.InverseTransformPoint(agent.nextPosition);
@@ -56,6 +56,23 @@ namespace Orchestration.Entity
 
             //自身の位置をAgentに同期
             transform.position = agent.nextPosition;
+
+            Debug.Log("magnitude is " + localNextPos.magnitude);
+            //歩きサウンドを再生
+            if (0 < localNextPos.magnitude)
+            {
+                if (!foodStepAudio.isPlaying)
+                {
+                    foodStepAudio.Play();
+                }
+            }
+            else
+            {
+                if (foodStepAudio.isPlaying)
+                {
+                    foodStepAudio.Stop();
+                }
+            }
         }
 
         /// <summary>
