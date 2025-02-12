@@ -31,6 +31,11 @@ namespace Orchestration.InGame
                 controller.Select.OnStarted += _unitManager.SelectSwitch;
                 controller.Skill.OnStarted += _unitManager.SkillActive;
             }
+
+            //リザルト時の操作形態に変更
+            var system = ServiceLocator.GetInstance<IngameSystemManager>();
+            system.OnResultOpen += ResultWindowOpen;
+            system.OnResultEnd += ResultWindowEnd;
         }
 
         private void Update()
@@ -38,18 +43,6 @@ namespace Orchestration.InGame
             if (Physics.Raycast(ActiveRay, out RaycastHit hit, float.PositiveInfinity, _gridActiveLayer))
             {
                 GridHighLight(hit.point);
-            }
-        }
-
-        private void OnDestroy()
-        {
-            var controller = ServiceLocator.GetInstance<PlayerController>();
-
-            if (controller)
-            {
-                controller.Active.OnStarted -= OnActive;
-                controller.Select.OnStarted -= _unitManager.SelectSwitch;
-                controller.Skill.OnStarted -= _unitManager.SkillActive;
             }
         }
 
@@ -72,6 +65,42 @@ namespace Orchestration.InGame
             if (manager.GetGridByPosition(point, out GridInfo info))
             {
                 manager.HighLightGrid(info);
+            }
+        }
+
+        private void ResultWindowOpen()
+        {
+            var controller = ServiceLocator.GetInstance<PlayerController>();
+
+            if (controller)
+            {
+                controller.Active.OnStarted -= OnActive;
+                controller.Select.OnStarted -= _unitManager.SelectSwitch;
+                controller.Skill.OnStarted -= _unitManager.SkillActive;
+            }
+        }
+
+        public void ResultWindowEnd()
+        {
+            var controller = ServiceLocator.GetInstance<PlayerController>();
+
+            if (controller)
+            {
+                controller.Select.OnStarted += ResultCotrol;
+            }
+
+            void ResultCotrol(float c)
+            {
+                var logic = ServiceLocator.GetInstance<GameLogic>();
+
+                if (0 < c)
+                {
+                    logic.SceneChange(SceneEnum.Home);
+                }
+                else
+                {
+                    logic.SceneChange(SceneEnum.InGame);
+                }
             }
         }
 
