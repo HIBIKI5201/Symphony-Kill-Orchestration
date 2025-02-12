@@ -73,12 +73,7 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 Assets/a.meta
-Assets/a/a.unity
-Assets/a/a.unity.meta
-Assets/a/PlayerController.cs
-Assets/a/PlayerController.cs.meta
-Assets/a/SuperStateMachine.cs
-Assets/a/SuperStateMachine.cs.meta
+Assets/a/
 Assets/Audio/guns/
 Assets/Audio/misc bangs/
 Assets/Audio/sample music/
@@ -92,5 +87,5 @@ Assets/CG/Map/Building/
 Assets/UI Toolkit/Font/ki_kokugo/
 Assets/CG/Map/Nature/
 Assets/CG/Particle/AssetTools/
-Assets/CG/Particle/Hit/
 Assets/Audio/SE/FootStep/Clips/
+Assets/CG/Particle/Skill/
