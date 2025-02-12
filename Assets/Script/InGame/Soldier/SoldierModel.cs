@@ -87,8 +87,10 @@ namespace Orchestration.Entity
         public void Init()
         {
             _agent = GetComponent<NavMeshAgent>();
-
-            _agent.enabled = false;
+            if (_agent)
+            {
+                _agent.enabled = false;
+            }
 
             _animator = GetComponentInChildren<Animator>();
 
@@ -150,7 +152,7 @@ namespace Orchestration.Entity
                 _muzzleFlash.Play();
             }
 
-            if (_shootAudioClip)
+            if (_muzzleAudio && _shootAudioClip)
             {
                 _muzzleAudio.Stop();
                 _muzzleAudio.clip = _shootAudioClip;

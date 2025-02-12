@@ -6,7 +6,6 @@ using UnityEngine.AI;
 
 namespace Orchestration.Entity
 {
-    [RequireComponent(typeof(NavMeshAgent))]
     public class SoldierMove : MonoBehaviour
     {
         private Vector2 _currentDirection = Vector2.zero;
