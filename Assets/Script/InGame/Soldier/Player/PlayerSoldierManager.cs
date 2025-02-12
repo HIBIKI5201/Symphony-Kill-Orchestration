@@ -39,7 +39,7 @@ namespace Orchestration.Entity
             if (_data.SpecialPoint < _data.MaxSpecialPoint)
             {
                 //毎秒スキルをチャージ
-                _data.SpecialPointProportion += Time.deltaTime;
+                _data.SpecialPointProportion += Time.deltaTime / 2;
             }
         }
 
