@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -85,6 +86,8 @@ namespace SymphonyFrameWork.CoreSystem
 
         public interface IPausable
         {
+            private static Dictionary<IPausable, Action<bool>> PauseEventDictionary = new();
+
             void Pause();
             void Resume();
 
@@ -94,9 +97,20 @@ namespace SymphonyFrameWork.CoreSystem
             /// <param name="pausable"></param>
             static void RegisterPauseManager(IPausable pausable)
             {
-                OnPauseChanged += value =>
+                if (PauseEventDictionary.ContainsKey(pausable))
                 {
-                    if (value)
+                    return;
+                }
+
+                Action<bool> pauseEvent = OnPauseEvent;
+
+                PauseEventDictionary.Add(pausable, pauseEvent);
+
+                OnPauseChanged += pauseEvent;
+
+                void OnPauseEvent(bool paused)
+                {
+                    if (paused)
                     {
                         pausable.Pause();
                     }
@@ -104,7 +118,20 @@ namespace SymphonyFrameWork.CoreSystem
                     {
                         pausable.Resume();
                     }
-                };
+                }
+            }
+
+            /// <summary>
+            /// ポーズ時のイベントを購買解除する
+            /// </summary>
+            /// <param name="pausable"></param>
+            static void UnregisterPauseManager(IPausable pausable)
+            {
+                if (PauseEventDictionary.TryGetValue(pausable, out var pauseEvent))
+                {
+                    OnPauseChanged -= pauseEvent;
+                    PauseEventDictionary.Remove(pausable);
+                }
             }
         }
     }
