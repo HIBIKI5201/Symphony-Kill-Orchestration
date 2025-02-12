@@ -47,6 +47,7 @@ namespace Orchestration.Entity
             {
                 system.KillEnemy();
             }
+            else Debug.LogError("インゲームシステムが見つかりませんでした");
 
             base.OnDeath();
         }

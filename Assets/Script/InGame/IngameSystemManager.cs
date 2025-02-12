@@ -18,6 +18,7 @@ namespace Orchestration.InGame
         public event Action OnResultEnd;
 
         private int _activeEnemyValue = 0;
+        private object _enemyValueLock = new object();
 
         [SerializeField]
         private float _stageLimit = 10;
@@ -62,8 +63,8 @@ namespace Orchestration.InGame
             _killCounter++;
             OnKillCounterChanged?.Invoke(_killCounter);
 
-            _activeEnemyValue--;
-            if (_activeEnemyValue <= 0)
+            ChangeActiveEnemy(-1);
+            if (_activeEnemyValue == 0)
             {
                 NextStage();
             }
@@ -73,9 +74,16 @@ namespace Orchestration.InGame
         /// アクティブな敵を追加
         /// </summary>
         /// <param name="value"></param>
-        public void AddAcviveEnemy(int value)
+        public void AddAcviveEnemy(int value) => ChangeActiveEnemy(value);
+
+        private void ChangeActiveEnemy(int value)
         {
-            _activeEnemyValue += value;
+            lock (_enemyValueLock)
+            {
+                _activeEnemyValue += value;
+
+                Debug.Log($"{value} : {_activeEnemyValue}");
+            }
         }
 
         public async void ResultOpen()
