@@ -43,6 +43,16 @@ namespace Orchestration.Entity
             }
         }
 
+        [Space]
+
+        [SerializeField]
+        private string _skillName;
+        public string SkillName { get => _skillName; }
+
+        [SerializeField, TextArea]
+        private string _skillExplanation;
+        public string SkillExplanation { get => _skillExplanation; }
+
         [Header("体力ステータス")]
 
         //ヘルス

@@ -52,6 +52,10 @@ namespace Orchestration.Entity
             _ui.Select(active);
 
             IconSelect(_model.MiniMapIcon, active);
+
+            //ƒXƒLƒ‹‚Ìî•ñ‚ğ‘‚«‚Ş
+            var ui = ServiceLocator.GetInstance<IngameUIManager>();
+            ui.SetSkillInfo(_data.SkillName, _data.SkillExplanation);
         }
 
         /// <summary>
