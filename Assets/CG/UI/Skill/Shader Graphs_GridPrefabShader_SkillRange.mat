@@ -40,7 +40,7 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Speed: 4
+    - _Speed: 8
     - _stripe: 1.6
     m_Colors:
     - _Color: {r: 0.2984786, g: 1, b: 0, a: 0.47058824}
