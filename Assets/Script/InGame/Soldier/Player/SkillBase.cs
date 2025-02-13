@@ -4,8 +4,16 @@ namespace Orchestration.Entity
 {
     public abstract class SkillBase : MonoBehaviour
     {
-        public void SkillActive(PlayerSoldierManager soldier, SoldierData_SO data)
-        {
+        public virtual void SkillVisible() { }
+
+        public virtual void SkillActive(PlayerSoldierManager soldier, SoldierData_SO data)
+        {   
+            //ポイントが足りなければリターン
+            if (data.SpecialPoint <= data.SpecialCost)
+            {
+                return;
+            }
+
             if (SkillProccess(soldier, data))
             {
                 data.SpecialPoint -= data.SpecialCost;
