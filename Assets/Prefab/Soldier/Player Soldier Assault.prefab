@@ -274,6 +274,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   _particle: {fileID: 162584487599433031, guid: 39f852c28f9c3fd45a427c24f3564ba7, type: 3}
+  _rangePrefab: {fileID: 8580134640895342146, guid: 39e99a614290faa418bc0a33e8905a47, type: 3}
 --- !u!120 &-5440457604786556256
 LineRenderer:
   serializedVersion: 2
