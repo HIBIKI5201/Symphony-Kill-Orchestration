@@ -22,7 +22,7 @@ namespace Orchestration.Entity
             _rangePrefab = Instantiate(_rangePrefab, transform.position, Quaternion.identity, transform);
             _rangePrefab.SetActive(false);
 
-            _rangePrefab.transform.localScale = new Vector3(_range, _rangePrefab.transform.localScale.y, _range);
+            _rangePrefab.transform.localScale = new Vector3(_range * 2, _rangePrefab.transform.localScale.y, _range * 2);
         }
 
         public override void SkillVisible()

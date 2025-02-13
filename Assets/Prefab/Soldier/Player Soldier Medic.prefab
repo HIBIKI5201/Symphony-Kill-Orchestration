@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healAmountPercent: 40
-  _range: 8
+  _range: 4
   _particle: {fileID: 4515497926535975121, guid: bddb971e34eb14d48be30c7b922eb077, type: 3}
   _rangePrefab: {fileID: 8580134640895342146, guid: 39e99a614290faa418bc0a33e8905a47, type: 3}
 --- !u!120 &-5440457604786556256
