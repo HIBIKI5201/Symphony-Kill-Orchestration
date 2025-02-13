@@ -29,7 +29,8 @@ namespace Orchestration.InGame
             {
                 controller.Active.OnStarted += OnActive;
                 controller.Select.OnStarted += _unitManager.SelectSwitch;
-                controller.Skill.OnStarted += _unitManager.SkillActive;
+                controller.Skill.OnStarted += _unitManager.SkillVisible;
+                controller.Skill.OnCanseled += _unitManager.SkillActive;
             }
 
             //リザルト時の操作形態に変更
@@ -76,7 +77,8 @@ namespace Orchestration.InGame
             {
                 controller.Active.OnStarted -= OnActive;
                 controller.Select.OnStarted -= _unitManager.SelectSwitch;
-                controller.Skill.OnStarted -= _unitManager.SkillActive;
+                controller.Skill.OnStarted -= _unitManager.SkillVisible;
+                controller.Skill.OnCanseled -= _unitManager.SkillActive;
             }
         }
 

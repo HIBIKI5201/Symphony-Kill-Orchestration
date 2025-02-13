@@ -133,7 +133,7 @@ namespace Orchestration.InGame
             Collider current = _confiner.BoundingVolume;
 
             //次のコライダーに変更
-            if (current)
+            if (current && _camera && _confiner)
             {
                 int index = Array.IndexOf(_configers, current);
                 index = ++index % _configers.Length;
