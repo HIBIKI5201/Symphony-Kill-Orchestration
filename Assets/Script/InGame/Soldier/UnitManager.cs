@@ -127,6 +127,8 @@ namespace Orchestration.InGame
             }
         }
 
+        public void SkillVisible(float value) => _selectSolider.SkillVisible();
+
         public void SkillActive(float value) => _selectSolider.SkillActive();
 
         /// <summary>

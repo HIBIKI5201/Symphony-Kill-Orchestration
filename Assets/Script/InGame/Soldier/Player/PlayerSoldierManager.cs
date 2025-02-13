@@ -1,7 +1,6 @@
 using Orchestration.InGame;
 using SymphonyFrameWork.CoreSystem;
 using SymphonyFrameWork.Utility;
-using System;
 using UnityEngine;
 
 namespace Orchestration.Entity
@@ -98,6 +97,14 @@ namespace Orchestration.Entity
             }
         }
 
+        public void SkillVisible()
+        {
+            if (_skillBase)
+            {
+                _skillBase.SkillVisible();
+            }
+        }
+
         /// <summary>
         /// ƒXƒLƒ‹‚ð‹N“®‚·‚é
         /// </summary>
@@ -105,12 +112,10 @@ namespace Orchestration.Entity
         {
             if (_skillBase)
             {
-                if (_data.SpecialCost <= _data.SpecialPoint)
-                {
-                    _skillBase.SkillActive(this, _data);
-                }
+                _skillBase.SkillActive(this, _data);
             }
         }
+
 
         protected override void OnDeath()
         {
