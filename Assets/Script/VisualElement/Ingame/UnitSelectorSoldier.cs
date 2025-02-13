@@ -30,7 +30,7 @@ namespace Orchestration.UI
             return Task.CompletedTask;
         }
 
-        public void Init(Texture2D texture)
+        public void Init(Sprite texture)
         {
             _icon.style.backgroundImage = new StyleBackground(texture);
         }

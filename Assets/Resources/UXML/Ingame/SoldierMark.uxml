@@ -1,3 +1,3 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <engine:VisualElement name="Mark" style="height: 4%; width: 2%; position: absolute; background-image: url(&quot;project://database/Assets/Sprite/Circle.png?fileID=2800000&amp;guid=0def4c8354f9f3141a9e646ce79bd43a&amp;type=3#Circle&quot;); -unity-background-image-tint-color: rgb(0, 0, 255);" />
+    <engine:VisualElement name="Mark" style="height: 4%; width: 2%; position: absolute; background-image: url(&quot;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=4154780841294389669&amp;guid=53eb84800b6e6ea469876587461d61aa&amp;type=3#arrow-down&quot;); -unity-background-image-tint-color: rgb(0, 0, 255);" />
 </engine:UXML>

@@ -1,14 +1,15 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Resources/USS/UnitSelector-Soldier.uss?fileID=7433441132597879392&amp;guid=19329f4bc47ea78439d924366196f0ed&amp;type=3#UnitSelector-Soldier" />
-    <engine:VisualElement style="min-width: 20%; height: 100%; background-color: rgb(26, 26, 26); min-height: auto; width: 100%; justify-content: space-evenly;">
+    <Style src="project://database/Assets/UI%20Toolkit/USS/text.uss?fileID=7433441132597879392&amp;guid=532b434e280348644b8ef36234fdc00b&amp;type=3#text" />
+    <engine:VisualElement class="text" style="min-width: 20%; height: 100%; background-color: rgb(26, 26, 26); min-height: auto; width: 100%; justify-content: space-evenly;">
         <engine:VisualElement name="selecter" class="un-select" style="position: absolute; bottom: 0; align-self: flex-start; background-color: rgb(0, 225, 255);" />
-        <engine:VisualElement name="icon" style="width: 100%; height: 60%; align-self: center; -unity-background-scale-mode: scale-to-fit; padding-top: 5%; padding-right: 5%; padding-bottom: 5%; padding-left: 5%;" />
-        <engine:VisualElement style="width: 100%; height: 25%; flex-direction: row; padding-top: 3%; padding-right: 3%; padding-bottom: 3%; padding-left: 3%;">
-            <engine:VisualElement style="width: 25%; height: 100%; justify-content: center;">
-                <engine:Label text="0" name="count" style="font-size: 50%; color: rgb(255, 255, 255); -unity-text-align: middle-center; width: 100%; height: 100%; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+        <engine:VisualElement name="icon" style="width: 100%; height: 60%; align-self: center; -unity-background-scale-mode: scale-to-fit; padding-top: 5%; padding-right: 5%; padding-bottom: 5%; padding-left: 5%; background-image: url(&quot;project://database/Assets/Sprite/%E7%84%A1%E9%A1%8C.png?fileID=375282879&amp;guid=64574d6aea2bfd847a01bca7eeba7f7e&amp;type=3#無題_0&quot;); background-color: rgba(255, 255, 255, 0); -unity-background-image-tint-color: rgb(255, 255, 255);" />
+        <engine:VisualElement style="width: 100%; height: 25%; flex-direction: row; padding-top: 3%; padding-right: 3%; padding-bottom: 3%; padding-left: 3%; justify-content: center; align-items: center;">
+            <engine:VisualElement style="width: 25%; height: 100%; justify-content: center; margin-top: 2%; margin-right: 2%; margin-bottom: 2%; margin-left: 2%;">
+                <engine:Label text="10&#10;" name="count" style="font-size: 35%; color: rgb(255, 255, 255); -unity-text-align: middle-center; width: 100%; height: 100%; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
             </engine:VisualElement>
-            <engine:VisualElement style="flex-grow: 1; height: 100%; width: 75%; justify-content: center;">
-                <engine:VisualElement style="height: 40%; background-color: rgb(77, 77, 77);">
+            <engine:VisualElement style="height: 100%; width: 70%; justify-content: center;">
+                <engine:VisualElement style="height: 40%; background-color: rgb(77, 77, 77); width: 100%;">
                     <engine:VisualElement name="guage" style="width: 100%; height: 100%; background-color: rgb(218, 195, 29);" />
                 </engine:VisualElement>
             </engine:VisualElement>

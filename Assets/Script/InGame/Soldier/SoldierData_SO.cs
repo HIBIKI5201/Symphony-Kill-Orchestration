@@ -23,8 +23,8 @@ namespace Orchestration.Entity
         [Header("Šî–{î•ñ")]
 
         [SerializeField]
-        private Texture2D _icon;
-        public Texture2D Icon { get => _icon; }
+        private Sprite _icon;
+        public Sprite Icon { get => _icon; }
 
         [SerializeField]
         private string _name;

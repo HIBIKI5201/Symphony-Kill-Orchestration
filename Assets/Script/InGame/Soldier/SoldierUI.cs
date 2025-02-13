@@ -30,7 +30,7 @@ namespace Orchestration.Entity
             _soldierMark.style.unityBackgroundImageTintColor = color;
         }
 
-        public void AddInfomationForHUD(string name, Texture2D icon)
+        public void AddInfomationForHUD(string name, Sprite icon)
         {
             var ingameUIManager = ServiceLocator.GetInstance<IngameUIManager>();
             if (ingameUIManager)
