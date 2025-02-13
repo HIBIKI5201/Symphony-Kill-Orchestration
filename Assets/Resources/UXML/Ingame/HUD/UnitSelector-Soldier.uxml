@@ -6,7 +6,7 @@
         <engine:VisualElement name="icon" style="width: 100%; height: 60%; align-self: center; -unity-background-scale-mode: scale-to-fit; padding-top: 5%; padding-right: 5%; padding-bottom: 5%; padding-left: 5%; background-image: url(&quot;project://database/Assets/Sprite/%E7%84%A1%E9%A1%8C.png?fileID=375282879&amp;guid=64574d6aea2bfd847a01bca7eeba7f7e&amp;type=3#無題_0&quot;); background-color: rgba(255, 255, 255, 0); -unity-background-image-tint-color: rgb(255, 255, 255);" />
         <engine:VisualElement style="width: 100%; height: 25%; flex-direction: row; padding-top: 3%; padding-right: 3%; padding-bottom: 3%; padding-left: 3%; justify-content: center; align-items: center;">
             <engine:VisualElement style="width: 25%; height: 100%; justify-content: center; margin-top: 2%; margin-right: 2%; margin-bottom: 2%; margin-left: 2%;">
-                <engine:Label text="10&#10;" name="count" style="font-size: 35%; color: rgb(255, 255, 255); -unity-text-align: middle-center; width: 100%; height: 100%; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                <engine:Label text="0" name="count" style="font-size: 35%; color: rgb(255, 255, 255); -unity-text-align: middle-center; width: 100%; height: 100%; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
             </engine:VisualElement>
             <engine:VisualElement style="height: 100%; width: 70%; justify-content: center;">
                 <engine:VisualElement style="height: 40%; background-color: rgb(77, 77, 77); width: 100%;">

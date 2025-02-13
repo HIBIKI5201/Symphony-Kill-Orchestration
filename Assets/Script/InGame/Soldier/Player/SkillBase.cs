@@ -9,7 +9,7 @@ namespace Orchestration.Entity
         public virtual void SkillActive(PlayerSoldierManager soldier, SoldierData_SO data)
         {   
             //ポイントが足りなければリターン
-            if (data.SpecialPoint <= data.SpecialCost)
+            if (data.SpecialPoint < data.SpecialCost)
             {
                 return;
             }
