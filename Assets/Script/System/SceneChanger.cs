@@ -11,10 +11,15 @@ namespace Orchestration.System
         private bool _isLoading;
         public bool IsLoading { get => _isLoading; }
 
-        public SceneChanger()
+        private float _fadeOutTime = 1;
+        private float _fadeInTime = 1;
+
+        public SceneChanger(float fadeOutTime, float fadeInTime)
         {
             Scene scene = SceneManager.GetActiveScene();
             _currentSceneName = scene.name;
+            _fadeOutTime = fadeOutTime;
+            _fadeInTime = fadeInTime;
         }
 
         public async void SceneLoad(SceneEnum sceneEnum)
@@ -27,7 +32,7 @@ namespace Orchestration.System
             _isLoading = true;
             PauseManager.Pause = true;
 
-            await FadeOut(1.5f);
+            await FadeOut(_fadeOutTime);
 
             //ロードシーンのロード
             if (!await SceneLoader.LoadScene(SceneEnum.LoadingScene.ToString()))
@@ -65,7 +70,7 @@ namespace Orchestration.System
                 }
             }
 
-            await FadeIn(1);
+            await FadeIn(_fadeInTime);
 
             //元のシーンをアンロード
             bool unloadSuccess = await SceneLoader.UnloadScene(_currentSceneName.ToString(),
@@ -109,12 +114,12 @@ namespace Orchestration.System
             //少し猶予を作る
             await Awaitable.WaitForSecondsAsync(0.5f);
 
-            await FadeOut(1);
+            await FadeOut(_fadeOutTime);
 
             //ロードシーンをアンロード
             await SceneLoader.UnloadScene(SceneEnum.LoadingScene.ToString());
 
-            await FadeIn(1.5f);
+            await FadeIn(_fadeInTime);
 
             PauseManager.Pause = false;
             _isLoading = false;

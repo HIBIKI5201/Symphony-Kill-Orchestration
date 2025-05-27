@@ -19,7 +19,7 @@ namespace Orchestration
 
         private void Awake()
         {
-            _changer = new SceneChanger();
+            _changer = new SceneChanger(1, 1);
             _systemUIManager = GetComponentInChildren<SystemUIManager>();
         }
 

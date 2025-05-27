@@ -42,13 +42,13 @@ namespace Orchestration.System
         }
 
         /// <summary>
-        /// イベントのコンテナを生成
+        /// ?C?x???g??R???e?i???
         /// </summary>
         /// <typeparam name="T"></typeparam>
         public class InputContext<T> where T : struct
         {
             /// <summary>
-            /// イベント登録
+            /// ?C?x???g?o?^
             /// </summary>
             /// <param name="action"></param>
             public InputContext(InputAction action)
@@ -65,7 +65,7 @@ namespace Orchestration.System
             }
 
             /// <summary>
-            /// イベントを解放
+            /// ?C?x???g?????
             /// </summary>
            ~InputContext()
             {
@@ -73,7 +73,7 @@ namespace Orchestration.System
             }
 
             /// <summary>
-            /// イベントをリセットする
+            /// ?C?x???g?????Z?b?g????
             /// </summary>
             public void Reset()
             {
