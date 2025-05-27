@@ -49,6 +49,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemy: {fileID: 853334020108491180}
   _object: {fileID: 3426775357935222337}
+  _gridLength: {x: 10, y: 10}
+  _gridSize: 1
+  _lineLength: 3
 --- !u!1 &853334020108491180
 GameObject:
   m_ObjectHideFlags: 0
