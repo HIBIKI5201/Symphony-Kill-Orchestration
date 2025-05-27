@@ -8,7 +8,7 @@ namespace Orchestration.Entity
 
         public virtual void SkillActive(PlayerSoldierManager soldier, SoldierData_SO data)
         {   
-            //ƒ|ƒCƒ“ƒg‚ª‘«‚è‚È‚¯‚ê‚ÎƒŠƒ^[ƒ“
+            //ãƒã‚¤ãƒ³ãƒˆãŒè¶³ã‚Šãªã‘ã‚Œã°ãƒªã‚¿ãƒ¼ãƒ³
             if (data.SpecialPoint < data.SpecialCost)
             {
                 return;
@@ -21,11 +21,11 @@ namespace Orchestration.Entity
         }
 
         /// <summary>
-        /// ƒXƒLƒ‹‚Ìˆ—‚ğs‚¤
+        /// ã‚¹ã‚­ãƒ«ã®å‡¦ç†ã‚’è¡Œã†
         /// </summary>
         /// <param name="soldier"></param>
         /// <param name="data"></param>
-        /// <returns>ˆ—‚ª¬Œ÷‚µ‚½‚©‚Ç‚¤‚©</returns>
+        /// <returns>å‡¦ç†ãŒæˆåŠŸã—ãŸã‹ã©ã†ã‹</returns>
         protected abstract bool SkillProccess(PlayerSoldierManager soldier, SoldierData_SO data);
     }
 }

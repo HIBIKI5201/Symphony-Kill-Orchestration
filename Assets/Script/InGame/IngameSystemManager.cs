@@ -84,7 +84,7 @@ namespace Orchestration.InGame
         }
 
         /// <summary>
-        /// ƒAƒNƒeƒBƒu‚È“G‚ğ’Ç‰Á
+        /// ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ãªæ•µã‚’è¿½åŠ 
         /// </summary>
         /// <param name="value"></param>
         public void AddAcviveEnemy(int value) => ChangeActiveEnemy(value, ActiveEnemyUpdateMode.Add);
@@ -104,20 +104,20 @@ namespace Orchestration.InGame
 
         public async void ResultOpen()
         {
-            //ƒQ[ƒ€‚ğƒ|[ƒY‚·‚é
+            //ã‚²ãƒ¼ãƒ ã‚’ãƒãƒ¼ã‚ºã™ã‚‹
             PauseManager.Pause = true;
 
-            //ƒŠƒUƒ‹ƒgŠJn‚ÌƒCƒxƒ“ƒg
+            //ãƒªã‚¶ãƒ«ãƒˆé–‹å§‹æ™‚ã®ã‚¤ãƒ™ãƒ³ãƒˆ
             OnResultOpen?.Invoke();
 
             int score = _killCounter * 100 + _stageCounter * 50;
 
-            //ƒŠƒUƒ‹ƒgƒEƒBƒ“ƒhƒE‚Ì‰‰o
+            //ãƒªã‚¶ãƒ«ãƒˆã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®æ¼”å‡º
             var ui = ServiceLocator.GetInstance<IngameUIManager>();
             await ui.ResultWindowStart(score, _stageCounter * 10, _killCounter);
 
 
-            //ƒŠƒUƒ‹ƒg‰‰oI—¹‚ÌƒCƒxƒ“ƒg
+            //ãƒªã‚¶ãƒ«ãƒˆæ¼”å‡ºçµ‚äº†æ™‚ã®ã‚¤ãƒ™ãƒ³ãƒˆ
             OnResultEnd?.Invoke();
         }
 

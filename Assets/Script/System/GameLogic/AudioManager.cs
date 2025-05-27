@@ -88,14 +88,14 @@ namespace Orchestration.System
         {
             foreach (AudioType type in Enum.GetValues(typeof(AudioType)))
             {
-                //Enum‚Ì–¼‘O‚©‚çƒOƒ‹[ƒv–¼‚ğæ“¾
+                //Enumã®åå‰ã‹ã‚‰ã‚°ãƒ«ãƒ¼ãƒ—åã‚’å–å¾—
                 string name = type.ToString();
                 if (string.IsNullOrEmpty(name))
                 {
                     continue;
                 }
 
-                //ƒOƒ‹[ƒv‚ğæ“¾‚µAudioSource‚ğ‰Šú‰»
+                //ã‚°ãƒ«ãƒ¼ãƒ—ã‚’å–å¾—ã—AudioSourceã‚’åˆæœŸåŒ–
                 AudioMixerGroup group = _mixer.FindMatchingGroups(name).FirstOrDefault();
                 if (group)
                 {
@@ -104,37 +104,37 @@ namespace Orchestration.System
 
                     source.playOnAwake = false;
 
-                    //‰Šú‚Ì‰¹—Ê‚ğæ“¾
+                    //åˆæœŸã®éŸ³é‡ã‚’å–å¾—
                     _mixer.GetFloat($"{name}_Volume", out float value);
 
-                    //î•ñ‚ğ«‘“o˜^
+                    //æƒ…å ±ã‚’è¾æ›¸ç™»éŒ²
                     _audioDict.Add(type, (group, source, value));
                 }
             }
         }
 
         /// <summary>
-        /// Mixer‚Ì‰¹—Ê‚ğ•ÏX‚·‚é
-        /// ‰¹—Ê‚ÍƒQ[ƒ€ŠJn‚Ì‰¹—Ê‚ğŠî€‚ÅŠ„‡‚Å•ÏX‚³‚ê‚é
+        /// Mixerã®éŸ³é‡ã‚’å¤‰æ›´ã™ã‚‹
+        /// éŸ³é‡ã¯ã‚²ãƒ¼ãƒ é–‹å§‹æ™‚ã®éŸ³é‡ã‚’åŸºæº–ã§å‰²åˆã§å¤‰æ›´ã•ã‚Œã‚‹
         /// </summary>
-        /// <param name="type">•ÏX‚µ‚½‚¢ƒI[ƒfƒBƒI‚Ìí—Ş</param>
-        /// <param name="value">Š„‡</param>
+        /// <param name="type">å¤‰æ›´ã—ãŸã„ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªã®ç¨®é¡</param>
+        /// <param name="value">å‰²åˆ</param>
         public void VolumeSliderChanged(AudioType type, float value)
         {
             if (value < 0 || 1 < value)
             {
-                Debug.LogWarning("—^‚¦‚ç‚ê‚½‰¹—Ê‚Í‹K’è’lŠO‚Å‚·");
+                Debug.LogWarning("ä¸ãˆã‚‰ã‚ŒãŸéŸ³é‡ã¯è¦å®šå€¤å¤–ã§ã™");
                 return;
             }
 
-            //Š„‡‚©‚çXV‚³‚ê‚½ƒfƒVƒxƒ‹’PˆÊ‚Ì‰¹—Ê‚ğŒvZ‚·‚é
+            //å‰²åˆã‹ã‚‰æ›´æ–°ã•ã‚ŒãŸãƒ‡ã‚·ãƒ™ãƒ«å˜ä½ã®éŸ³é‡ã‚’è¨ˆç®—ã™ã‚‹
             float db = value * (_audioDict[type].originalVolume + 80) - 80;
 
             _mixer.SetFloat(type.ToString(), db);
         }
 
         /// <summary>
-        /// ƒ~ƒLƒT[ƒOƒ‹[ƒv‚ğæ“¾
+        /// ãƒŸã‚­ã‚µãƒ¼ã‚°ãƒ«ãƒ¼ãƒ—ã‚’å–å¾—
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
@@ -142,7 +142,7 @@ namespace Orchestration.System
 
         public async void BGMChanged(int index, float duration)
         {
-            //ƒLƒƒƒ“ƒZƒ‹‚³‚ê‚Ä‚¢‚È‚¯‚ê‚Î~‚ß‚é
+            //ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã•ã‚Œã¦ã„ãªã‘ã‚Œã°æ­¢ã‚ã‚‹
             if (_bgmChangeToken != null && !_bgmChangeToken.IsCancellationRequested)
             {
                 _bgmChangeToken.Cancel();
@@ -153,13 +153,13 @@ namespace Orchestration.System
 
             await BGMChange(index, duration, token);
 
-            //BGM‚ğƒtƒF[ƒh‚·‚éˆ—
+            //BGMã‚’ãƒ•ã‚§ãƒ¼ãƒ‰ã™ã‚‹å‡¦ç†
             async Task BGMChange(int index, float duration, CancellationToken token)
             {
                 AudioSource source = _audioDict[AudioType.BGM].source;
                 AudioClip bgm = _bgmList[index];
 
-                //‰¹—Ê‚ª­‚È‚­‚È‚é‚Ü‚Å‘Ò‚Â
+                //éŸ³é‡ãŒå°‘ãªããªã‚‹ã¾ã§å¾…ã¤
                 try
                 {
                     while (source.volume > 0)
@@ -172,14 +172,14 @@ namespace Orchestration.System
                 {
                     source.volume = 0;
 
-                    //ƒNƒŠƒbƒv‚ğ“ü‚ê‘Ö‚¦
+                    //ã‚¯ãƒªãƒƒãƒ—ã‚’å…¥ã‚Œæ›¿ãˆ
                     source.Stop();
                     source.clip = bgm;
                     source.Play();
                 }
 
 
-                //‰¹—Ê‚ª‘å‚«‚­‚È‚é‚Ü‚Å‘Ò‚Â
+                //éŸ³é‡ãŒå¤§ãããªã‚‹ã¾ã§å¾…ã¤
                 try
                 {
                     while (source.volume < 1)
@@ -210,7 +210,7 @@ namespace Orchestration.System
                 }
 
                 /// <summary>
-                /// ‚µ‚ÉOnGUI‚ğg—p‚µ‚Ä‚İ‚½
+                /// è©¦ã—ã«OnGUIã‚’ä½¿ç”¨ã—ã¦ã¿ãŸ
                 /// </summary>
                 private void OnGUI()
                 {

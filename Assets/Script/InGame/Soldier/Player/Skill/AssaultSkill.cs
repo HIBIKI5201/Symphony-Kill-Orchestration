@@ -55,14 +55,14 @@ namespace Orchestration.Entity
 
             if (colliders.Length > 0)
             {
-                Debug.Log("ƒAƒTƒ‹ƒgƒXƒLƒ‹”­“®");
+                Debug.Log("ã‚¢ã‚µãƒ«ãƒˆã‚¹ã‚­ãƒ«ç™ºå‹•");
 
-                //üˆÍ‚Ì“G‚ğ‘S‚Äæ“¾‚·‚é
+                //å‘¨å›²ã®æ•µã‚’å…¨ã¦å–å¾—ã™ã‚‹
                 SoldierManager[] soldiers = colliders
                     .Select(c => c.GetComponent<SoldierManager>())
                     .Where(sm => sm).ToArray();
 
-                //–¡•û‚Éƒoƒt‚ğ’Ç‰Á‚·‚é
+                //å‘³æ–¹ã«ãƒãƒ•ã‚’è¿½åŠ ã™ã‚‹
                 int count = soldiers.Length;
                 Func<float, float> buff = damage => damage * (1 + (_buffAmountPercent * count / 100));
 
@@ -78,7 +78,7 @@ namespace Orchestration.Entity
 
                 var attackModule = GetComponent<SoldierAttack>();
 
-                //•ºm‚Éƒ_ƒ[ƒW‚ğ—^‚¦‚é
+                //å…µå£«ã«ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ãˆã‚‹
                 foreach (var s in soldiers)
                 {
                     attackModule.AttackEnemy(s, new(data.Attack), soldier);

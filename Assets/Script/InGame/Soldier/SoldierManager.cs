@@ -6,7 +6,7 @@ using UnityEngine.AI;
 namespace Orchestration.Entity
 {
     /// <summary>
-    /// •ºm‚Ìƒx[ƒXƒNƒ‰ƒX
+    /// å…µå£«ã®ãƒ™ãƒ¼ã‚¹ã‚¯ãƒ©ã‚¹
     /// </summary>
     [RequireComponent(typeof(SoldierMove), typeof(SoldierUI), typeof(SoldierModel))]
     [RequireComponent(typeof(SoldierAttack))]
@@ -83,7 +83,7 @@ namespace Orchestration.Entity
 
         private void Update()
         {
-            //ƒ|[ƒY’†‚Ìˆ—
+            //ãƒãƒ¼ã‚ºä¸­ã®å‡¦ç†
             if (_isPause)
             {
                 _move.OnPauseMove(_model.Agent);
@@ -95,42 +95,42 @@ namespace Orchestration.Entity
 
         protected virtual void Update_S()
         {
-            //UŒ‚‚µŒü‚­•ûŒü‚ğæ“¾
+            //æ”»æ’ƒã—å‘ãæ–¹å‘ã‚’å–å¾—
             (Vector3 forwardDirecion, float rotateTime) = Attack();
 
             _move.Rotation(forwardDirecion, rotateTime);
 
-            //ˆÚ“®
+            //ç§»å‹•
             _move.Move(_model.Agent, _model.Animator, _model.FoodStepAudio);
 
-            //ƒwƒ‹ƒXƒo[‚ÌˆÊ’uXV
+            //ãƒ˜ãƒ«ã‚¹ãƒãƒ¼ã®ä½ç½®æ›´æ–°
             _ui.MarkMove(transform.position, _model.HealthBarOffset);
         }
 
         /// <summary>
-        /// UŒ‚‚·‚é
+        /// æ”»æ’ƒã™ã‚‹
         /// </summary>
-        /// <returns>Œü‚­•ûŒü‚Æ‘¬“x</returns>
+        /// <returns>å‘ãæ–¹å‘ã¨é€Ÿåº¦</returns>
         protected virtual (Vector3, float) Attack()
         {
-            //üˆÍ‚É“G‚ª‚¢‚éê‡‚ÍUŒ‚A‚¢‚È‚¢ê‡‚ÍˆÚ“®•ûŒü‚ğŒü‚­
+            //å‘¨å›²ã«æ•µãŒã„ã‚‹å ´åˆã¯æ”»æ’ƒã€ã„ãªã„å ´åˆã¯ç§»å‹•æ–¹å‘ã‚’å‘ã
             if (_attack.SearchTarget(_data.AttackRange, _model.TargetLayer, out var enemy))
             {
                 AttackProccess(enemy);
 
-                //‚‘¬‚Å“G‚Ì•ûŒü‚ÉŒü‚­
+                //é«˜é€Ÿã§æ•µã®æ–¹å‘ã«å‘ã
                 return ((enemy.transform.position - transform.position).normalized, 5);
             }
             else
             {
-                //‚ä‚Á‚­‚èˆÚ“®•ûŒü‚ÉŒü‚­
+                //ã‚†ã£ãã‚Šç§»å‹•æ–¹å‘ã«å‘ã
                 return (_model.Agent.velocity.normalized, 3);
             }
         }
 
         protected virtual void AttackProccess(SoldierManager enemy)
         {
-            //UŒ‚‚Å‚«‚È‚¢‚È‚çƒŠƒ^[ƒ“
+            //æ”»æ’ƒã§ããªã„ãªã‚‰ãƒªã‚¿ãƒ¼ãƒ³
             if (!_attack.CanAttack(_data.AttackRatePerMinute))
             {
                 return;
@@ -138,12 +138,12 @@ namespace Orchestration.Entity
 
             float random = UnityEngine.Random.Range(0, 100);
 
-            //“G‚Éƒ_ƒ[ƒW‚ğ—^‚¦‚é
+            //æ•µã«ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ãˆã‚‹
             _attack.AttackEnemy(enemy, new(_data.Attack, isCritical: random < _data.CriticalChance), this);
 
             _model.Shoot();
 
-            //’eŠÛ‚ğ¶¬‚·‚é
+            //å¼¾ä¸¸ã‚’ç”Ÿæˆã™ã‚‹
             if (_model.BulletPrefab)
             {
                 var bullet = Instantiate(_model.BulletPrefab, _model.MuzzleFlash.transform.position, Quaternion.identity);
@@ -164,7 +164,7 @@ namespace Orchestration.Entity
         }
 
         /// <summary>
-        /// ˆÚ“®–Ú•W‚ğXV
+        /// ç§»å‹•ç›®æ¨™ã‚’æ›´æ–°
         /// </summary>
         public void SetDestination(Vector3 point)
         {
@@ -172,10 +172,10 @@ namespace Orchestration.Entity
         }
 
         /// <summary>
-        /// •ºm‚Éƒ_ƒ[ƒW‚ğ—^‚¦‚é
+        /// å…µå£«ã«ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ãˆã‚‹
         /// </summary>
         /// <param name="damage"></param>
-        /// <param name="target">UŒ‚‚µ‚½‘ÎÛ</param>
+        /// <param name="target">æ”»æ’ƒã—ãŸå¯¾è±¡</param>
         public virtual void AddDamage(AttackData data, SoldierManager target)
         {
             _ui.DamageTextInstantiate(data);
@@ -183,13 +183,13 @@ namespace Orchestration.Entity
         }
 
         /// <summary>
-        /// •ºm‚É‰ñ•œ‚ğ—^‚¦‚é
+        /// å…µå£«ã«å›å¾©ã‚’ä¸ãˆã‚‹
         /// </summary>
         /// <param name="heal"></param>
         public virtual void AddHeal(float heal) => _data.HealthPoint += heal;
 
         /// <summary>
-        /// ƒwƒ‹ƒX‚ª0ˆÈ‰º‚É‚È‚Á‚½‚ç©ŒÈ”j‰óˆ—‚·‚é
+        /// ãƒ˜ãƒ«ã‚¹ãŒ0ä»¥ä¸‹ã«ãªã£ãŸã‚‰è‡ªå·±ç ´å£Šå‡¦ç†ã™ã‚‹
         /// </summary>
         /// <param name="health"></param>
         protected virtual void OnDeath()

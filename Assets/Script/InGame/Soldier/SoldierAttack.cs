@@ -12,7 +12,7 @@ namespace Orchestration.Entity
 
         private void Update()
         {
-            //ƒ|[ƒY’†‚Íƒ^ƒCƒ}[‚ğ•Û‚Â
+            //ãƒãƒ¼ã‚ºä¸­ã¯ã‚¿ã‚¤ãƒãƒ¼ã‚’ä¿ã¤
             if (PauseManager.Pause)
             {
                 _attackTimer += Time.deltaTime;
@@ -20,7 +20,7 @@ namespace Orchestration.Entity
         }
 
         /// <summary>
-        /// UŒ‚‚Å‚«‚éó‘Ô‚©‚Ç‚¤‚©
+        /// æ”»æ’ƒã§ãã‚‹çŠ¶æ…‹ã‹ã©ã†ã‹
         /// </summary>
         /// <param name="rpm"></param>
         /// <returns></returns>
@@ -31,12 +31,12 @@ namespace Orchestration.Entity
         }
 
         /// <summary>
-        /// ”ÍˆÍ“à‚Ì•ºm‚Ì’†‚ÅÅ‚à‹ß‚¢Ò‚ğæ“¾‚·‚é
+        /// ç¯„å›²å†…ã®å…µå£«ã®ä¸­ã§æœ€ã‚‚è¿‘ã„è€…ã‚’å–å¾—ã™ã‚‹
         /// </summary>
-        /// <param name="radius">’Tõ”¼Œa</param>
-        /// <param name="layerMask">UŒ‚‘ÎÛ‚ÌƒŒƒCƒ„[</param>
+        /// <param name="radius">æ¢ç´¢åŠå¾„</param>
+        /// <param name="layerMask">æ”»æ’ƒå¯¾è±¡ã®ãƒ¬ã‚¤ãƒ¤ãƒ¼</param>
         /// <param name="soldier"></param>
-        /// <returns>”ÍˆÍ“à‚É‘ÎÛ‚ª‚¢‚é‚©‚Ç‚¤‚©</returns>
+        /// <returns>ç¯„å›²å†…ã«å¯¾è±¡ãŒã„ã‚‹ã‹ã©ã†ã‹</returns>
         public bool SearchTarget(float radius, LayerMask layerMask, out SoldierManager soldier)
         {
             soldier = default;
@@ -50,18 +50,18 @@ namespace Orchestration.Entity
                     .Where(sm => sm).ToArray();
 
                 soldier = soldiers
-                    //‹ß‚¢‡”Ô‚Éƒ\[ƒg
+                    //è¿‘ã„é †ç•ªã«ã‚½ãƒ¼ãƒˆ
                     .OrderBy(s => Vector3.Distance(transform.position, s.transform.position))
-                    //Ëü‚ª’Ê‚Á‚Ä‚¢‚é‚©‚ğ”»’è
+                    //å°„ç·šãŒé€šã£ã¦ã„ã‚‹ã‹ã‚’åˆ¤å®š
                     .Where(s =>
                     {
-                        //•ºm‚ÉŒü‚¯‚ÄRay‚ğì¬
+                        //å…µå£«ã«å‘ã‘ã¦Rayã‚’ä½œæˆ
                         Ray ray = new Ray(
                             transform.position + new Vector3(0, 1, 0),
                             (s.transform.position - transform.position).normalized
                             );
 
-                        //“–‚½‚Á‚½‚à‚Ì‚ªƒ^[ƒQƒbƒg‚Ì•ºm‚©‚Ç‚¤‚©1
+                        //å½“ãŸã£ãŸã‚‚ã®ãŒã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®å…µå£«ã‹ã©ã†ã‹1
                         if (Physics.Raycast(ray, out var hitInfo))
                         {
                             if (hitInfo.transform == s.transform)
@@ -79,7 +79,7 @@ namespace Orchestration.Entity
         }
 
         /// <summary>
-        /// ‘ÎÛ‚ğUŒ‚‚·‚é
+        /// å¯¾è±¡ã‚’æ”»æ’ƒã™ã‚‹
         /// </summary>
         /// <param name="target"></param>
         /// <param name="attackData"></param>
@@ -92,14 +92,14 @@ namespace Orchestration.Entity
                     attackData.Damage *= 3;
                 }
 
-                //‹——£Œ¸Š
+                //è·é›¢æ¸›è¡°
                 float distance = Vector3.Distance(target.transform.position, me.transform.position);
                 float rate = distance / me.Data.AttackRange;
                 attackData.Damage *= 1 - (1 - me.Data.DistanceDecay) * Mathf.Min(rate, 1);
 
                 target.AddDamage(attackData, me);
 
-                _attackTimer = Time.time; //ƒCƒ“ƒ^[ƒoƒ‹‚ğƒŠƒZƒbƒg
+                _attackTimer = Time.time; //ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒ«ã‚’ãƒªã‚»ãƒƒãƒˆ
             }
         }
 

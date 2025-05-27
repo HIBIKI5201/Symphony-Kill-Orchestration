@@ -60,14 +60,14 @@ namespace Orchestration.InGame
         {
             _brain = Camera.main.GetComponent<CinemachineBrain>();
 
-            //ƒƒCƒ“ƒJƒƒ‰‚ÌˆÊ’u‚ğ‰Šú‰»
+            //ãƒ¡ã‚¤ãƒ³ã‚«ãƒ¡ãƒ©ã®ä½ç½®ã‚’åˆæœŸåŒ–
             _brain.transform.position = _camera.transform.position;
 
             PlayerController controller = ServiceLocator.GetInstance<PlayerController>();
 
             if (controller)
             {
-                //ˆÚ“®“ü—Í‚ğvelocity‚É‹L˜^
+                //ç§»å‹•å…¥åŠ›ã‚’velocityã«è¨˜éŒ²
                 controller.Move.OnPerformed += UpdateVelocity;
                 controller.Move.OnCanseled += ResetVelocity;
                 controller.Zoom.OnStarted += ChangeConfiger;
@@ -83,7 +83,7 @@ namespace Orchestration.InGame
 
             if (controller)
             {
-                //ˆÚ“®“ü—Í‚ğvelocity‚É‹L˜^
+                //ç§»å‹•å…¥åŠ›ã‚’velocityã«è¨˜éŒ²
                 controller.Move.OnPerformed -= UpdateVelocity;
                 controller.Move.OnCanseled -= ResetVelocity;
                 controller.Zoom.OnStarted -= ChangeConfiger;
@@ -97,10 +97,10 @@ namespace Orchestration.InGame
         {
             if (!_isPause)
             {
-                //Brain‚ÆˆÊ’u‚ğ“¯Šú
+                //Brainã¨ä½ç½®ã‚’åŒæœŸ
                 _camera.transform.position = _brain.transform.position;
 
-                //ƒJƒƒ‰‚ÌˆÚ“®
+                //ã‚«ãƒ¡ãƒ©ã®ç§»å‹•
                 _camera.transform.position += new Vector3(_velocity.x, 0, _velocity.y).normalized * _speed * Time.deltaTime;
             }
         }
@@ -109,7 +109,7 @@ namespace Orchestration.InGame
         {
             float nextPosX = (count) * GroundManager.ChunkSize + _firstPosX;
 
-            //Ÿ‚ÌƒXƒe[ƒWˆÊ’u‚ÉˆÚ“®‚·‚é‚Ü‚ÅŒJ‚è•Ô‚·
+            //æ¬¡ã®ã‚¹ãƒ†ãƒ¼ã‚¸ä½ç½®ã«ç§»å‹•ã™ã‚‹ã¾ã§ç¹°ã‚Šè¿”ã™
             while (nextPosX >= _configerObj.position.x)
             {
                 _configerObj.position += new Vector3(_configerSpeed * Time.deltaTime, 0, 0);
@@ -124,7 +124,7 @@ namespace Orchestration.InGame
                 }
             }
 
-            //ˆÚ“®Š®—¹‚µ‚½‚ç®”’l‚É–ß‚·
+            //ç§»å‹•å®Œäº†ã—ãŸã‚‰æ•´æ•°å€¤ã«æˆ»ã™
             _configerObj.position = new Vector3(nextPosX, _configerObj.position.y, _configerObj.position.z);
         }
 
@@ -132,7 +132,7 @@ namespace Orchestration.InGame
         {
             Collider current = _confiner.BoundingVolume;
 
-            //Ÿ‚ÌƒRƒ‰ƒCƒ_[‚É•ÏX
+            //æ¬¡ã®ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼ã«å¤‰æ›´
             if (current && _camera && _confiner)
             {
                 int index = Array.IndexOf(_configers, current);
@@ -140,7 +140,7 @@ namespace Orchestration.InGame
                 _confiner.BoundingVolume = _configers[index];
 
 
-                //“¯‚¶ˆÊ’uŠÖŒW‚ÉˆÚ“®
+                //åŒã˜ä½ç½®é–¢ä¿‚ã«ç§»å‹•
                 Vector3 localPos = current.transform.InverseTransformPoint(_camera.transform.position);
                 _brain.transform.position = _configers[index].transform.position + localPos;
             }
