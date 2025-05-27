@@ -1,4 +1,4 @@
-using Orchestration.InGame;
+ï»¿using Orchestration.InGame;
 using SymphonyFrameWork.CoreSystem;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +20,7 @@ namespace Orchestration.Entity
 
         protected override (Vector3, float) Attack()
         {
-            //üˆÍ‚É“G‚ª‚¢‚éê‡‚ÍUŒ‚A‚¢‚È‚¢ê‡‚ÍˆÚ“®•ûŒü‚ğŒü‚­
+            //???Í‚É“G??????ê‡?ÍU???A???È‚??ê‡?ÍˆÚ“??????????
             if (_attack.SearchTarget(_data.AttackRange, _model.TargetLayer, out var enemy))
             {
                 if (_attack.CanAttack(_data.AttackRatePerMinute))
@@ -29,12 +29,12 @@ namespace Orchestration.Entity
                     _lastTarget = enemy;
                 }
 
-                //‚‘¬‚Å“G‚Ì•ûŒü‚ÉŒü‚­
+                //?????Å“G?Ì•????ÉŒ???
                 return ((enemy.transform.position - transform.position).normalized, 5);
             }
             else
             {
-                //‚ä‚Á‚­‚èˆÚ“®•ûŒü‚ÉŒü‚­
+                //???????Ú“??????ÉŒ???
                 return (_model.Agent.velocity.normalized, 3);
             }
         }
@@ -43,23 +43,23 @@ namespace Orchestration.Entity
         {
             base.AddDamage(data, target);
 
-            //‚à‚µUŒ‚ŠO‚©‚çŒ‚‚½‚ê‚½ê‡‚Í‹ß•t‚­
+            //????U???O???çŒ‚???ê‚½?ê‡?Í‹ß•t??
             if (_data.AttackRange < Vector3.Distance(target.transform.position, transform.position))
             {
                 GoToTarget(target);
             }
-            //UŒ‚‚ª”ÍˆÍ“à‚©‚ç‚È‚ç“®‚©‚È‚¢
+            //?U?????ÍˆÍ“????È‚ç“®???È‚?
             else
             {
-                //–Ú•W’n“_‚ª©’n“_‚Å‚È‚¢ê‡‚Í©’n“_‚ÉXV‚·‚é
+                //?Ú•W?n?_?????n?_?Å‚È‚??ê‡?Í??n?_?ÉX?V????
                 NavMeshAgent agent = _model.Agent;
                 if (agent.isActiveAndEnabled && !agent.pathPending)
                 {
-                    if (agent.remainingDistance > 2) //—×‚ÌƒOƒŠƒbƒhˆÈã‚Ì‹——£‚ª‚ ‚éê‡‚Ì‚İ
+                    if (agent.remainingDistance > 2) //?×‚ÌƒO???b?h?È?Ì‹?????????ê‡?Ì‚?
                     {
                         GroundManager manager = ServiceLocator.GetInstance<GroundManager>();
 
-                        //ˆÚ“®•ûŒü‚ÌƒOƒŠƒbƒh‚ÉˆÚ“®‚·‚é‚æ‚¤‚ÉƒIƒtƒZƒbƒg‚ğ¶¬
+                        //?Ú“??????ÌƒO???b?h?ÉˆÚ“?????æ‚¤?ÉƒI?t?Z?b?g?ğ¶?
                         Vector3 direction = agent.velocity.normalized;
                         direction *= manager.GridSize;
 
@@ -70,7 +70,7 @@ namespace Orchestration.Entity
         }
 
         /// <summary>
-        /// ‘ÎÛ‚ÌêŠ‚Ì‹ß‚­‚És‚­i•—Dæ’Tõj
+        /// ?ÎÛ‚ÌêŠ?Ì‹ß‚??És???i???D??T???j
         /// </summary>
         /// <param name="target"></param>
         public void GoToTarget(SoldierManager target)
@@ -79,55 +79,55 @@ namespace Orchestration.Entity
 
             Vector3 start = target.transform.position;
 
-            // Še•ûˆÊ‚ğ‚Â”z—ñi4•ûŒüj
+            // ?e???Ê‚???Â”z??i4?????j
             Vector3[] directions = new Vector3[]
             {
                 Vector3.right, Vector3.left, Vector3.forward, Vector3.back
             }.Select(v => v * manager.GridSize).ToArray();
 
             GridInfo info = null;
-            var queue = new Queue<Vector3>(); // BFS‚Ì’Tõ—pƒLƒ…[
-            var visited = new HashSet<Vector3>(); // ’TõÏ‚İƒŠƒXƒgid•¡–h~j
+            var queue = new Queue<Vector3>(); // BFS?Ì’T???p?L???[
+            var visited = new HashSet<Vector3>(); // ?T???Ï‚İƒ??X?g?i?d???h?~?j
 
             queue.Enqueue(start);
             visited.Add(start);
 
             while (queue.Count > 0)
             {
-                Vector3 current = queue.Dequeue(); // ƒLƒ…[‚Ìæ“ª‚ğæ“¾
+                Vector3 current = queue.Dequeue(); // ?L???[?Ìæ“ª??æ“¾
 
                 foreach (var dir in directions)
                 {
                     Vector3 nextPos = current + dir;
 
-                    // ‚·‚Å‚É–K‚ê‚½êŠ‚ÍƒXƒLƒbƒv
+                    // ???Å‚É–K?ê‚½?êŠ?ÍƒX?L?b?v
                     if (visited.Contains(nextPos))
                     {
                         continue;
                     }
 
-                    visited.Add(nextPos); // –K–âÏ‚İ‚Æ‚µ‚Äƒ}[ƒN
+                    visited.Add(nextPos); // ?K??Ï‚İ‚Æ‚??Äƒ}?[?N
 
-                    // ƒOƒŠƒbƒh‚ª‚ ‚é‚©Šm”F
+                    // ?O???b?h?????é‚©?m?F
                     if (manager.GetGridByPosition(nextPos, out info) && !manager.IsRegisterGridInfo(info))
                     {
                         goto End;
                     }
 
-                    // Ÿ‚Ì’TõŒó•â‚Æ‚µ‚Ä’Ç‰Á
+                    // ???Ì’T?????Æ‚??Ä’Ç‰?
                     queue.Enqueue(nextPos);
                 }
             }
 
         End:
             SetDestination(info.transform.position);
-            return; // Å‚à‹ß‚¢ƒOƒŠƒbƒh‚ªŒ©‚Â‚©‚Á‚½‚çI—¹
+            return; // ?Å‚?ß‚??O???b?h?????Â‚???????I??
         }
 
         private void OnDestroy()
         {
             var system = ServiceLocator.GetInstance<IngameSystemManager>();
-            //€–S‚ÉƒVƒXƒeƒ€‚É’Ê
+            //???S???ÉƒV?X?e???É’Ê?
             if (system)
             {
                 system.KillEnemy();

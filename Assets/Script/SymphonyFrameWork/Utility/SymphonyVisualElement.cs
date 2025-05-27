@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -31,7 +31,7 @@ namespace SymphonyFrameWork.Utility
 
             if (treeAsset != null)
             {
-                #region eƒGƒŒƒƒ“ƒg‚Ì‰Šú‰»
+                #region ?e?G???????g?Ì?????
 
                 var container = treeAsset.Instantiate();
                 container.style.width = Length.Percent(100);
@@ -62,7 +62,7 @@ namespace SymphonyFrameWork.Utility
 
                 #endregion
 
-                // UI—v‘f‚Ìæ“¾
+                // UI?v?f?Ìæ“¾
                 await Initialize_S(container);
             }
             else

@@ -1,4 +1,4 @@
-using SymphonyFrameWork.Utility;
+ï»¿using SymphonyFrameWork.Utility;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -23,7 +23,7 @@ namespace Orchestration.UI
         {
             if (progress < 0 || 1 < progress)
             {
-                Debug.LogWarning("”’l‚Ì”ÍˆÍŠO‚Å‚·");
+                Debug.LogWarning("???l?Ì”ÍˆÍŠO?Å‚?");
                 return;
             }
 

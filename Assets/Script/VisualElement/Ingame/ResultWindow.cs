@@ -1,4 +1,4 @@
-using SymphonyFrameWork.Utility;
+ï»¿using SymphonyFrameWork.Utility;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -37,7 +37,7 @@ namespace Orchestration.UI
 
         public async Task ResultWindowStart(int score, int stage, int kill)
         {
-            //’iX‚Æ•\¦‚³‚ê‚é‰‰o
+            //?i?X?Æ•\??????é‰‰?o
             style.visibility = Visibility.Visible;
 
             await Awaitable.WaitForSecondsAsync(0.5f);
@@ -46,18 +46,18 @@ namespace Orchestration.UI
 
             await Awaitable.WaitForSecondsAsync(0.5f);
 
-            //ƒXƒe[ƒWƒJƒEƒ“ƒg‚ğƒJƒEƒ“ƒgƒAƒbƒv
+            //?X?e?[?W?J?E???g??J?E???g?A?b?v
             await CountUp(_stageCounter, stage, 1, "m");
 
             await Awaitable.WaitForSecondsAsync(0.25f);
 
-            //ƒLƒ‹ƒJƒEƒ“ƒg‚ğƒJƒEƒ“ƒgƒAƒbƒv
+            //?L???J?E???g??J?E???g?A?b?v
             await CountUp(_killCounter, kill, 1);
 
 
             await Awaitable.WaitForSecondsAsync(0.25f);
 
-            //ƒXƒRƒA‚ğƒJƒEƒ“ƒgƒAƒbƒv
+            //?X?R?A??J?E???g?A?b?v
             await CountUp(_scoreCounter, score, 1);
 
             await Awaitable.WaitForSecondsAsync(0.5f);

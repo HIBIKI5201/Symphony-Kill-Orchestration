@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using UnityEngine;
 
 namespace SymphonyFrameWork.CoreSystem
@@ -42,26 +42,26 @@ namespace SymphonyFrameWork.CoreSystem
 
         private static void Load()
         {
-            #region Prefs‚©‚çƒf[ƒ^‚ğƒ[ƒh‚·‚é
+            #region Prefs????f?[?^????[?h????
             string json = PlayerPrefs.GetString(typeof(DataType).Name);
             if (string.IsNullOrEmpty(json))
             {
-                Debug.LogWarning($"{typeof(DataType).Name}‚Ìƒf[ƒ^‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½");
+                Debug.LogWarning($"{typeof(DataType).Name}?Ìƒf?[?^?????Â‚???Ü‚???Å‚???");
                 _saveData = new SaveData(new DataType());
                 return;
             }
             #endregion
 
-            #region JSON‚É•ÏŠ·‚µ‚Ä•Û‘¶
+            #region JSON?É•ÏŠ????Ä•Û‘?
             SaveData data = JsonUtility.FromJson<SaveData>(json);
             if (data is not null)
             {
-                Debug.Log($"{typeof(DataType).Name}‚Ìƒf[ƒ^‚ªƒ[ƒh‚³‚ê‚Ü‚µ‚½\n{data}");
+                Debug.Log($"{typeof(DataType).Name}?Ìƒf?[?^?????[?h????Ü‚???\n{data}");
                 _saveData = data;
             }
             else
             {
-                Debug.LogWarning($"{typeof(DataType).Name}‚Ìƒ[ƒh‚ªo—ˆ‚Ü‚¹‚ñ‚Å‚µ‚½");
+                Debug.LogWarning($"{typeof(DataType).Name}?Ìƒ??[?h???o???Ü‚???Å‚???");
                 _saveData = new SaveData(new DataType());
             }
             #endregion

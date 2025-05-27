@@ -1,4 +1,4 @@
-using Orchestration.InGame;
+ï»¿using Orchestration.InGame;
 using SymphonyFrameWork.CoreSystem;
 using System;
 using UnityEngine;
@@ -15,7 +15,7 @@ namespace Orchestration.Entity
 
         protected override bool SkillProccess(PlayerSoldierManager soldier, SoldierData_SO data)
         {
-            //–¡•û‘Sˆõ‚Éƒoƒt‚ð—^‚¦‚é
+            //?????S???Éƒo?t??^????
             var unit = ServiceLocator.GetInstance<UnitManager>();
             if (unit)
             {

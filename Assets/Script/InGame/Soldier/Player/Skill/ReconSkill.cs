@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 namespace Orchestration.Entity
 {
@@ -12,7 +12,7 @@ namespace Orchestration.Entity
         private GameObject _particle;
         protected override bool SkillProccess(PlayerSoldierManager soldier, SoldierData_SO data)
         {
-            Debug.Log("ƒŠƒRƒ“ƒXƒLƒ‹”­“®");
+            Debug.Log("???R???X?L??????");
 
             var attackModule = GetComponent<SoldierAttack>();
 

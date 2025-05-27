@@ -1,10 +1,10 @@
-using Orchestration.Entity;
+ï»¿using Orchestration.Entity;
 using UnityEngine;
 
 namespace Orchestration.InGame
 {
     /// <summary>
-    /// ƒOƒŠƒbƒh‚Ìî•ñ‚Æ‘€ì‚ğ‚Â
+    /// ?O???b?h?Ì??Æ‘???????
     /// </summary>
     public class GridInfo : MonoBehaviour
     {
@@ -40,7 +40,7 @@ namespace Orchestration.InGame
             }
             else
             {
-                Debug.LogWarning("ƒOƒŠƒbƒh‚ÌƒnƒCƒ‰ƒCƒg‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ");
+                Debug.LogWarning("?O???b?h?Ìƒn?C???C?g?????Â‚???Ü‚???");
             }
 
             if (_ground)
@@ -49,7 +49,7 @@ namespace Orchestration.InGame
             }
             else
             {
-                Debug.LogWarning("ƒOƒŠƒbƒh‚ÌƒOƒ‰ƒEƒ“ƒh‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ");
+                Debug.LogWarning("?O???b?h?ÌƒO???E???h?????Â‚???Ü‚???");
             }
         }
 

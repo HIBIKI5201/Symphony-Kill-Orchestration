@@ -1,4 +1,4 @@
-using Orchestration.InGame;
+ï»¿using Orchestration.InGame;
 using Orchestration.UI;
 using SymphonyFrameWork.CoreSystem;
 using SymphonyFrameWork.Utility;
@@ -67,7 +67,7 @@ namespace Orchestration.Entity
         }
 
         /// <summary>
-        /// ƒwƒ‹ƒXƒo[‚ÌˆÊ’u‚ğXV‚·‚é
+        /// ?w???X?o?[?ÌˆÊ’u??X?V????
         /// </summary>
         /// <param name="pos"></param>
         public void MarkMove(Vector3 pos, Vector3 healthBarOffset)
@@ -77,18 +77,18 @@ namespace Orchestration.Entity
                 return;
             }
 
-            //ƒXƒNƒŠ[ƒ“À•WŒn‚É•ÏŠ·
+            //?X?N???[?????W?n?É•ÏŠ?
             Vector2 screenPos = Camera.main.WorldToScreenPoint(pos + healthBarOffset);
 
             float centerX = screenPos.x - (_soldierMark.resolvedStyle.width / 2);
-            float centerY = Screen.height - screenPos.y; //UITKÀ•WŒn‚Å‚Í’l‚ª‚‚¢‚Ù‚Ç‰º‚ÉˆÚ“®‚·‚é
+            float centerY = Screen.height - screenPos.y; //UITK???W?n?Å‚Í’l???????Ù‚Ç‰??ÉˆÚ“?????
 
             _soldierMark.style.left = centerX;
             _soldierMark.style.top = centerY;
         }
 
         /// <summary>
-        /// ƒ_ƒ[ƒW•\¦‚ğ’Ç‰Á
+        /// ?_???[?W?\????Ç‰?
         /// </summary>
         /// <param name="data"></param>
         public void DamageTextInstantiate(AttackData data)
@@ -102,20 +102,20 @@ namespace Orchestration.Entity
         }
 
         /// <summary>
-        /// ƒwƒ‹ƒXƒo[‚Ì—Ê‚ğXV‚·‚é
+        /// ?w???X?o?[?Ì—Ê‚?X?V????
         /// </summary>
         /// <param name="proportion"></param>
         public void HealthBarUpdate(float proportion) => _info.HealthBarUpdate(proportion);
 
         /// <summary>
-        /// ƒXƒyƒVƒƒƒ‹ƒ|ƒCƒ“ƒg‚Ì—Ê‚ğXV‚·‚é
+        /// ?X?y?V?????|?C???g?Ì—Ê‚?X?V????
         /// </summary>
         /// <param name="proportion"></param>
         /// <param name="count"></param>
         public void SpecialPointGuageUpdate(float proportion) => _selector.SpecialPointGuageUpdate(proportion);
 
         /// <summary>
-        /// ƒXƒyƒVƒƒƒ‹ƒ|ƒCƒ“ƒg‚ÌƒJƒEƒ“ƒg—Ê‚ğXV‚·‚é
+        /// ?X?y?V?????|?C???g?ÌƒJ?E???g?Ê‚?X?V????
         /// </summary>
         /// <param name="count"></param>
         public void SpecialPointCountUpdate(int count) => _selector.SpecialPointCountUpdate(count);

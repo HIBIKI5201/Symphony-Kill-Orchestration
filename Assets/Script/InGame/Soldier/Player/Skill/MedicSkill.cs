@@ -1,4 +1,4 @@
-using Orchestration.InGame;
+ï»¿using Orchestration.InGame;
 using SymphonyFrameWork.CoreSystem;
 using UnityEngine;
 
@@ -43,10 +43,10 @@ namespace Orchestration.Entity
             {
                 foreach (var s in unit.UnitSoldiers)
                 {
-                    //”ÍˆÍ“à‚Ì–¡•û‚ÉŽg—p
+                    //?ÍˆÍ“?Ì–????ÉŽg?p
                     if (Vector3.Distance(s.transform.position, transform.position) < _range)
                     {
-                        float damagedHealth = s.Data.MaxHealthPoint - s.Data.HealthPoint; //í‚ç‚ê‚½‘Ì—Í—Ê
+                        float damagedHealth = s.Data.MaxHealthPoint - s.Data.HealthPoint; //???ê‚½?Ì—Í—?
                         damagedHealth *= _healAmountPercent / 100;
 
                         s.AddHeal(damagedHealth);

@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 namespace Orchestration.Editor
 {
     /// <summary>
-    ///     Rider移行によって起きた文字化けを修正する
+    ///     Rider移行によって起きた文字化けを削除する
     /// </summary>
     public class FixBrokenComments
     {
@@ -20,9 +20,10 @@ namespace Orchestration.Editor
                 string content = File.ReadAllText(filePath, Encoding.UTF8);
                 string original = content;
 
-                // 「//」から行末までに「�」が含まれる行のコメント部分を削除
-                content = Regex.Replace(content, @"(//.*?)[�]+.*", "//");
+                // 文字化けが含まれる行のコメント部分を削除
+                content = Regex.Replace(content, @"?", "?");
 
+                //変更があれば書き換え
                 if (content != original)
                 {
                     File.WriteAllText(filePath, content, Encoding.UTF8);
