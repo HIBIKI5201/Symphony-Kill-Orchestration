@@ -11,7 +11,7 @@ namespace SymphonyFrameWork.Utility
                 return true;
             }
 
-            Debug.LogError(message);
+            Debug.LogWarning(message);
             return false;
         }
     }
