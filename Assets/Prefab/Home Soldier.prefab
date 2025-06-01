@@ -28,6 +28,18 @@ PrefabInstance:
       propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[2].m_Overridden
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2454968635907306165, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: 1b766da7cc2d648aa84e36cb5fe8abcb, type: 3}
+    - target: {fileID: 2454968635907306165, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1b766da7cc2d648aa84e36cb5fe8abcb, type: 3}
+    - target: {fileID: 2454968635907306165, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 3269193367629621591, guid: 4bfcf7f3d138e24489063acfde621917, type: 2}
     - target: {fileID: 2852204906293816622, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -111,7 +123,7 @@ PrefabInstance:
     - target: {fileID: 7466211388178101979, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
       propertyPath: _muzzleAudio
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 9189349375922374598}
     - target: {fileID: 7466211388178101979, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
       propertyPath: _iconMaterial
       value: 
@@ -146,6 +158,11 @@ PrefabInstance:
 --- !u!4 &5111946372693429928 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1974727565369703387, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
+  m_PrefabInstance: {fileID: 6743837416227173747}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &9189349375922374598 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2454968635907306165, guid: 79d66b26b22c8d04191146b932313a98, type: 3}
   m_PrefabInstance: {fileID: 6743837416227173747}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8849457660553472663
