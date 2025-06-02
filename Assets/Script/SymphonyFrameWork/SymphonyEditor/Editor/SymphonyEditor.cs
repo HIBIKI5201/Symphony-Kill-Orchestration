@@ -1,3 +1,4 @@
+﻿# if UNITY_EDITOR
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.UIElements;
@@ -53,7 +54,6 @@ namespace SymphonyFrameWork.Editor
             }
         }
 
-        [MenuItem("Symphony FrameWork/Admin")]
         public static void ShowWindow()
         {
             StaticFieldEditorUI wnd = GetWindow<StaticFieldEditorUI>();
@@ -162,3 +162,5 @@ namespace SymphonyFrameWork.Editor
         }
     }
 }
+
+#endif

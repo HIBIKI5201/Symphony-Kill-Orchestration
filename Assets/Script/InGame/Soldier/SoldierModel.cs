@@ -1,4 +1,4 @@
-using Orchestration.System;
+ï»¿using Orchestration.System;
 using SymphonyFrameWork.CoreSystem;
 using SymphonyFrameWork.Utility;
 using System.Threading;
@@ -12,7 +12,7 @@ namespace Orchestration.Entity
 {
     public class SoldierModel : MonoBehaviour
     {
-        #region ƒRƒ“ƒ|[ƒlƒ“ƒg
+        #region ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
         private NavMeshAgent _agent;
         public NavMeshAgent Agent { get => _agent; }
 
@@ -24,24 +24,24 @@ namespace Orchestration.Entity
         private bool _isFoodStepPlayed;
         #endregion
 
-        [Header("UŒ‚")]
+        [Header("æ”»æ’ƒ")]
 
-        [SerializeField, Tooltip("UŒ‚‚µ‚½‚¢•ºm‚ÌƒŒƒCƒ„[")]
+        [SerializeField, Tooltip("æ”»æ’ƒã—ãŸã„å…µå£«ã®ãƒ¬ã‚¤ãƒ¤ãƒ¼")]
         private LayerMask _targetLayer;
         public LayerMask TargetLayer { get => _targetLayer; }
 
-        [Header("‰‰o")]
+        [Header("æ¼”å‡º")]
 
-        [SerializeField, Tooltip("ã”¼g‚ÌƒŠƒO")]
+        [SerializeField, Tooltip("ä¸ŠåŠèº«ã®ãƒªã‚°")]
         private Rig _forwardRig;
 
-        [SerializeField, Tooltip("ã”¼g‚ÌƒŠƒO‚Ìƒ^[ƒQƒbƒg")]
+        [SerializeField, Tooltip("ä¸ŠåŠèº«ã®ãƒªã‚°ã®ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ")]
         private Transform _forwardRigTarget;
         public Vector3 TargetPosition { get => _forwardRigTarget.position; }
 
         [Space]
 
-        [SerializeField, Tooltip("ƒ}ƒYƒ‹ƒtƒ‰ƒbƒVƒ…‚ÌVFX")]
+        [SerializeField, Tooltip("ãƒã‚ºãƒ«ãƒ•ãƒ©ãƒƒã‚·ãƒ¥ã®VFX")]
         private VisualEffect _muzzleFlash;
         public VisualEffect MuzzleFlash { get => _muzzleFlash; }
 
@@ -56,8 +56,8 @@ namespace Orchestration.Entity
         private GameObject _bulletPrefab;
         public GameObject BulletPrefab { get => _bulletPrefab; }
 
-        [Header("ƒI[ƒfƒBƒI")]
-        [SerializeField, Tooltip("ƒ}ƒYƒ‹‚ÌƒI[ƒfƒBƒIƒ\[ƒX")]
+        [Header("ã‚ªãƒ¼ãƒ‡ã‚£ã‚ª")]
+        [SerializeField, Tooltip("ãƒã‚ºãƒ«ã®ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªã‚½ãƒ¼ã‚¹")]
         private AudioSource _muzzleAudio;
 
         [SerializeField]
@@ -105,41 +105,47 @@ namespace Orchestration.Entity
 
             if (_muzzleAudio)
             {
-                //SE—p‚ÌMixerGroup‚Éw’è
+                //SEç”¨ã®MixerGroupã«æŒ‡å®š
                 _muzzleAudio.outputAudioMixerGroup = ServiceLocator.GetInstance<AudioManager>().GetMixerGroup(System.AudioType.SE);
                 _muzzleAudio.playOnAwake = false;
                 _muzzleAudio.spatialBlend = 1;
             }
             else
             {
-                Debug.LogWarning("MuzzleAudio is not assigned. Please assign an AudioSource for muzzle audio effects."); 
+                Debug.LogWarning("ãƒã‚ºãƒ«ã®ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªã‚½ãƒ¼ã‚¹ãŒã‚ã‚Šã¾ã›ã‚“"); 
             }
 
-            if (!_shootAudioClip)
-                Debug.LogWarning("ShootAudioClip is not assigned. Please assign an AudioClip for shooting sound effects.");
-
+            if (_shootAudioClip)
+            {
+                var group = ServiceLocator.GetInstance<AudioManager>().GetMixerGroup(System.AudioType.SE);
+                Debug.Log($"[develop]{name}ã®ãƒã‚ºãƒ«ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªã¯{_shootAudioClip.name}ã§ã™\ngroup:{group.name} {(group.audioMixer.GetFloat("SE_Volume", out var value) ? $"volume:{value}" : "volume is not found")}");
+            }
+            else
+            {
+                Debug.LogWarning("ãƒã‚ºãƒ«ã®ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªã‚¯ãƒªãƒƒãƒ—ãŒã‚ã‚Šã¾ã›ã‚“");
+            }
             if (_muzzleFlashLight)
             {
                 _muzzleFlashLight.enabled = false;
             }
 
-            if (_agent.NullCheckComponent("NavMeshAgent‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ"))
+            if (_agent.NullCheckComponent("NavMeshAgentãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“"))
             {
-                //è“®‚Å“®‚©‚·‚½‚ßƒAƒbƒvƒf[ƒg‚Í‚È‚µ
+                //æ‰‹å‹•ã§å‹•ã‹ã™ãŸã‚ã‚¢ãƒƒãƒ—ãƒ‡ãƒ¼ãƒˆã¯ãªã—
                 _agent.updatePosition = false;
                 _agent.updateRotation = false;
 
                 _agent.autoTraverseOffMeshLink = true;
             }
 
-            if (_animator.NullCheckComponent("Animator‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ"))
+            if (_animator.NullCheckComponent("AnimatorãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“"))
             {
                 _animator.applyRootMotion = false;
             }
 
-            if (_foodStepAudio.NullCheckComponent())
+            if (_foodStepAudio.NullCheckComponent("food step audio"))
             {
-                //SE—p‚ÌMixerGroup‚Éw’è
+                //SEç”¨ã®MixerGroupã«æŒ‡å®š
                 _foodStepAudio.outputAudioMixerGroup = ServiceLocator.GetInstance<AudioManager>().GetMixerGroup(System.AudioType.SE);
                 _foodStepAudio.playOnAwake = false;
                 _foodStepAudio.Stop();
@@ -178,7 +184,7 @@ namespace Orchestration.Entity
 
             if (_muzzleFlashLight)
             {
-                //‚Ü‚¾ƒ‰ƒCƒg‚ª•t‚¢‚Ä‚¢‚é‚È‚çƒXƒLƒbƒv
+                //ã¾ã ãƒ©ã‚¤ãƒˆãŒä»˜ã„ã¦ã„ã‚‹ãªã‚‰ã‚¹ã‚­ãƒƒãƒ—
                 if (_muzzleFlashLightTask != null && !_muzzleFlashLightTask.IsCompleted)
                 {
                     goto MuzzleFlashEnd;
@@ -211,7 +217,7 @@ namespace Orchestration.Entity
             {
                 _animator.speed = 0;
 
-                //‚à‚µ•à‚«ƒTƒEƒ“ƒh‚ªÄ¶’†‚¾‚Á‚½‚çó‘Ô‚ğ•Û‘¶‚µ‚Ä’â~
+                //ã‚‚ã—æ­©ãã‚µã‚¦ãƒ³ãƒ‰ãŒå†ç”Ÿä¸­ã ã£ãŸã‚‰çŠ¶æ…‹ã‚’ä¿å­˜ã—ã¦åœæ­¢
                 if (_foodStepAudio.isPlaying)
                 {
                     _isFoodStepPlayed = true;
@@ -222,7 +228,7 @@ namespace Orchestration.Entity
             {
                 _animator.speed = 1;
 
-                //‚à‚µ•à‚«ƒTƒEƒ“ƒh‚ªÄ¶‚µ‚Ä‚¢‚½‚çÄŠJ
+                //ã‚‚ã—æ­©ãã‚µã‚¦ãƒ³ãƒ‰ãŒå†ç”Ÿã—ã¦ã„ãŸã‚‰å†é–‹
                 if (_isFoodStepPlayed)
                 {
                     _isFoodStepPlayed = false;

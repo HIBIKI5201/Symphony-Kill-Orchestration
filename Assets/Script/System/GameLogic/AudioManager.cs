@@ -1,4 +1,4 @@
-using SymphonyFrameWork.CoreSystem;
+﻿using SymphonyFrameWork.CoreSystem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +23,7 @@ namespace Orchestration.System
         [Space]
 
         [SerializeField]
-        private AudioVolumeSetting _webGLSetting;
+        private AudioVolumeSetting _buildSetting;
 
         [Serializable]
         private struct AudioVolumeSetting
@@ -62,24 +62,24 @@ namespace Orchestration.System
         {
             if (!Application.isEditor)
             {
-                if (_webGLSetting.Master != 0)
+                if (_buildSetting.Master != 0)
                 {
-                    _mixer.SetFloat($"{AudioType.Master}_Volume", _webGLSetting.Master);
+                    _mixer.SetFloat($"{AudioType.Master}_Volume", _buildSetting.Master);
                 }
 
-                if (_webGLSetting.BGM != 0)
+                if (_buildSetting.BGM != 0)
                 {
-                    _mixer.SetFloat($"{AudioType.BGM}_Volume", _webGLSetting.BGM);
+                    _mixer.SetFloat($"{AudioType.BGM}_Volume", _buildSetting.BGM);
                 }
                 
-                if (_webGLSetting.SE != 0)
+                if (_buildSetting.SE != 0)
                 {
-                    _mixer.SetFloat($"{AudioType.SE}_Volume", _webGLSetting.SE);
+                    _mixer.SetFloat($"{AudioType.SE}_Volume", _buildSetting.SE);
                 }
 
-                if (_webGLSetting.Voice != 0)
+                if (_buildSetting.Voice != 0)
                 {
-                    _mixer.SetFloat($"{AudioType.Voice}_Volume", _webGLSetting.Voice);
+                    _mixer.SetFloat($"{AudioType.Voice}_Volume", _buildSetting.Voice);
                 }
             }
         }
