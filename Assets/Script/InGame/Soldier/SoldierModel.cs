@@ -110,6 +110,13 @@ namespace Orchestration.Entity
                 _muzzleAudio.playOnAwake = false;
                 _muzzleAudio.spatialBlend = 1;
             }
+            else
+            {
+                Debug.LogWarning("MuzzleAudio is not assigned. Please assign an AudioSource for muzzle audio effects."); 
+            }
+
+            if (!_shootAudioClip)
+                Debug.LogWarning("ShootAudioClip is not assigned. Please assign an AudioClip for shooting sound effects.");
 
             if (_muzzleFlashLight)
             {
