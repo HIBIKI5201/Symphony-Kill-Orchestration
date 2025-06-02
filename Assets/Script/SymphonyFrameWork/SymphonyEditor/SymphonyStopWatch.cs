@@ -1,4 +1,4 @@
-ï»¿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Debug = UnityEngine.Debug;
 
@@ -10,7 +10,7 @@ namespace SymphonyFrameWork.Editor
         private static Dictionary<int, (Stopwatch watch, string text)> dict = new();
 #endif
         /// <summary>
-        /// ???Æ”??È‚?ID??w?è‚µ?Ä‚???????
+        /// ‘¼‚Æ”í‚ç‚È‚¢ID‚ðŽw’è‚µ‚Ä‚­‚¾‚³‚¢
         /// </summary>
         /// <param name="id"></param>
         /// <param name="text"></param>
@@ -20,13 +20,13 @@ namespace SymphonyFrameWork.Editor
 #if UNITY_EDITOR
             if (!dict.TryAdd(id, (Stopwatch.StartNew(), text)))
             {
-                Debug.LogWarning($"?X?g?b?v?E?H?b?`??ID??????Ä‚??Ü‚?\n{id}?Å‚Í‚È‚??Ê‚?ID??w?è‚µ?Ä‚???????");
+                Debug.LogWarning($"ƒXƒgƒbƒvƒEƒHƒbƒ`‚ÌID‚ª”í‚Á‚Ä‚¢‚Ü‚·\n{id}‚Å‚Í‚È‚¢•Ê‚ÌID‚ðŽw’è‚µ‚Ä‚­‚¾‚³‚¢");
             }
 #endif
         }
 
         /// <summary>
-        /// ?J?n???Æ“???ID?????Ä‰?????
+        /// ŠJŽnŽž‚Æ“¯‚¶ID‚ð“ü‚ê‚Ä‰º‚³‚¢
         /// </summary>
         /// <param name="id"></param>
         [Conditional("UNITY_EDITOR")]
@@ -39,7 +39,7 @@ namespace SymphonyFrameWork.Editor
                 Debug.Log($"{value.text} <color=green><b>{value.watch.ElapsedMilliseconds}</b></color> ms");
                 dict.Remove(id);
             }
-            else Debug.LogWarning($"{id}?ÌƒX?g?b?v?E?H?b?`?ÍŠJ?n????Ä‚??Ü‚???");
+            else Debug.LogWarning($"{id}‚ÌƒXƒgƒbƒvƒEƒHƒbƒ`‚ÍŠJŽn‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ");
 #endif
         }
     }

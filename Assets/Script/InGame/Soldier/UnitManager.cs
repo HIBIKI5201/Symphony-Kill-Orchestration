@@ -1,4 +1,4 @@
-ï»¿using Orchestration.Entity;
+using Orchestration.Entity;
 using SymphonyFrameWork.CoreSystem;
 using System;
 using System.Collections.Generic;
@@ -35,7 +35,7 @@ namespace Orchestration.InGame
 
         private void Start()
         {
-            //?e???m?ğ¶?
+            //Še•ºm‚ğ¶¬
             AddSoldier(SoldierType.Assault, new Vector3(0.5f, 0, -3.5f));
             AddSoldier(SoldierType.Support, new Vector3(0.5f, 0, -1.5f));
             AddSoldier(SoldierType.Medic, new Vector3(0.5f, 0, 1.5f));
@@ -58,7 +58,7 @@ namespace Orchestration.InGame
 
             foreach (var soldier in _soldiers.Values)
             {
-                //???m??Next???E???È?É‚??é‚©?Ç‚???
+                //•ºm‚ªNext‹«ŠEüˆÈã‚É‚¢‚é‚©‚Ç‚¤‚©
                 if (soldier.transform.position.x >
                     system.StageCounter * GroundManager.ChunkSize
                     + groundManager.FirstBoundaryLineX
@@ -72,12 +72,12 @@ namespace Orchestration.InGame
         }
 
         /// <summary>
-        /// ?I?ğ’†‚Ì•??m??ÏX
+        /// ‘I‘ğ’†‚Ì•ºm‚ğ•ÏX
         /// </summary>
         /// <param name="axis"></param>
         public void SelectSwitch(float axis)
         {
-            //?I?ğ’†‚Ì•??m?ÌƒC???f?b?N?X
+            //‘I‘ğ’†‚Ì•ºm‚ÌƒCƒ“ƒfƒbƒNƒX
             int index = _soldiers.Values.ToList().FindIndex(s => s == _selectSolider);
 
             axis = Math.Sign(axis);
@@ -104,20 +104,20 @@ namespace Orchestration.InGame
                 return;
             }
 
-            //???ÌƒZ???N?g??Ô‚???
+            //Œ³‚ÌƒZƒŒƒNƒgó‘Ô‚ğ‰ğœ
             if (_selectSolider)
             {
                 _selectSolider.Select(false);
             }
 
-            //?V???ÉƒZ???N?g??Ô‚É‚???
+            //V‚½‚ÉƒZƒŒƒNƒgó‘Ô‚É‚·‚é
             _selectSolider = soldier;
             _selectSolider.Select(true);
 
         }
 
         /// <summary>
-        /// ???m??I??????êŠ?ÉˆÚ“???????
+        /// •ºm‚ğ‘I‘ğ‚µ‚½êŠ‚ÉˆÚ“®‚³‚¹‚é
         /// </summary>
         public void SoldierMove(Vector3 point)
         {
@@ -132,7 +132,7 @@ namespace Orchestration.InGame
         public void SkillActive(float value) => _selectSolider.SkillActive();
 
         /// <summary>
-        /// ???E???O?É‚??é•º?m????E????ÌˆÊ’u?ÉˆÚ“???????
+        /// ‹«ŠEüŠO‚É‚¢‚é•ºm‚ğ‹«ŠEü“à‚ÌˆÊ’u‚ÉˆÚ“®‚³‚¹‚é
         /// </summary>
         /// <param name="count"></param>
         private void BorderOutSoldierMove(int count)
@@ -149,14 +149,14 @@ namespace Orchestration.InGame
             {
                 if (soldier.AgentDestination.x <= lineX)
                 {
-                    //?Ê’u?Ì‰???????ÉˆÚ“?????
+                    //ˆÊ’u‚Ì‰„’·üã‚ÉˆÚ“®‚·‚é
                     Vector3 movePoint = soldier.transform.position;
                     movePoint.x = lineX;
 
                     GridInfo info = null;
                     do
                     {
-                        //?Ú“??æ‚ª???Â‚???Ü‚ÅŒJ??Ô‚?
+                        //ˆÚ“®æ‚ªŒ©‚Â‚©‚é‚Ü‚ÅŒJ‚è•Ô‚·
                         if (movePoint.z < 5)
                         {
                             movePoint.z += 1;
@@ -167,10 +167,10 @@ namespace Orchestration.InGame
                             movePoint.x += 1;
                         }
 
-                        //?O???b?h?????é‚©?m?F
+                        //ƒOƒŠƒbƒh‚ª‚ ‚é‚©Šm”F
                         manager.GetGridByPosition(movePoint, out info);
                     }
-                    //?O???b?h?????é‚©?g?p?Ï‚İ‚Ìê‡?ÍŒJ??Ô‚?
+                    //ƒOƒŠƒbƒh‚ª‚ ‚é‚©g—pÏ‚İ‚Ìê‡‚ÍŒJ‚è•Ô‚·
                     while (info == null || manager.IsRegisterGridInfo(info));
 
                     soldier.SetDestination(info.transform.position);
@@ -179,7 +179,7 @@ namespace Orchestration.InGame
         }
 
         /// <summary>
-        /// ?^?C?v????v???n?u??Ô‚?
+        /// ƒ^ƒCƒv‚©‚çƒvƒŒƒnƒu‚ğ•Ô‚·
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
@@ -196,7 +196,7 @@ namespace Orchestration.InGame
         }
 
         /// <summary>
-        /// ???m?ğ¶?????
+        /// •ºm‚ğ¶¬‚·‚é
         /// </summary>
         /// <param name="type"></param>
         /// <param name="position"></param>
@@ -213,14 +213,14 @@ namespace Orchestration.InGame
         }
 
         /// <summary>
-        /// ???m?????S???????Æ‚?L?^????
+        /// •ºm‚ª€–S‚µ‚½‚±‚Æ‚ğ‹L˜^‚·‚é
         /// </summary>
         /// <param name="soldierManager"></param>
         public void DeathSoldier(PlayerSoldierManager soldierManager)
         {
             var type = _soldiers.ToList().Find(kvp => kvp.Value == soldierManager);
 
-            //????I?ğ’†‚Ì•??m?È‚çŸ?Ì•??m?É•ÏX
+            //‚à‚µ‘I‘ğ’†‚Ì•ºm‚È‚çŸ‚Ì•ºm‚É•ÏX
             if (type.Value == _selectSolider)
             {
                 SelectSwitch(1);

@@ -1,4 +1,4 @@
-ï»¿using Orchestration.UI;
+using Orchestration.UI;
 using SymphonyFrameWork.CoreSystem;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -84,7 +84,7 @@ namespace Orchestration.InGame
         {
             float nextPosX = count * GroundManager.ChunkSize + _miniMapFirstPosX;
 
-            //???ÌƒX?e?[?W?Ê’u?ÉˆÚ“?????Ü‚ÅŒJ??Ô‚?
+            //Ÿ‚ÌƒXƒe[ƒWˆÊ’u‚ÉˆÚ“®‚·‚é‚Ü‚ÅŒJ‚è•Ô‚·
             while (nextPosX >= _miniMapCamera.position.x)
             {
                 _miniMapCamera.position += new Vector3(_miniMapCameraSpeed * Time.deltaTime, 0, 0);
@@ -92,7 +92,7 @@ namespace Orchestration.InGame
                 await Awaitable.NextFrameAsync();
             }
 
-            //?Ú“??????????ç®???l?É–ß‚?
+            //ˆÚ“®Š®—¹‚µ‚½‚ç®”’l‚É–ß‚·
             _miniMapCamera.position = new Vector3(nextPosX, _miniMapCamera.position.y, _miniMapCamera.position.z);
         }
 

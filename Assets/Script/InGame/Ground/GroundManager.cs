@@ -1,4 +1,4 @@
-ï»¿using SymphonyFrameWork.CoreSystem;
+using SymphonyFrameWork.CoreSystem;
 using UnityEngine;
 
 namespace Orchestration.InGame
@@ -46,7 +46,7 @@ namespace Orchestration.InGame
             }
             else
             {
-                Debug.LogError("???E???????Â‚???Ü‚???");
+                Debug.LogError("‹«ŠEü‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ");
             }
         }
 
@@ -57,14 +57,14 @@ namespace Orchestration.InGame
         }
 
         /// <summary>
-        /// ???E????Ú“???????
+        /// ‹«ŠEü‚ğˆÚ“®‚³‚¹‚é
         /// </summary>
         /// <param name="count"></param>
         private async void MoveBoundaryLine(int count)
         {
             float nextPosX = count * ChunkSize + _firstBoundaryLineX;
 
-            //???ÌƒX?e?[?W?Ê’u?ÉˆÚ“?????Ü‚ÅŒJ??Ô‚?
+            //Ÿ‚ÌƒXƒe[ƒWˆÊ’u‚ÉˆÚ“®‚·‚é‚Ü‚ÅŒJ‚è•Ô‚·
             while (nextPosX >= _overBoundaryLine.position.x)
             {
                 _overBoundaryLine.position += new Vector3(_boundaryLineSpeed * Time.deltaTime, 0, 0);
@@ -77,45 +77,45 @@ namespace Orchestration.InGame
                 catch { }
             }
 
-            //?Ú“??????????ç®???l?É–ß‚?
+            //ˆÚ“®Š®—¹‚µ‚½‚ç®”’l‚É–ß‚·
             _overBoundaryLine.position = new Vector3(nextPosX, _overBoundaryLine.position.y, _overBoundaryLine.position.z);
             _nextBoundaryLine.position = new Vector3(nextPosX + ChunkSize * NextBoundaryLineCount, _nextBoundaryLine.position.y, _nextBoundaryLine.position.z);
         }
 
         /// <summary>
-        /// ???Í‚??ê‚½???W?Éˆ?Ô‹ß‚??O???b?h??Ì??W??Ô‚?
+        /// “ü—Í‚³‚ê‚½À•W‚Éˆê”Ô‹ß‚¢ƒOƒŠƒbƒhã‚ÌÀ•W‚ğ•Ô‚·
         /// </summary>
-        /// <param name="position">?????????????W</param>
-        /// <param name="pos">?O???b?h?Ì??W</param>
-        ///<param name="index">?O???b?h?ÌƒC???f?b?N?X?Ô?</param>
-        /// <returns>?O???b?h?????İ‚??é‚©</returns>
+        /// <param name="position">ŒŸõ‚µ‚½‚¢À•W</param>
+        /// <param name="pos">ƒOƒŠƒbƒh‚ÌÀ•W</param>
+        ///<param name="index">ƒOƒŠƒbƒh‚ÌƒCƒ“ƒfƒbƒNƒX”Ô†</param>
+        /// <returns>ƒOƒŠƒbƒh‚ª‘¶İ‚·‚é‚©</returns>
         public bool GetGridByPosition(Vector3 position, out GridInfo info) =>
             _gridManager.GetGridByPosition(position, out info);
 
         /// <summary>
-        /// ?O???b?h?????g?p?Ìê‡?Í“o?^????
-        /// ?g?p????Ä‚???ê‡??false??Ô‚?
+        /// ƒOƒŠƒbƒh‚ª–¢g—p‚Ìê‡‚Í“o˜^‚·‚é
+        /// g—p‚³‚ê‚Ä‚¢‚éê‡‚Ífalse‚ğ•Ô‚·
         /// </summary>
         /// <param name="info"></param>
         /// <returns></returns>
         public bool TryRegisterGridInfo(GridInfo info) => _gridManager.TryRegisterGridInfo(info);
 
         /// <summary>
-        /// ?g?p?o?^????????
+        /// g—p“o˜^‚ğ‰ğœ‚·‚é
         /// </summary>
         /// <param name="info"></param>
         /// <returns></returns>
         public bool TryUnregisterGridInfo(GridInfo info) => _gridManager.TryUnregisterGridInfo(info);
 
         /// <summary>
-        /// ?w?è‚µ???O???b?h??n?C???C?g????
-        /// ???Í‚????X?g?É‚È‚??ê‡?Íƒn?C???C?g?????
+        /// w’è‚µ‚½ƒOƒŠƒbƒh‚ğƒnƒCƒ‰ƒCƒg‚·‚é
+        /// “ü—Í‚ªƒŠƒXƒg‚É‚È‚¢ê‡‚ÍƒnƒCƒ‰ƒCƒg‚ğÁ‚·
         /// </summary>
-        /// <param name="index">?O???b?h?ÌƒC???f?b?N?X?Ô?</param>
+        /// <param name="index">ƒOƒŠƒbƒh‚ÌƒCƒ“ƒfƒbƒNƒX”Ô†</param>
         public void HighLightGrid(GridInfo info) => _gridManager.HighLightGrid(info);
 
         /// <summary>
-        /// ?O???b?h???g?p?Ï‚İ‚É“o?^????Ä‚??é‚©?Ç‚???
+        /// ƒOƒŠƒbƒh‚ªg—pÏ‚İ‚É“o˜^‚³‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©
         /// </summary>
         /// <param name="info"></param>
         /// <returns></returns>

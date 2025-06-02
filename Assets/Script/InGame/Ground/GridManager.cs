@@ -1,4 +1,4 @@
-ï»¿using SymphonyFrameWork.CoreSystem;
+using SymphonyFrameWork.CoreSystem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ using UnityEngine.AI;
 namespace Orchestration.InGame
 {
     /// <summary>
-    /// ?O???b?h?Ìƒ}?l?[?W???[?N???X
+    /// ƒOƒŠƒbƒh‚Ìƒ}ƒl[ƒWƒƒ[ƒNƒ‰ƒX
     /// </summary>
     public class GridManager : MonoBehaviour
     {
@@ -18,20 +18,20 @@ namespace Orchestration.InGame
 
         private NavMeshSurface _surface;
 
-        [SerializeField, Tooltip("?O???b?h?Ì‘å‚«??")]
+        [SerializeField, Tooltip("ƒOƒŠƒbƒh‚Ì‘å‚«‚³")]
         private float _gridSize = 1f;
         public float GridSize { get => _gridSize; }
 
         [Space]
 
-        [SerializeField, Tooltip("?O???b?h?Ìƒv???n?u")]
+        [SerializeField, Tooltip("ƒOƒŠƒbƒh‚ÌƒvƒŒƒnƒu")]
         private GameObject _gridPrefab;
 
         [Space]
-        [SerializeField, Tooltip("?O???b?h???I?Î‚?Ä‚??È‚????Ìƒ}?e???A??")]
+        [SerializeField, Tooltip("ƒOƒŠƒbƒh‚ª‘I‚Î‚ê‚Ä‚¢‚È‚¢‚Ìƒ}ƒeƒŠƒAƒ‹")]
         private Material _unselectGridMaterial;
 
-        [SerializeField, Tooltip("?O???b?h???I?Î‚?Ä‚??é?Ìƒ}?e???A??")]
+        [SerializeField, Tooltip("ƒOƒŠƒbƒh‚ª‘I‚Î‚ê‚Ä‚¢‚é‚Ìƒ}ƒeƒŠƒAƒ‹")]
         private Material _selectGridMaterial;
 
         private List<GridInfo> _griInfoList = new();
@@ -72,11 +72,11 @@ namespace Orchestration.InGame
 
         private async void Start()
         {
-            //?X?e?[?W???Ï‚??Æƒ`?????N?ğ¶?????C?x???g??o?^
+            //ƒXƒe[ƒW‚ª•Ï‚í‚é‚Æƒ`ƒƒƒ“ƒN‚ğ¶¬‚·‚éƒCƒxƒ“ƒg‚ğ“o˜^
             IngameSystemManager system = ServiceLocator.GetInstance<IngameSystemManager>();
             system.OnStageChanged += counter => OnStageChanged();
 
-            //????NavMesh?ğ¶?
+            //‰ŠúNavMesh‚ğ¶¬
             _surface.BuildNavMesh();
 
             for (int i = 0; i < GroundManager.ChunkCapacity; i++)
@@ -93,7 +93,7 @@ namespace Orchestration.InGame
         {
             IsInitializeDone = false;
 
-            //?G?l?~?[?`?????N???çƒ‰???_???Éæ“¾
+            //ƒGƒlƒ~[ƒ`ƒƒƒ“ƒN‚©‚çƒ‰ƒ“ƒ_ƒ€‚Éæ“¾
             int index = UnityEngine.Random.Range(0, _enemyChunkPrefabList.Count);
             GameObject chunk = _enemyChunkPrefabList[index];
 
@@ -113,27 +113,27 @@ namespace Orchestration.InGame
         }
 
         /// <summary>
-        /// ?`?????N?ğ¶?????
+        /// ƒ`ƒƒƒ“ƒN‚ğ¶¬‚·‚é
         /// </summary>
         /// <returns></returns>
         public async Task ChunkBuild(GameObject chunkPrefab)
         {
-            //?????_???È‰?]???????
+            //ƒ‰ƒ“ƒ_ƒ€‚È‰ñ“]‚ğ‰Á‚¦‚é
             float randomRotation = UnityEngine.Random.Range(0, 4) * 90;
 
-            //?`?????N?ğ¶?
+            //ƒ`ƒƒƒ“ƒN‚ğ¶¬
             GameObject chunk = Instantiate(chunkPrefab,
                 new Vector3(_lastChunkPos, 0, 0),
                 Quaternion.Euler(new Vector3(0, randomRotation, 0) + chunkPrefab.transform.eulerAngles));
 
             chunk.transform.parent = transform;
 
-            //?`?????N?Ì???æ“¾
+            //ƒ`ƒƒƒ“ƒN‚Ìî•ñ‚ğæ“¾
             if (chunk.TryGetComponent<ChunkAsset>(out var asset))
             {
                 var system = ServiceLocator.GetInstance<IngameSystemManager>();
 
-                if (_lastChunkAsset != null) //??Â‘O?Ìƒ`?????N?Ì“G??W?v
+                if (_lastChunkAsset != null) //ˆê‚Â‘O‚Ìƒ`ƒƒƒ“ƒN‚Ì“G‚ğWŒv
                 {
                     system.AddAcviveEnemy(_lastChunkAsset.EnemyValue);
                 }
@@ -143,25 +143,25 @@ namespace Orchestration.InGame
 
             _lastChunkPos += GroundManager.ChunkSize;
 
-            //?A?N?e?B?u?Èƒ`?????N?ÌƒR???N?V?????É’Ç‰?
+            //ƒAƒNƒeƒBƒu‚Èƒ`ƒƒƒ“ƒN‚ÌƒRƒŒƒNƒVƒ‡ƒ“‚É’Ç‰Á
             _chunkQueue.Enqueue(chunk.gameObject);
 
-            //NavMesh??Ä???
+            //NavMesh‚ğÄ¶¬
             await _surface.UpdateNavMesh(_surface.navMeshData);
 
-            //?O???b?h?ÌˆÊ’u????X?g??
+            //ƒOƒŠƒbƒh‚ÌˆÊ’u‚ğƒŠƒXƒg‰»
             List<Vector3> gridPosList = GridCreate();
 
             gridPosList = FilterNonexistentGrid(gridPosList);
 
-            //?O???b?h?ğ¶?
+            //ƒOƒŠƒbƒh‚ğ¶¬
             if (_gridPrefab)
             {
                 await GridPrefabInstantiate(gridPosList, chunk.transform);
             }
 
-            //?L???p?V?e?B?È?Ìƒ`?????N??j??
-            //?i?`?????N??????É”j?ó‚µ‚È‚??ÆV?????`?????N?É‚??Ìƒ`?????N?ÌƒO???b?h???????????j
+            //ƒLƒƒƒpƒVƒeƒBˆÈã‚Ìƒ`ƒƒƒ“ƒN‚ğ”j‰ó
+            //iƒ`ƒƒƒ“ƒN¶¬Œã‚É”j‰ó‚µ‚È‚¢‚ÆV‚µ‚¢ƒ`ƒƒƒ“ƒN‚É‚±‚Ìƒ`ƒƒƒ“ƒN‚ÌƒOƒŠƒbƒh‚ª¶¬‚³‚ê‚éj
             if (_chunkQueue.Count > GroundManager.ChunkCapacity)
             {
                 GameObject obj = _chunkQueue.Dequeue();
@@ -172,18 +172,18 @@ namespace Orchestration.InGame
         }
 
         /// <summary>
-        /// ?w?è‚µ???`?????N??íœ????
+        /// w’è‚µ‚½ƒ`ƒƒƒ“ƒN‚ğíœ‚·‚é
         /// </summary>
         /// <param name="chunk"></param>
         private void DestroyChunk(GameObject chunk)
         {
             try
             {
-                //?`?????N?ÌƒO???b?h??S?Äæ“¾
+                //ƒ`ƒƒƒ“ƒN‚ÌƒOƒŠƒbƒh‚ğ‘S‚Äæ“¾
                 Transform gridPrefabRoot = chunk.transform.Find(GridPrefabsName);
                 GridInfo[] positions = gridPrefabRoot.GetComponentsInChildren<GridInfo>().ToArray();
 
-                //?íœ????`?????N?ÌƒO???b?h??????[?u
+                //íœ‚·‚éƒ`ƒƒƒ“ƒN‚ÌƒOƒŠƒbƒh‚ğƒŠƒ€[ƒu
                 foreach (GridInfo info in positions)
                 {
                     _griInfoList.Remove(info);
@@ -193,14 +193,14 @@ namespace Orchestration.InGame
             }
             catch
             {
-                Debug.LogWarning("?w?è‚³?ê‚½?`?????N??íœ?Å‚??Ü‚???Å‚???");
+                Debug.LogWarning("w’è‚³‚ê‚½ƒ`ƒƒƒ“ƒN‚ğíœ‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½");
             }
         }
 
         /// <summary>
-        /// NavMesh??????êŠ????????O???b?h?ğ¶?
+        /// NavMesh‚ª‚ ‚éêŠ‚ğŒŸõ‚µƒOƒŠƒbƒh‚ğ¶¬
         /// </summary>
-        /// <returns>?O???b?h?Ì??W?Ìƒ??X?g</returns>
+        /// <returns>ƒOƒŠƒbƒh‚ÌÀ•W‚ÌƒŠƒXƒg</returns>
         private List<Vector3> GridCreate()
         {
             List<Vector3> list = new();
@@ -213,7 +213,7 @@ namespace Orchestration.InGame
                 {
                     for (searchPos.x = navMeshRange.min.x; searchPos.x <= navMeshRange.max.x; searchPos.x += _gridSize)
                     {
-                        //?T?[?`????êŠ??NavMesh?????????çƒŠ?X?g?É’Ç‰?
+                        //ƒT[ƒ`‚·‚éêŠ‚ÉNavMesh‚ª‚ ‚Á‚½‚çƒŠƒXƒg‚É’Ç‰Á
                         if (NavMesh.SamplePosition(searchPos, out _, _gridSize * 0.1f, NavMesh.AllAreas))
                         {
                             list.Add(searchPos);
@@ -231,13 +231,13 @@ namespace Orchestration.InGame
         }
 
         /// <summary>
-        /// ?O???b?h?????É???????Ä‚???Ê’u????O????
+        /// ƒOƒŠƒbƒh‚ªŠù‚É¶¬‚³‚ê‚Ä‚¢‚éˆÊ’u‚ğœŠO‚·‚é
         /// </summary>
-        /// <param name="list">?t?B???^?[?????????W?Ìƒ??X?g</param>
-        /// <returns>?t?B???^?[?Ï‚Ìƒ??X?g</returns>
+        /// <param name="list">ƒtƒBƒ‹ƒ^[‚µ‚½‚¢À•W‚ÌƒŠƒXƒg</param>
+        /// <returns>ƒtƒBƒ‹ƒ^[Ï‚ÌƒŠƒXƒg</returns>
         private List<Vector3> FilterNonexistentGrid(List<Vector3> list)
         {
-            //?????Ì??????Ì‚??ß‚?HashSet?É•ÏŠ?
+            //ŒŸõ‚Ì‚‘¬‰»‚Ì‚½‚ß‚ÉHashSet‚É•ÏŠ·
             HashSet<Vector3Int> filter = new(_griInfoList.Select(gi => gi.Position));
 
             List<Vector3> filtered = new();
@@ -256,12 +256,12 @@ namespace Orchestration.InGame
         }
 
         /// <summary>
-        /// ?O???b?h?ÌˆÊ’u?Éƒv???n?u?ğ¶?
+        /// ƒOƒŠƒbƒh‚ÌˆÊ’u‚ÉƒvƒŒƒnƒu‚ğ¶¬
         /// </summary>
-        /// <param name="list">?O???b?h?ÌˆÊ’u</param>
+        /// <param name="list">ƒOƒŠƒbƒh‚ÌˆÊ’u</param>
         private async Task GridPrefabInstantiate(List<Vector3> list, Transform parent)
         {
-            //?v???n?u?Ìe?I?u?W?F?N?g?ğ¶?
+            //ƒvƒŒƒnƒu‚ÌeƒIƒuƒWƒFƒNƒg‚ğ¶¬
             GameObject rootObj = new(GridPrefabsName);
             rootObj.transform.SetParent(parent);
             rootObj.transform.localPosition = Vector3.zero;
@@ -269,7 +269,7 @@ namespace Orchestration.InGame
 
             if (list.Count > 0)
             {
-                //?e?I?u?W?F?N?g?Ìq?Æ‚??ÄƒO???b?h?v???n?u??êŠ‡????
+                //eƒIƒuƒWƒFƒNƒg‚Ìq‚Æ‚µ‚ÄƒOƒŠƒbƒhƒvƒŒƒnƒu‚ğˆêŠ‡¶¬
                 GameObject[] objects = await InstantiateAsync(original: _gridPrefab,
                     count: list.Count,
                     parent: rootObj.transform,
@@ -278,7 +278,7 @@ namespace Orchestration.InGame
                     cancellationToken: destroyCancellationToken);
 
 
-                //?????????I?u?W?F?N?g??GridInfo??æ“¾
+                //¶¬‚µ‚½ƒIƒuƒWƒFƒNƒg‚ÌGridInfo‚ğæ“¾
                 for (int i = 0; i < objects.Length; i++)
                 {
                     GameObject obj = objects[i];
@@ -290,7 +290,7 @@ namespace Orchestration.InGame
         }
 
         /// <summary>
-        /// NavMesh?Ì’[?Ì“?_??æ“¾
+        /// NavMesh‚Ì’[‚Ì“ñ“_‚ğæ“¾
         /// </summary>
         /// <returns></returns>
         private (Vector3 min, Vector3 max) GetNavMeshCorners()
@@ -302,14 +302,14 @@ namespace Orchestration.InGame
                 Vector3 min = triangulation.vertices[0];
                 Vector3 max = triangulation.vertices[0];
 
-                // ?S???_????[?v???ÄÅ??l?ÆÅ‘?l??v?Z
+                // ‘S’¸“_‚ğƒ‹[ƒv‚µ‚ÄÅ¬’l‚ÆÅ‘å’l‚ğŒvZ
                 foreach (Vector3 vertex in triangulation.vertices)
                 {
                     min = Vector3.Min(min, vertex);
                     max = Vector3.Max(max, vertex);
                 }
 
-                //?[????Ø‚?Ì‚Ä‚?
+                //’[”‚ğØ‚èÌ‚Ä‚é
                 const float divisor = 0.5f;
                 min = FloorToNearest(min, divisor, _gridSize / 2);
                 max = FloorToNearest(max, divisor, _gridSize / 2);
@@ -319,7 +319,7 @@ namespace Orchestration.InGame
 
             return (Vector3.zero, Vector3.zero);
 
-            //divisor?ÅŠ??????]???Ø‚?Ì‚Ä‚?
+            //divisor‚ÅŠ„‚Á‚½—]‚è‚ğØ‚èÌ‚Ä‚é
             Vector3 FloorToNearest(Vector3 vector, float divisor, float offset)
             {
                 return new Vector3(
@@ -331,24 +331,24 @@ namespace Orchestration.InGame
         }
 
         /// <summary>
-        /// ???Í‚??ê‚½???W?Éˆ?Ô‹ß‚??O???b?h??Ì??W??Ô‚?
+        /// “ü—Í‚³‚ê‚½À•W‚Éˆê”Ô‹ß‚¢ƒOƒŠƒbƒhã‚ÌÀ•W‚ğ•Ô‚·
         /// </summary>
-        /// <param name="position">?????????????W</param>
-        /// <param name="pos">?O???b?h?Ì??W</param>
-        ///<param name="index">?O???b?h?ÌƒC???f?b?N?X?Ô?</param>
-        /// <returns>?O???b?h?????İ‚??é‚©</returns>
+        /// <param name="position">ŒŸõ‚µ‚½‚¢À•W</param>
+        /// <param name="pos">ƒOƒŠƒbƒh‚ÌÀ•W</param>
+        ///<param name="index">ƒOƒŠƒbƒh‚ÌƒCƒ“ƒfƒbƒNƒX”Ô†</param>
+        /// <returns>ƒOƒŠƒbƒh‚ª‘¶İ‚·‚é‚©</returns>
         public bool GetGridByPosition(Vector3 position, out GridInfo info)
         {
-            Vector3Int pos = Vector3Int.FloorToInt(position - Edge + new Vector3(0, 0.3f, 0)); //???????????D?æ‚·??
+            Vector3Int pos = Vector3Int.FloorToInt(position - Edge + new Vector3(0, 0.3f, 0)); //­‚µã•ûŒü‚ğ—Dæ‚·‚é
 
-            //?????ÉƒO???b?h?????é‚©?ğ”»’?
+            //‚»‚±‚ÉƒOƒŠƒbƒh‚ª‚ ‚é‚©‚ğ”»’è
             info = _griInfoList.Find(gi => gi.Position == pos);
             return info != null;
         }
 
         /// <summary>
-        /// ?O???b?h?????g?p?Ìê‡?Í“o?^????
-        /// ?g?p????Ä‚???ê‡??false??Ô‚?
+        /// ƒOƒŠƒbƒh‚ª–¢g—p‚Ìê‡‚Í“o˜^‚·‚é
+        /// g—p‚³‚ê‚Ä‚¢‚éê‡‚Ífalse‚ğ•Ô‚·
         /// </summary>
         /// <param name="info"></param>
         /// <returns></returns>
@@ -365,7 +365,7 @@ namespace Orchestration.InGame
         }
 
         /// <summary>
-        /// ?g?p?o?^????????
+        /// g—p“o˜^‚ğ‰ğœ‚·‚é
         /// </summary>
         /// <param name="info"></param>
         /// <returns></returns>
@@ -380,36 +380,36 @@ namespace Orchestration.InGame
         }
 
         /// <summary>
-        /// ?O???b?h???g?p?Ï‚İ‚É“o?^????Ä‚??é‚©?Ç‚???
+        /// ƒOƒŠƒbƒh‚ªg—pÏ‚İ‚É“o˜^‚³‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©
         /// </summary>
         /// <param name="info"></param>
         /// <returns></returns>
         public bool IsRegisterGridInfo(GridInfo info) => _usedGridList.Contains(info);
 
         /// <summary>
-        /// ?w?è‚µ???O???b?h??n?C???C?g????
-        /// ???Í‚????X?g?É‚È‚??ê‡?Íƒn?C???C?g?????
+        /// w’è‚µ‚½ƒOƒŠƒbƒh‚ğƒnƒCƒ‰ƒCƒg‚·‚é
+        /// “ü—Í‚ªƒŠƒXƒg‚É‚È‚¢ê‡‚ÍƒnƒCƒ‰ƒCƒg‚ğÁ‚·
         /// </summary>
-        /// <param name="index">?O???b?h?ÌƒC???f?b?N?X?Ô?</param>
+        /// <param name="index">ƒOƒŠƒbƒh‚ÌƒCƒ“ƒfƒbƒNƒX”Ô†</param>
         public void HighLightGrid(GridInfo info)
         {
             if (info != null)
             {
-                //?O?ÌƒO???b?h?Ìƒn?C???C?g??I?t??
+                //‘O‚ÌƒOƒŠƒbƒh‚ÌƒnƒCƒ‰ƒCƒg‚ğƒIƒt‚É
                 if (_highLightingGrid != null)
                 {
                     HighLightSet(_highLightingGrid, false);
                 }
 
-                //?n?C???C?g??\?????L?^
+                //ƒnƒCƒ‰ƒCƒg‚ğ•\¦‚µ‹L˜^
                 HighLightSet(info, true);
 
                 _highLightingGrid = info;
             }
-            //?ÍˆÍŠO????????
+            //”ÍˆÍŠO‚¾‚Á‚½
             else
             {
-                //?n?C???C?g???ÌƒO???b?h??????ÎƒI?t??
+                //ƒnƒCƒ‰ƒCƒg’†‚ÌƒOƒŠƒbƒh‚ª‚ ‚ê‚ÎƒIƒt‚É
                 if (_highLightingGrid != null)
                 {
                     HighLightSet(_highLightingGrid, false);

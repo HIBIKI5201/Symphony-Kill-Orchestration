@@ -1,11 +1,11 @@
-ï»¿using System.Diagnostics;
+using System.Diagnostics;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
 namespace SymphonyFrameWork.Editor
 {
     /// <summary>
-    /// ?G?f?B?^?p?Ìƒ??O?ğ”­s????N???X
+    /// ƒGƒfƒBƒ^—p‚ÌƒƒO‚ğ”­s‚·‚éƒNƒ‰ƒX
     /// </summary>
     public static class SymphonyDebugLog
     {

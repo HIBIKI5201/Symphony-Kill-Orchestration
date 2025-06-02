@@ -1,4 +1,4 @@
-ï»¿using SymphonyFrameWork.Utility;
+using SymphonyFrameWork.Utility;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -30,7 +30,7 @@ namespace Orchestration.UI
 
         public void SetSkillInfo(string name, string explanation)
         {
-            //?X?N???[?????s???È‚?L?????Z??????
+            //ƒXƒNƒ[ƒ‹Às’†‚È‚çƒLƒƒƒ“ƒZƒ‹‚·‚é
             if (_scrollTokenSource != null)
             {
                 _scrollTokenSource.Cancel();
@@ -39,7 +39,7 @@ namespace Orchestration.UI
             _name.text = name;
             _explanation.text = explanation;
 
-            //?X?N???[????J?n
+            //ƒXƒNƒ[ƒ‹‚ğŠJn
             _scrollTokenSource = new CancellationTokenSource();
             Scroll(_scrollTokenSource.Token);
         }
@@ -48,7 +48,7 @@ namespace Orchestration.UI
         {
             while (!token.IsCancellationRequested)
             {
-                //?Ê’u????Z?b?g
+                //ˆÊ’u‚ğƒŠƒZƒbƒg
                 _explanationScroll.scrollOffset = new Vector2(_explanationScroll.scrollOffset.x, 0);
 
                 try
@@ -57,11 +57,11 @@ namespace Orchestration.UI
                 }
                 catch { }
 
-                //?????Ì‰B??Ä‚??é•”????æ“¾
+                //‰º•”‚Ì‰B‚ê‚Ä‚¢‚é•”•ª‚ğæ“¾
                 float targetY = _explanation.worldBound.y - _explanationScroll.contentViewport.worldBound.y + 100;
 
                 float currentY = 0;
-                //?S?Äo???Ü‚ÅƒX?N???[??????
+                //‘S‚Äo‚·‚Ü‚ÅƒXƒNƒ[ƒ‹‚·‚é
                 do
                 {
                     currentY = _explanationScroll.scrollOffset.y;
@@ -69,7 +69,7 @@ namespace Orchestration.UI
 
                     _explanationScroll.scrollOffset = new Vector2(_explanationScroll.scrollOffset.x, newY);
 
-                    // 1?t???[???Ò‹@
+                    // 1ƒtƒŒ[ƒ€‘Ò‹@
                     try
                     {
                         await Awaitable.NextFrameAsync(token);

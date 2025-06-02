@@ -1,4 +1,4 @@
-ï»¿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,18 +9,18 @@ namespace Orchestration.Entity
     {
         public void Awake()
         {
-            //???l?Ì?????
+            //”’l‚Ì‰Šú‰»
             _healthPoint = _maxHealthPoint;
             _specialPoint = 0;
             _specialPointProportion = 0;
 
-            //?C?x???g???????
+            //ƒCƒxƒ“ƒg‚ð‰Šú‰»
             OnHealthChanged = null;
             OnSpecialPointChanged = null;
             OnSpecialPointProportionChanged = null;
         }
 
-        [Header("??{???")]
+        [Header("Šî–{î•ñ")]
 
         [SerializeField]
         private Sprite _icon;
@@ -32,7 +32,7 @@ namespace Orchestration.Entity
         {
             get
             {
-                //???O???È‚???Îƒf?t?H???g????Ô‚?
+                //–¼‘O‚ª‚È‚¯‚ê‚ÎƒfƒtƒHƒ‹ƒg–¼‚ð•Ô‚·
                 if (string.IsNullOrEmpty(_name))
                 {
                     return "Soldier";
@@ -54,9 +54,9 @@ namespace Orchestration.Entity
         private string _skillExplanation;
         public string SkillExplanation { get => _skillExplanation; }
 
-        [Header("?Ì—ÍƒX?e?[?^?X")]
+        [Header("‘Ì—ÍƒXƒe[ƒ^ƒX")]
 
-        //?w???X
+        //ƒwƒ‹ƒX
         [SerializeField]
         private float _maxHealthPoint = 100;
         public float MaxHealthPoint { get => _maxHealthPoint; }
@@ -82,7 +82,7 @@ namespace Orchestration.Entity
 
         [Space]
 
-        [Header("?U???X?e?[?^?X")]
+        [Header("UŒ‚ƒXƒe[ƒ^ƒX")]
 
         [SerializeField]
         private float _attack = 10;
@@ -124,9 +124,9 @@ namespace Orchestration.Entity
         private float _distanceDecay = 0.8f;
         public float DistanceDecay { get => _distanceDecay; }
 
-        [Header("?X?L??")]
+        [Header("ƒXƒLƒ‹")]
 
-        //?X?y?V?????|?C???g
+        //ƒXƒyƒVƒƒƒ‹ƒ|ƒCƒ“ƒg
         [SerializeField]
         private int _skillCost = 10;
         public int SpecialCost { get => _skillCost; }

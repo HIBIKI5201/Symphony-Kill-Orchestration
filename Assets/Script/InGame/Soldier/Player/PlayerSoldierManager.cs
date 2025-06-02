@@ -1,4 +1,4 @@
-ï»¿using Orchestration.InGame;
+using Orchestration.InGame;
 using SymphonyFrameWork.CoreSystem;
 using SymphonyFrameWork.Utility;
 using UnityEngine;
@@ -11,12 +11,12 @@ namespace Orchestration.Entity
 
         private SkillBase _skillBase;
 
-        private bool _isSupportBuff; //??Uboolen?É‚??Ä‘Î?
+        private bool _isSupportBuff; //ˆê’Uboolen‚É‚µ‚Ä‘Îˆ
         public override void Awake_S()
         {
             base.Awake_S();
 
-            if (_data != null && _ui.NullCheckComponent($"{name}??UI?????Â‚???Ü‚???Å‚???"))
+            if (_data != null && _ui.NullCheckComponent($"{name}‚ÌUI‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½"))
             {
                 _data.OnHealthChanged += value =>
                     _ui.HealthBarUpdate(value / _data.MaxHealthPoint);
@@ -32,7 +32,7 @@ namespace Orchestration.Entity
         {
             base.Update_S();
 
-            //?Ú“??o?H????`??
+            //ˆÚ“®Œo˜Hü‚ğ•`‰æ
             if (_model.Agent.path.corners.Length > 0)
             {
                 _ui.MoveLineRender(_model.Agent, _model.MoveLineRenderer);
@@ -40,7 +40,7 @@ namespace Orchestration.Entity
 
             if (_data.SpecialPoint < _data.MaxSpecialPoint)
             {
-                //???b?X?L???|?C???g??`???[?W
+                //–ˆ•bƒXƒLƒ‹ƒ|ƒCƒ“ƒg‚ğƒ`ƒƒ[ƒW
                 _data.SpecialPointProportion += Time.deltaTime / 4;
             }
         }
@@ -61,7 +61,7 @@ namespace Orchestration.Entity
 
 
         /// <summary>
-        /// ?I????ê‚½???Ì‰??o
+        /// ‘I‘ğ‚³‚ê‚½‚Ì‰‰o
         /// </summary>
         /// <param name="active"></param>
         public void Select(bool active)
@@ -70,13 +70,13 @@ namespace Orchestration.Entity
 
             IconSelect(_model.MiniMapIcon, active);
 
-            //?X?L???Ì??????????
+            //ƒXƒLƒ‹‚Ìî•ñ‚ğ‘‚«‚Ş
             var ui = ServiceLocator.GetInstance<IngameUIManager>();
             ui.SetSkillInfo(_data.SkillName, _data.SkillExplanation);
         }
 
         /// <summary>
-        /// ?~?j?}?b?v?ÌƒA?C?R????X?V
+        /// ƒ~ƒjƒ}ƒbƒv‚ÌƒAƒCƒRƒ“‚ğXV
         /// </summary>
         /// <param name="renderer"></param>
         /// <param name="active"></param>
@@ -106,7 +106,7 @@ namespace Orchestration.Entity
         }
 
         /// <summary>
-        /// ?X?L????N??????
+        /// ƒXƒLƒ‹‚ğ‹N“®‚·‚é
         /// </summary>
         public void SkillActive()
         {

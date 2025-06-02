@@ -1,4 +1,4 @@
-ï»¿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -27,11 +27,11 @@ namespace SymphonyFrameWork.CoreSystem
             }
         }
 
-        [Tooltip("?|?[?Y????true?A???Y?[??????false?Å??s????C?x???g")]
+        [Tooltip("ƒ|[ƒY‚ÉtrueAƒŠƒY[ƒ€‚Éfalse‚ÅÀs‚·‚éƒCƒxƒ“ƒg")]
         public static event Action<bool> OnPauseChanged;
 
         /// <summary>
-        /// ?|?[?Y???É’?~????WaitForSecond
+        /// ƒ|[ƒY‚É’â~‚·‚éWaitForSecond
         /// </summary>
         /// <param name="time"></param>
         /// <returns></returns>
@@ -48,7 +48,7 @@ namespace SymphonyFrameWork.CoreSystem
         }
 
         /// <summary>
-        /// ?|?[?Y???É’?~????WaitForSecond
+        /// ƒ|[ƒY‚É’â~‚·‚éWaitForSecond
         /// </summary>
         /// <param name="time"></param>
         /// <param name="token"></param>
@@ -66,7 +66,7 @@ namespace SymphonyFrameWork.CoreSystem
         }
 
         /// <summary>
-        /// ?|?[?Y???É’?~????GameObject??Destroy
+        /// ƒ|[ƒY’†‚É’â~‚·‚éGameObject‚ÌDestroy
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="t"></param>
@@ -92,7 +92,7 @@ namespace SymphonyFrameWork.CoreSystem
             void Resume();
 
             /// <summary>
-            /// PauseManager?Éƒ|?[?Y???ÌƒC?x???g??w???o?^????
+            /// PauseManager‚Éƒ|[ƒY‚ÌƒCƒxƒ“ƒg‚ğw”ƒ“o˜^‚·‚é
             /// </summary>
             /// <param name="pausable"></param>
             static void RegisterPauseManager(IPausable pausable)
@@ -122,7 +122,7 @@ namespace SymphonyFrameWork.CoreSystem
             }
 
             /// <summary>
-            /// ?|?[?Y???ÌƒC?x???g??w?????????
+            /// ƒ|[ƒY‚ÌƒCƒxƒ“ƒg‚ğw”ƒ‰ğœ‚·‚é
             /// </summary>
             /// <param name="pausable"></param>
             static void UnregisterPauseManager(IPausable pausable)

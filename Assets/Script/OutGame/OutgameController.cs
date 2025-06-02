@@ -1,4 +1,4 @@
-ï»¿using Orchestration.System;
+using Orchestration.System;
 using SymphonyFrameWork.CoreSystem;
 using UnityEngine;
 
@@ -10,7 +10,7 @@ namespace Orchestration.OutGame
         {
             await Awaitable.WaitForSecondsAsync(1.5f);
 
-            //?????Ì“??Í‚??????????ÉƒQ?[????J?n????
+            //‰½‚©‚Ì“ü—Í‚ª‚ ‚Á‚½‚ÉƒQ[ƒ€‚ğŠJn‚·‚é
             var playerController = ServiceLocator.GetInstance<PlayerController>();
             if (playerController)
             {
@@ -19,12 +19,12 @@ namespace Orchestration.OutGame
                 playerController.Select.OnStarted += StartGameFloat;
             }
 
-            //?Q?[???X?^?[?g?Ìƒ??\?b?h
+            //ƒQ[ƒ€ƒXƒ^[ƒg‚Ìƒƒ\ƒbƒh
             void StartGame()
             {
                 var system = ServiceLocator.GetInstance<OutGameSystemManager>();
 
-                //???[?h???????????ç‘€?????
+                //ƒ[ƒh‚ª¬Œ÷‚µ‚½‚ç‘€ì‚ğ‰ğœ
                 if (system.InGameLoad() && playerController)
                 {
                     playerController.Active.OnStarted -= StartGameFloat;

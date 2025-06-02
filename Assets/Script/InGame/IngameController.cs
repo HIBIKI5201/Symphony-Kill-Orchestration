@@ -1,4 +1,4 @@
-ï»¿using Orchestration.System;
+using Orchestration.System;
 using SymphonyFrameWork.CoreSystem;
 using UnityEngine;
 
@@ -23,7 +23,7 @@ namespace Orchestration.InGame
         {
             var controller = ServiceLocator.GetInstance<PlayerController>();
 
-            //?????ê‚½??I?ğ’†‚Ì•??m?ÉˆÚ“??w??
+            //‰Ÿ‚³‚ê‚½‚ç‘I‘ğ’†‚Ì•ºm‚ÉˆÚ“®w¦
             _unitManager = ServiceLocator.GetInstance<UnitManager>();
             if (controller)
             {
@@ -33,7 +33,7 @@ namespace Orchestration.InGame
                 controller.Skill.OnCanseled += _unitManager.SkillActive;
             }
 
-            //???U???g???Ì‘???`?Ô‚É•ÏX
+            //ƒŠƒUƒ‹ƒg‚Ì‘€ìŒ`‘Ô‚É•ÏX
             var system = ServiceLocator.GetInstance<IngameSystemManager>();
             system.OnResultOpen += ResultWindowOpen;
             system.OnResultEnd += ResultWindowEnd;
@@ -56,13 +56,13 @@ namespace Orchestration.InGame
         }
 
         /// <summary>
-        /// ?}?E?X?Éd?È‚??Ä‚???O???b?h?Ìƒn?C???C?g????
+        /// ƒ}ƒEƒX‚Éd‚È‚Á‚Ä‚¢‚éƒOƒŠƒbƒh‚ÌƒnƒCƒ‰ƒCƒg‚·‚é
         /// </summary>
         private void GridHighLight(Vector3 point)
         {
             var manager = ServiceLocator.GetInstance<GroundManager>();
 
-            //?q?b?g?????êŠ?ÌƒO???b?h?Ê’u??Ú•W?n?_?ÉƒZ?b?g
+            //ƒqƒbƒg‚µ‚½êŠ‚ÌƒOƒŠƒbƒhˆÊ’u‚ğ–Ú•W’n“_‚ÉƒZƒbƒg
             if (manager.GetGridByPosition(point, out GridInfo info))
             {
                 manager.HighLightGrid(info);

@@ -1,4 +1,4 @@
-ï»¿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -27,7 +27,7 @@ namespace Orchestration.System
             while (0 < alpha)
             {
                 alpha -= (1 / time) * Time.deltaTime;
-                _fade.style.opacity = alpha; //?????x??X?V
+                _fade.style.opacity = alpha; //“§–¾“x‚ðXV
                 await Awaitable.NextFrameAsync();
             }
             _fade.style.opacity = 0;
@@ -39,7 +39,7 @@ namespace Orchestration.System
             while (alpha < 1)
             {
                 alpha += (1 / time) * Time.deltaTime;
-                _fade.style.opacity = alpha; //?????x??X?V
+                _fade.style.opacity = alpha; //“§–¾“x‚ðXV
                 await Awaitable.NextFrameAsync();
             }
             _fade.style.opacity = 1;

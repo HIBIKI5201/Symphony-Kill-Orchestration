@@ -1,4 +1,4 @@
-ï»¿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -17,7 +17,7 @@ namespace SymphonyFrameWork.CoreSystem
         }
 
         /// <summary>
-        ///?Q?[???J?n???Ì?????????
+        ///ƒQ[ƒ€ŠJn‚Ì‰Šú‰»ˆ—
         /// </summary>
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void AfterSceneLoad()
@@ -27,8 +27,8 @@ namespace SymphonyFrameWork.CoreSystem
         }
 
         /// <summary>
-        /// ???[?h????Ä‚???V?[????Ô‚?
-        /// ?È‚??ê‡??null??Ô‚?
+        /// ƒ[ƒh‚³‚ê‚Ä‚¢‚éƒV[ƒ“‚ğ•Ô‚·
+        /// ‚È‚¢ê‡‚Ínull‚ğ•Ô‚·
         /// </summary>
         /// <param name="sceneName"></param>
         /// <returns></returns>
@@ -49,23 +49,23 @@ namespace SymphonyFrameWork.CoreSystem
         }
 
         /// <summary>
-        /// ?V?[??????[?h????
+        /// ƒV[ƒ“‚ğƒ[ƒh‚·‚é
         /// </summary>
-        /// <param name="sceneName">?V?[????</param>
-        /// <param name="loadingAction">???[?h?Ìi??????????É‚??????\?b?h</param>
-        /// <returns>???[?h?É?????????</returns>
+        /// <param name="sceneName">ƒV[ƒ“–¼</param>
+        /// <param name="loadingAction">ƒ[ƒh‚Ìi’»—¦‚ğˆø”‚É‚µ‚½ƒƒ\ƒbƒh</param>
+        /// <returns>ƒ[ƒh‚É¬Œ÷‚µ‚½‚©</returns>
         public static async Task<bool> LoadScene(string sceneName, Action<float> loadingAction = null)
         {
             if (_sceneDict.ContainsKey(sceneName))
             {
-                Debug.LogWarning($"{sceneName}?V?[???ÍŠ??Éƒ??[?h????Ä‚??Ü‚?");
+                Debug.LogWarning($"{sceneName}ƒV[ƒ“‚ÍŠù‚Éƒ[ƒh‚³‚ê‚Ä‚¢‚Ü‚·");
                 return false;
             }
 
             var operation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
             if (operation == null)
             {
-                Debug.LogError($"{sceneName}?V?[???Í“o?^????Ä‚??Ü‚???");
+                Debug.LogError($"{sceneName}ƒV[ƒ“‚Í“o˜^‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ");
                 return false;
             }
 
@@ -85,23 +85,23 @@ namespace SymphonyFrameWork.CoreSystem
         }
 
         /// <summary>
-        /// ?V?[????A?????[?h????
+        /// ƒV[ƒ“‚ğƒAƒ“ƒ[ƒh‚·‚é
         /// </summary>
-        /// <param name="sceneName">?V?[????</param>
-        /// <param name="loadingAction">???[?h?Ìi??????????É‚??????\?b?h</param>
-        /// <returns>?A?????[?h?É?????????</returns>
+        /// <param name="sceneName">ƒV[ƒ“–¼</param>
+        /// <param name="loadingAction">ƒ[ƒh‚Ìi’»—¦‚ğˆø”‚É‚µ‚½ƒƒ\ƒbƒh</param>
+        /// <returns>ƒAƒ“ƒ[ƒh‚É¬Œ÷‚µ‚½‚©</returns>
         public static async Task<bool> UnloadScene(string sceneName, Action<float> loadingAction = null)
         {
             if (!_sceneDict.ContainsKey(sceneName))
             {
-                Debug.LogWarning($"{sceneName}?V?[???Íƒ??[?h????Ä‚??Ü‚???");
+                Debug.LogWarning($"{sceneName}ƒV[ƒ“‚Íƒ[ƒh‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ");
                 return false;
             }
 
             var operation = SceneManager.UnloadSceneAsync(sceneName);
             if (operation == null)
             {
-                Debug.LogError($"{sceneName}?V?[???Í“o?^????Ä‚??Ü‚???");
+                Debug.LogError($"{sceneName}ƒV[ƒ“‚Í“o˜^‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ");
                 return false;
             }
 

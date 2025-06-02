@@ -1,4 +1,4 @@
-ï»¿using Orchestration.System;
+using Orchestration.System;
 using SymphonyFrameWork.CoreSystem;
 using SymphonyFrameWork.Utility;
 using System.Threading;
@@ -12,7 +12,7 @@ namespace Orchestration.Entity
 {
     public class SoldierModel : MonoBehaviour
     {
-        #region ?R???|?[?l???g
+        #region ƒRƒ“ƒ|[ƒlƒ“ƒg
         private NavMeshAgent _agent;
         public NavMeshAgent Agent { get => _agent; }
 
@@ -24,24 +24,24 @@ namespace Orchestration.Entity
         private bool _isFoodStepPlayed;
         #endregion
 
-        [Header("?U??")]
+        [Header("UŒ‚")]
 
-        [SerializeField, Tooltip("?U???????????m?Ìƒ??C???[")]
+        [SerializeField, Tooltip("UŒ‚‚µ‚½‚¢•ºm‚ÌƒŒƒCƒ„[")]
         private LayerMask _targetLayer;
         public LayerMask TargetLayer { get => _targetLayer; }
 
-        [Header("???o")]
+        [Header("‰‰o")]
 
-        [SerializeField, Tooltip("?ã”¼?g?Ìƒ??O")]
+        [SerializeField, Tooltip("ã”¼g‚ÌƒŠƒO")]
         private Rig _forwardRig;
 
-        [SerializeField, Tooltip("?ã”¼?g?Ìƒ??O?Ìƒ^?[?Q?b?g")]
+        [SerializeField, Tooltip("ã”¼g‚ÌƒŠƒO‚Ìƒ^[ƒQƒbƒg")]
         private Transform _forwardRigTarget;
         public Vector3 TargetPosition { get => _forwardRigTarget.position; }
 
         [Space]
 
-        [SerializeField, Tooltip("?}?Y???t???b?V????VFX")]
+        [SerializeField, Tooltip("ƒ}ƒYƒ‹ƒtƒ‰ƒbƒVƒ…‚ÌVFX")]
         private VisualEffect _muzzleFlash;
         public VisualEffect MuzzleFlash { get => _muzzleFlash; }
 
@@ -56,8 +56,8 @@ namespace Orchestration.Entity
         private GameObject _bulletPrefab;
         public GameObject BulletPrefab { get => _bulletPrefab; }
 
-        [Header("?I?[?f?B?I")]
-        [SerializeField, Tooltip("?}?Y???ÌƒI?[?f?B?I??[?X")]
+        [Header("ƒI[ƒfƒBƒI")]
+        [SerializeField, Tooltip("ƒ}ƒYƒ‹‚ÌƒI[ƒfƒBƒIƒ\[ƒX")]
         private AudioSource _muzzleAudio;
 
         [SerializeField]
@@ -105,7 +105,7 @@ namespace Orchestration.Entity
 
             if (_muzzleAudio)
             {
-                //SE?p??MixerGroup?Éw??
+                //SE—p‚ÌMixerGroup‚Éw’è
                 _muzzleAudio.outputAudioMixerGroup = ServiceLocator.GetInstance<AudioManager>().GetMixerGroup(System.AudioType.SE);
                 _muzzleAudio.playOnAwake = false;
                 _muzzleAudio.spatialBlend = 1;
@@ -123,23 +123,23 @@ namespace Orchestration.Entity
                 _muzzleFlashLight.enabled = false;
             }
 
-            if (_agent.NullCheckComponent("NavMeshAgent?????Â‚???Ü‚???"))
+            if (_agent.NullCheckComponent("NavMeshAgent‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ"))
             {
-                //?è“®?Å“????????ßƒA?b?v?f?[?g?Í‚È‚?
+                //è“®‚Å“®‚©‚·‚½‚ßƒAƒbƒvƒf[ƒg‚Í‚È‚µ
                 _agent.updatePosition = false;
                 _agent.updateRotation = false;
 
                 _agent.autoTraverseOffMeshLink = true;
             }
 
-            if (_animator.NullCheckComponent("Animator?????Â‚???Ü‚???"))
+            if (_animator.NullCheckComponent("Animator‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ"))
             {
                 _animator.applyRootMotion = false;
             }
 
             if (_foodStepAudio.NullCheckComponent())
             {
-                //SE?p??MixerGroup?Éw??
+                //SE—p‚ÌMixerGroup‚Éw’è
                 _foodStepAudio.outputAudioMixerGroup = ServiceLocator.GetInstance<AudioManager>().GetMixerGroup(System.AudioType.SE);
                 _foodStepAudio.playOnAwake = false;
                 _foodStepAudio.Stop();
@@ -178,7 +178,7 @@ namespace Orchestration.Entity
 
             if (_muzzleFlashLight)
             {
-                //?Ü‚????C?g???t???Ä‚???È‚?X?L?b?v
+                //‚Ü‚¾ƒ‰ƒCƒg‚ª•t‚¢‚Ä‚¢‚é‚È‚çƒXƒLƒbƒv
                 if (_muzzleFlashLightTask != null && !_muzzleFlashLightTask.IsCompleted)
                 {
                     goto MuzzleFlashEnd;
@@ -211,7 +211,7 @@ namespace Orchestration.Entity
             {
                 _animator.speed = 0;
 
-                //???????T?E???h???Ä????????????Ô‚?Û‘????Ä’?~
+                //‚à‚µ•à‚«ƒTƒEƒ“ƒh‚ªÄ¶’†‚¾‚Á‚½‚çó‘Ô‚ğ•Û‘¶‚µ‚Ä’â~
                 if (_foodStepAudio.isPlaying)
                 {
                     _isFoodStepPlayed = true;
@@ -222,7 +222,7 @@ namespace Orchestration.Entity
             {
                 _animator.speed = 1;
 
-                //???????T?E???h???Ä????Ä‚?????ÄŠJ
+                //‚à‚µ•à‚«ƒTƒEƒ“ƒh‚ªÄ¶‚µ‚Ä‚¢‚½‚çÄŠJ
                 if (_isFoodStepPlayed)
                 {
                     _isFoodStepPlayed = false;

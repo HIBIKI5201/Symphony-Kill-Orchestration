@@ -1,12 +1,10 @@
 using UnityEngine;
+using UnityEditor;
 using UnityEngine.UIElements;
 using System.Reflection;
 using SymphonyFrameWork.CoreSystem;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
-
-#if UNITY_EDITOR
-using UnityEditor;
 
 namespace SymphonyFrameWork.Editor
 {
@@ -164,4 +162,3 @@ namespace SymphonyFrameWork.Editor
         }
     }
 }
-#endif

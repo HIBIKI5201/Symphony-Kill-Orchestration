@@ -1,4 +1,4 @@
-ï»¿using SymphonyFrameWork.Utility;
+using SymphonyFrameWork.Utility;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -24,7 +24,7 @@ namespace Orchestration.UI
         {
             position += new Vector3(0, 1.5f, 0);
 
-            await Awaitable.NextFrameAsync(); //UI?Ì??????Ò‚?
+            await Awaitable.NextFrameAsync(); //UI‚Ì‰Šú‰»‘Ò‚¿
 
             style.visibility = Visibility.Visible;
             
@@ -35,16 +35,16 @@ namespace Orchestration.UI
                 _text.style.color = Color.yellow;
             }
 
-            //?X?N???[?????W?n?É•ÏŠ?
+            //ƒXƒNƒŠ[ƒ“À•WŒn‚É•ÏŠ·
             Vector2 screenPos = Camera.main.WorldToScreenPoint(position);
 
-            //UITK???W?n?Å‚Í’l???????Ù‚Ç‰??ÉˆÚ“?????
+            //UITKÀ•WŒn‚Å‚Í’l‚ª‚‚¢‚Ù‚Ç‰º‚ÉˆÚ“®‚·‚é
             Vector2 center = new(screenPos.x - (_text.resolvedStyle.width / 2), Screen.height - screenPos.y);
 
-            //?????I?É”??
+            //•¨—“I‚É”ò‚Ô
             Vector2 velocity = new Vector2(Random.Range(-0.3f, 0.3f), Random.Range(-1f, 0f)).normalized * 750;
 
-            //?Å??ÉƒY?????êŠ????n?Ü‚?
+            //Å‰‚ÉƒYƒŒ‚½êŠ‚©‚çn‚Ü‚é
             for (int i = 0; i < 5; i++)
             {
                 Physics(ref center, ref velocity);
@@ -52,7 +52,7 @@ namespace Orchestration.UI
 
             TextMove(center);
             
-            //???Ô‚?Ò‚?????É???
+            //ŠÔ‚ğ‘Ò‚Á‚½Œã‚ÉÁ‚·
             float timer = 0;
             while (timer < 0.5f)
             {
@@ -60,7 +60,7 @@ namespace Orchestration.UI
 
                 Physics(ref center, ref velocity);
 
-                velocity *= 0.9f; //?i?X?ÆŒ???
+                velocity *= 0.9f; //’iX‚ÆŒ¸‘¬
 
                 if (highLight)
                 {
@@ -76,7 +76,7 @@ namespace Orchestration.UI
 
         private void Physics(ref Vector2 pos, ref Vector2 velocity)
         {
-            velocity.y += 1000f * Time.deltaTime; //?d??
+            velocity.y += 1000f * Time.deltaTime; //d—Í
 
             pos.x += velocity.x * Time.deltaTime;
             pos.y += velocity.y * Time.deltaTime;

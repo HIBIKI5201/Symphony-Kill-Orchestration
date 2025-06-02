@@ -1,4 +1,4 @@
-ï»¿using SymphonyFrameWork.CoreSystem;
+using SymphonyFrameWork.CoreSystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -26,7 +26,7 @@ namespace Orchestration.System
         {
             if (_isLoading)
             {
-                Debug.LogWarning("???[?f?B???O???Éƒ??[?h?Å‚??Ü‚???");
+                Debug.LogWarning("ƒ[ƒfƒBƒ“ƒO’†‚Éƒ[ƒh‚Å‚«‚Ü‚¹‚ñ");
                 return;
             }
             _isLoading = true;
@@ -34,25 +34,25 @@ namespace Orchestration.System
 
             await FadeOut(_fadeOutTime);
 
-            //???[?h?V?[???Ìƒ??[?h
+            //ƒ[ƒhƒV[ƒ“‚Ìƒ[ƒh
             if (!await SceneLoader.LoadScene(SceneEnum.LoadingScene.ToString()))
             {
-                Debug.LogError("???[?h?V?[????Ç‚İ??ß‚Ü‚???Å‚???");
+                Debug.LogError("ƒ[ƒhƒV[ƒ“‚ğ“Ç‚İ‚ß‚Ü‚¹‚ñ‚Å‚µ‚½");
                 return;
             }
             else
             {
-                //???[?h?V?[????A?N?e?B?u??
+                //ƒ[ƒhƒV[ƒ“‚ğƒAƒNƒeƒBƒu‚É
                 SceneLoader.GetExistScene(SceneEnum.LoadingScene.ToString(), out Scene scene);
                 SceneManager.SetActiveScene(scene);
             }
 
-            //???[?h?V?[???Ìƒ}?l?[?W???[??æ“¾????
+            //ƒ[ƒhƒV[ƒ“‚Ìƒ}ƒl[ƒWƒƒ[‚ğæ“¾‚·‚é
             LoadSceneManager manager = null;
 
             if (SceneLoader.GetExistScene(SceneEnum.LoadingScene.ToString(), out Scene loadScene))
             {
-                //???[?h?V?[???Ìƒ??[?g?I?u?W?F?N?g???çƒ?[?h?V?[???}?l?[?W???[??T??
+                //ƒ[ƒhƒV[ƒ“‚Ìƒ‹[ƒgƒIƒuƒWƒFƒNƒg‚©‚çƒ[ƒhƒV[ƒ“ƒ}ƒl[ƒWƒƒ[‚ğ’T‚·
                 foreach (GameObject obj in loadScene.GetRootGameObjects())
                 {
                     manager = obj.GetComponent<LoadSceneManager>();
@@ -64,7 +64,7 @@ namespace Orchestration.System
 
                 if (!manager)
                 {
-                    Debug.LogError("???[?h?V?[???}?l?[?W???[?????Â‚???Ü‚???");
+                    Debug.LogError("ƒ[ƒhƒV[ƒ“ƒ}ƒl[ƒWƒƒ[‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ");
                     LoadFailed();
                     return;
                 }
@@ -72,28 +72,28 @@ namespace Orchestration.System
 
             await FadeIn(_fadeInTime);
 
-            //???ÌƒV?[????A?????[?h
+            //Œ³‚ÌƒV[ƒ“‚ğƒAƒ“ƒ[ƒh
             bool unloadSuccess = await SceneLoader.UnloadScene(_currentSceneName.ToString(),
                 progress =>
                 {
-                    manager.ProgressUpdate(progress / 2); //0?`50%?Ì”Íˆ?
+                    manager.ProgressUpdate(progress / 2); //0`50%‚Ì”ÍˆÍ
                 });
 
-            //?????P?\????
+            //­‚µ—P—\‚ğì‚é
             await Awaitable.WaitForSecondsAsync(0.5f);
 
             if (unloadSuccess)
             {
-                //?V?[??????[?h
+                //ƒV[ƒ“‚ğƒ[ƒh
                 bool loadSuccess = await SceneLoader.LoadScene(sceneEnum.ToString(),
                     progress =>
                     {
-                        manager.ProgressUpdate(progress / 2 + 0.5f); //50?`100%?Ì”Íˆ?
+                        manager.ProgressUpdate(progress / 2 + 0.5f); //50`100%‚Ì”ÍˆÍ
                     });
 
                 if (loadSuccess)
                 {
-                    //???[?h?É????????çŒ»?İ‚ÌƒV?[????A?N?e?B?u?????Ä‹L??????
+                    //ƒ[ƒh‚É¬Œ÷‚µ‚½‚çŒ»İ‚ÌƒV[ƒ“‚ğƒAƒNƒeƒBƒu‰»‚µ‚Ä‹L‰¯‚·‚é
                     if (SceneLoader.GetExistScene(sceneEnum.ToString(), out Scene scene))
                     {
                         SceneManager.SetActiveScene(scene);
@@ -108,15 +108,15 @@ namespace Orchestration.System
             }
             else return;
 
-            //???????????ğ–¾????é‚½?ß‚ÉƒQ?[?W??Å‘å‰»
+            //Š®—¹‚µ‚½–‚ğ–¾¦‚·‚é‚½‚ß‚ÉƒQ[ƒW‚ğÅ‘å‰»
             manager.ProgressUpdate(1);
 
-            //?????P?\????
+            //­‚µ—P—\‚ğì‚é
             await Awaitable.WaitForSecondsAsync(0.5f);
 
             await FadeOut(_fadeOutTime);
 
-            //???[?h?V?[????A?????[?h
+            //ƒ[ƒhƒV[ƒ“‚ğƒAƒ“ƒ[ƒh
             await SceneLoader.UnloadScene(SceneEnum.LoadingScene.ToString());
 
             await FadeIn(_fadeInTime);
@@ -126,20 +126,20 @@ namespace Orchestration.System
         }
 
         /// <summary>
-        /// ??Ê‚?t?F?[?h?C??????
+        /// ‰æ–Ê‚ğƒtƒF[ƒhƒCƒ“‚·‚é
         /// </summary>
         private async Awaitable FadeIn(float time) =>
             await ServiceLocator.GetInstance<GameLogic>().FadeIn(time);
 
         /// <summary>
-        /// ??Ê‚?t?F?[?h?A?E?g????
+        /// ‰æ–Ê‚ğƒtƒF[ƒhƒAƒEƒg‚·‚é
         /// </summary>
         private async Awaitable FadeOut(float time) =>
             await ServiceLocator.GetInstance<GameLogic>().FadeOut(time);
 
 
         /// <summary>
-        /// ???[?h?É??s?????ê‡?Íƒz?[???É–ß‚?
+        /// ƒ[ƒh‚É¸”s‚µ‚½ê‡‚Íƒz[ƒ€‚É–ß‚é
         /// </summary>
         private async void LoadFailed()
         {

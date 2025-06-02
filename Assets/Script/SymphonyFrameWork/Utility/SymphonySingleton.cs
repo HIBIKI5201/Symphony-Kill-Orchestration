@@ -1,4 +1,4 @@
-ï»¿using SymphonyFrameWork.CoreSystem;
+using SymphonyFrameWork.CoreSystem;
 using System;
 using System.Reflection;
 using UnityEngine;
@@ -14,7 +14,7 @@ namespace SymphonyFrameWork.Utility
         {
             if (_target)
             {
-                //Target?ÌƒN???X??L???X?g???Ä??s????
+                //Target‚ÌƒNƒ‰ƒX‚ğƒLƒƒƒXƒg‚µ‚ÄÀs‚·‚é
                 Type targetType = _target.GetType();
                 MethodInfo method = typeof(ServiceLocator).GetMethod(nameof(ServiceLocator.SetInstance))
                     .MakeGenericMethod(targetType);
@@ -29,7 +29,7 @@ namespace SymphonyFrameWork.Utility
             {
                 Type targetType = _target.GetType();
 
-                //ServiceLocator.DestroyInstance??æ“¾????
+                //ServiceLocator.DestroyInstance‚ğæ“¾‚·‚é
                 MethodInfo destroyMethod = typeof(ServiceLocator)
                             .GetMethod("DestroyInstance",
                             BindingFlags.Public | BindingFlags.Static,

@@ -1,4 +1,4 @@
-ï»¿using Orchestration.InGame;
+using Orchestration.InGame;
 using SymphonyFrameWork.CoreSystem;
 using SymphonyFrameWork.Utility;
 using UnityEngine;
@@ -18,14 +18,14 @@ namespace Orchestration.Entity
 
             try
             {
-                //?????????I???Ü‚Å‘Ò‹@
+                //‰Šú‰»‚ªI‚í‚é‚Ü‚Å‘Ò‹@
                 await SymphonyTask.WaitUntil(() => manager.GridInitializeDone, destroyCancellationToken);
             }
             catch { }
 
             agent.enabled = true;
 
-            //?????ÌêŠ???Ô‹ß‚??O???b?h?Ü‚ÅˆÚ“?
+            //©•ª‚ÌêŠ‚ğˆê”Ô‹ß‚¢ƒOƒŠƒbƒh‚Ü‚ÅˆÚ“®
             if (manager.GetGridByPosition(transform.position, out GridInfo info))
             {
                 if (manager.TryRegisterGridInfo(info))
@@ -39,24 +39,24 @@ namespace Orchestration.Entity
         }
 
         /// <summary>
-        /// ?A?j???[?^?[?ÉˆÚ“??p?????[?^??n???A???W??X?V
+        /// ƒAƒjƒ[ƒ^[‚ÉˆÚ“®ƒpƒ‰ƒ[ƒ^‚ğ“n‚µAÀ•W‚ğXV
         /// </summary>
         public void Move(NavMeshAgent agent, Animator animator, AudioSource foodStepAudio)
         {
-            //?^?[?Q?b?g?Ìƒx?N?g????v?Z
+            //ƒ^[ƒQƒbƒg‚ÌƒxƒNƒgƒ‹‚ğŒvZ
             Vector3 localNextPos = transform.InverseTransformPoint(agent.nextPosition);
             Vector2 direction = new Vector2(localNextPos.x, localNextPos.z).normalized;
 
-            //Lerp?ÅŠ??ç‚©?É•Ï‰?
+            //Lerp‚ÅŠŠ‚ç‚©‚É•Ï‰»
             _currentDirection = Vector2.Lerp(_currentDirection, direction, Time.deltaTime * 3);
 
             animator.SetFloat("Right", _currentDirection.x);
             animator.SetFloat("Forward", _currentDirection.y);
 
-            //???g?ÌˆÊ’u??Agent?É“???
+            //©g‚ÌˆÊ’u‚ğAgent‚É“¯Šú
             transform.position = agent.nextPosition;
 
-            //????T?E???h??Ä?
+            //•à‚«ƒTƒEƒ“ƒh‚ğÄ¶
             if (0 < localNextPos.magnitude)
             {
                 if (!foodStepAudio.isPlaying)
@@ -74,13 +74,13 @@ namespace Orchestration.Entity
         }
 
         /// <summary>
-        /// ?????Ì•????É‰?]??????
+        /// ˆø”‚Ì•ûŒü‚É‰ñ“]‚³‚¹‚é
         /// </summary>
-        /// <param name="direction">???????????</param>
-        /// <param name="time">?????Ü‚Å‚ÉŠ|???é•½?Ï“I?È???</param>
+        /// <param name="direction">Œü‚©‚¹‚é•ûŒü</param>
+        /// <param name="time">Œü‚­‚Ü‚Å‚ÉŠ|‚©‚é•½‹Ï“I‚ÈŠÔ</param>
         public void Rotation(Vector3 direction, float time = 3)
         {
-            // ?i?s??????????ê‡?Ì‚İ‰?]
+            // is•ûŒü‚ª‚ ‚éê‡‚Ì‚İ‰ñ“]
             if (direction.magnitude > 0.1f)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(direction);
@@ -89,20 +89,20 @@ namespace Orchestration.Entity
         }
 
         /// <summary>
-        /// ?Ú“??êŠ??æ“¾???İ’?
+        /// ˆÚ“®êŠ‚ğæ“¾‚µİ’è
         /// </summary>
         public void SetDestination(NavMeshAgent agent, Vector3 point)
         {
             var manager = ServiceLocator.GetInstance<GroundManager>();
 
-            //?q?b?g?????êŠ?ÌƒO???b?h?Ê’u?????g?p?È‚?Ú“I?n?ÉƒZ?b?g
+            //ƒqƒbƒg‚µ‚½êŠ‚ÌƒOƒŠƒbƒhˆÊ’u‚ª–¢g—p‚È‚ç–Ú“I’n‚ÉƒZƒbƒg
             if (manager.GetGridByPosition(point, out GridInfo info) && manager.TryRegisterGridInfo(info))
             {
                 if (agent.isActiveAndEnabled)
                 {
                     agent.SetDestination(info.transform.position);
 
-                    //?O?ÌƒO???b?h?Ìg?p?o?^????
+                    //‘O‚ÌƒOƒŠƒbƒh‚Ìg—p“o˜^‚ğ‰ğœ
                     manager.TryUnregisterGridInfo(_currentGridInfo);
                     _currentGridInfo = info;
                 }
@@ -118,7 +118,7 @@ namespace Orchestration.Entity
         {
             var manager = ServiceLocator.GetInstance<GroundManager>();
 
-            //???????????O???b?h?Ìg?p?o?^????
+            //©•ª‚ª‚¢‚½ƒOƒŠƒbƒh‚Ìg—p“o˜^‚ğ‰ğœ
             if (manager)
             {
                 manager.TryUnregisterGridInfo(_currentGridInfo);

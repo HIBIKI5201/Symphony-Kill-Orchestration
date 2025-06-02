@@ -1,4 +1,4 @@
-Ôªøusing System;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -11,7 +11,7 @@ namespace SymphonyFrameWork.Utility
         {
             await Awaitable.BackgroundThreadAsync();
             action.Invoke();
-            Debug.Log($"{action}?Ãé??s???I?????‹Ç???");
+            Debug.Log($"{action}ÇÃé¿çsÇ™èIóπÇµÇ‹ÇµÇΩ");
         }
 
         public static async Task WaitUntil(Func<bool> action, CancellationToken token)
