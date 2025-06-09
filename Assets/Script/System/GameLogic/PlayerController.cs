@@ -1,4 +1,4 @@
-using SymphonyFrameWork.CoreSystem;
+﻿using SymphonyFrameWork.CoreSystem;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -7,13 +7,25 @@ namespace Orchestration.System
     public class PlayerController : MonoBehaviour
     {
 
-        private PlayerInput _input;
+        private PlayerInput _playerInput;
 
-        public InputContext<Vector2> Move;
-        public InputContext<float> Active;
-        public InputContext<float> Select;
-        public InputContext<float> Skill;
-        public InputContext<float> Zoom;
+        private InputContext<Vector2> _move;
+        public InputContext<Vector2> Move => _move;
+
+        private InputContext<float> _active;
+        public InputContext<float> Active => _active;
+
+        private InputContext<float> _select;
+        public InputContext<float> Select => _select;
+
+        private InputContext<float> _skill;
+        public InputContext<float> Skill => _skill;
+
+        private InputContext<float> _zoom;
+        public InputContext<float> Zoom => _zoom;
+
+        private InputContext<float> _input;
+        public InputContext<float> Input => _input;
 
         private void OnEnable()
         {
@@ -27,17 +39,18 @@ namespace Orchestration.System
 
         private void Awake()
         {
-            _input = GetComponent<PlayerInput>();
+            _playerInput = GetComponent<PlayerInput>();
 
-            if (_input)
+            if (_playerInput)
             {
-                _input.notificationBehavior = PlayerNotifications.InvokeCSharpEvents;
+                _playerInput.notificationBehavior = PlayerNotifications.InvokeCSharpEvents;
 
-                Move = new InputContext<Vector2>(_input.actions["Move"]);
-                Active = new InputContext<float>(_input.actions["Active"]);
-                Select = new InputContext<float>(_input.actions["Select"]);
-                Skill = new InputContext<float>(_input.actions["Skill"]);
-                Zoom = new InputContext<float>(_input.actions["Zoom"]);
+                _move = new InputContext<Vector2>(_playerInput.actions["Move"]);
+                _active = new InputContext<float>(_playerInput.actions["Active"]);
+                _select = new InputContext<float>(_playerInput.actions["Select"]);
+                _skill = new InputContext<float>(_playerInput.actions["Skill"]);
+                _zoom = new InputContext<float>(_playerInput.actions["Zoom"]);
+                _input = new InputContext<float>(_playerInput.actions["InputContext"]);
             }
         }
 

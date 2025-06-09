@@ -1,3 +1,4 @@
+ï»¿using Orchestration.System;
 using Orchestration.UI;
 using SymphonyFrameWork.CoreSystem;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ namespace Orchestration.InGame
     {
         private UIDocument _document;
 
+        private InputContext _inputContext;
         private MiniMap _miniMap;
         private UnitInfomation _unitInfo;
         private UnitSelector _unitSelector;
@@ -40,6 +42,7 @@ namespace Orchestration.InGame
             if (_document)
             {
                 VisualElement root = _document.rootVisualElement;
+                _inputContext = root.Q<InputContext>();
                 _miniMap = root.Q<MiniMap>();
                 _unitInfo = root.Q<UnitInfomation>();
                 _unitSelector = root.Q<UnitSelector>();
@@ -59,6 +62,10 @@ namespace Orchestration.InGame
             system.OnStageChanged += CountUpdate;
             system.OnKillCounterChanged += KillCountUpdate;
 
+            PlayerController controller = ServiceLocator.GetInstance<PlayerController>();
+            controller.Input.OnStarted += OnInputStarted;
+            controller.Input.OnCanseled += OnInputCanceled;
+
             CountUpdate(0);
             KillCountUpdate(0);
         }
@@ -73,6 +80,13 @@ namespace Orchestration.InGame
                 system.OnStageChanged -= CountUpdate;
                 system.OnKillCounterChanged -= KillCountUpdate;
             }
+
+            PlayerController controller = ServiceLocator.GetInstance<PlayerController>();
+            if (controller)
+            {
+                controller.Input.OnStarted -= OnInputStarted;
+                controller.Input.OnCanseled -= OnInputCanceled;
+            }
         }
 
         public void Add(VisualElement element) => _document.rootVisualElement.Add(element);
@@ -80,11 +94,21 @@ namespace Orchestration.InGame
         public void AddSoldierInfo(UnitInfomationSoldier info) => _unitInfo?.AddSoldierInfo(info);
         public void AddSoldierSelector(UnitSelectorSoldier info) => _unitSelector?.AddSoldierInfo(info);
 
+        public void CountUpdate(int count) => _stageInfo?.CountUpdate(count);
+        public void KillCountUpdate(int count) => _stageInfo?.KillCountUpdate(count);
+
+        public void SetSkillInfo(string name, string explanation) => _skillInfo?.SetSkillInfo(name, explanation);
+        public async Task ResultWindowStart(int score, int stage, int kill) =>
+            await _resultWindow.ResultWindowStart(score, stage, kill);
+
+        private void OnInputStarted(float value) => _inputContext.ShowExplanation();
+        private void OnInputCanceled(float value) => _inputContext.HideExplanation();
+
         private async void MoveMiniMapCamera(int count)
         {
             float nextPosX = count * GroundManager.ChunkSize + _miniMapFirstPosX;
 
-            //ŽŸ‚ÌƒXƒe[ƒWˆÊ’u‚ÉˆÚ“®‚·‚é‚Ü‚ÅŒJ‚è•Ô‚·
+            //æ¬¡ã®ã‚¹ãƒ†ãƒ¼ã‚¸ä½ç½®ã«ç§»å‹•ã™ã‚‹ã¾ã§ç¹°ã‚Šè¿”ã™
             while (nextPosX >= _miniMapCamera.position.x)
             {
                 _miniMapCamera.position += new Vector3(_miniMapCameraSpeed * Time.deltaTime, 0, 0);
@@ -92,15 +116,8 @@ namespace Orchestration.InGame
                 await Awaitable.NextFrameAsync();
             }
 
-            //ˆÚ“®Š®—¹‚µ‚½‚ç®”’l‚É–ß‚·
+            //ç§»å‹•å®Œäº†ã—ãŸã‚‰æ•´æ•°å€¤ã«æˆ»ã™
             _miniMapCamera.position = new Vector3(nextPosX, _miniMapCamera.position.y, _miniMapCamera.position.z);
         }
-
-        public void CountUpdate(int count) => _stageInfo?.CountUpdate(count);
-        public void KillCountUpdate(int count) => _stageInfo?.KillCountUpdate(count);
-
-        public void SetSkillInfo(string name, string explanation) => _skillInfo?.SetSkillInfo(name, explanation);
-        public async Task ResultWindowStart(int score, int stage, int kill) =>
-            await _resultWindow.ResultWindowStart(score, stage, kill);
     }
 }

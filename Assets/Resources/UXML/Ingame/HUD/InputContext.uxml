@@ -1,0 +1,34 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/USS/text.uss?fileID=7433441132597879392&amp;guid=532b434e280348644b8ef36234fdc00b&amp;type=3#text" />
+    <engine:Label text="操作説明 : T" class="text" style="bottom: 32%; left: 2%; position: absolute; color: rgb(255, 255, 255); font-size: 40px; -unity-text-outline-color: rgb(0, 0, 0); -unity-text-outline-width: 0.3px; background-color: rgba(0, 0, 0, 0.25);" />
+    <engine:VisualElement style="flex-grow: 1; justify-content: center; width: 100%; height: 100%; margin-right: 0;">
+        <engine:VisualElement name="explanation" style="position: absolute; width: 45%; height: 80%; background-color: rgba(0, 0, 0, 0.75); align-self: center; align-content: center; display: none; justify-content: center;">
+            <engine:VisualElement style="width: 100%; flex-direction: row; justify-content: space-evenly; margin-top: 5%; margin-right: 0; margin-bottom: 5%; margin-left: 0; align-self: center;">
+                <engine:Label text="操作" class="text" style="color: rgb(255, 255, 255); font-size: 65px; width: 30%; -unity-text-align: upper-center;" />
+                <engine:Label text="キーボードマウス" class="text" style="color: rgb(255, 255, 255); font-size: 65px; width: 30%; -unity-text-align: upper-center;" />
+            </engine:VisualElement>
+            <engine:VisualElement style="justify-content: center; height: 70%;">
+                <engine:VisualElement style="width: 100%; flex-direction: row; justify-content: space-evenly; margin-top: 2%; margin-bottom: 2%;">
+                    <engine:Label text="移動" class="text" style="color: rgb(255, 255, 255); font-size: 50px; width: 30%; -unity-text-align: upper-center;" />
+                    <engine:Label text="WASD" class="text" style="color: rgb(255, 255, 255); font-size: 50px; width: 30%; -unity-text-align: upper-center;" />
+                </engine:VisualElement>
+                <engine:VisualElement style="width: 100%; flex-direction: row; justify-content: space-evenly; margin-top: 2%; margin-bottom: 2%;">
+                    <engine:Label text="指示" class="text" style="color: rgb(255, 255, 255); font-size: 50px; width: 30%; -unity-text-align: upper-center;" />
+                    <engine:Label text="左クリック" class="text" style="color: rgb(255, 255, 255); font-size: 50px; width: 30%; -unity-text-align: upper-center;" />
+                </engine:VisualElement>
+                <engine:VisualElement style="width: 100%; flex-direction: row; justify-content: space-evenly; margin-top: 2%; margin-bottom: 2%;">
+                    <engine:Label text="選択" class="text" style="color: rgb(255, 255, 255); font-size: 50px; width: 30%; -unity-text-align: upper-center;" />
+                    <engine:Label text="Q E" class="text" style="color: rgb(255, 255, 255); font-size: 50px; width: 30%; -unity-text-align: upper-center;" />
+                </engine:VisualElement>
+                <engine:VisualElement style="width: 100%; flex-direction: row; justify-content: space-evenly; margin-top: 2%; margin-bottom: 2%;">
+                    <engine:Label text="スキル" class="text" style="color: rgb(255, 255, 255); font-size: 50px; width: 30%; -unity-text-align: upper-center;" />
+                    <engine:Label text="Space" class="text" style="color: rgb(255, 255, 255); font-size: 50px; width: 30%; -unity-text-align: upper-center;" />
+                </engine:VisualElement>
+                <engine:VisualElement style="width: 100%; flex-direction: row; justify-content: space-evenly; margin-top: 2%; margin-bottom: 2%;">
+                    <engine:Label text="ズーム" class="text" style="color: rgb(255, 255, 255); font-size: 50px; width: 30%; -unity-text-align: upper-center;" />
+                    <engine:Label text="Shift" class="text" style="color: rgb(255, 255, 255); font-size: 50px; width: 30%; -unity-text-align: upper-center;" />
+                </engine:VisualElement>
+            </engine:VisualElement>
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>
