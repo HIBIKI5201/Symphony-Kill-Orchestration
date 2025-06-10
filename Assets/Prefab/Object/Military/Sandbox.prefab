@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2724280234133596791}
   - component: {fileID: 8519397629230361160}
+  - component: {fileID: 7524036465545411584}
   m_Layer: 0
   m_Name: Sandbox
   m_TagString: Untagged
@@ -49,6 +50,27 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0.5, z: 0}
   m_TimeToStationary: 0.5
+--- !u!65 &7524036465545411584
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5599372907103526911}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1001 &4651235596682832819
 PrefabInstance:
   m_ObjectHideFlags: 0
